@@ -1,0 +1,33 @@
+{
+  "contract_version": "1.1.0",
+  "dataset_id": "synthetic.l2-books",
+  "dataset_version": "1.0.0",
+  "extensions": {},
+  "generated_at": "2026-01-01T00:00:00Z",
+  "public_or_synthetic": true,
+  "streams": [
+    {
+      "data_sha256": "ae71a1d713137b0d3029474773bf04977870b69e2b422dd98555aff935fe7cda",
+      "fields": [
+        "asks.price",
+        "asks.size",
+        "bids.price",
+        "bids.size"
+      ],
+      "kind": "book_snapshot_l2",
+      "record_count": 10,
+      "schema_sha256": "21916be05a99f5ef98f5b2b4095ee20819ce3fab5d92390dd363d61f449cd4f7",
+      "stream_id": "book",
+      "symbols": [
+        "SYNTH.L2"
+      ],
+      "timeframe": {
+        "alignment": "epoch",
+        "calendar": "24/7",
+        "interval": null,
+        "mode": "event",
+        "timezone": "UTC"
+      }
+    }
+  ]
+}

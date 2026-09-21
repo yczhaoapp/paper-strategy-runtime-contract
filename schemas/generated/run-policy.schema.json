@@ -1,0 +1,73 @@
+{
+  "$defs": {
+    "SandboxMode": {
+      "enum": [
+        "development",
+        "strict_container"
+      ],
+      "title": "SandboxMode",
+      "type": "string"
+    },
+    "SupportLevel": {
+      "enum": [
+        "ADAPTER_AVAILABLE",
+        "CONFORMANCE_VERIFIED",
+        "PRODUCTION_CERTIFIED",
+        "PROFILED"
+      ],
+      "title": "SupportLevel",
+      "type": "string"
+    }
+  },
+  "$id": "urn:psrc:schema/run-policy.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allow_engine_substitution": {
+      "const": false,
+      "default": false,
+      "title": "Allow Engine Substitution",
+      "type": "boolean"
+    },
+    "allow_lossy": {
+      "default": false,
+      "title": "Allow Lossy",
+      "type": "boolean"
+    },
+    "allowed_transformations": {
+      "default": [],
+      "items": {
+        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+        "type": "string"
+      },
+      "title": "Allowed Transformations",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "minimum_engine_support": {
+      "$ref": "#/$defs/SupportLevel",
+      "default": "ADAPTER_AVAILABLE"
+    },
+    "required_sandbox": {
+      "$ref": "#/$defs/SandboxMode",
+      "default": "strict_container"
+    },
+    "strict": {
+      "default": true,
+      "title": "Strict",
+      "type": "boolean"
+    },
+    "transformation_parameters": {
+      "patternProperties": {
+        "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$": {
+          "additionalProperties": true,
+          "type": "object"
+        }
+      },
+      "title": "Transformation Parameters",
+      "type": "object"
+    }
+  },
+  "title": "RunPolicy",
+  "type": "object"
+}

@@ -1,0 +1,95 @@
+{
+  "version": "1.1",
+  "strategy_id": "rule.l2_imbalance_maker",
+  "strategy_kind": "rule",
+  "source_id": "avellaneda2008",
+  "fidelity": "formula_reproduction",
+  "claims": [
+    {
+      "claim_id": "maker.reservation_price",
+      "page": 5,
+      "anchor": "indifference price",
+      "locator": "Equation (29), PDF p.5",
+      "interpretation": "The reservation price shifts the mid-price by inventory times risk aversion, variance and remaining time."
+    },
+    {
+      "claim_id": "maker.optimal_spread",
+      "page": 5,
+      "anchor": "bid/ask spread",
+      "locator": "Equation (30), PDF p.5",
+      "interpretation": "The optimal total spread combines the inventory-risk horizon term and exponential-arrival decay term."
+    }
+  ],
+  "implementation": [
+    {
+      "path": "src/psrc/strategies/rule.py",
+      "sha256": "6cc6d335e5c9e7db298267b849291d06e061a7446693435cc7b4378d222adc9c",
+      "symbols": [
+        "L2ImbalanceMakerStrategy"
+      ]
+    },
+    {
+      "path": "strategies/rule.l2_imbalance_maker/strategy.py",
+      "sha256": "6b055b1bbed8d1dff3ad05951e541e3c7b2b5633c1605d7f0f81ba5827e2653b",
+      "symbols": [
+        "L2ImbalanceMakerStrategy",
+        "class Strategy"
+      ]
+    }
+  ],
+  "verification_tests": [
+    "tests/papers/test_reproduction_oracles.py::test_avellaneda_stoikov_quotes_reproduce_equations_29_30"
+  ],
+  "claim_links": [
+    {
+      "claim_id": "maker.reservation_price",
+      "implementation_path": "src/psrc/strategies/rule.py",
+      "symbol": "L2ImbalanceMakerStrategy",
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_avellaneda_stoikov_quotes_reproduce_equations_29_30"
+    },
+    {
+      "claim_id": "maker.optimal_spread",
+      "implementation_path": "src/psrc/strategies/rule.py",
+      "symbol": "L2ImbalanceMakerStrategy",
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_avellaneda_stoikov_quotes_reproduce_equations_29_30"
+    }
+  ],
+  "runtime_expectation": {
+    "source_data_sha256": "ae71a1d713137b0d3029474773bf04977870b69e2b422dd98555aff935fe7cda",
+    "decision_sha256": "c1ae8b32628830fcf6d6ef8fb9621607fcb878ee16d9efbe250b2ce2d5082871",
+    "data_kinds": [
+      "book_snapshot_l2"
+    ],
+    "timeframes": [
+      "event"
+    ],
+    "observed_action_kinds": [
+      "replace_order",
+      "submit_order"
+    ],
+    "observed_reason_codes": [
+      "quote.inventory_aware_ask",
+      "quote.inventory_aware_bid",
+      "quote.refresh_bid"
+    ],
+    "expected_decisions": 10,
+    "expected_orders": 11,
+    "expected_fills": 9,
+    "artifact_algorithm": null,
+    "artifact_id": null
+  },
+  "data_mode": "synthetic_fixture",
+  "original_paper_dataset": false,
+  "empirical_results_reproduced": false,
+  "assumptions": [
+    "Risk aversion, volatility, arrival decay and the finite event horizon are fixed before the run."
+  ],
+  "deviations": [
+    "Uses deterministic calibration constants and event time instead of fitting arrival intensities and clock-time volatility from the paper dataset."
+  ],
+  "mapping_review": "Numerical oracle independently evaluates equations (29)-(30); L2 snapshots supply the live mid-price while inventory comes from the runtime account.",
+  "algorithm_fidelity": "A2_algorithm_exact",
+  "data_fidelity": "D0_synthetic",
+  "experimental_fidelity": "E0_runtime_only",
+  "runtime_fidelity": "R1_unified_contract"
+}

@@ -1,0 +1,33 @@
+{
+  "contract_version": "1.1.0",
+  "dataset_id": "synthetic.l1-quotes",
+  "dataset_version": "1.0.0",
+  "extensions": {},
+  "generated_at": "2026-01-01T00:00:00Z",
+  "public_or_synthetic": true,
+  "streams": [
+    {
+      "data_sha256": "4497637c0e9bbf116623cb67b303971a077a23e1b94c28657acf1db3f246ee2b",
+      "fields": [
+        "ask_price",
+        "ask_size",
+        "bid_price",
+        "bid_size"
+      ],
+      "kind": "quote_l1",
+      "record_count": 10,
+      "schema_sha256": "df1ec37f7d6dae1bfe82b0b8f3dae35353fd792bcb23164c987850742612e3de",
+      "stream_id": "quotes",
+      "symbols": [
+        "SYNTH.L1"
+      ],
+      "timeframe": {
+        "alignment": "epoch",
+        "calendar": "24/7",
+        "interval": null,
+        "mode": "event",
+        "timezone": "UTC"
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+contract_version: 1.1.0
+strategy_id: rule.l1_microprice
+strategy_version: 1.0.0
+kind: rule
+entrypoint: strategy.py:Strategy
+required_profiles:
+- event.l1.v1
+- execution.basic.v1
+lifecycle:
+  training: not_required
+  inference: required
+  backtest: required
+  state_checkpointing: false
+data_requirements:
+- stream_id: quotes
+  kind: quote_l1
+  timeframe:
+    mode: event
+    interval: null
+    timezone: UTC
+    calendar: 24/7
+    alignment: epoch
+  symbols:
+  - SYNTH.L1
+  required_fields:
+  - ask_price
+  - ask_size
+  - bid_price
+  - bid_size
+  optional_fields: []
+  lookback: 1
+  depth: null
+  max_staleness_ns: null
+action_requirements:
+  allowed:
+  - no_op
+  - submit_order
+  max_abs_position: '10'
+  max_order_quantity: '1'
+resources:
+  sandbox: development
+  network: deny
+  filesystem: artifact_store_only
+  allowed_imports:
+  - math
+  - numpy
+  - statistics
+  timeout_seconds: 60
+  memory_mb: 512
+  process_limit: 32
+deterministic: true
+seed: 7
+extensions: {}

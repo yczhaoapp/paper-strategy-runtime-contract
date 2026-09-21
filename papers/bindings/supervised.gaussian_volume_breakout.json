@@ -1,0 +1,94 @@
+{
+  "version": "1.1",
+  "strategy_id": "supervised.gaussian_volume_breakout",
+  "strategy_kind": "supervised",
+  "source_id": "saifan2021",
+  "fidelity": "method_reproduction",
+  "claims": [
+    {
+      "claim_id": "gnb.model",
+      "page": 2,
+      "anchor": "Gaussian Naive Bayes",
+      "locator": "Abstract, PDF p.2",
+      "interpretation": "Gaussian Naive Bayes is one of the stock direction classifiers."
+    },
+    {
+      "claim_id": "gnb.continuous",
+      "page": 53,
+      "anchor": "features are continuous",
+      "locator": "Gaussian Naive Bayes section, PDF p.53",
+      "interpretation": "The paper chooses Gaussian Naive Bayes for continuous features."
+    }
+  ],
+  "implementation": [
+    {
+      "path": "src/psrc/strategies/supervised.py",
+      "sha256": "43954f41c1375d1b661a9c751686d6bd15edbf75a186698c5e17aac6baaa9c1c",
+      "symbols": [
+        "GaussianVolumeBreakoutStrategy"
+      ]
+    },
+    {
+      "path": "strategies/supervised.gaussian_volume_breakout/strategy.py",
+      "sha256": "6b977d28dc0fe8784a2f0d875c125004907d75ff1acef46cb6056fb9828f8d7a",
+      "symbols": [
+        "GaussianVolumeBreakoutStrategy",
+        "class Strategy"
+      ]
+    }
+  ],
+  "verification_tests": [
+    "tests/integration/test_supervised_strategy_matrix.py::test_every_supervised_strategy_trains_reloads_and_backtests[supervised.gaussian_volume_breakout]"
+  ],
+  "claim_links": [
+    {
+      "claim_id": "gnb.model",
+      "implementation_path": "src/psrc/strategies/supervised.py",
+      "symbol": "GaussianVolumeBreakoutStrategy",
+      "verification_test": "tests/integration/test_supervised_strategy_matrix.py::test_every_supervised_strategy_trains_reloads_and_backtests[supervised.gaussian_volume_breakout]"
+    },
+    {
+      "claim_id": "gnb.continuous",
+      "implementation_path": "src/psrc/strategies/supervised.py",
+      "symbol": "GaussianVolumeBreakoutStrategy",
+      "verification_test": "tests/integration/test_supervised_strategy_matrix.py::test_every_supervised_strategy_trains_reloads_and_backtests[supervised.gaussian_volume_breakout]"
+    }
+  ],
+  "runtime_expectation": {
+    "source_data_sha256": "83b9884f4b54b381744efb554df89690a61f8f7d2b274a0c0f156b140e795489",
+    "decision_sha256": "b8728ffa687e8392c26dc32140ba7c4187313b56d208ff2406fd48c15c2874f9",
+    "data_kinds": [
+      "bar"
+    ],
+    "timeframes": [
+      "PT1M"
+    ],
+    "observed_action_kinds": [
+      "prediction",
+      "target_position"
+    ],
+    "observed_reason_codes": [
+      "allocation.breakout_probability",
+      "model.gaussian_breakout_probability"
+    ],
+    "expected_decisions": 6,
+    "expected_orders": 6,
+    "expected_fills": 1,
+    "artifact_algorithm": "gaussian-naive-bayes-v1",
+    "artifact_id": "sha256-5503083ad1204d4a6012f795227b00faf7cfd662d4e14688d16a22b7ab252fde"
+  },
+  "data_mode": "synthetic_fixture",
+  "original_paper_dataset": false,
+  "empirical_results_reproduced": false,
+  "assumptions": [
+    "Features are conditionally Gaussian by class and class variances receive an explicit numerical floor."
+  ],
+  "deviations": [
+    "Uses volume and intrabar range only, outside the paper ensemble and selected-feature set."
+  ],
+  "mapping_review": "Manual claim-to-code review completed; hashes bind the reviewed paper, implementation module, and executable package wrapper.",
+  "algorithm_fidelity": "A1_method_equivalent",
+  "data_fidelity": "D0_synthetic",
+  "experimental_fidelity": "E0_runtime_only",
+  "runtime_fidelity": "R1_unified_contract"
+}

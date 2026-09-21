@@ -1,0 +1,7597 @@
+{
+  "dataset_id": "public.plotly.aapl-msft-2007-2016.train",
+  "features": [],
+  "labels": [],
+  "metadata": {
+    "actions": "deterministic offline exploration cycle {-1,0,1}",
+    "origin": "public_historical",
+    "reward": "next-day-aapl-minus-msft-return-minus-5bps-turnover",
+    "source_events_sha256": "e93d7ef71349476c1e30815b93ae1d31e6be003c0acfd38777cc75fc3de340de",
+    "split": "first-400-paired-days-train-next-106-paired-days-test"
+  },
+  "run_id": "train.reinforcement_learning.a2c_pairs",
+  "seed": 7,
+  "transitions": [
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 1,
+      "next_state": [
+        0.326287,
+        -1.0,
+        0.0652574
+      ],
+      "reward": -0.024370212453,
+      "state": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 2,
+      "next_state": [
+        2.176945449865,
+        0.0,
+        0.0384022
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.326287,
+        -1.0,
+        0.0652574
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 0,
+      "next_state": [
+        -0.808066552443,
+        1.0,
+        -0.0819308
+      ],
+      "reward": -0.005345789361,
+      "state": [
+        2.176945449865,
+        0.0,
+        0.0384022
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 1,
+      "next_state": [
+        3.810783196558,
+        -1.0,
+        0.1782392
+      ],
+      "reward": -0.08306786391,
+      "state": [
+        -0.808066552443,
+        1.0,
+        -0.0819308
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 2,
+      "next_state": [
+        4.747048989623,
+        0.0,
+        0.2134682
+      ],
+      "reward": -0.0005,
+      "state": [
+        3.810783196558,
+        -1.0,
+        0.1782392
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 0,
+      "next_state": [
+        -0.611561389681,
+        1.0,
+        -0.3654254
+      ],
+      "reward": -0.047935148206,
+      "state": [
+        4.747048989623,
+        0.0,
+        0.2134682
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 1,
+      "next_state": [
+        -2.155987876184,
+        -1.0,
+        -0.19485
+      ],
+      "reward": 0.027929609159,
+      "state": [
+        -0.611561389681,
+        1.0,
+        -0.3654254
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 2,
+      "next_state": [
+        -0.998392211132,
+        0.0,
+        0.0816614
+      ],
+      "reward": -0.0005,
+      "state": [
+        -2.155987876184,
+        -1.0,
+        -0.19485
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 0,
+      "next_state": [
+        -0.987050178459,
+        1.0,
+        -0.0376384
+      ],
+      "reward": -0.020716639098,
+      "state": [
+        -0.998392211132,
+        0.0,
+        0.0816614
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 1,
+      "next_state": [
+        -1.452257895274,
+        -1.0,
+        -0.1234984
+      ],
+      "reward": 0.057711779562,
+      "state": [
+        -0.987050178459,
+        1.0,
+        -0.0376384
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 2,
+      "next_state": [
+        -1.265908576721,
+        0.0,
+        -0.0503748
+      ],
+      "reward": -0.0005,
+      "state": [
+        -1.452257895274,
+        -1.0,
+        -0.1234984
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 0,
+      "next_state": [
+        -0.644950574992,
+        1.0,
+        0.0798818
+      ],
+      "reward": -0.007285883284,
+      "state": [
+        -1.265908576721,
+        0.0,
+        -0.0503748
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 1,
+      "next_state": [
+        -0.871595558879,
+        -1.0,
+        -0.0352578
+      ],
+      "reward": 0.012210063592,
+      "state": [
+        -0.644950574992,
+        1.0,
+        0.0798818
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 2,
+      "next_state": [
+        -1.799499752509,
+        0.0,
+        -0.0858342
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.871595558879,
+        -1.0,
+        -0.0352578
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 0,
+      "next_state": [
+        1.502940082485,
+        1.0,
+        0.1934302
+      ],
+      "reward": 0.014894987635,
+      "state": [
+        -1.799499752509,
+        0.0,
+        -0.0858342
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 1,
+      "next_state": [
+        0.550046282566,
+        -1.0,
+        -0.071146
+      ],
+      "reward": 0.014013094147,
+      "state": [
+        1.502940082485,
+        1.0,
+        0.1934302
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 2,
+      "next_state": [
+        1.056778671786,
+        0.0,
+        0.0372762
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.550046282566,
+        -1.0,
+        -0.071146
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 0,
+      "next_state": [
+        0.846263225537,
+        1.0,
+        0.0057232
+      ],
+      "reward": -0.003400240255,
+      "state": [
+        1.056778671786,
+        0.0,
+        0.0372762
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 1,
+      "next_state": [
+        -1.139728000589,
+        -1.0,
+        -0.1171568
+      ],
+      "reward": 0.009363176442,
+      "state": [
+        0.846263225537,
+        1.0,
+        0.0057232
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:0",
+      "next_action": 2,
+      "next_state": [
+        0.049451505726,
+        0.0,
+        0.0700572
+      ],
+      "reward": -0.0005,
+      "state": [
+        -1.139728000589,
+        -1.0,
+        -0.1171568
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 0,
+      "next_state": [
+        2.212398008918,
+        1.0,
+        0.118975
+      ],
+      "reward": 0.011725299428,
+      "state": [
+        0.049451505726,
+        0.0,
+        0.0700572
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 1,
+      "next_state": [
+        4.541376493121,
+        -1.0,
+        0.1646548
+      ],
+      "reward": -0.010654116533,
+      "state": [
+        2.212398008918,
+        1.0,
+        0.118975
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 2,
+      "next_state": [
+        2.262622176401,
+        0.0,
+        0.0376406
+      ],
+      "reward": -0.0005,
+      "state": [
+        4.541376493121,
+        -1.0,
+        0.1646548
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 0,
+      "next_state": [
+        2.110745781679,
+        1.0,
+        0.097837
+      ],
+      "reward": 0.028011243239,
+      "state": [
+        2.262622176401,
+        0.0,
+        0.0376406
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 1,
+      "next_state": [
+        1.567531888836,
+        -1.0,
+        0.0360864
+      ],
+      "reward": -0.005093640114,
+      "state": [
+        2.110745781679,
+        1.0,
+        0.097837
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 2,
+      "next_state": [
+        1.254833085685,
+        0.0,
+        0.0128378
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.567531888836,
+        -1.0,
+        0.0360864
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 0,
+      "next_state": [
+        1.477285654452,
+        1.0,
+        0.0554332
+      ],
+      "reward": 0.020214864291,
+      "state": [
+        1.254833085685,
+        0.0,
+        0.0128378
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 1,
+      "next_state": [
+        0.622345859845,
+        -1.0,
+        -0.0594946
+      ],
+      "reward": 0.007015175898,
+      "state": [
+        1.477285654452,
+        1.0,
+        0.0554332
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 2,
+      "next_state": [
+        -1.411977554623,
+        0.0,
+        -0.1096854
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.622345859845,
+        -1.0,
+        -0.0594946
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 0,
+      "next_state": [
+        -2.221000945492,
+        1.0,
+        -0.0216982
+      ],
+      "reward": -0.00359589139,
+      "state": [
+        -1.411977554623,
+        0.0,
+        -0.1096854
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 1,
+      "next_state": [
+        1.805223303528,
+        -1.0,
+        0.2217508
+      ],
+      "reward": -0.020980279283,
+      "state": [
+        -2.221000945492,
+        1.0,
+        -0.0216982
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 2,
+      "next_state": [
+        1.280540300178,
+        0.0,
+        -0.0006642
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.805223303528,
+        -1.0,
+        0.2217508
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 0,
+      "next_state": [
+        0.109008050015,
+        1.0,
+        -0.0800982
+      ],
+      "reward": 0.01988001155,
+      "state": [
+        1.280540300178,
+        0.0,
+        -0.0006642
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 1,
+      "next_state": [
+        0.155555752627,
+        -1.0,
+        -0.0046754
+      ],
+      "reward": -0.003112525086,
+      "state": [
+        0.109008050015,
+        1.0,
+        -0.0800982
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 2,
+      "next_state": [
+        1.828210195427,
+        0.0,
+        0.1461146
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.155555752627,
+        -1.0,
+        -0.0046754
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 0,
+      "next_state": [
+        0.507905950107,
+        1.0,
+        -0.0695494
+      ],
+      "reward": -0.012669539343,
+      "state": [
+        1.828210195427,
+        0.0,
+        0.1461146
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 1,
+      "next_state": [
+        5.441351968255,
+        -1.0,
+        0.2651572
+      ],
+      "reward": 0.009465996071,
+      "state": [
+        0.507905950107,
+        1.0,
+        -0.0695494
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 2,
+      "next_state": [
+        1.335510811318,
+        0.0,
+        -0.0785928
+      ],
+      "reward": -0.0005,
+      "state": [
+        5.441351968255,
+        -1.0,
+        0.2651572
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 0,
+      "next_state": [
+        1.683948251048,
+        1.0,
+        0.0905822
+      ],
+      "reward": 0.031296243397,
+      "state": [
+        1.335510811318,
+        0.0,
+        -0.0785928
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:1",
+      "next_action": 1,
+      "next_state": [
+        1.652567669,
+        -1.0,
+        0.0625858
+      ],
+      "reward": 0.006204529291,
+      "state": [
+        1.683948251048,
+        1.0,
+        0.0905822
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 2,
+      "next_state": [
+        2.015783858284,
+        0.0,
+        0.0916888
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.652567669,
+        -1.0,
+        0.0625858
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 0,
+      "next_state": [
+        1.046882040187,
+        1.0,
+        -0.0406672
+      ],
+      "reward": 0.011000212859,
+      "state": [
+        2.015783858284,
+        0.0,
+        0.0916888
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 1,
+      "next_state": [
+        1.634910920059,
+        -1.0,
+        0.0583932
+      ],
+      "reward": -0.003575722019,
+      "state": [
+        1.046882040187,
+        1.0,
+        -0.0406672
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 2,
+      "next_state": [
+        2.233016803094,
+        0.0,
+        0.100775
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.634910920059,
+        -1.0,
+        0.0583932
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 0,
+      "next_state": [
+        1.771042999766,
+        1.0,
+        0.0088646
+      ],
+      "reward": 0.00025716383,
+      "state": [
+        2.233016803094,
+        0.0,
+        0.100775
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 1,
+      "next_state": [
+        1.354598877045,
+        -1.0,
+        0.0019808
+      ],
+      "reward": -0.01710183991,
+      "state": [
+        1.771042999766,
+        1.0,
+        0.0088646
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 2,
+      "next_state": [
+        3.838722775254,
+        0.0,
+        0.1929102
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.354598877045,
+        -1.0,
+        0.0019808
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 0,
+      "next_state": [
+        0.293483949525,
+        1.0,
+        -0.1765922
+      ],
+      "reward": -0.0078495938,
+      "state": [
+        3.838722775254,
+        0.0,
+        0.1929102
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 1,
+      "next_state": [
+        0.326274417435,
+        -1.0,
+        0.0272564
+      ],
+      "reward": -0.000601779515,
+      "state": [
+        0.293483949525,
+        1.0,
+        -0.1765922
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 2,
+      "next_state": [
+        -0.169840556678,
+        0.0,
+        -0.0155684
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.326274417435,
+        -1.0,
+        0.0272564
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 0,
+      "next_state": [
+        -2.059519358324,
+        1.0,
+        -0.120228
+      ],
+      "reward": -0.001605439324,
+      "state": [
+        -0.169840556678,
+        0.0,
+        -0.0155684
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 1,
+      "next_state": [
+        -1.39349060439,
+        -1.0,
+        0.0060412
+      ],
+      "reward": -0.004481295623,
+      "state": [
+        -2.059519358324,
+        1.0,
+        -0.120228
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 2,
+      "next_state": [
+        -2.72069458536,
+        0.0,
+        -0.1556894
+      ],
+      "reward": -0.0005,
+      "state": [
+        -1.39349060439,
+        -1.0,
+        0.0060412
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 0,
+      "next_state": [
+        -1.045055561584,
+        1.0,
+        0.0828694
+      ],
+      "reward": 0.009224549535,
+      "state": [
+        -2.72069458536,
+        0.0,
+        -0.1556894
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 1,
+      "next_state": [
+        -0.055651218503,
+        -1.0,
+        0.0688462
+      ],
+      "reward": -0.005160510184,
+      "state": [
+        -1.045055561584,
+        1.0,
+        0.0828694
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 2,
+      "next_state": [
+        0.171463049238,
+        0.0,
+        -0.0027394
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.055651218503,
+        -1.0,
+        0.0688462
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 0,
+      "next_state": [
+        3.232327106067,
+        1.0,
+        0.1506572
+      ],
+      "reward": 0.0131491234,
+      "state": [
+        0.171463049238,
+        0.0,
+        -0.0027394
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 1,
+      "next_state": [
+        1.406233381637,
+        -1.0,
+        -0.0329846
+      ],
+      "reward": 0.019369864362,
+      "state": [
+        3.232327106067,
+        1.0,
+        0.1506572
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 2,
+      "next_state": [
+        0.846120038588,
+        0.0,
+        -0.0219202
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.406233381637,
+        -1.0,
+        -0.0329846
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:2",
+      "next_action": 0,
+      "next_state": [
+        -0.19932110929,
+        1.0,
+        -0.0608608
+      ],
+      "reward": -0.013784439342,
+      "state": [
+        0.846120038588,
+        0.0,
+        -0.0219202
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 1,
+      "next_state": [
+        0.508231964093,
+        -1.0,
+        0.0614344
+      ],
+      "reward": -0.013629323502,
+      "state": [
+        -0.19932110929,
+        1.0,
+        -0.0608608
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 2,
+      "next_state": [
+        -0.110566541314,
+        0.0,
+        -0.0193634
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.508231964093,
+        -1.0,
+        0.0614344
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 0,
+      "next_state": [
+        -6.407855958808,
+        1.0,
+        -0.2089156
+      ],
+      "reward": -0.025538756334,
+      "state": [
+        -0.110566541314,
+        0.0,
+        -0.0193634
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 1,
+      "next_state": [
+        -2.194438961568,
+        -1.0,
+        -0.0052488
+      ],
+      "reward": -0.003594839905,
+      "state": [
+        -6.407855958808,
+        1.0,
+        -0.2089156
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 2,
+      "next_state": [
+        -1.743494597145,
+        0.0,
+        -0.0336926
+      ],
+      "reward": -0.0005,
+      "state": [
+        -2.194438961568,
+        -1.0,
+        -0.0052488
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 0,
+      "next_state": [
+        -0.559230438602,
+        1.0,
+        0.0706074
+      ],
+      "reward": 0.01185709023,
+      "state": [
+        -1.743494597145,
+        0.0,
+        -0.0336926
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 1,
+      "next_state": [
+        0.096863856177,
+        -1.0,
+        0.049443
+      ],
+      "reward": 0.006401450788,
+      "state": [
+        -0.559230438602,
+        1.0,
+        0.0706074
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 2,
+      "next_state": [
+        -1.399333492762,
+        0.0,
+        -0.1490236
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.096863856177,
+        -1.0,
+        0.049443
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 0,
+      "next_state": [
+        -2.970935214743,
+        1.0,
+        -0.0741328
+      ],
+      "reward": -0.024104635559,
+      "state": [
+        -1.399333492762,
+        0.0,
+        -0.1490236
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 1,
+      "next_state": [
+        -1.759653653701,
+        -1.0,
+        -0.007147
+      ],
+      "reward": -0.009992736103,
+      "state": [
+        -2.970935214743,
+        1.0,
+        -0.0741328
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 2,
+      "next_state": [
+        -2.004408523468,
+        0.0,
+        -0.0672112
+      ],
+      "reward": -0.0005,
+      "state": [
+        -1.759653653701,
+        -1.0,
+        -0.007147
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 0,
+      "next_state": [
+        -0.548861063912,
+        1.0,
+        0.0818114
+      ],
+      "reward": 0.008718951462,
+      "state": [
+        -2.004408523468,
+        0.0,
+        -0.0672112
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 1,
+      "next_state": [
+        -0.663826324271,
+        -1.0,
+        -0.0324158
+      ],
+      "reward": 0.003584953079,
+      "state": [
+        -0.548861063912,
+        1.0,
+        0.0818114
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 2,
+      "next_state": [
+        -2.463028757104,
+        0.0,
+        -0.0877226
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.663826324271,
+        -1.0,
+        -0.0324158
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 0,
+      "next_state": [
+        1.532930231167,
+        1.0,
+        0.1444764
+      ],
+      "reward": 0.035691463433,
+      "state": [
+        -2.463028757104,
+        0.0,
+        -0.0877226
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 1,
+      "next_state": [
+        1.04319799908,
+        -1.0,
+        -0.0103638
+      ],
+      "reward": 0.002234896745,
+      "state": [
+        1.532930231167,
+        1.0,
+        0.1444764
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 2,
+      "next_state": [
+        0.725049681342,
+        0.0,
+        -0.0085604
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.04319799908,
+        -1.0,
+        -0.0103638
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 0,
+      "next_state": [
+        1.646999482439,
+        1.0,
+        0.0569296
+      ],
+      "reward": 0.032307604979,
+      "state": [
+        0.725049681342,
+        0.0,
+        -0.0085604
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 1,
+      "next_state": [
+        -3.996212650302,
+        -1.0,
+        -0.2998152
+      ],
+      "reward": 0.02312483175,
+      "state": [
+        1.646999482439,
+        1.0,
+        0.0569296
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:3",
+      "next_action": 2,
+      "next_state": [
+        -1.352656836776,
+        0.0,
+        0.0547764
+      ],
+      "reward": -0.0005,
+      "state": [
+        -3.996212650302,
+        -1.0,
+        -0.2998152
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 0,
+      "next_state": [
+        -2.51819122767,
+        1.0,
+        -0.1568296
+      ],
+      "reward": -0.019170623374,
+      "state": [
+        -1.352656836776,
+        0.0,
+        0.0547764
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 1,
+      "next_state": [
+        -1.815180019403,
+        -1.0,
+        -0.0432674
+      ],
+      "reward": -0.003341116747,
+      "state": [
+        -2.51819122767,
+        1.0,
+        -0.1568296
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 2,
+      "next_state": [
+        -1.937358349547,
+        0.0,
+        -0.1156378
+      ],
+      "reward": -0.0005,
+      "state": [
+        -1.815180019403,
+        -1.0,
+        -0.0432674
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 0,
+      "next_state": [
+        -0.521678200946,
+        1.0,
+        0.1428486
+      ],
+      "reward": 0.016822169046,
+      "state": [
+        -1.937358349547,
+        0.0,
+        -0.1156378
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 1,
+      "next_state": [
+        0.109730152041,
+        -1.0,
+        0.033997
+      ],
+      "reward": -0.026941802753,
+      "state": [
+        -0.521678200946,
+        1.0,
+        0.1428486
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 2,
+      "next_state": [
+        0.456265471775,
+        0.0,
+        0.0172856
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.109730152041,
+        -1.0,
+        0.033997
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 0,
+      "next_state": [
+        1.587401156066,
+        1.0,
+        0.038498
+      ],
+      "reward": 0.015847858419,
+      "state": [
+        0.456265471775,
+        0.0,
+        0.0172856
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 1,
+      "next_state": [
+        2.232125176382,
+        -1.0,
+        0.0765622
+      ],
+      "reward": -0.011801627669,
+      "state": [
+        1.587401156066,
+        1.0,
+        0.038498
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 2,
+      "next_state": [
+        0.747523091898,
+        0.0,
+        -0.0627614
+      ],
+      "reward": -0.0005,
+      "state": [
+        2.232125176382,
+        -1.0,
+        0.0765622
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 0,
+      "next_state": [
+        0.374306516859,
+        1.0,
+        -0.0093512
+      ],
+      "reward": 0.002611884499,
+      "state": [
+        0.747523091898,
+        0.0,
+        -0.0627614
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 1,
+      "next_state": [
+        -1.281122446835,
+        -1.0,
+        -0.058376
+      ],
+      "reward": 0.016797051743,
+      "state": [
+        0.374306516859,
+        1.0,
+        -0.0093512
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 2,
+      "next_state": [
+        -2.730075630163,
+        0.0,
+        -0.0596718
+      ],
+      "reward": -0.0005,
+      "state": [
+        -1.281122446835,
+        -1.0,
+        -0.058376
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 0,
+      "next_state": [
+        -0.284701082195,
+        1.0,
+        0.084635
+      ],
+      "reward": 0.021960703298,
+      "state": [
+        -2.730075630163,
+        0.0,
+        -0.0596718
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 1,
+      "next_state": [
+        0.875204748078,
+        -1.0,
+        0.0637958
+      ],
+      "reward": -0.011141522252,
+      "state": [
+        -0.284701082195,
+        1.0,
+        0.084635
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 2,
+      "next_state": [
+        0.800168356238,
+        0.0,
+        -0.0191978
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.875204748078,
+        -1.0,
+        0.0637958
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 0,
+      "next_state": [
+        3.963714276593,
+        1.0,
+        0.1575546
+      ],
+      "reward": 0.025025146558,
+      "state": [
+        0.800168356238,
+        0.0,
+        -0.0191978
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 1,
+      "next_state": [
+        2.091055541744,
+        -1.0,
+        0.018331
+      ],
+      "reward": 0.001140640691,
+      "state": [
+        3.963714276593,
+        1.0,
+        0.1575546
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 2,
+      "next_state": [
+        2.047075020281,
+        0.0,
+        0.0742168
+      ],
+      "reward": -0.0005,
+      "state": [
+        2.091055541744,
+        -1.0,
+        0.018331
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 0,
+      "next_state": [
+        1.256308182894,
+        1.0,
+        -0.0226014
+      ],
+      "reward": 0.015695266777,
+      "state": [
+        2.047075020281,
+        0.0,
+        0.0742168
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:4",
+      "next_action": 1,
+      "next_state": [
+        0.086402497054,
+        -1.0,
+        -0.0808136
+      ],
+      "reward": 0.002745734424,
+      "state": [
+        1.256308182894,
+        1.0,
+        -0.0226014
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 2,
+      "next_state": [
+        0.008204084777,
+        0.0,
+        0.0135934
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.086402497054,
+        -1.0,
+        -0.0808136
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 0,
+      "next_state": [
+        4.495972318998,
+        1.0,
+        0.1996904
+      ],
+      "reward": 0.033375972123,
+      "state": [
+        0.008204084777,
+        0.0,
+        0.0135934
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 1,
+      "next_state": [
+        1.358999059957,
+        -1.0,
+        -0.0415224
+      ],
+      "reward": 0.018763220044,
+      "state": [
+        4.495972318998,
+        1.0,
+        0.1996904
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 2,
+      "next_state": [
+        1.426455799804,
+        0.0,
+        0.0355376
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.358999059957,
+        -1.0,
+        -0.0415224
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 0,
+      "next_state": [
+        1.980057613639,
+        1.0,
+        0.0806754
+      ],
+      "reward": 0.015101601212,
+      "state": [
+        1.426455799804,
+        0.0,
+        0.0355376
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 1,
+      "next_state": [
+        2.428326992044,
+        -1.0,
+        0.1193342
+      ],
+      "reward": -0.018390657327,
+      "state": [
+        1.980057613639,
+        1.0,
+        0.0806754
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 2,
+      "next_state": [
+        3.518262323686,
+        0.0,
+        0.2277844
+      ],
+      "reward": -0.0005,
+      "state": [
+        2.428326992044,
+        -1.0,
+        0.1193342
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 0,
+      "next_state": [
+        1.166407601448,
+        1.0,
+        -0.1277744
+      ],
+      "reward": -0.011631948637,
+      "state": [
+        3.518262323686,
+        0.0,
+        0.2277844
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 1,
+      "next_state": [
+        0.204887747252,
+        -1.0,
+        -0.1040872
+      ],
+      "reward": 0.032542652022,
+      "state": [
+        1.166407601448,
+        1.0,
+        -0.1277744
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 2,
+      "next_state": [
+        0.396247069252,
+        0.0,
+        0.0599366
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.204887747252,
+        -1.0,
+        -0.1040872
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 0,
+      "next_state": [
+        -2.237260541582,
+        1.0,
+        -0.250621
+      ],
+      "reward": -0.042514621642,
+      "state": [
+        0.396247069252,
+        0.0,
+        0.0599366
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 1,
+      "next_state": [
+        -1.841637679094,
+        -1.0,
+        -0.0089152
+      ],
+      "reward": -0.007360484188,
+      "state": [
+        -2.237260541582,
+        1.0,
+        -0.250621
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 2,
+      "next_state": [
+        -0.931759786891,
+        0.0,
+        0.0559944
+      ],
+      "reward": -0.0005,
+      "state": [
+        -1.841637679094,
+        -1.0,
+        -0.0089152
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 0,
+      "next_state": [
+        0.272036080976,
+        1.0,
+        0.1149902
+      ],
+      "reward": 0.036935389853,
+      "state": [
+        -0.931759786891,
+        0.0,
+        0.0559944
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 1,
+      "next_state": [
+        0.337016887622,
+        -1.0,
+        -0.0216874
+      ],
+      "reward": 0.008792949916,
+      "state": [
+        0.272036080976,
+        1.0,
+        0.1149902
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 2,
+      "next_state": [
+        1.400037011883,
+        0.0,
+        0.0895178
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.337016887622,
+        -1.0,
+        -0.0216874
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 0,
+      "next_state": [
+        1.461330917452,
+        1.0,
+        -0.0056486
+      ],
+      "reward": 0.011835937977,
+      "state": [
+        1.400037011883,
+        0.0,
+        0.0895178
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 1,
+      "next_state": [
+        3.464081238462,
+        -1.0,
+        0.2119726
+      ],
+      "reward": -0.017892218361,
+      "state": [
+        1.461330917452,
+        1.0,
+        -0.0056486
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 2,
+      "next_state": [
+        1.777935720354,
+        0.0,
+        -0.0174636
+      ],
+      "reward": -0.0005,
+      "state": [
+        3.464081238462,
+        -1.0,
+        0.2119726
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:5",
+      "next_action": 0,
+      "next_state": [
+        0.593123306922,
+        1.0,
+        -0.0808664
+      ],
+      "reward": -0.023505157525,
+      "state": [
+        1.777935720354,
+        0.0,
+        -0.0174636
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 1,
+      "next_state": [
+        -0.127458776075,
+        -1.0,
+        -0.0537788
+      ],
+      "reward": -0.007864864736,
+      "state": [
+        0.593123306922,
+        1.0,
+        -0.0808664
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 2,
+      "next_state": [
+        -0.716153840593,
+        0.0,
+        -0.0222714
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.127458776075,
+        -1.0,
+        -0.0537788
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 0,
+      "next_state": [
+        1.145674102061,
+        1.0,
+        0.155439
+      ],
+      "reward": 0.023844518133,
+      "state": [
+        -0.716153840593,
+        0.0,
+        -0.0222714
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 1,
+      "next_state": [
+        -0.725262782042,
+        -1.0,
+        -0.1078476
+      ],
+      "reward": 0.014553284695,
+      "state": [
+        1.145674102061,
+        1.0,
+        0.155439
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 2,
+      "next_state": [
+        0.609023975016,
+        0.0,
+        0.065938
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.725262782042,
+        -1.0,
+        -0.1078476
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 0,
+      "next_state": [
+        3.800016533232,
+        1.0,
+        0.157335
+      ],
+      "reward": 0.044377594803,
+      "state": [
+        0.609023975016,
+        0.0,
+        0.065938
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 1,
+      "next_state": [
+        1.772791342466,
+        -1.0,
+        -0.0054468
+      ],
+      "reward": 0.00172291448,
+      "state": [
+        3.800016533232,
+        1.0,
+        0.157335
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 2,
+      "next_state": [
+        1.018461037031,
+        0.0,
+        -0.0198262
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.772791342466,
+        -1.0,
+        -0.0054468
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 0,
+      "next_state": [
+        3.456324723378,
+        1.0,
+        0.227866
+      ],
+      "reward": 0.033077412318,
+      "state": [
+        1.018461037031,
+        0.0,
+        -0.0198262
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 1,
+      "next_state": [
+        1.385282382325,
+        -1.0,
+        -0.0506208
+      ],
+      "reward": 0.004152926094,
+      "state": [
+        3.456324723378,
+        1.0,
+        0.227866
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 2,
+      "next_state": [
+        -0.15686601786,
+        0.0,
+        -0.1428848
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.385282382325,
+        -1.0,
+        -0.0506208
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 0,
+      "next_state": [
+        1.491557314868,
+        1.0,
+        0.1775912
+      ],
+      "reward": 0.035113078388,
+      "state": [
+        -0.15686601786,
+        0.0,
+        -0.1428848
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 1,
+      "next_state": [
+        0.44010881145,
+        -1.0,
+        -0.0580392
+      ],
+      "reward": 0.003355879098,
+      "state": [
+        1.491557314868,
+        1.0,
+        0.1775912
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 2,
+      "next_state": [
+        -2.321412796688,
+        0.0,
+        -0.2208142
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.44010881145,
+        -1.0,
+        -0.0580392
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 0,
+      "next_state": [
+        -2.428447554037,
+        1.0,
+        -0.0661226
+      ],
+      "reward": -0.010735593349,
+      "state": [
+        -2.321412796688,
+        0.0,
+        -0.2208142
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 1,
+      "next_state": [
+        -2.613537840284,
+        -1.0,
+        -0.1408228
+      ],
+      "reward": 0.00447009068,
+      "state": [
+        -2.428447554037,
+        1.0,
+        -0.0661226
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 2,
+      "next_state": [
+        -0.296444097104,
+        0.0,
+        0.2122724
+      ],
+      "reward": -0.0005,
+      "state": [
+        -2.613537840284,
+        -1.0,
+        -0.1408228
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 0,
+      "next_state": [
+        -0.267561216197,
+        1.0,
+        -0.011013
+      ],
+      "reward": -0.001810616576,
+      "state": [
+        -0.296444097104,
+        0.0,
+        0.2122724
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 1,
+      "next_state": [
+        -0.824559167387,
+        -1.0,
+        -0.1071412
+      ],
+      "reward": 0.047804237259,
+      "state": [
+        -0.267561216197,
+        1.0,
+        -0.011013
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:6",
+      "next_action": 2,
+      "next_state": [
+        0.566288717902,
+        0.0,
+        0.091779
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.824559167387,
+        -1.0,
+        -0.1071412
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 0,
+      "next_state": [
+        6.95203743456,
+        1.0,
+        0.4670442
+      ],
+      "reward": 0.086945533377,
+      "state": [
+        0.566288717902,
+        0.0,
+        0.091779
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 1,
+      "next_state": [
+        2.737088632033,
+        -1.0,
+        0.1336786
+      ],
+      "reward": -0.005953683963,
+      "state": [
+        6.95203743456,
+        1.0,
+        0.4670442
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 2,
+      "next_state": [
+        1.382236230784,
+        0.0,
+        -0.0672622
+      ],
+      "reward": -0.0005,
+      "state": [
+        2.737088632033,
+        -1.0,
+        0.1336786
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 0,
+      "next_state": [
+        0.548453441796,
+        1.0,
+        -0.123437
+      ],
+      "reward": -0.054927479523,
+      "state": [
+        1.382236230784,
+        0.0,
+        -0.0672622
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 1,
+      "next_state": [
+        0.284125321406,
+        -1.0,
+        -0.0143988
+      ],
+      "reward": -0.01489689519,
+      "state": [
+        0.548453441796,
+        1.0,
+        -0.123437
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 2,
+      "next_state": [
+        -0.192857546463,
+        0.0,
+        -0.0316348
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.284125321406,
+        -1.0,
+        -0.0143988
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 0,
+      "next_state": [
+        -0.479930281535,
+        1.0,
+        0.058105
+      ],
+      "reward": -0.015524920565,
+      "state": [
+        -0.192857546463,
+        0.0,
+        -0.0316348
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 1,
+      "next_state": [
+        -1.543465745041,
+        -1.0,
+        -0.097375
+      ],
+      "reward": -0.006759194463,
+      "state": [
+        -0.479930281535,
+        1.0,
+        0.058105
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 2,
+      "next_state": [
+        -1.436238053953,
+        0.0,
+        -0.0090506
+      ],
+      "reward": -0.0005,
+      "state": [
+        -1.543465745041,
+        -1.0,
+        -0.097375
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 0,
+      "next_state": [
+        -5.605585343584,
+        1.0,
+        -0.1723372
+      ],
+      "reward": -0.023282397865,
+      "state": [
+        -1.436238053953,
+        0.0,
+        -0.0090506
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 1,
+      "next_state": [
+        -1.768159257891,
+        -1.0,
+        0.0244744
+      ],
+      "reward": 0.032528035412,
+      "state": [
+        -5.605585343584,
+        1.0,
+        -0.1723372
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 2,
+      "next_state": [
+        0.316699017265,
+        0.0,
+        0.1537884
+      ],
+      "reward": -0.0005,
+      "state": [
+        -1.768159257891,
+        -1.0,
+        0.0244744
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 0,
+      "next_state": [
+        1.4305404342,
+        1.0,
+        0.0996622
+      ],
+      "reward": 0.024606498105,
+      "state": [
+        0.316699017265,
+        0.0,
+        0.1537884
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 1,
+      "next_state": [
+        1.277709284912,
+        -1.0,
+        -0.0152162
+      ],
+      "reward": 0.019310183544,
+      "state": [
+        1.4305404342,
+        1.0,
+        0.0996622
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 2,
+      "next_state": [
+        0.522991237261,
+        0.0,
+        -0.0541766
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.277709284912,
+        -1.0,
+        -0.0152162
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 0,
+      "next_state": [
+        0.628971484537,
+        1.0,
+        0.018587
+      ],
+      "reward": -0.013949523291,
+      "state": [
+        0.522991237261,
+        0.0,
+        -0.0541766
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 1,
+      "next_state": [
+        0.245706049332,
+        -1.0,
+        -0.010053
+      ],
+      "reward": -0.027980652263,
+      "state": [
+        0.628971484537,
+        1.0,
+        0.018587
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 2,
+      "next_state": [
+        -0.31629011258,
+        0.0,
+        0.000992
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.245706049332,
+        -1.0,
+        -0.010053
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 0,
+      "next_state": [
+        7.219369221473,
+        1.0,
+        0.2031438
+      ],
+      "reward": 0.049996839618,
+      "state": [
+        -0.31629011258,
+        0.0,
+        0.000992
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:7",
+      "next_action": 1,
+      "next_state": [
+        3.276605179918,
+        -1.0,
+        0.0820918
+      ],
+      "reward": -0.034380081598,
+      "state": [
+        7.219369221473,
+        1.0,
+        0.2031438
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 2,
+      "next_state": [
+        1.188707222827,
+        0.0,
+        -0.064032
+      ],
+      "reward": -0.0005,
+      "state": [
+        3.276605179918,
+        -1.0,
+        0.0820918
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 0,
+      "next_state": [
+        0.403180356025,
+        1.0,
+        -0.0533806
+      ],
+      "reward": 0.013751639976,
+      "state": [
+        1.188707222827,
+        0.0,
+        -0.064032
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 1,
+      "next_state": [
+        0.409551903643,
+        -1.0,
+        0.0230186
+      ],
+      "reward": 0.010435281812,
+      "state": [
+        0.403180356025,
+        1.0,
+        -0.0533806
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 2,
+      "next_state": [
+        0.578610948501,
+        0.0,
+        0.0378354
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.409551903643,
+        -1.0,
+        0.0230186
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 0,
+      "next_state": [
+        -0.253212896211,
+        1.0,
+        -0.0218268
+      ],
+      "reward": 0.033115948534,
+      "state": [
+        0.578610948501,
+        0.0,
+        0.0378354
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 1,
+      "next_state": [
+        2.540987060522,
+        -1.0,
+        0.102795
+      ],
+      "reward": -0.022081118764,
+      "state": [
+        -0.253212896211,
+        1.0,
+        -0.0218268
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 2,
+      "next_state": [
+        1.283600783522,
+        0.0,
+        -0.0317502
+      ],
+      "reward": -0.0005,
+      "state": [
+        2.540987060522,
+        -1.0,
+        0.102795
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 0,
+      "next_state": [
+        3.489273391834,
+        1.0,
+        0.124361
+      ],
+      "reward": 0.037732210448,
+      "state": [
+        1.283600783522,
+        0.0,
+        -0.0317502
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 1,
+      "next_state": [
+        0.612068922673,
+        -1.0,
+        -0.0888398
+      ],
+      "reward": 0.038877521654,
+      "state": [
+        3.489273391834,
+        1.0,
+        0.124361
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 2,
+      "next_state": [
+        -2.543469989978,
+        0.0,
+        -0.1856792
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.612068922673,
+        -1.0,
+        -0.0888398
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 0,
+      "next_state": [
+        -0.905965183825,
+        1.0,
+        0.06661
+      ],
+      "reward": -0.008240960814,
+      "state": [
+        -2.543469989978,
+        0.0,
+        -0.1856792
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 1,
+      "next_state": [
+        0.465780631392,
+        -1.0,
+        0.1177462
+      ],
+      "reward": -0.037083160965,
+      "state": [
+        -0.905965183825,
+        1.0,
+        0.06661
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 2,
+      "next_state": [
+        -1.5490286046,
+        0.0,
+        -0.1781384
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.465780631392,
+        -1.0,
+        0.1177462
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 0,
+      "next_state": [
+        -0.757813204645,
+        1.0,
+        0.035985
+      ],
+      "reward": 0.009537589707,
+      "state": [
+        -1.5490286046,
+        0.0,
+        -0.1781384
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 1,
+      "next_state": [
+        -1.351033120072,
+        -1.0,
+        -0.0652882
+      ],
+      "reward": 0.004392636059,
+      "state": [
+        -0.757813204645,
+        1.0,
+        0.035985
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 2,
+      "next_state": [
+        0.18075444412,
+        0.0,
+        0.0814952
+      ],
+      "reward": -0.0005,
+      "state": [
+        -1.351033120072,
+        -1.0,
+        -0.0652882
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 0,
+      "next_state": [
+        1.418740977852,
+        1.0,
+        0.089896
+      ],
+      "reward": 0.007293376678,
+      "state": [
+        0.18075444412,
+        0.0,
+        0.0814952
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 1,
+      "next_state": [
+        1.087886220911,
+        -1.0,
+        0.001588
+      ],
+      "reward": -0.012173089286,
+      "state": [
+        1.418740977852,
+        1.0,
+        0.089896
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 2,
+      "next_state": [
+        2.534153546,
+        0.0,
+        0.0803044
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.087886220911,
+        -1.0,
+        0.001588
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:8",
+      "next_action": 0,
+      "next_state": [
+        2.367714689067,
+        1.0,
+        0.0688602
+      ],
+      "reward": 0.004952095699,
+      "state": [
+        2.534153546,
+        0.0,
+        0.0803044
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 1,
+      "next_state": [
+        1.728288570836,
+        -1.0,
+        0.0270564
+      ],
+      "reward": -0.020275195882,
+      "state": [
+        2.367714689067,
+        1.0,
+        0.0688602
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 2,
+      "next_state": [
+        1.011548207392,
+        0.0,
+        -0.0300964
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.728288570836,
+        -1.0,
+        0.0270564
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 0,
+      "next_state": [
+        0.398637174478,
+        1.0,
+        -0.0259288
+      ],
+      "reward": 0.016039375411,
+      "state": [
+        1.011548207392,
+        0.0,
+        -0.0300964
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 1,
+      "next_state": [
+        0.288811565756,
+        -1.0,
+        0.0085992
+      ],
+      "reward": -0.000353193267,
+      "state": [
+        0.398637174478,
+        1.0,
+        -0.0259288
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 2,
+      "next_state": [
+        1.497847722083,
+        0.0,
+        0.0490164
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.288811565756,
+        -1.0,
+        0.0085992
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 0,
+      "next_state": [
+        0.487749077677,
+        1.0,
+        -0.0175294
+      ],
+      "reward": -0.0061493339,
+      "state": [
+        1.497847722083,
+        0.0,
+        0.0490164
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 1,
+      "next_state": [
+        -0.719447651834,
+        -1.0,
+        -0.0245406
+      ],
+      "reward": -0.009177950976,
+      "state": [
+        0.487749077677,
+        1.0,
+        -0.0175294
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 2,
+      "next_state": [
+        3.566022679869,
+        0.0,
+        0.0785186
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.719447651834,
+        -1.0,
+        -0.0245406
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 0,
+      "next_state": [
+        3.853997113791,
+        1.0,
+        0.0670084
+      ],
+      "reward": 0.004572625484,
+      "state": [
+        3.566022679869,
+        0.0,
+        0.0785186
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 1,
+      "next_state": [
+        -0.583975447017,
+        -1.0,
+        -0.128725
+      ],
+      "reward": 0.018466762718,
+      "state": [
+        3.853997113791,
+        1.0,
+        0.0670084
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 2,
+      "next_state": [
+        1.257706623462,
+        0.0,
+        0.0957182
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.583975447017,
+        -1.0,
+        -0.128725
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 0,
+      "next_state": [
+        4.131361020377,
+        1.0,
+        0.1709296
+      ],
+      "reward": 0.039512382261,
+      "state": [
+        1.257706623462,
+        0.0,
+        0.0957182
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 1,
+      "next_state": [
+        0.975488847834,
+        -1.0,
+        -0.0855962
+      ],
+      "reward": 0.008010923015,
+      "state": [
+        4.131361020377,
+        1.0,
+        0.1709296
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 2,
+      "next_state": [
+        -0.137227750731,
+        0.0,
+        -0.0704482
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.975488847834,
+        -1.0,
+        -0.0855962
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 0,
+      "next_state": [
+        -0.452103873801,
+        1.0,
+        -0.0169354
+      ],
+      "reward": -0.01725425715,
+      "state": [
+        -0.137227750731,
+        0.0,
+        -0.0704482
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 1,
+      "next_state": [
+        0.213323548801,
+        -1.0,
+        0.0485544
+      ],
+      "reward": -0.023250957415,
+      "state": [
+        -0.452103873801,
+        1.0,
+        -0.0169354
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 2,
+      "next_state": [
+        0.474130064433,
+        0.0,
+        0.0349924
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.213323548801,
+        -1.0,
+        0.0485544
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 0,
+      "next_state": [
+        -0.117360488966,
+        1.0,
+        -0.0219606
+      ],
+      "reward": 0.005749786296,
+      "state": [
+        0.474130064433,
+        0.0,
+        0.0349924
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 1,
+      "next_state": [
+        -4.663647630003,
+        -1.0,
+        -0.1624594
+      ],
+      "reward": 0.005372669864,
+      "state": [
+        -0.117360488966,
+        1.0,
+        -0.0219606
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:9",
+      "next_action": 2,
+      "next_state": [
+        -2.088223550794,
+        0.0,
+        -0.0060856
+      ],
+      "reward": -0.0005,
+      "state": [
+        -4.663647630003,
+        -1.0,
+        -0.1624594
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 0,
+      "next_state": [
+        1.772090863117,
+        1.0,
+        0.2393904
+      ],
+      "reward": 0.013519323725,
+      "state": [
+        -2.088223550794,
+        0.0,
+        -0.0060856
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 1,
+      "next_state": [
+        1.170108082576,
+        -1.0,
+        -0.0059524
+      ],
+      "reward": -0.012849856218,
+      "state": [
+        1.772090863117,
+        1.0,
+        0.2393904
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 2,
+      "next_state": [
+        2.80747936216,
+        0.0,
+        0.1858152
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.170108082576,
+        -1.0,
+        -0.0059524
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 0,
+      "next_state": [
+        0.840204330547,
+        1.0,
+        -0.1195306
+      ],
+      "reward": -0.013062388223,
+      "state": [
+        2.80747936216,
+        0.0,
+        0.1858152
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 1,
+      "next_state": [
+        -1.469727279944,
+        -1.0,
+        -0.3232022
+      ],
+      "reward": 0.039621815219,
+      "state": [
+        0.840204330547,
+        1.0,
+        -0.1195306
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 2,
+      "next_state": [
+        -7.279397191888,
+        0.0,
+        -0.9345452
+      ],
+      "reward": -0.0005,
+      "state": [
+        -1.469727279944,
+        -1.0,
+        -0.3232022
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 0,
+      "next_state": [
+        -1.799027045693,
+        1.0,
+        0.1594178
+      ],
+      "reward": 0.014743135123,
+      "state": [
+        -7.279397191888,
+        0.0,
+        -0.9345452
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 1,
+      "next_state": [
+        -1.723961023261,
+        -1.0,
+        -0.2735894
+      ],
+      "reward": 0.017607525447,
+      "state": [
+        -1.799027045693,
+        1.0,
+        0.1594178
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 2,
+      "next_state": [
+        -1.713346403795,
+        0.0,
+        -0.3238626
+      ],
+      "reward": -0.0005,
+      "state": [
+        -1.723961023261,
+        -1.0,
+        -0.2735894
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 0,
+      "next_state": [
+        -1.480494020231,
+        1.0,
+        -0.1474456
+      ],
+      "reward": -0.020505600053,
+      "state": [
+        -1.713346403795,
+        0.0,
+        -0.3238626
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 1,
+      "next_state": [
+        -1.154537339696,
+        -1.0,
+        0.0113776
+      ],
+      "reward": -0.003294053567,
+      "state": [
+        -1.480494020231,
+        1.0,
+        -0.1474456
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 2,
+      "next_state": [
+        -0.875932491076,
+        0.0,
+        0.0622458
+      ],
+      "reward": -0.0005,
+      "state": [
+        -1.154537339696,
+        -1.0,
+        0.0113776
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 0,
+      "next_state": [
+        0.306431615716,
+        1.0,
+        0.2521596
+      ],
+      "reward": 0.038344337119,
+      "state": [
+        -0.875932491076,
+        0.0,
+        0.0622458
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 1,
+      "next_state": [
+        1.72233820881,
+        -1.0,
+        0.1432098
+      ],
+      "reward": 0.003181187328,
+      "state": [
+        0.306431615716,
+        1.0,
+        0.2521596
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 2,
+      "next_state": [
+        1.535125657264,
+        0.0,
+        -0.0337396
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.72233820881,
+        -1.0,
+        0.1432098
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 0,
+      "next_state": [
+        1.40203352256,
+        1.0,
+        0.0601266
+      ],
+      "reward": -0.028986482926,
+      "state": [
+        1.535125657264,
+        0.0,
+        -0.0337396
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 1,
+      "next_state": [
+        -0.000564598203,
+        -1.0,
+        -0.193753
+      ],
+      "reward": 0.058829783739,
+      "state": [
+        1.40203352256,
+        1.0,
+        0.0601266
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 2,
+      "next_state": [
+        -0.047864126115,
+        0.0,
+        0.0416614
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.000564598203,
+        -1.0,
+        -0.193753
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 0,
+      "next_state": [
+        0.25106329016,
+        1.0,
+        0.070485
+      ],
+      "reward": -0.007772352789,
+      "state": [
+        -0.047864126115,
+        0.0,
+        0.0416614
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:10",
+      "next_action": 1,
+      "next_state": [
+        0.168720292418,
+        -1.0,
+        0.0073924
+      ],
+      "reward": 0.004886019559,
+      "state": [
+        0.25106329016,
+        1.0,
+        0.070485
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 2,
+      "next_state": [
+        -0.516999443687,
+        0.0,
+        -0.0520154
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.168720292418,
+        -1.0,
+        0.0073924
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 0,
+      "next_state": [
+        -0.707502890717,
+        1.0,
+        -0.0222854
+      ],
+      "reward": -0.011350894994,
+      "state": [
+        -0.516999443687,
+        0.0,
+        -0.0520154
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 1,
+      "next_state": [
+        -2.191872540285,
+        -1.0,
+        -0.0719718
+      ],
+      "reward": -0.012630328007,
+      "state": [
+        -0.707502890717,
+        1.0,
+        -0.0222854
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 2,
+      "next_state": [
+        0.34441645554,
+        0.0,
+        0.103501
+      ],
+      "reward": -0.0005,
+      "state": [
+        -2.191872540285,
+        -1.0,
+        -0.0719718
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 0,
+      "next_state": [
+        2.709205486183,
+        1.0,
+        0.1205196
+      ],
+      "reward": 0.021288973936,
+      "state": [
+        0.34441645554,
+        0.0,
+        0.103501
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 1,
+      "next_state": [
+        7.520488299755,
+        -1.0,
+        0.3971864
+      ],
+      "reward": -0.040250783565,
+      "state": [
+        2.709205486183,
+        1.0,
+        0.1205196
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 2,
+      "next_state": [
+        2.267198716465,
+        0.0,
+        0.0307954
+      ],
+      "reward": -0.0005,
+      "state": [
+        7.520488299755,
+        -1.0,
+        0.3971864
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 0,
+      "next_state": [
+        1.178061753234,
+        1.0,
+        -0.0649802
+      ],
+      "reward": 0.011089183463,
+      "state": [
+        2.267198716465,
+        0.0,
+        0.0307954
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 1,
+      "next_state": [
+        1.38482019427,
+        -1.0,
+        0.143463
+      ],
+      "reward": -0.026847621995,
+      "state": [
+        1.178061753234,
+        1.0,
+        -0.0649802
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 2,
+      "next_state": [
+        0.792583386225,
+        0.0,
+        -0.0580226
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.38482019427,
+        -1.0,
+        0.143463
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 0,
+      "next_state": [
+        1.348369477412,
+        1.0,
+        0.1322304
+      ],
+      "reward": 0.001298778653,
+      "state": [
+        0.792583386225,
+        0.0,
+        -0.0580226
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 1,
+      "next_state": [
+        2.790537829072,
+        -1.0,
+        0.073916
+      ],
+      "reward": -0.01086787362,
+      "state": [
+        1.348369477412,
+        1.0,
+        0.1322304
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 2,
+      "next_state": [
+        -1.441373396716,
+        0.0,
+        -0.2982196
+      ],
+      "reward": -0.0005,
+      "state": [
+        2.790537829072,
+        -1.0,
+        0.073916
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 0,
+      "next_state": [
+        -1.293868401806,
+        1.0,
+        -0.0123332
+      ],
+      "reward": 0.011776258904,
+      "state": [
+        -1.441373396716,
+        0.0,
+        -0.2982196
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 1,
+      "next_state": [
+        -0.143191837157,
+        -1.0,
+        0.1216038
+      ],
+      "reward": -0.024479662471,
+      "state": [
+        -1.293868401806,
+        1.0,
+        -0.0123332
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 2,
+      "next_state": [
+        -0.771395943652,
+        0.0,
+        -0.077177
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.143191837157,
+        -1.0,
+        0.1216038
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 0,
+      "next_state": [
+        -0.101976874657,
+        1.0,
+        0.0646052
+      ],
+      "reward": -0.010707832832,
+      "state": [
+        -0.771395943652,
+        0.0,
+        -0.077177
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 1,
+      "next_state": [
+        -0.473822839934,
+        -1.0,
+        -0.0589384
+      ],
+      "reward": -0.002454522659,
+      "state": [
+        -0.101976874657,
+        1.0,
+        0.0646052
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 2,
+      "next_state": [
+        -4.950372567416,
+        0.0,
+        -0.2182334
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.473822839934,
+        -1.0,
+        -0.0589384
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:11",
+      "next_action": 0,
+      "next_state": [
+        -2.725218318932,
+        1.0,
+        -0.0673698
+      ],
+      "reward": -0.010561987956,
+      "state": [
+        -4.950372567416,
+        0.0,
+        -0.2182334
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 1,
+      "next_state": [
+        -0.593330408948,
+        -1.0,
+        0.14069
+      ],
+      "reward": 0.004406770147,
+      "state": [
+        -2.725218318932,
+        1.0,
+        -0.0673698
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 2,
+      "next_state": [
+        -1.569369778091,
+        0.0,
+        -0.1513934
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.593330408948,
+        -1.0,
+        0.14069
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 0,
+      "next_state": [
+        -1.187132223716,
+        1.0,
+        -0.012555
+      ],
+      "reward": -0.001174070127,
+      "state": [
+        -1.569369778091,
+        0.0,
+        -0.1513934
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 1,
+      "next_state": [
+        -2.100640853487,
+        -1.0,
+        -0.1291752
+      ],
+      "reward": -0.002352026956,
+      "state": [
+        -1.187132223716,
+        1.0,
+        -0.012555
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 2,
+      "next_state": [
+        -1.723320120682,
+        0.0,
+        0.0016722
+      ],
+      "reward": -0.0005,
+      "state": [
+        -2.100640853487,
+        -1.0,
+        -0.1291752
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 0,
+      "next_state": [
+        -1.577579220674,
+        1.0,
+        -0.039716
+      ],
+      "reward": 0.010297412507,
+      "state": [
+        -1.723320120682,
+        0.0,
+        0.0016722
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 1,
+      "next_state": [
+        -1.15764617573,
+        -1.0,
+        -0.0057864
+      ],
+      "reward": -0.000934485235,
+      "state": [
+        -1.577579220674,
+        1.0,
+        -0.039716
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 2,
+      "next_state": [
+        1.624769692684,
+        0.0,
+        0.1980726
+      ],
+      "reward": -0.0005,
+      "state": [
+        -1.15764617573,
+        -1.0,
+        -0.0057864
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 0,
+      "next_state": [
+        1.336868978219,
+        1.0,
+        -0.0154404
+      ],
+      "reward": 0.001675206512,
+      "state": [
+        1.624769692684,
+        0.0,
+        0.1980726
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 1,
+      "next_state": [
+        2.80918237678,
+        -1.0,
+        0.1227996
+      ],
+      "reward": -0.00663906098,
+      "state": [
+        1.336868978219,
+        1.0,
+        -0.0154404
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 2,
+      "next_state": [
+        1.940940846426,
+        0.0,
+        0.0378456
+      ],
+      "reward": -0.0005,
+      "state": [
+        2.80918237678,
+        -1.0,
+        0.1227996
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 0,
+      "next_state": [
+        0.939333648371,
+        1.0,
+        -0.0463978
+      ],
+      "reward": -0.004296961833,
+      "state": [
+        1.940940846426,
+        0.0,
+        0.0378456
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 1,
+      "next_state": [
+        0.035425925592,
+        -1.0,
+        -0.071774
+      ],
+      "reward": 0.047345368839,
+      "state": [
+        0.939333648371,
+        1.0,
+        -0.0463978
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 2,
+      "next_state": [
+        -2.881428518566,
+        0.0,
+        -0.1385636
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.035425925592,
+        -1.0,
+        -0.071774
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 0,
+      "next_state": [
+        0.630107343014,
+        1.0,
+        0.2081534
+      ],
+      "reward": -0.002955317648,
+      "state": [
+        -2.881428518566,
+        0.0,
+        -0.1385636
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 1,
+      "next_state": [
+        -0.831320545906,
+        -1.0,
+        -0.1062998
+      ],
+      "reward": -0.018994924199,
+      "state": [
+        0.630107343014,
+        1.0,
+        0.2081534
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 2,
+      "next_state": [
+        -0.606036816568,
+        0.0,
+        -0.0007434
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.831320545906,
+        -1.0,
+        -0.1062998
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 0,
+      "next_state": [
+        -0.416796251136,
+        1.0,
+        -0.0044458
+      ],
+      "reward": -0.018206198665,
+      "state": [
+        -0.606036816568,
+        0.0,
+        -0.0007434
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 1,
+      "next_state": [
+        -0.097499136721,
+        -1.0,
+        0.005044
+      ],
+      "reward": -0.022110402081,
+      "state": [
+        -0.416796251136,
+        1.0,
+        -0.0044458
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:12",
+      "next_action": 2,
+      "next_state": [
+        -2.17431720557,
+        0.0,
+        -0.13089
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.097499136721,
+        -1.0,
+        0.005044
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 0,
+      "next_state": [
+        -1.807441849859,
+        1.0,
+        0.0016824
+      ],
+      "reward": -0.033461078086,
+      "state": [
+        -2.17431720557,
+        0.0,
+        -0.13089
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 1,
+      "next_state": [
+        -0.211644987727,
+        -1.0,
+        0.0720982
+      ],
+      "reward": -0.012441280812,
+      "state": [
+        -1.807441849859,
+        1.0,
+        0.0016824
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 2,
+      "next_state": [
+        0.726185679456,
+        0.0,
+        0.0449564
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.211644987727,
+        -1.0,
+        0.0720982
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 0,
+      "next_state": [
+        4.194534197617,
+        1.0,
+        0.1901098
+      ],
+      "reward": -0.004140126266,
+      "state": [
+        0.726185679456,
+        0.0,
+        0.0449564
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 1,
+      "next_state": [
+        -2.165042647119,
+        -1.0,
+        -0.4286812
+      ],
+      "reward": 0.104524921223,
+      "state": [
+        4.194534197617,
+        1.0,
+        0.1901098
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 2,
+      "next_state": [
+        -5.332313139823,
+        0.0,
+        -0.521078
+      ],
+      "reward": -0.0005,
+      "state": [
+        -2.165042647119,
+        -1.0,
+        -0.4286812
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 0,
+      "next_state": [
+        -2.172457651947,
+        1.0,
+        -0.0470978
+      ],
+      "reward": -0.032400886455,
+      "state": [
+        -5.332313139823,
+        0.0,
+        -0.521078
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 1,
+      "next_state": [
+        -1.208556990946,
+        -1.0,
+        0.0715432
+      ],
+      "reward": -0.007678752484,
+      "state": [
+        -2.172457651947,
+        1.0,
+        -0.0470978
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 2,
+      "next_state": [
+        -0.666668566613,
+        0.0,
+        0.079508
+      ],
+      "reward": -0.0005,
+      "state": [
+        -1.208556990946,
+        -1.0,
+        0.0715432
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 0,
+      "next_state": [
+        -0.02134321785,
+        1.0,
+        0.147013
+      ],
+      "reward": 0.016635218368,
+      "state": [
+        -0.666668566613,
+        0.0,
+        0.079508
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 1,
+      "next_state": [
+        0.323060878346,
+        -1.0,
+        -0.0459372
+      ],
+      "reward": -0.012635837958,
+      "state": [
+        -0.02134321785,
+        1.0,
+        0.147013
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 2,
+      "next_state": [
+        7.121026373935,
+        0.0,
+        0.6565776
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.323060878346,
+        -1.0,
+        -0.0459372
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 0,
+      "next_state": [
+        2.201991919411,
+        1.0,
+        0.0289864
+      ],
+      "reward": -0.007662393331,
+      "state": [
+        7.121026373935,
+        0.0,
+        0.6565776
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 1,
+      "next_state": [
+        2.288529038609,
+        -1.0,
+        0.3036306
+      ],
+      "reward": -0.020703810181,
+      "state": [
+        2.201991919411,
+        1.0,
+        0.0289864
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 2,
+      "next_state": [
+        1.43462299754,
+        0.0,
+        -0.015884
+      ],
+      "reward": -0.0005,
+      "state": [
+        2.288529038609,
+        -1.0,
+        0.3036306
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 0,
+      "next_state": [
+        1.313512284017,
+        1.0,
+        0.10997
+      ],
+      "reward": 0.007295657412,
+      "state": [
+        1.43462299754,
+        0.0,
+        -0.015884
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 1,
+      "next_state": [
+        0.884002673789,
+        -1.0,
+        -0.030898
+      ],
+      "reward": -0.020324810218,
+      "state": [
+        1.313512284017,
+        1.0,
+        0.10997
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 2,
+      "next_state": [
+        2.133801606353,
+        0.0,
+        0.218865
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.884002673789,
+        -1.0,
+        -0.030898
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 0,
+      "next_state": [
+        0.564043543009,
+        1.0,
+        -0.1637264
+      ],
+      "reward": -0.04056605727,
+      "state": [
+        2.133801606353,
+        0.0,
+        0.218865
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:13",
+      "next_action": 1,
+      "next_state": [
+        -0.545040130866,
+        -1.0,
+        -0.0814962
+      ],
+      "reward": -0.015483547044,
+      "state": [
+        0.564043543009,
+        1.0,
+        -0.1637264
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 2,
+      "next_state": [
+        0.414393629725,
+        0.0,
+        0.0982596
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.545040130866,
+        -1.0,
+        -0.0814962
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 0,
+      "next_state": [
+        -0.448646559716,
+        1.0,
+        -0.0488648
+      ],
+      "reward": -0.019895980961,
+      "state": [
+        0.414393629725,
+        0.0,
+        0.0982596
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 1,
+      "next_state": [
+        -0.670240871311,
+        -1.0,
+        -0.019122
+      ],
+      "reward": 0.013712948592,
+      "state": [
+        -0.448646559716,
+        1.0,
+        -0.0488648
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 2,
+      "next_state": [
+        -0.33925277025,
+        0.0,
+        0.027071
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.670240871311,
+        -1.0,
+        -0.019122
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 0,
+      "next_state": [
+        -0.515780171964,
+        1.0,
+        -0.0211528
+      ],
+      "reward": -0.014661527463,
+      "state": [
+        -0.33925277025,
+        0.0,
+        0.027071
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 1,
+      "next_state": [
+        2.45070742361,
+        -1.0,
+        0.082078
+      ],
+      "reward": 0.001167156997,
+      "state": [
+        -0.515780171964,
+        1.0,
+        -0.0211528
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 2,
+      "next_state": [
+        0.262343044698,
+        0.0,
+        -0.0448252
+      ],
+      "reward": -0.0005,
+      "state": [
+        2.45070742361,
+        -1.0,
+        0.082078
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 0,
+      "next_state": [
+        -6.123907031511,
+        1.0,
+        -0.1919008
+      ],
+      "reward": -0.024823855371,
+      "state": [
+        0.262343044698,
+        0.0,
+        -0.0448252
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 1,
+      "next_state": [
+        -0.153838378782,
+        -1.0,
+        0.1399864
+      ],
+      "reward": -0.037204719365,
+      "state": [
+        -6.123907031511,
+        1.0,
+        -0.1919008
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 2,
+      "next_state": [
+        3.824715005829,
+        0.0,
+        0.2916278
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.153838378782,
+        -1.0,
+        0.1399864
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 0,
+      "next_state": [
+        2.691008845471,
+        1.0,
+        0.1089298
+      ],
+      "reward": -0.012004668398,
+      "state": [
+        3.824715005829,
+        0.0,
+        0.2916278
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 1,
+      "next_state": [
+        1.470318513195,
+        -1.0,
+        -0.018495
+      ],
+      "reward": 0.017595216405,
+      "state": [
+        2.691008845471,
+        1.0,
+        0.1089298
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 2,
+      "next_state": [
+        0.479927060079,
+        0.0,
+        -0.1194094
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.470318513195,
+        -1.0,
+        -0.018495
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 0,
+      "next_state": [
+        -0.564981933958,
+        1.0,
+        -0.1764648
+      ],
+      "reward": -0.020752973381,
+      "state": [
+        0.479927060079,
+        0.0,
+        -0.1194094
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 1,
+      "next_state": [
+        -0.445303879943,
+        -1.0,
+        0.0853582
+      ],
+      "reward": 0.008037638137,
+      "state": [
+        -0.564981933958,
+        1.0,
+        -0.1764648
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 2,
+      "next_state": [
+        -1.420687214985,
+        0.0,
+        -0.0630126
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.445303879943,
+        -1.0,
+        0.0853582
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 0,
+      "next_state": [
+        -2.045334925181,
+        1.0,
+        -0.1264994
+      ],
+      "reward": -0.027899132209,
+      "state": [
+        -1.420687214985,
+        0.0,
+        -0.0630126
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 1,
+      "next_state": [
+        -2.967961225355,
+        -1.0,
+        -0.1988682
+      ],
+      "reward": -0.021148396447,
+      "state": [
+        -2.045334925181,
+        1.0,
+        -0.1264994
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 2,
+      "next_state": [
+        -0.691291403489,
+        0.0,
+        0.1772742
+      ],
+      "reward": -0.0005,
+      "state": [
+        -2.967961225355,
+        -1.0,
+        -0.1988682
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:14",
+      "next_action": 0,
+      "next_state": [
+        -0.008497748556,
+        1.0,
+        0.0538022
+      ],
+      "reward": 0.015004394091,
+      "state": [
+        -0.691291403489,
+        0.0,
+        0.1772742
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 1,
+      "next_state": [
+        1.558904092284,
+        -1.0,
+        0.1802744
+      ],
+      "reward": -0.013665298476,
+      "state": [
+        -0.008497748556,
+        1.0,
+        0.0538022
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 2,
+      "next_state": [
+        0.621044641838,
+        0.0,
+        -0.107822
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.558904092284,
+        -1.0,
+        0.1802744
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 0,
+      "next_state": [
+        -0.967286206969,
+        1.0,
+        -0.2044994
+      ],
+      "reward": 0.007978852243,
+      "state": [
+        0.621044641838,
+        0.0,
+        -0.107822
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 1,
+      "next_state": [
+        0.547753300578,
+        -1.0,
+        0.1778222
+      ],
+      "reward": -0.004476121677,
+      "state": [
+        -0.967286206969,
+        1.0,
+        -0.2044994
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 2,
+      "next_state": [
+        -0.615678229113,
+        0.0,
+        -0.0875638
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.547753300578,
+        -1.0,
+        0.1778222
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 0,
+      "next_state": [
+        1.096418884781,
+        1.0,
+        0.168902
+      ],
+      "reward": 0.046814962075,
+      "state": [
+        -0.615678229113,
+        0.0,
+        -0.0875638
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 1,
+      "next_state": [
+        1.284584203714,
+        -1.0,
+        0.0481608
+      ],
+      "reward": -0.01242049593,
+      "state": [
+        1.096418884781,
+        1.0,
+        0.168902
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 2,
+      "next_state": [
+        4.201965018194,
+        0.0,
+        0.2973038
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.284584203714,
+        -1.0,
+        0.0481608
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 0,
+      "next_state": [
+        2.101456343019,
+        1.0,
+        0.0392252
+      ],
+      "reward": -0.0158014672,
+      "state": [
+        4.201965018194,
+        0.0,
+        0.2973038
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 1,
+      "next_state": [
+        2.002052592497,
+        -1.0,
+        0.118733
+      ],
+      "reward": -0.025670147039,
+      "state": [
+        2.101456343019,
+        1.0,
+        0.0392252
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 2,
+      "next_state": [
+        0.739906356602,
+        0.0,
+        -0.140472
+      ],
+      "reward": -0.0005,
+      "state": [
+        2.002052592497,
+        -1.0,
+        0.118733
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 0,
+      "next_state": [
+        -0.635900696108,
+        1.0,
+        -0.2060862
+      ],
+      "reward": 0.002056548484,
+      "state": [
+        0.739906356602,
+        0.0,
+        -0.140472
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 1,
+      "next_state": [
+        -0.568525202746,
+        -1.0,
+        0.0570192
+      ],
+      "reward": 0.00111739427,
+      "state": [
+        -0.635900696108,
+        1.0,
+        -0.2060862
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 2,
+      "next_state": [
+        0.414901431057,
+        0.0,
+        0.161248
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.568525202746,
+        -1.0,
+        0.0570192
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 0,
+      "next_state": [
+        0.251514139788,
+        1.0,
+        -0.0133382
+      ],
+      "reward": 0.003678706009,
+      "state": [
+        0.414901431057,
+        0.0,
+        0.161248
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 1,
+      "next_state": [
+        0.941701400918,
+        -1.0,
+        0.0743518
+      ],
+      "reward": -0.019356429533,
+      "state": [
+        0.251514139788,
+        1.0,
+        -0.0133382
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 2,
+      "next_state": [
+        1.74481680197,
+        0.0,
+        0.0531474
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.941701400918,
+        -1.0,
+        0.0743518
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 0,
+      "next_state": [
+        0.576666307974,
+        1.0,
+        -0.082748
+      ],
+      "reward": -0.014529436692,
+      "state": [
+        1.74481680197,
+        0.0,
+        0.0531474
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 1,
+      "next_state": [
+        0.427988812907,
+        -1.0,
+        0.0104672
+      ],
+      "reward": -0.01392101966,
+      "state": [
+        0.576666307974,
+        1.0,
+        -0.082748
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:15",
+      "next_action": 2,
+      "next_state": [
+        1.858327958475,
+        0.0,
+        0.0748982
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.427988812907,
+        -1.0,
+        0.0104672
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 0,
+      "next_state": [
+        3.196218832181,
+        1.0,
+        0.0887562
+      ],
+      "reward": 0.011628967879,
+      "state": [
+        1.858327958475,
+        0.0,
+        0.0748982
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 1,
+      "next_state": [
+        1.084019234727,
+        -1.0,
+        -0.046152
+      ],
+      "reward": 0.001711076446,
+      "state": [
+        3.196218832181,
+        1.0,
+        0.0887562
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 2,
+      "next_state": [
+        -0.652584253172,
+        0.0,
+        -0.0877588
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.084019234727,
+        -1.0,
+        -0.046152
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 0,
+      "next_state": [
+        -1.591470852463,
+        1.0,
+        -0.0672416
+      ],
+      "reward": -0.004686571993,
+      "state": [
+        -0.652584253172,
+        0.0,
+        -0.0877588
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 1,
+      "next_state": [
+        -2.576780705685,
+        -1.0,
+        -0.08133
+      ],
+      "reward": -0.016703546811,
+      "state": [
+        -1.591470852463,
+        1.0,
+        -0.0672416
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 2,
+      "next_state": [
+        -1.116894387304,
+        0.0,
+        0.0512786
+      ],
+      "reward": -0.0005,
+      "state": [
+        -2.576780705685,
+        -1.0,
+        -0.08133
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 0,
+      "next_state": [
+        -2.365811929024,
+        1.0,
+        -0.1551206
+      ],
+      "reward": -0.042247481391,
+      "state": [
+        -1.116894387304,
+        0.0,
+        0.0512786
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 1,
+      "next_state": [
+        -4.586305745068,
+        -1.0,
+        -0.3205788
+      ],
+      "reward": 0.021877885444,
+      "state": [
+        -2.365811929024,
+        1.0,
+        -0.1551206
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 2,
+      "next_state": [
+        -1.794814415345,
+        0.0,
+        0.0458194
+      ],
+      "reward": -0.0005,
+      "state": [
+        -4.586305745068,
+        -1.0,
+        -0.3205788
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 0,
+      "next_state": [
+        2.057063453289,
+        1.0,
+        0.6640348
+      ],
+      "reward": 0.066125906422,
+      "state": [
+        -1.794814415345,
+        0.0,
+        0.0458194
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 1,
+      "next_state": [
+        2.926949395031,
+        -1.0,
+        0.3406428
+      ],
+      "reward": -0.043947809143,
+      "state": [
+        2.057063453289,
+        1.0,
+        0.6640348
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 2,
+      "next_state": [
+        2.192198227273,
+        0.0,
+        0.1886136
+      ],
+      "reward": -0.0005,
+      "state": [
+        2.926949395031,
+        -1.0,
+        0.3406428
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 0,
+      "next_state": [
+        1.445764653729,
+        1.0,
+        0.0100696
+      ],
+      "reward": -0.002593996597,
+      "state": [
+        2.192198227273,
+        0.0,
+        0.1886136
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 1,
+      "next_state": [
+        0.778995726663,
+        -1.0,
+        -0.1272058
+      ],
+      "reward": -0.004924584392,
+      "state": [
+        1.445764653729,
+        1.0,
+        0.0100696
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 2,
+      "next_state": [
+        0.700242542668,
+        0.0,
+        0.0771062
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.778995726663,
+        -1.0,
+        -0.1272058
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 0,
+      "next_state": [
+        1.383690586416,
+        1.0,
+        0.1525162
+      ],
+      "reward": 0.025918113544,
+      "state": [
+        0.700242542668,
+        0.0,
+        0.0771062
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 1,
+      "next_state": [
+        -0.01717732683,
+        -1.0,
+        -0.15134
+      ],
+      "reward": 0.009872846667,
+      "state": [
+        1.383690586416,
+        1.0,
+        0.1525162
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 2,
+      "next_state": [
+        0.371188710783,
+        0.0,
+        0.0522764
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.01717732683,
+        -1.0,
+        -0.15134
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 0,
+      "next_state": [
+        0.992466120058,
+        1.0,
+        0.045767
+      ],
+      "reward": 0.010973408499,
+      "state": [
+        0.371188710783,
+        0.0,
+        0.0522764
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:16",
+      "next_action": 1,
+      "next_state": [
+        -0.279361176573,
+        -1.0,
+        -0.0817748
+      ],
+      "reward": 0.011799543211,
+      "state": [
+        0.992466120058,
+        1.0,
+        0.045767
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 2,
+      "next_state": [
+        -1.925750661898,
+        0.0,
+        -0.0712532
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.279361176573,
+        -1.0,
+        -0.0817748
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 0,
+      "next_state": [
+        -0.274431765372,
+        1.0,
+        0.0803944
+      ],
+      "reward": 0.012413112138,
+      "state": [
+        -1.925750661898,
+        0.0,
+        -0.0712532
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 1,
+      "next_state": [
+        -3.086072931369,
+        -1.0,
+        -0.1470504
+      ],
+      "reward": 0.023514700003,
+      "state": [
+        -0.274431765372,
+        1.0,
+        0.0803944
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 2,
+      "next_state": [
+        -2.819382693739,
+        0.0,
+        -0.0785708
+      ],
+      "reward": -0.0005,
+      "state": [
+        -3.086072931369,
+        -1.0,
+        -0.1470504
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 0,
+      "next_state": [
+        -0.663195094544,
+        1.0,
+        0.0948962
+      ],
+      "reward": 0.00348568512,
+      "state": [
+        -2.819382693739,
+        0.0,
+        -0.0785708
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 1,
+      "next_state": [
+        0.44725647109,
+        -1.0,
+        0.0672946
+      ],
+      "reward": 0.002753678768,
+      "state": [
+        -0.663195094544,
+        1.0,
+        0.0948962
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 2,
+      "next_state": [
+        4.710237006431,
+        0.0,
+        0.290222
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.44725647109,
+        -1.0,
+        0.0672946
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 0,
+      "next_state": [
+        1.702806094318,
+        1.0,
+        -0.0368952
+      ],
+      "reward": -0.024240915217,
+      "state": [
+        4.710237006431,
+        0.0,
+        0.290222
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 1,
+      "next_state": [
+        0.655283497427,
+        -1.0,
+        -0.1022504
+      ],
+      "reward": 0.013185327073,
+      "state": [
+        1.702806094318,
+        1.0,
+        -0.0368952
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 2,
+      "next_state": [
+        1.924956514044,
+        0.0,
+        0.2466332
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.655283497427,
+        -1.0,
+        -0.1022504
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 0,
+      "next_state": [
+        1.464477974816,
+        1.0,
+        0.0113884
+      ],
+      "reward": 0.014629719279,
+      "state": [
+        1.924956514044,
+        0.0,
+        0.2466332
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 1,
+      "next_state": [
+        1.826292521271,
+        -1.0,
+        0.1005394
+      ],
+      "reward": -0.013253136701,
+      "state": [
+        1.464477974816,
+        1.0,
+        0.0113884
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 2,
+      "next_state": [
+        1.052806695595,
+        0.0,
+        -0.051063
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.826292521271,
+        -1.0,
+        0.1005394
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 0,
+      "next_state": [
+        1.190736909482,
+        1.0,
+        0.05123
+      ],
+      "reward": 0.010181052123,
+      "state": [
+        1.052806695595,
+        0.0,
+        -0.051063
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 1,
+      "next_state": [
+        1.672481729015,
+        -1.0,
+        0.100268
+      ],
+      "reward": -0.00532192851,
+      "state": [
+        1.190736909482,
+        1.0,
+        0.05123
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 2,
+      "next_state": [
+        3.745663630163,
+        0.0,
+        0.14124
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.672481729015,
+        -1.0,
+        0.100268
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 0,
+      "next_state": [
+        1.159535317935,
+        1.0,
+        -0.0801262
+      ],
+      "reward": -0.009892908396,
+      "state": [
+        3.745663630163,
+        0.0,
+        0.14124
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 1,
+      "next_state": [
+        -0.495107960737,
+        -1.0,
+        -0.1368354
+      ],
+      "reward": 0.00370076272,
+      "state": [
+        1.159535317935,
+        1.0,
+        -0.0801262
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 2,
+      "next_state": [
+        1.104320889408,
+        0.0,
+        0.1651258
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.495107960737,
+        -1.0,
+        -0.1368354
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:17",
+      "next_action": 0,
+      "next_state": [
+        -1.250908905929,
+        1.0,
+        -0.1787184
+      ],
+      "reward": -0.030211536325,
+      "state": [
+        1.104320889408,
+        0.0,
+        0.1651258
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 1,
+      "next_state": [
+        -0.744112695454,
+        -1.0,
+        0.0476528
+      ],
+      "reward": -0.016694525381,
+      "state": [
+        -1.250908905929,
+        1.0,
+        -0.1787184
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 2,
+      "next_state": [
+        0.784887892564,
+        0.0,
+        0.1245008
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.744112695454,
+        -1.0,
+        0.0476528
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 0,
+      "next_state": [
+        -6.495265925217,
+        1.0,
+        -0.5667546
+      ],
+      "reward": -0.083554417163,
+      "state": [
+        0.784887892564,
+        0.0,
+        0.1245008
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 1,
+      "next_state": [
+        -3.621776704977,
+        -1.0,
+        -0.2955106
+      ],
+      "reward": 0.03352769464,
+      "state": [
+        -6.495265925217,
+        1.0,
+        -0.5667546
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 2,
+      "next_state": [
+        -1.283185447792,
+        0.0,
+        0.1641476
+      ],
+      "reward": -0.0005,
+      "state": [
+        -3.621776704977,
+        -1.0,
+        -0.2955106
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 0,
+      "next_state": [
+        -0.405364929731,
+        1.0,
+        0.1640466
+      ],
+      "reward": 0.029949271438,
+      "state": [
+        -1.283185447792,
+        0.0,
+        0.1641476
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 1,
+      "next_state": [
+        -0.095927486389,
+        -1.0,
+        0.0404942
+      ],
+      "reward": 0.001965940036,
+      "state": [
+        -0.405364929731,
+        1.0,
+        0.1640466
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 2,
+      "next_state": [
+        -0.244649836154,
+        0.0,
+        -0.0971146
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.095927486389,
+        -1.0,
+        0.0404942
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 0,
+      "next_state": [
+        0.921515929845,
+        1.0,
+        0.0803978
+      ],
+      "reward": -0.007425733047,
+      "state": [
+        -0.244649836154,
+        0.0,
+        -0.0971146
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 1,
+      "next_state": [
+        1.032607962712,
+        -1.0,
+        0.0293626
+      ],
+      "reward": 0.001828560324,
+      "state": [
+        0.921515929845,
+        1.0,
+        0.0803978
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 2,
+      "next_state": [
+        2.029752619844,
+        0.0,
+        0.081021
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.032607962712,
+        -1.0,
+        0.0293626
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 0,
+      "next_state": [
+        0.139950779769,
+        1.0,
+        -0.0936092
+      ],
+      "reward": 0.001037622183,
+      "state": [
+        2.029752619844,
+        0.0,
+        0.081021
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 1,
+      "next_state": [
+        -0.783730288903,
+        -1.0,
+        -0.0449782
+      ],
+      "reward": 0.029304487534,
+      "state": [
+        0.139950779769,
+        1.0,
+        -0.0936092
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 2,
+      "next_state": [
+        0.888351135015,
+        0.0,
+        0.087741
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.783730288903,
+        -1.0,
+        -0.0449782
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 0,
+      "next_state": [
+        -0.057989124005,
+        1.0,
+        -0.0307984
+      ],
+      "reward": -0.011736856806,
+      "state": [
+        0.888351135015,
+        0.0,
+        0.087741
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 1,
+      "next_state": [
+        9.338647980362,
+        -1.0,
+        0.401273
+      ],
+      "reward": -0.067503580536,
+      "state": [
+        -0.057989124005,
+        1.0,
+        -0.0307984
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 2,
+      "next_state": [
+        3.150091031871,
+        0.0,
+        0.1524008
+      ],
+      "reward": -0.0005,
+      "state": [
+        9.338647980362,
+        -1.0,
+        0.401273
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 0,
+      "next_state": [
+        1.783580054208,
+        1.0,
+        0.0185648
+      ],
+      "reward": 0.007171185279,
+      "state": [
+        3.150091031871,
+        0.0,
+        0.1524008
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 1,
+      "next_state": [
+        1.652144296276,
+        -1.0,
+        0.1169734
+      ],
+      "reward": -0.028701577907,
+      "state": [
+        1.783580054208,
+        1.0,
+        0.0185648
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:18",
+      "next_action": 2,
+      "next_state": [
+        1.831076380971,
+        0.0,
+        0.175138
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.652144296276,
+        -1.0,
+        0.1169734
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 0,
+      "next_state": [
+        1.536292852432,
+        1.0,
+        0.0629156
+      ],
+      "reward": -0.006033724141,
+      "state": [
+        1.831076380971,
+        0.0,
+        0.175138
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 1,
+      "next_state": [
+        1.371485418927,
+        -1.0,
+        -0.0091124
+      ],
+      "reward": -0.00593872021,
+      "state": [
+        1.536292852432,
+        1.0,
+        0.0629156
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 2,
+      "next_state": [
+        0.783138791173,
+        0.0,
+        -0.0416284
+      ],
+      "reward": -0.0005,
+      "state": [
+        1.371485418927,
+        -1.0,
+        -0.0091124
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 0,
+      "next_state": [
+        1.031336120956,
+        1.0,
+        0.067164
+      ],
+      "reward": 0.010993126898,
+      "state": [
+        0.783138791173,
+        0.0,
+        -0.0416284
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 1,
+      "next_state": [
+        -4.284708692787,
+        -1.0,
+        -0.4398536
+      ],
+      "reward": 0.063146062762,
+      "state": [
+        1.031336120956,
+        1.0,
+        0.067164
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 2,
+      "next_state": [
+        -4.034517309513,
+        0.0,
+        -0.2798306
+      ],
+      "reward": -0.0005,
+      "state": [
+        -4.284708692787,
+        -1.0,
+        -0.4398536
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 0,
+      "next_state": [
+        -2.267062128731,
+        1.0,
+        -0.1116528
+      ],
+      "reward": -0.015824553936,
+      "state": [
+        -4.034517309513,
+        0.0,
+        -0.2798306
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 1,
+      "next_state": [
+        -0.344627752274,
+        -1.0,
+        0.3677018
+      ],
+      "reward": -0.022556047795,
+      "state": [
+        -2.267062128731,
+        1.0,
+        -0.1116528
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 2,
+      "next_state": [
+        0.192399666389,
+        0.0,
+        0.1022506
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.344627752274,
+        -1.0,
+        0.3677018
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 0,
+      "next_state": [
+        -0.215571238609,
+        1.0,
+        -0.165409
+      ],
+      "reward": -0.032418265962,
+      "state": [
+        0.192399666389,
+        0.0,
+        0.1022506
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 1,
+      "next_state": [
+        -0.387393277794,
+        -1.0,
+        -0.09424
+      ],
+      "reward": -0.002750965556,
+      "state": [
+        -0.215571238609,
+        1.0,
+        -0.165409
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 2,
+      "next_state": [
+        0.632205081656,
+        0.0,
+        0.1330842
+      ],
+      "reward": -0.0005,
+      "state": [
+        -0.387393277794,
+        -1.0,
+        -0.09424
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 0,
+      "next_state": [
+        -0.63075991307,
+        1.0,
+        -0.1541578
+      ],
+      "reward": -0.009371542727,
+      "state": [
+        0.632205081656,
+        0.0,
+        0.1330842
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 1,
+      "next_state": [
+        -1.185538142196,
+        -1.0,
+        0.0119894
+      ],
+      "reward": 0.021389754108,
+      "state": [
+        -0.63075991307,
+        1.0,
+        -0.1541578
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 2,
+      "next_state": [
+        -2.146189874204,
+        0.0,
+        -0.1289634
+      ],
+      "reward": -0.0005,
+      "state": [
+        -1.185538142196,
+        -1.0,
+        0.0119894
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 0,
+      "next_state": [
+        -1.297811470441,
+        1.0,
+        0.0347678
+      ],
+      "reward": 0.012729401523,
+      "state": [
+        -2.146189874204,
+        0.0,
+        -0.1289634
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 1,
+      "next_state": [
+        0.721097106305,
+        -1.0,
+        0.1425016
+      ],
+      "reward": -0.014626581294,
+      "state": [
+        -1.297811470441,
+        1.0,
+        0.0347678
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 2,
+      "next_state": [
+        0.973033284108,
+        0.0,
+        0.0311528
+      ],
+      "reward": -0.0005,
+      "state": [
+        0.721097106305,
+        -1.0,
+        0.1425016
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl-msft:19",
+      "next_action": 0,
+      "next_state": [
+        0.803564627785,
+        1.0,
+        -0.0383306
+      ],
+      "reward": -0.016105245763,
+      "state": [
+        0.973033284108,
+        0.0,
+        0.0311528
+      ],
+      "step": 18,
+      "terminated": true,
+      "truncated": false
+    }
+  ]
+}

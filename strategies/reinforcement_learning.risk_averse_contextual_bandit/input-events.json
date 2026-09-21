@@ -1,0 +1,172 @@
+[
+  {
+    "available_time": "2026-01-02T16:00:00Z",
+    "event_id": "daily:1",
+    "event_time": "2026-01-02T16:00:00Z",
+    "instrument_id": "SYNTH.DAILY",
+    "payload": {
+      "close": "100",
+      "high": "100.5",
+      "kind": "bar",
+      "low": "99.5",
+      "open": "100",
+      "volume": "1000"
+    },
+    "receive_time": "2026-01-02T16:00:00Z",
+    "sequence": 0,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-03T16:00:00Z",
+    "event_id": "daily:2",
+    "event_time": "2026-01-03T16:00:00Z",
+    "instrument_id": "SYNTH.DAILY",
+    "payload": {
+      "close": "101",
+      "high": "101.5",
+      "kind": "bar",
+      "low": "99.5",
+      "open": "100",
+      "volume": "1001"
+    },
+    "receive_time": "2026-01-03T16:00:00Z",
+    "sequence": 1,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-04T16:00:00Z",
+    "event_id": "daily:3",
+    "event_time": "2026-01-04T16:00:00Z",
+    "instrument_id": "SYNTH.DAILY",
+    "payload": {
+      "close": "100",
+      "high": "101.5",
+      "kind": "bar",
+      "low": "99.5",
+      "open": "101",
+      "volume": "1002"
+    },
+    "receive_time": "2026-01-04T16:00:00Z",
+    "sequence": 2,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-05T16:00:00Z",
+    "event_id": "daily:4",
+    "event_time": "2026-01-05T16:00:00Z",
+    "instrument_id": "SYNTH.DAILY",
+    "payload": {
+      "close": "102",
+      "high": "102.5",
+      "kind": "bar",
+      "low": "99.5",
+      "open": "100",
+      "volume": "1003"
+    },
+    "receive_time": "2026-01-05T16:00:00Z",
+    "sequence": 3,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-06T16:00:00Z",
+    "event_id": "daily:5",
+    "event_time": "2026-01-06T16:00:00Z",
+    "instrument_id": "SYNTH.DAILY",
+    "payload": {
+      "close": "101",
+      "high": "102.5",
+      "kind": "bar",
+      "low": "100.5",
+      "open": "102",
+      "volume": "1004"
+    },
+    "receive_time": "2026-01-06T16:00:00Z",
+    "sequence": 4,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-07T16:00:00Z",
+    "event_id": "daily:6",
+    "event_time": "2026-01-07T16:00:00Z",
+    "instrument_id": "SYNTH.DAILY",
+    "payload": {
+      "close": "106",
+      "high": "106.5",
+      "kind": "bar",
+      "low": "100.5",
+      "open": "101",
+      "volume": "1005"
+    },
+    "receive_time": "2026-01-07T16:00:00Z",
+    "sequence": 5,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-08T16:00:00Z",
+    "event_id": "daily:7",
+    "event_time": "2026-01-08T16:00:00Z",
+    "instrument_id": "SYNTH.DAILY",
+    "payload": {
+      "close": "108",
+      "high": "108.5",
+      "kind": "bar",
+      "low": "105.5",
+      "open": "106",
+      "volume": "1006"
+    },
+    "receive_time": "2026-01-08T16:00:00Z",
+    "sequence": 6,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-09T16:00:00Z",
+    "event_id": "daily:8",
+    "event_time": "2026-01-09T16:00:00Z",
+    "instrument_id": "SYNTH.DAILY",
+    "payload": {
+      "close": "104",
+      "high": "108.5",
+      "kind": "bar",
+      "low": "103.5",
+      "open": "108",
+      "volume": "1007"
+    },
+    "receive_time": "2026-01-09T16:00:00Z",
+    "sequence": 7,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-10T16:00:00Z",
+    "event_id": "daily:9",
+    "event_time": "2026-01-10T16:00:00Z",
+    "instrument_id": "SYNTH.DAILY",
+    "payload": {
+      "close": "98",
+      "high": "104.5",
+      "kind": "bar",
+      "low": "97.5",
+      "open": "104",
+      "volume": "1008"
+    },
+    "receive_time": "2026-01-10T16:00:00Z",
+    "sequence": 8,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-11T16:00:00Z",
+    "event_id": "daily:10",
+    "event_time": "2026-01-11T16:00:00Z",
+    "instrument_id": "SYNTH.DAILY",
+    "payload": {
+      "close": "94",
+      "high": "98.5",
+      "kind": "bar",
+      "low": "93.5",
+      "open": "98",
+      "volume": "1009"
+    },
+    "receive_time": "2026-01-11T16:00:00Z",
+    "sequence": 9,
+    "source": "synthetic.v1"
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "$id": "urn:psrc:schema/training-input-evidence.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Immutable declaration of the exact embedded training payload.",
+  "properties": {
+    "contract_version": {
+      "default": "1.1.0",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "dataset_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "input_width": {
+      "exclusiveMinimum": 0,
+      "title": "Input Width",
+      "type": "integer"
+    },
+    "kind": {
+      "enum": [
+        "reinforcement_learning",
+        "supervised"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "record_count": {
+      "exclusiveMinimum": 0,
+      "title": "Record Count",
+      "type": "integer"
+    },
+    "request_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Request Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "dataset_id",
+    "input_width",
+    "kind",
+    "record_count",
+    "request_sha256"
+  ],
+  "title": "TrainingInputEvidence",
+  "type": "object"
+}

@@ -1,0 +1,204 @@
+{
+  "version": "1.0",
+  "sources": [
+    {
+      "version": "1.0",
+      "source_id": "avellaneda2008",
+      "title": "High-frequency trading in a limit order book",
+      "authors": [
+        "Marco Avellaneda",
+        "Sasha Stoikov"
+      ],
+      "source_url": "https://math.nyu.edu/inmemoriam/avellaneda/HighFrequencyTrading.pdf",
+      "source_sha256": "71fa9268339ae82365171caa7416833b3a5d584f05e4f4c087c4ae72d7121a8d"
+    },
+    {
+      "version": "1.0",
+      "source_id": "chipwanya2023",
+      "title": "Stock Market Directional Bias Prediction Using ML Algorithms",
+      "authors": [
+        "Ryan Chipwanya"
+      ],
+      "source_url": "https://arxiv.org/pdf/2310.16855",
+      "source_sha256": "ce5644b3dc03932fca64156631ddcb2ef3f2abab9a44ec6d8364f5c0ba2fe7c1"
+    },
+    {
+      "version": "1.0",
+      "source_id": "deeplob2018",
+      "title": "DeepLOB: Deep Convolutional Neural Networks for Limit Order Books",
+      "authors": [
+        "Zihao Zhang",
+        "Stefan Zohren",
+        "Stephen Roberts"
+      ],
+      "source_url": "https://arxiv.org/pdf/1808.03668",
+      "source_sha256": "f50d57a80644ac427433824b540c9bc713ffd2249c2042ba975d986078295913"
+    },
+    {
+      "version": "1.0",
+      "source_id": "gould2015",
+      "title": "Queue Imbalance as a One-Tick-Ahead Price Predictor in a Limit Order Book",
+      "authors": [
+        "Martin D. Gould",
+        "Julius Bonart"
+      ],
+      "source_url": "https://arxiv.org/pdf/1512.03492",
+      "source_sha256": "a5051285adfe2d8a2d7f46a758486f357d556a46a964bc89b245de7e7a0bc338"
+    },
+    {
+      "version": "1.0",
+      "source_id": "gu2019",
+      "title": "Empirical Asset Pricing via Machine Learning",
+      "authors": [
+        "Shihao Gu",
+        "Bryan Kelly",
+        "Dacheng Xiu"
+      ],
+      "source_url": "https://www.nber.org/system/files/working_papers/w25398/w25398.pdf",
+      "source_sha256": "cf4ebd0a103c7714235c8e464e060c96f9f7332c4e82b2219f2560767d928c66"
+    },
+    {
+      "version": "1.0",
+      "source_id": "khizbullin2023",
+      "title": "C++ design patterns for low-latency applications including high-frequency trading",
+      "authors": [
+        "Paul Bilokon",
+        "Burak Gunduz"
+      ],
+      "source_url": "https://arxiv.org/pdf/2309.04259",
+      "source_sha256": "504f8375e6eee3098be63123d7858124b0a9917d0430d6ced0a22eb15ac2da8a"
+    },
+    {
+      "version": "1.0",
+      "source_id": "li2023",
+      "title": "A General Framework on Enhancing Portfolio Management with Reinforcement Learning",
+      "authors": [
+        "Yinheng Li",
+        "Junhao Wang",
+        "Yijie Cao"
+      ],
+      "source_url": "https://arxiv.org/pdf/1911.11880",
+      "source_sha256": "28bac43b974c41a9acd602fdd6b3033341fd9a9f25aac739591be58a7bbf9a7b"
+    },
+    {
+      "version": "1.0",
+      "source_id": "lin2022",
+      "title": "Risk-averse Contextual Multi-armed Bandit Problem with Linear Payoffs",
+      "authors": [
+        "Yifan Lin",
+        "Yuhao Wang",
+        "Enlu Zhou"
+      ],
+      "source_url": "https://arxiv.org/pdf/2206.12463",
+      "source_sha256": "3e538c2468d69e084a06f231d86254c0672e91d69f565e7418bf5fce45f665bf"
+    },
+    {
+      "version": "1.0",
+      "source_id": "lokin2026",
+      "title": "Fill Probabilities in a Limit Order Book with State-Dependent Stochastic Order Flows",
+      "authors": [
+        "Felix Lokin",
+        "Fenghui Yu"
+      ],
+      "source_url": "https://arxiv.org/pdf/2403.02572",
+      "source_sha256": "7b6f6923cb5a1975353f522caa558e29fc9eca6e906530250463b16046a25785"
+    },
+    {
+      "version": "1.0",
+      "source_id": "ma2015",
+      "title": "Profitability of simple technical trading rules of Chinese stock exchange indexes",
+      "authors": [
+        "Qianqiu Ma",
+        "Wen-Jen Wang",
+        "Jun Li",
+        "Dong Han"
+      ],
+      "source_url": "https://arxiv.org/pdf/1504.04254",
+      "source_sha256": "6908ca31e92e750881255742a99ffc3daf00ca2e9d0b0012652809d0f538b87a"
+    },
+    {
+      "version": "1.0",
+      "source_id": "moodi2023",
+      "title": "Integrating feature selection and regression methods with technical indicators for predicting Apple Inc. stock prices",
+      "authors": [
+        "Fatemeh Moodi",
+        "Amir Jahangard-Rafsanjani"
+      ],
+      "source_url": "https://arxiv.org/pdf/2310.09903",
+      "source_sha256": "f2b1f92613d1db365206481427daec60cc491dfe3464d41890733aba18d523d5"
+    },
+    {
+      "version": "1.0",
+      "source_id": "nevmyvaka2006",
+      "title": "Reinforcement Learning for Optimized Trade Execution",
+      "authors": [
+        "Yuriy Nevmyvaka",
+        "Yi Feng",
+        "Michael Kearns"
+      ],
+      "source_url": "https://www.cis.upenn.edu/~mkearns/papers/rlexec.pdf",
+      "source_sha256": "3157e2d6ace0bb95ff8fb7215f1b2bb79e7c27f5434137bab4fdd2e9507dcae4"
+    },
+    {
+      "version": "1.0",
+      "source_id": "pardo2022",
+      "title": "A Modular Framework for Reinforcement Learning Optimal Execution",
+      "authors": [
+        "Fernando de Meer Pardo",
+        "Christoph Auth",
+        "Florin Dascalu"
+      ],
+      "source_url": "https://arxiv.org/pdf/2208.06244",
+      "source_sha256": "289db4306c3f73189511586bf128793f4eeaa3b6d36991508458c3062d83d838"
+    },
+    {
+      "version": "1.0",
+      "source_id": "saifan2021",
+      "title": "Combining Machine Learning Classifiers for Stock Trading with Effective Feature Extraction",
+      "authors": [
+        "A. K. M. Amanat Ullah",
+        "Miftah Uddin Md Ihsan",
+        "Fahim Imtiaz",
+        "Md. Golam Rabiul Alam",
+        "Mahbub Majumdar",
+        "Ashir Ahmed"
+      ],
+      "source_url": "https://arxiv.org/pdf/2107.13148",
+      "source_sha256": "7af54057ce8fc74068583b2251d249f68f13c960e70517653d74556020fb28c3"
+    },
+    {
+      "version": "1.0",
+      "source_id": "spooner2018",
+      "title": "Market Making via Reinforcement Learning",
+      "authors": [
+        "Thomas Spooner",
+        "John Fearnley",
+        "Rahul Savani",
+        "Andreas Koukorinis"
+      ],
+      "source_url": "https://arxiv.org/pdf/1804.04216",
+      "source_sha256": "1f653c9b625fa068f521660006194796a835da239b1da529f124841af9f82762"
+    },
+    {
+      "version": "1.0",
+      "source_id": "stoikov2017",
+      "title": "The Micro-Price",
+      "authors": [
+        "Sasha Stoikov"
+      ],
+      "source_url": "https://www.ma.imperial.ac.uk/~ajacquie/Gatheral60/Slides/Gatheral60%20-%20Stoikov.pdf",
+      "source_sha256": "906b3d99cc38e511d3cea86fa381000809c217c231e6cdc4a0353e62bbad2fdd"
+    },
+    {
+      "version": "1.0",
+      "source_id": "yang2024",
+      "title": "Reinforcement Learning Pair Trading: A Dynamic Scaling Approach",
+      "authors": [
+        "Hongshen Yang",
+        "Avinash Malik"
+      ],
+      "source_url": "https://arxiv.org/pdf/2407.16103",
+      "source_sha256": "9b30affe7f856c1add02ff4fb8bb7f3eac670e877a19bf3c91a18bbf4fc98eb3"
+    }
+  ]
+}

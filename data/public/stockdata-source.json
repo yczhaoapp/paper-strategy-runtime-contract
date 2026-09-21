@@ -1,0 +1,24 @@
+{
+  "version": "1.0",
+  "dataset_id": "public.plotly.aapl-msft-2007-2016",
+  "file": "stockdata.csv",
+  "source_url": "https://raw.githubusercontent.com/plotly/datasets/master/stockdata.csv",
+  "source_sha256": "60bf505fec160ce05ba959382adee32ea6e53ce14fe22886db27c58fe1b0d26b",
+  "retrieved_at": "2026-09-21",
+  "records": 2306,
+  "instrument": "AAPL-MSFT",
+  "period": ["2007-01-03", "2016-03-01"],
+  "columns_used": [
+    "Date",
+    "AAPL",
+    "MSFT"
+  ],
+  "repository_license": "MIT",
+  "repository_license_file": "PLOTLY-DATASETS-LICENSE",
+  "repository_license_url": "https://github.com/plotly/datasets/blob/master/LICENSE",
+  "repository_license_sha256": "842e29495d9d99eef9b6d5f2e442785cdd0ab39d81792b2c6302d17bb0cc6030",
+  "rights_note": "The source repository applies an MIT license, but does not separately identify the upstream market-data origin of this sample. It is a public reproducible proxy, not an original paper dataset.",
+  "availability_rule": "Each daily close becomes available at the next UTC day; only past and current available observations may enter a decision.",
+  "paper_dataset": false,
+  "empirical_paper_results_reproduced": false
+}

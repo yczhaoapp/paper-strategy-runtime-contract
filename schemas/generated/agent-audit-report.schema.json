@@ -1,0 +1,96 @@
+{
+  "$defs": {
+    "AgentAuditIssue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "error",
+            "warning"
+          ],
+          "title": "Severity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "path",
+        "severity"
+      ],
+      "title": "AgentAuditIssue",
+      "type": "object"
+    }
+  },
+  "$id": "urn:psrc:schema/agent-audit-report.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approved_for_compilation": {
+      "title": "Approved For Compilation",
+      "type": "boolean"
+    },
+    "checked_fields": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checked Fields",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "contract_version": {
+      "default": "1.1.0",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "human_review_required": {
+      "default": true,
+      "title": "Human Review Required",
+      "type": "boolean"
+    },
+    "issues": {
+      "items": {
+        "$ref": "#/$defs/AgentAuditIssue"
+      },
+      "title": "Issues",
+      "type": "array"
+    },
+    "runtime_authority_granted": {
+      "const": false,
+      "default": false,
+      "title": "Runtime Authority Granted",
+      "type": "boolean"
+    },
+    "spec_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Spec Id",
+      "type": "string"
+    },
+    "strategy_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Strategy Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "approved_for_compilation",
+    "issues",
+    "spec_id",
+    "strategy_id"
+  ],
+  "title": "AgentAuditReport",
+  "type": "object"
+}

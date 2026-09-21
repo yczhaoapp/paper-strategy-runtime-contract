@@ -1,0 +1,428 @@
+{
+  "$defs": {
+    "BarPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "close": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Close"
+        },
+        "high": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "High"
+        },
+        "kind": {
+          "const": "bar",
+          "default": "bar",
+          "title": "Kind",
+          "type": "string"
+        },
+        "low": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Low"
+        },
+        "open": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Open"
+        },
+        "volume": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Volume"
+        }
+      },
+      "required": [
+        "close",
+        "high",
+        "low",
+        "open",
+        "volume"
+      ],
+      "title": "BarPayload",
+      "type": "object"
+    },
+    "BookLevel": {
+      "additionalProperties": false,
+      "properties": {
+        "price": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Price"
+        },
+        "size": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Size"
+        }
+      },
+      "required": [
+        "price",
+        "size"
+      ],
+      "title": "BookLevel",
+      "type": "object"
+    },
+    "BookSnapshotL2Payload": {
+      "additionalProperties": false,
+      "properties": {
+        "asks": {
+          "items": {
+            "$ref": "#/$defs/BookLevel"
+          },
+          "title": "Asks",
+          "type": "array"
+        },
+        "bids": {
+          "items": {
+            "$ref": "#/$defs/BookLevel"
+          },
+          "title": "Bids",
+          "type": "array"
+        },
+        "kind": {
+          "const": "book_snapshot_l2",
+          "default": "book_snapshot_l2",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asks",
+        "bids"
+      ],
+      "title": "BookSnapshotL2Payload",
+      "type": "object"
+    },
+    "MarketEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "available_time": {
+          "format": "date-time",
+          "title": "Available Time",
+          "type": "string"
+        },
+        "event_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "event_time": {
+          "format": "date-time",
+          "title": "Event Time",
+          "type": "string"
+        },
+        "instrument_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "payload": {
+          "discriminator": {
+            "mapping": {
+              "bar": "#/$defs/BarPayload",
+              "book_snapshot_l2": "#/$defs/BookSnapshotL2Payload",
+              "quote_l1": "#/$defs/QuoteL1Payload",
+              "trade": "#/$defs/TradePayload"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/BarPayload"
+            },
+            {
+              "$ref": "#/$defs/TradePayload"
+            },
+            {
+              "$ref": "#/$defs/QuoteL1Payload"
+            },
+            {
+              "$ref": "#/$defs/BookSnapshotL2Payload"
+            }
+          ],
+          "title": "Payload"
+        },
+        "receive_time": {
+          "format": "date-time",
+          "title": "Receive Time",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "source": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "available_time",
+        "event_id",
+        "event_time",
+        "instrument_id",
+        "payload",
+        "receive_time",
+        "sequence",
+        "source"
+      ],
+      "title": "MarketEvent",
+      "type": "object"
+    },
+    "QuoteL1Payload": {
+      "additionalProperties": false,
+      "properties": {
+        "ask_price": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Ask Price"
+        },
+        "ask_size": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Ask Size"
+        },
+        "bid_price": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Bid Price"
+        },
+        "bid_size": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Bid Size"
+        },
+        "kind": {
+          "const": "quote_l1",
+          "default": "quote_l1",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ask_price",
+        "ask_size",
+        "bid_price",
+        "bid_size"
+      ],
+      "title": "QuoteL1Payload",
+      "type": "object"
+    },
+    "TradePayload": {
+      "additionalProperties": false,
+      "properties": {
+        "aggressor_side": {
+          "default": "unknown",
+          "enum": [
+            "buy",
+            "sell",
+            "unknown"
+          ],
+          "title": "Aggressor Side",
+          "type": "string"
+        },
+        "kind": {
+          "const": "trade",
+          "default": "trade",
+          "title": "Kind",
+          "type": "string"
+        },
+        "price": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Price"
+        },
+        "size": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Size"
+        },
+        "trade_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Trade Id"
+        }
+      },
+      "required": [
+        "price",
+        "size"
+      ],
+      "title": "TradePayload",
+      "type": "object"
+    }
+  },
+  "$id": "urn:psrc:schema/run-input-evidence.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "default": "1.1.0",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "dataset_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "effective_data_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Effective Data Sha256",
+      "type": "string"
+    },
+    "effective_events": {
+      "items": {
+        "$ref": "#/$defs/MarketEvent"
+      },
+      "title": "Effective Events",
+      "type": "array"
+    },
+    "source_data_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Data Sha256",
+      "type": "string"
+    },
+    "source_events": {
+      "items": {
+        "$ref": "#/$defs/MarketEvent"
+      },
+      "title": "Source Events",
+      "type": "array"
+    },
+    "transformation_ids": {
+      "default": [],
+      "items": {
+        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+        "type": "string"
+      },
+      "title": "Transformation Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "dataset_id",
+    "effective_data_sha256",
+    "effective_events",
+    "source_data_sha256",
+    "source_events"
+  ],
+  "title": "RunInputEvidence",
+  "type": "object"
+}

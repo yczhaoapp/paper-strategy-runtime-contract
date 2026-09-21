@@ -1,0 +1,123 @@
+challenge: SX-CH-003
+contract_version: "1.1.0"
+policy:
+  no_silent_fallback: true
+  strict_compatibility_default: true
+  generated_checks_may_not_skip: true
+
+criteria:
+  engineering:
+    description: 完整仓库、锁定环境、配置、合成 fixture 与一键复现。
+    evidence:
+      - README.md
+      - pyproject.toml
+      - Makefile
+      - Dockerfile
+      - .dockerignore
+      - uv.lock
+      - scripts/verify-container.sh
+      - .github/workflows/ci.yml
+      - tests/e2e/test_cli.py
+      - reports/generated/acceptance-report.json
+
+  contract:
+    description: 策略、数据、账户、动作、产物、日志与报告的版本化 Schema 和生命周期。
+    evidence:
+      - spec/contract-v1.md
+      - spec/lifecycle.md
+      - spec/runtime-interfaces.md
+      - docs/public-interface-coverage.md
+      - spec/package.md
+      - spec/errors.md
+      - schemas/generated
+      - tests/e2e/test_json_schema_interop.py
+      - tests/integration/test_public_interface_coverage.py
+      - src/psrc/contract
+      - src/psrc/domain
+      - src/psrc/runtime
+
+  strategies:
+    description: 规则、监督学习、强化学习各 6 个，具有实质差异并逐一绑定真实论文证据。
+    required_counts:
+      rule: 6
+      supervised: 6
+      reinforcement_learning: 6
+    evidence:
+      - strategies
+      - docs/strategy-matrix.md
+      - tests/integration/test_rule_strategy_matrix.py
+      - tests/integration/test_supervised_strategy_matrix.py
+      - tests/integration/test_rl_strategy_matrix.py
+      - papers/source-registry.json
+      - papers/bindings
+      - tests/papers/test_pipeline.py
+
+  explainable_failures:
+    description: 强制失败结构化，兼容性转换显式且可审计。
+    required_error_codes:
+      - DATA_FIELD_MISSING
+      - DATA_TIMEFRAME_MISMATCH
+      - SYMBOL_MAPPING_FAILED
+      - ARTIFACT_NOT_FOUND
+      - ACTION_INVALID
+      - ORDER_REJECTED
+      - TRAINING_FAILED
+      - BACKTEST_FAILED
+    evidence:
+      - spec/errors.md
+      - spec/compatibility.md
+      - tests/negative
+      - reports/generated/runs/failures/summary.json
+      - reports/generated/runs/compatibility/bundle.json
+
+  tests_security_extension:
+    description: 正常与失败测试、严格沙箱、适配器、能力画像和统一报告。
+    required_verified_adapters:
+      - reference
+      - backtrader
+    required_profiled_engines:
+      - lean
+      - qlib
+      - vnpy
+    evidence:
+      - tests
+      - src/psrc/sandbox
+      - src/psrc/adapters
+      - src/psrc/adapters/registry.py
+      - engine_profiles
+      - tests/adapters
+      - tests/integration/test_strategy_packages.py
+      - src/psrc/authoring
+      - docs/adapter-guide.md
+      - docs/acceptance-audit.md
+      - reports/generated/acceptance-report.json
+
+  paper_reproduction:
+    description: 18 个策略均达到方法或算法复现并有论文/声明/代码绑定；计入集合不允许方法适配；4 个深度案例从原文编译到训练、推理与回测；另以来源、规格和源码绑定的通用入口执行三类未知外部论文包；公开真实数据和合成数据分轨，不声明原收益复现。
+    required_strategy_bindings:
+      rule: 6
+      supervised: 6
+      reinforcement_learning: 6
+    minimum_distinct_sources: 15
+    minimum_formula_reproductions: 6
+    required_reproductions: 18
+    minimum_algorithm_exact: 9
+    minimum_public_data_bindings: 6
+    minimum_public_data_bindings_per_kind: 2
+    empirical_claims_allowed: false
+    maximum_method_adaptations: 0
+    required_paper_ids:
+      - avellaneda2008
+      - gould2015
+      - nevmyvaka2006
+      - ma2015
+    evidence:
+      - papers/recipes
+      - papers/bindings
+      - papers/source-registry.json
+      - data/public/source.json
+      - src/psrc/papers
+      - tests/papers
+      - tests/integration/test_strategy_packages.py
+      - spec/paper-pipeline.md
+      - reports/generated/runs/papers/summary.json

@@ -1,0 +1,94 @@
+{
+  "version": "1.1",
+  "strategy_id": "supervised.l1_adverse_selection",
+  "strategy_kind": "supervised",
+  "source_id": "gould2015",
+  "fidelity": "algorithm_reproduction",
+  "claims": [
+    {
+      "claim_id": "adverse.imbalance",
+      "page": 7,
+      "anchor": "queue imbalance",
+      "locator": "Equation (7), PDF p.7",
+      "interpretation": "The sole predictor is normalized best-bid minus best-ask queue size."
+    },
+    {
+      "claim_id": "adverse.logistic_mle",
+      "page": 13,
+      "anchor": "maximum likelihood estimates",
+      "locator": "Equation (17), PDF p.13",
+      "interpretation": "Maximum-likelihood logistic regression maps imbalance to the probability of the next upward mid-price move."
+    }
+  ],
+  "implementation": [
+    {
+      "path": "src/psrc/strategies/supervised.py",
+      "sha256": "43954f41c1375d1b661a9c751686d6bd15edbf75a186698c5e17aac6baaa9c1c",
+      "symbols": [
+        "L1AdverseSelectionStrategy"
+      ]
+    },
+    {
+      "path": "strategies/supervised.l1_adverse_selection/strategy.py",
+      "sha256": "58fc9b7a1db570b781061947aa95d3d551fd8f0e31a3ee2cbc9bd8c06fa59196",
+      "symbols": [
+        "L1AdverseSelectionStrategy",
+        "class Strategy"
+      ]
+    }
+  ],
+  "verification_tests": [
+    "tests/papers/test_reproduction_oracles.py::test_queue_imbalance_logistic_matches_maximum_likelihood_direction"
+  ],
+  "claim_links": [
+    {
+      "claim_id": "adverse.imbalance",
+      "implementation_path": "src/psrc/strategies/supervised.py",
+      "symbol": "L1AdverseSelectionStrategy",
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_queue_imbalance_logistic_matches_maximum_likelihood_direction"
+    },
+    {
+      "claim_id": "adverse.logistic_mle",
+      "implementation_path": "src/psrc/strategies/supervised.py",
+      "symbol": "L1AdverseSelectionStrategy",
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_queue_imbalance_logistic_matches_maximum_likelihood_direction"
+    }
+  ],
+  "runtime_expectation": {
+    "source_data_sha256": "4497637c0e9bbf116623cb67b303971a077a23e1b94c28657acf1db3f246ee2b",
+    "decision_sha256": "4134c062c68a4e334252114111aa05a66db575823acf7dbb6749efd0ee1dd519",
+    "data_kinds": [
+      "quote_l1"
+    ],
+    "timeframes": [
+      "event"
+    ],
+    "observed_action_kinds": [
+      "prediction",
+      "target_position"
+    ],
+    "observed_reason_codes": [
+      "allocation.avoid_adverse_side",
+      "model.queue_imbalance_logistic"
+    ],
+    "expected_decisions": 10,
+    "expected_orders": 10,
+    "expected_fills": 9,
+    "artifact_algorithm": "queue-imbalance-logistic-mle-v1",
+    "artifact_id": "sha256-c92ba2ed89ea7f6682a5f40cf5cf30ee9602d658cb398c80292bdcc54006e55b"
+  },
+  "data_mode": "synthetic_fixture",
+  "original_paper_dataset": false,
+  "empirical_results_reproduced": false,
+  "assumptions": [
+    "Training rows are chronologically prepared imbalance and next-mid-price direction pairs."
+  ],
+  "deviations": [
+    "Uses the repository fixture rather than LOBSTER and does not reproduce the paper’s empirical ROC tables."
+  ],
+  "mapping_review": "The previous perceptron and extra features were removed; the artifact now stores the one-feature logistic maximum-likelihood model specified in equation (17).",
+  "algorithm_fidelity": "A2_algorithm_exact",
+  "data_fidelity": "D0_synthetic",
+  "experimental_fidelity": "E0_runtime_only",
+  "runtime_fidelity": "R1_unified_contract"
+}

@@ -1,0 +1,977 @@
+{
+  "$defs": {
+    "ActionKind": {
+      "enum": [
+        "cancel_order",
+        "no_op",
+        "prediction",
+        "replace_order",
+        "submit_order",
+        "target_position",
+        "target_weight"
+      ],
+      "title": "ActionKind",
+      "type": "string"
+    },
+    "ActionRequirements": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed": {
+          "items": {
+            "$ref": "#/$defs/ActionKind"
+          },
+          "title": "Allowed",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "max_abs_position": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Abs Position"
+        },
+        "max_order_quantity": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Order Quantity"
+        }
+      },
+      "required": [
+        "allowed"
+      ],
+      "title": "ActionRequirements",
+      "type": "object"
+    },
+    "ContractError": {
+      "additionalProperties": false,
+      "properties": {
+        "cause_chain": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Cause Chain",
+          "type": "array"
+        },
+        "code": {
+          "$ref": "#/$defs/ErrorCode"
+        },
+        "contract_version": {
+          "default": "1.1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "details": {
+          "additionalProperties": true,
+          "title": "Details",
+          "type": "object"
+        },
+        "engine_id": {
+          "anyOf": [
+            {
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Engine Id"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "retryable": {
+          "default": false,
+          "title": "Retryable",
+          "type": "boolean"
+        },
+        "run_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "stage": {
+          "$ref": "#/$defs/ErrorStage"
+        },
+        "strategy_id": {
+          "anyOf": [
+            {
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Strategy Id"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "run_id",
+        "stage"
+      ],
+      "title": "ContractError",
+      "type": "object"
+    },
+    "DataKind": {
+      "enum": [
+        "bar",
+        "book_snapshot_l2",
+        "quote_l1",
+        "trade"
+      ],
+      "title": "DataKind",
+      "type": "string"
+    },
+    "DataRequirement": {
+      "additionalProperties": false,
+      "properties": {
+        "depth": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Depth"
+        },
+        "kind": {
+          "$ref": "#/$defs/DataKind"
+        },
+        "lookback": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Lookback",
+          "type": "integer"
+        },
+        "max_staleness_ns": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Staleness Ns"
+        },
+        "optional_fields": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Optional Fields",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "required_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Fields",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "stream_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Stream Id",
+          "type": "string"
+        },
+        "symbols": {
+          "default": [],
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Symbols",
+          "type": "array"
+        },
+        "timeframe": {
+          "$ref": "#/$defs/Timeframe"
+        }
+      },
+      "required": [
+        "kind",
+        "required_fields",
+        "stream_id",
+        "timeframe"
+      ],
+      "title": "DataRequirement",
+      "type": "object"
+    },
+    "DatasetManifest": {
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "default": "1.1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "dataset_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Dataset Id",
+          "type": "string"
+        },
+        "dataset_version": {
+          "title": "Dataset Version",
+          "type": "string"
+        },
+        "extensions": {
+          "patternProperties": {
+            "^(?:[a-z](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z](?:[a-z0-9-]*[a-z0-9])?$": {
+              "additionalProperties": true,
+              "type": "object"
+            }
+          },
+          "title": "Extensions",
+          "type": "object"
+        },
+        "generated_at": {
+          "format": "date-time",
+          "title": "Generated At",
+          "type": "string"
+        },
+        "public_or_synthetic": {
+          "title": "Public Or Synthetic",
+          "type": "boolean"
+        },
+        "streams": {
+          "items": {
+            "$ref": "#/$defs/DatasetStream"
+          },
+          "title": "Streams",
+          "type": "array"
+        }
+      },
+      "required": [
+        "dataset_id",
+        "dataset_version",
+        "generated_at",
+        "public_or_synthetic",
+        "streams"
+      ],
+      "title": "DatasetManifest",
+      "type": "object"
+    },
+    "DatasetStream": {
+      "additionalProperties": false,
+      "properties": {
+        "data_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Data Sha256",
+          "type": "string"
+        },
+        "fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Fields",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "kind": {
+          "$ref": "#/$defs/DataKind"
+        },
+        "record_count": {
+          "minimum": 0,
+          "title": "Record Count",
+          "type": "integer"
+        },
+        "schema_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Schema Sha256",
+          "type": "string"
+        },
+        "stream_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Stream Id",
+          "type": "string"
+        },
+        "symbols": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Symbols",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "timeframe": {
+          "$ref": "#/$defs/Timeframe"
+        }
+      },
+      "required": [
+        "data_sha256",
+        "fields",
+        "kind",
+        "record_count",
+        "schema_sha256",
+        "stream_id",
+        "symbols",
+        "timeframe"
+      ],
+      "title": "DatasetStream",
+      "type": "object"
+    },
+    "EngineCapabilities": {
+      "additionalProperties": false,
+      "properties": {
+        "action_kinds": {
+          "items": {
+            "$ref": "#/$defs/ActionKind"
+          },
+          "title": "Action Kinds",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "adapter_version": {
+          "title": "Adapter Version",
+          "type": "string"
+        },
+        "contract_version": {
+          "default": "1.1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "data_kinds": {
+          "items": {
+            "$ref": "#/$defs/DataKind"
+          },
+          "title": "Data Kinds",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "engine_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Engine Id",
+          "type": "string"
+        },
+        "engine_version": {
+          "title": "Engine Version",
+          "type": "string"
+        },
+        "execution": {
+          "$ref": "#/$defs/ExecutionSemantics"
+        },
+        "extensions": {
+          "patternProperties": {
+            "^(?:[a-z](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z](?:[a-z0-9-]*[a-z0-9])?$": {
+              "additionalProperties": true,
+              "type": "object"
+            }
+          },
+          "title": "Extensions",
+          "type": "object"
+        },
+        "profiles": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Profiles",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "sandbox_modes": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/SandboxMode"
+          },
+          "title": "Sandbox Modes",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "support_level": {
+          "$ref": "#/$defs/SupportLevel"
+        }
+      },
+      "required": [
+        "action_kinds",
+        "adapter_version",
+        "data_kinds",
+        "engine_id",
+        "engine_version",
+        "execution",
+        "profiles",
+        "support_level"
+      ],
+      "title": "EngineCapabilities",
+      "type": "object"
+    },
+    "ErrorCode": {
+      "enum": [
+        "ACTION_INVALID",
+        "ARTIFACT_HASH_MISMATCH",
+        "ARTIFACT_NOT_FOUND",
+        "BACKTEST_FAILED",
+        "COMPATIBILITY_TRANSFORM_FAILED",
+        "CONTRACT_VERSION_UNSUPPORTED",
+        "DATA_FIELD_MISSING",
+        "DATA_HASH_MISMATCH",
+        "DATA_KIND_MISMATCH",
+        "DATA_ORDERING_INVALID",
+        "DATA_RECORD_COUNT_MISMATCH",
+        "DATA_STREAM_MISSING",
+        "DATA_TIMEFRAME_MISMATCH",
+        "ENGINE_CAPABILITY_UNSUPPORTED",
+        "ENGINE_DEPENDENCY_MISSING",
+        "INFERENCE_FAILED",
+        "LIFECYCLE_TRANSITION_INVALID",
+        "MANIFEST_INVALID",
+        "ORDER_REJECTED",
+        "PAPER_COMPILATION_FAILED",
+        "PAPER_EVIDENCE_MISSING",
+        "PAPER_INPUT_INVALID",
+        "PAPER_PARSE_FAILED",
+        "PAPER_RECIPE_INVALID",
+        "PAPER_SOURCE_MISMATCH",
+        "SANDBOX_EXECUTION_FAILED",
+        "SANDBOX_POLICY_DENIED",
+        "SANDBOX_POLICY_DOWNGRADE",
+        "SANDBOX_RESOURCE_EXHAUSTED",
+        "SANDBOX_TIMEOUT",
+        "SANDBOX_UNAVAILABLE",
+        "SOURCE_HASH_MISMATCH",
+        "SYMBOL_MAPPING_FAILED",
+        "TRAINING_DATA_MISMATCH",
+        "TRAINING_FAILED"
+      ],
+      "title": "ErrorCode",
+      "type": "string"
+    },
+    "ErrorStage": {
+      "enum": [
+        "action_validation",
+        "artifact",
+        "backtest",
+        "capability_negotiation",
+        "discovery",
+        "inference",
+        "initialization",
+        "reporting",
+        "sandbox",
+        "training",
+        "validation"
+      ],
+      "title": "ErrorStage",
+      "type": "string"
+    },
+    "ExecutionSemantics": {
+      "additionalProperties": false,
+      "properties": {
+        "cancel": {
+          "title": "Cancel",
+          "type": "boolean"
+        },
+        "fee_model": {
+          "title": "Fee Model",
+          "type": "string"
+        },
+        "fill_model": {
+          "title": "Fill Model",
+          "type": "string"
+        },
+        "latency_model": {
+          "title": "Latency Model",
+          "type": "string"
+        },
+        "partial_fills": {
+          "title": "Partial Fills",
+          "type": "boolean"
+        },
+        "queue_model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Queue Model"
+        },
+        "replace": {
+          "enum": [
+            "cancel_new",
+            "native",
+            "unsupported"
+          ],
+          "title": "Replace",
+          "type": "string"
+        },
+        "same_timestamp_ordering": {
+          "title": "Same Timestamp Ordering",
+          "type": "string"
+        },
+        "slippage_model": {
+          "title": "Slippage Model",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cancel",
+        "fee_model",
+        "fill_model",
+        "latency_model",
+        "partial_fills",
+        "replace",
+        "same_timestamp_ordering",
+        "slippage_model"
+      ],
+      "title": "ExecutionSemantics",
+      "type": "object"
+    },
+    "LifecycleRequirements": {
+      "additionalProperties": false,
+      "properties": {
+        "backtest": {
+          "const": "required",
+          "default": "required",
+          "title": "Backtest",
+          "type": "string"
+        },
+        "inference": {
+          "const": "required",
+          "default": "required",
+          "title": "Inference",
+          "type": "string"
+        },
+        "state_checkpointing": {
+          "default": false,
+          "title": "State Checkpointing",
+          "type": "boolean"
+        },
+        "training": {
+          "$ref": "#/$defs/TrainingMode"
+        }
+      },
+      "required": [
+        "training"
+      ],
+      "title": "LifecycleRequirements",
+      "type": "object"
+    },
+    "ResourcePolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_imports": {
+          "default": [
+            "math",
+            "numpy",
+            "statistics"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Imports",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "filesystem": {
+          "default": "artifact_store_only",
+          "enum": [
+            "artifact_store_only",
+            "read_only_data",
+            "unrestricted"
+          ],
+          "title": "Filesystem",
+          "type": "string"
+        },
+        "memory_mb": {
+          "default": 512,
+          "maximum": 16384,
+          "minimum": 64,
+          "title": "Memory Mb",
+          "type": "integer"
+        },
+        "network": {
+          "default": "deny",
+          "enum": [
+            "allow",
+            "deny"
+          ],
+          "title": "Network",
+          "type": "string"
+        },
+        "process_limit": {
+          "default": 32,
+          "maximum": 1024,
+          "minimum": 1,
+          "title": "Process Limit",
+          "type": "integer"
+        },
+        "sandbox": {
+          "$ref": "#/$defs/SandboxMode",
+          "default": "strict_container"
+        },
+        "timeout_seconds": {
+          "default": 60,
+          "maximum": 3600,
+          "minimum": 1,
+          "title": "Timeout Seconds",
+          "type": "integer"
+        }
+      },
+      "title": "ResourcePolicy",
+      "type": "object"
+    },
+    "RunPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "allow_engine_substitution": {
+          "const": false,
+          "default": false,
+          "title": "Allow Engine Substitution",
+          "type": "boolean"
+        },
+        "allow_lossy": {
+          "default": false,
+          "title": "Allow Lossy",
+          "type": "boolean"
+        },
+        "allowed_transformations": {
+          "default": [],
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Allowed Transformations",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "minimum_engine_support": {
+          "$ref": "#/$defs/SupportLevel",
+          "default": "ADAPTER_AVAILABLE"
+        },
+        "required_sandbox": {
+          "$ref": "#/$defs/SandboxMode",
+          "default": "strict_container"
+        },
+        "strict": {
+          "default": true,
+          "title": "Strict",
+          "type": "boolean"
+        },
+        "transformation_parameters": {
+          "patternProperties": {
+            "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$": {
+              "additionalProperties": true,
+              "type": "object"
+            }
+          },
+          "title": "Transformation Parameters",
+          "type": "object"
+        }
+      },
+      "title": "RunPolicy",
+      "type": "object"
+    },
+    "SandboxMode": {
+      "enum": [
+        "development",
+        "strict_container"
+      ],
+      "title": "SandboxMode",
+      "type": "string"
+    },
+    "StrategyKind": {
+      "enum": [
+        "reinforcement_learning",
+        "rule",
+        "supervised"
+      ],
+      "title": "StrategyKind",
+      "type": "string"
+    },
+    "StrategyManifest": {
+      "additionalProperties": false,
+      "properties": {
+        "action_requirements": {
+          "$ref": "#/$defs/ActionRequirements"
+        },
+        "contract_version": {
+          "default": "1.1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "data_requirements": {
+          "items": {
+            "$ref": "#/$defs/DataRequirement"
+          },
+          "title": "Data Requirements",
+          "type": "array"
+        },
+        "deterministic": {
+          "default": true,
+          "title": "Deterministic",
+          "type": "boolean"
+        },
+        "entrypoint": {
+          "title": "Entrypoint",
+          "type": "string"
+        },
+        "extensions": {
+          "patternProperties": {
+            "^(?:[a-z](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z](?:[a-z0-9-]*[a-z0-9])?$": {
+              "additionalProperties": true,
+              "type": "object"
+            }
+          },
+          "title": "Extensions",
+          "type": "object"
+        },
+        "kind": {
+          "$ref": "#/$defs/StrategyKind"
+        },
+        "lifecycle": {
+          "$ref": "#/$defs/LifecycleRequirements"
+        },
+        "required_profiles": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Required Profiles",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "resources": {
+          "$ref": "#/$defs/ResourcePolicy",
+          "default": {
+            "allowed_imports": [
+              "math",
+              "numpy",
+              "statistics"
+            ],
+            "filesystem": "artifact_store_only",
+            "memory_mb": 512,
+            "network": "deny",
+            "process_limit": 32,
+            "sandbox": "strict_container",
+            "timeout_seconds": 60
+          }
+        },
+        "seed": {
+          "default": 0,
+          "title": "Seed",
+          "type": "integer"
+        },
+        "strategy_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Strategy Id",
+          "type": "string"
+        },
+        "strategy_version": {
+          "title": "Strategy Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "action_requirements",
+        "data_requirements",
+        "entrypoint",
+        "kind",
+        "lifecycle",
+        "required_profiles",
+        "strategy_id",
+        "strategy_version"
+      ],
+      "title": "StrategyManifest",
+      "type": "object"
+    },
+    "SupportLevel": {
+      "enum": [
+        "ADAPTER_AVAILABLE",
+        "CONFORMANCE_VERIFIED",
+        "PRODUCTION_CERTIFIED",
+        "PROFILED"
+      ],
+      "title": "SupportLevel",
+      "type": "string"
+    },
+    "Timeframe": {
+      "additionalProperties": false,
+      "properties": {
+        "alignment": {
+          "default": "epoch",
+          "title": "Alignment",
+          "type": "string"
+        },
+        "calendar": {
+          "default": "24/7",
+          "title": "Calendar",
+          "type": "string"
+        },
+        "interval": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "ISO-8601 duration, e.g. PT1M or P1D",
+          "title": "Interval"
+        },
+        "mode": {
+          "$ref": "#/$defs/TimeframeMode"
+        },
+        "timezone": {
+          "default": "UTC",
+          "title": "Timezone",
+          "type": "string"
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "title": "Timeframe",
+      "type": "object"
+    },
+    "TimeframeMode": {
+      "enum": [
+        "bar",
+        "event"
+      ],
+      "title": "TimeframeMode",
+      "type": "string"
+    },
+    "TrainingMode": {
+      "enum": [
+        "not_required",
+        "required"
+      ],
+      "title": "TrainingMode",
+      "type": "string"
+    }
+  },
+  "$id": "urn:psrc:schema/failure-report.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actual_input": {
+      "additionalProperties": true,
+      "title": "Actual Input",
+      "type": "object"
+    },
+    "contract_version": {
+      "default": "1.1.0",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "dataset_manifest": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/DatasetManifest"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "engine_capabilities": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/EngineCapabilities"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "error": {
+      "$ref": "#/$defs/ContractError"
+    },
+    "finished_at": {
+      "format": "date-time",
+      "title": "Finished At",
+      "type": "string"
+    },
+    "run_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "run_policy": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RunPolicy"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "status": {
+      "const": "failed",
+      "default": "failed",
+      "title": "Status",
+      "type": "string"
+    },
+    "strategy_manifest": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/StrategyManifest"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "error",
+    "finished_at",
+    "run_id",
+    "started_at"
+  ],
+  "title": "FailureReport",
+  "type": "object"
+}

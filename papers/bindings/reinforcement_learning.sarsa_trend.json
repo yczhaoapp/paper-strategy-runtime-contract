@@ -1,0 +1,92 @@
+{
+  "version": "1.1",
+  "strategy_id": "reinforcement_learning.sarsa_trend",
+  "strategy_kind": "reinforcement_learning",
+  "source_id": "spooner2018",
+  "fidelity": "method_reproduction",
+  "claims": [
+    {
+      "claim_id": "sarsa.algorithm",
+      "page": 4,
+      "anchor": "Q-learning (QL), SARSA",
+      "locator": "Section 4.4, PDF p.4",
+      "interpretation": "SARSA is one of the on-policy temporal-difference algorithms evaluated."
+    },
+    {
+      "claim_id": "sarsa.state",
+      "page": 5,
+      "anchor": "agent-state representation",
+      "locator": "Benchmarks, PDF p.5",
+      "interpretation": "Results distinguish an explicit agent-state representation and reward function."
+    }
+  ],
+  "implementation": [
+    {
+      "path": "src/psrc/strategies/reinforcement_learning.py",
+      "sha256": "854f91e3b116a7cdc7aa4897f033c81654d5df3b29301efec016dc9468b63271",
+      "symbols": [
+        "SarsaTrendStrategy"
+      ]
+    },
+    {
+      "path": "strategies/reinforcement_learning.sarsa_trend/strategy.py",
+      "sha256": "b87f86238772e019fb73cb13cd121f8059cc453a2dc63bb753c771e3092535f7",
+      "symbols": [
+        "SarsaTrendStrategy",
+        "class Strategy"
+      ]
+    }
+  ],
+  "verification_tests": [
+    "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.sarsa_trend]"
+  ],
+  "claim_links": [
+    {
+      "claim_id": "sarsa.algorithm",
+      "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
+      "symbol": "SarsaTrendStrategy",
+      "verification_test": "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.sarsa_trend]"
+    },
+    {
+      "claim_id": "sarsa.state",
+      "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
+      "symbol": "SarsaTrendStrategy",
+      "verification_test": "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.sarsa_trend]"
+    }
+  ],
+  "runtime_expectation": {
+    "source_data_sha256": "6993433f37d1cd97bff46b9b1c19bb48c3a62fd0912b9489fca49b07a87bc2a8",
+    "decision_sha256": "039592b452ad4c0128afa043456abc77ec571d1a98bce103fbec1a2a461ed3f8",
+    "data_kinds": [
+      "bar"
+    ],
+    "timeframes": [
+      "PT1M"
+    ],
+    "observed_action_kinds": [
+      "target_position"
+    ],
+    "observed_reason_codes": [
+      "policy.sarsa_trend"
+    ],
+    "expected_decisions": 10,
+    "expected_orders": 10,
+    "expected_fills": 5,
+    "artifact_algorithm": "on-policy-sarsa-v1",
+    "artifact_id": "sha256-b48b6640ecb444dcc2b5d74e41d1b6310d1f404a3c7c066d1070424d48677aa4"
+  },
+  "data_mode": "synthetic_fixture",
+  "original_paper_dataset": false,
+  "empirical_results_reproduced": false,
+  "assumptions": [
+    "Training transitions include the next on-policy action used by the SARSA backup."
+  ],
+  "deviations": [
+    "Uses bar trend/range/inventory state and target positions rather than the paper market-making environment."
+  ],
+  "mapping_review": "Manual claim-to-code review completed; hashes bind the reviewed paper, implementation module, and executable package wrapper.",
+  "algorithm_fidelity": "A1_method_equivalent",
+  "data_fidelity": "D0_synthetic",
+  "experimental_fidelity": "E0_runtime_only",
+  "runtime_fidelity": "R1_unified_contract"
+}

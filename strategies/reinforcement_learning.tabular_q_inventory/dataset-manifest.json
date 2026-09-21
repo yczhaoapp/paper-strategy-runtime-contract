@@ -1,0 +1,34 @@
+{
+  "contract_version": "1.1.0",
+  "dataset_id": "synthetic.daily-bars",
+  "dataset_version": "1.0.0",
+  "extensions": {},
+  "generated_at": "2026-01-01T00:00:00Z",
+  "public_or_synthetic": true,
+  "streams": [
+    {
+      "data_sha256": "e989804ddac4ac04a762e1cd027844e135664b27dda3d30f23c5fc61fbf9519a",
+      "fields": [
+        "close",
+        "high",
+        "low",
+        "open",
+        "volume"
+      ],
+      "kind": "bar",
+      "record_count": 10,
+      "schema_sha256": "f58dbc46db0cc5c40fc318557cb937277e01a3d9fa0ab04c10b074a18893146c",
+      "stream_id": "bars",
+      "symbols": [
+        "SYNTH.DAILY"
+      ],
+      "timeframe": {
+        "alignment": "epoch",
+        "calendar": "24/7",
+        "interval": "P1D",
+        "mode": "bar",
+        "timezone": "UTC"
+      }
+    }
+  ]
+}

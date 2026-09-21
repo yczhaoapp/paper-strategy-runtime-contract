@@ -1,0 +1,24 @@
+contract_version: 1.0.0
+engine_id: qlib
+engine_version: profile-2026.09
+adapter_version: 0.0.0
+support_level: PROFILED
+profiles: [core.bar.v1, training.supervised.v1, portfolio.batch.v1]
+data_kinds: [bar]
+action_kinds: [no_op, prediction, target_weight]
+execution:
+  partial_fills: false
+  cancel: false
+  replace: unsupported
+  same_timestamp_ordering: batch-calendar-step
+  queue_model: null
+  fill_model: exchange-simulator-profile-required
+  fee_model: exchange-config-required
+  slippage_model: exchange-config-required
+  latency_model: batch-step
+sandbox_modes: []
+extensions:
+  org.microsoft.qlib:
+    adapter_status: design-only
+    required_mapping: DataHandler/Feature -> MarketEvent; Signal -> Prediction; Position -> AccountSnapshot
+    limitation: not an event-driven execution engine; order-book profiles remain unsupported

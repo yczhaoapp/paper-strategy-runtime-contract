@@ -1,0 +1,94 @@
+{
+  "algorithm_fidelity": "A2_algorithm_exact",
+  "assumptions": [
+    "A parent quantity and number of equal time buckets are declared before execution."
+  ],
+  "claim_links": [
+    {
+      "claim_id": "twap.schedule",
+      "implementation_path": "src/psrc/strategies/rule.py",
+      "symbol": "TwapExecutionStrategy",
+      "verification_test": "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.twap_execution]"
+    },
+    {
+      "claim_id": "twap.volume",
+      "implementation_path": "src/psrc/strategies/rule.py",
+      "symbol": "TwapExecutionStrategy",
+      "verification_test": "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.twap_execution]"
+    }
+  ],
+  "claims": [
+    {
+      "anchor": "Time-Weighted Average Price",
+      "claim_id": "twap.schedule",
+      "interpretation": "TWAP provides the fixed order-submission schedule used as the execution benchmark.",
+      "locator": "Abstract, PDF p.1",
+      "page": 1
+    },
+    {
+      "anchor": "decided a priori",
+      "claim_id": "twap.volume",
+      "interpretation": "Order times and volumes may be fixed in advance as in a TWAP algorithm.",
+      "locator": "Section 2.4, PDF p.7",
+      "page": 7
+    }
+  ],
+  "data_fidelity": "D0_synthetic",
+  "data_mode": "synthetic_fixture",
+  "deviations": [
+    "Uses market orders on minute bars and omits limit-order fill uncertainty and benchmark-improvement rewards."
+  ],
+  "empirical_results_reproduced": false,
+  "experimental_fidelity": "E0_runtime_only",
+  "fidelity": "formula_reproduction",
+  "implementation": [
+    {
+      "path": "src/psrc/strategies/rule.py",
+      "sha256": "6cc6d335e5c9e7db298267b849291d06e061a7446693435cc7b4378d222adc9c",
+      "symbols": [
+        "TwapExecutionStrategy"
+      ]
+    },
+    {
+      "path": "strategies/rule.twap_execution/strategy.py",
+      "sha256": "23266ca8e1aa388e3e975c4927377dd3128403b343ee04b84f18e1b4f28f8e13",
+      "symbols": [
+        "TwapExecutionStrategy",
+        "class Strategy"
+      ]
+    }
+  ],
+  "mapping_review": "Manual claim-to-code review completed; hashes bind the reviewed paper, implementation module, and executable package wrapper.",
+  "original_paper_dataset": false,
+  "runtime_expectation": {
+    "artifact_algorithm": null,
+    "artifact_id": null,
+    "data_kinds": [
+      "bar"
+    ],
+    "decision_sha256": "c67b3c19b326178cf70b92cb44b0a33d65e9e024d2bc161255c5c9e3e0addb52",
+    "expected_decisions": 6,
+    "expected_fills": 4,
+    "expected_orders": 4,
+    "observed_action_kinds": [
+      "no_op",
+      "submit_order"
+    ],
+    "observed_reason_codes": [
+      "execution.twap_slice",
+      "twap.complete"
+    ],
+    "source_data_sha256": "83b9884f4b54b381744efb554df89690a61f8f7d2b274a0c0f156b140e795489",
+    "timeframes": [
+      "PT1M"
+    ]
+  },
+  "runtime_fidelity": "R1_unified_contract",
+  "source_id": "pardo2022",
+  "strategy_id": "rule.twap_execution",
+  "strategy_kind": "rule",
+  "verification_tests": [
+    "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.twap_execution]"
+  ],
+  "version": "1.1"
+}

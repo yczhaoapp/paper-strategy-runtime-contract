@@ -1,0 +1,341 @@
+{
+  "$defs": {
+    "CompatibilityRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "affected_records": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Affected Records",
+          "type": "integer"
+        },
+        "disableable": {
+          "const": true,
+          "default": true,
+          "title": "Disableable",
+          "type": "boolean"
+        },
+        "input_schema_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Input Schema Sha256"
+        },
+        "output_schema_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Schema Sha256"
+        },
+        "parameters": {
+          "additionalProperties": true,
+          "title": "Parameters",
+          "type": "object"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/$defs/CompatibilityResult"
+        },
+        "reversible": {
+          "title": "Reversible",
+          "type": "boolean"
+        },
+        "transformation_id": {
+          "anyOf": [
+            {
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Transformation Id"
+        },
+        "transformation_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Transformation Version"
+        }
+      },
+      "required": [
+        "rationale",
+        "result",
+        "reversible"
+      ],
+      "title": "CompatibilityRecord",
+      "type": "object"
+    },
+    "CompatibilityResult": {
+      "enum": [
+        "EXACT",
+        "TRANSFORMED_LOSSLESS",
+        "TRANSFORMED_LOSSY",
+        "UNSUPPORTED"
+      ],
+      "title": "CompatibilityResult",
+      "type": "string"
+    },
+    "DataKind": {
+      "enum": [
+        "bar",
+        "book_snapshot_l2",
+        "quote_l1",
+        "trade"
+      ],
+      "title": "DataKind",
+      "type": "string"
+    },
+    "DatasetStream": {
+      "additionalProperties": false,
+      "properties": {
+        "data_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Data Sha256",
+          "type": "string"
+        },
+        "fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Fields",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "kind": {
+          "$ref": "#/$defs/DataKind"
+        },
+        "record_count": {
+          "minimum": 0,
+          "title": "Record Count",
+          "type": "integer"
+        },
+        "schema_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Schema Sha256",
+          "type": "string"
+        },
+        "stream_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Stream Id",
+          "type": "string"
+        },
+        "symbols": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Symbols",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "timeframe": {
+          "$ref": "#/$defs/Timeframe"
+        }
+      },
+      "required": [
+        "data_sha256",
+        "fields",
+        "kind",
+        "record_count",
+        "schema_sha256",
+        "stream_id",
+        "symbols",
+        "timeframe"
+      ],
+      "title": "DatasetStream",
+      "type": "object"
+    },
+    "Timeframe": {
+      "additionalProperties": false,
+      "properties": {
+        "alignment": {
+          "default": "epoch",
+          "title": "Alignment",
+          "type": "string"
+        },
+        "calendar": {
+          "default": "24/7",
+          "title": "Calendar",
+          "type": "string"
+        },
+        "interval": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "ISO-8601 duration, e.g. PT1M or P1D",
+          "title": "Interval"
+        },
+        "mode": {
+          "$ref": "#/$defs/TimeframeMode"
+        },
+        "timezone": {
+          "default": "UTC",
+          "title": "Timezone",
+          "type": "string"
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "title": "Timeframe",
+      "type": "object"
+    },
+    "TimeframeMode": {
+      "enum": [
+        "bar",
+        "event"
+      ],
+      "title": "TimeframeMode",
+      "type": "string"
+    }
+  },
+  "$id": "urn:psrc:schema/execution-plan.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "compatibility": {
+      "items": {
+        "$ref": "#/$defs/CompatibilityRecord"
+      },
+      "title": "Compatibility",
+      "type": "array"
+    },
+    "compiled_at": {
+      "format": "date-time",
+      "title": "Compiled At",
+      "type": "string"
+    },
+    "contract_version": {
+      "default": "1.1.0",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "dataset_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "dataset_manifest_sha256": {
+      "title": "Dataset Manifest Sha256",
+      "type": "string"
+    },
+    "dataset_streams": {
+      "items": {
+        "$ref": "#/$defs/DatasetStream"
+      },
+      "title": "Dataset Streams",
+      "type": "array"
+    },
+    "engine_capabilities_sha256": {
+      "title": "Engine Capabilities Sha256",
+      "type": "string"
+    },
+    "engine_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Engine Id",
+      "type": "string"
+    },
+    "external_strategy_admission_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "External Strategy Admission Sha256"
+    },
+    "run_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "run_policy_sha256": {
+      "title": "Run Policy Sha256",
+      "type": "string"
+    },
+    "strategy_code_evidence_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Strategy Code Evidence Sha256"
+    },
+    "strategy_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Strategy Id",
+      "type": "string"
+    },
+    "strategy_manifest_sha256": {
+      "title": "Strategy Manifest Sha256",
+      "type": "string"
+    },
+    "training_input_evidence_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Training Input Evidence Sha256"
+    }
+  },
+  "required": [
+    "compatibility",
+    "compiled_at",
+    "dataset_id",
+    "dataset_manifest_sha256",
+    "dataset_streams",
+    "engine_capabilities_sha256",
+    "engine_id",
+    "run_id",
+    "run_policy_sha256",
+    "strategy_id",
+    "strategy_manifest_sha256"
+  ],
+  "title": "ExecutionPlan",
+  "type": "object"
+}

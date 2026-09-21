@@ -1,0 +1,162 @@
+[
+  {
+    "available_time": "2026-01-02T09:30:00Z",
+    "event_id": "quote:1",
+    "event_time": "2026-01-02T09:30:00Z",
+    "instrument_id": "SYNTH.L1",
+    "payload": {
+      "ask_price": "100.05",
+      "ask_size": "2",
+      "bid_price": "99.95",
+      "bid_size": "9",
+      "kind": "quote_l1"
+    },
+    "receive_time": "2026-01-02T09:30:00Z",
+    "sequence": 0,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:30:01Z",
+    "event_id": "quote:2",
+    "event_time": "2026-01-02T09:30:01Z",
+    "instrument_id": "SYNTH.L1",
+    "payload": {
+      "ask_price": "100.15",
+      "ask_size": "9",
+      "bid_price": "100.05",
+      "bid_size": "2",
+      "kind": "quote_l1"
+    },
+    "receive_time": "2026-01-02T09:30:01Z",
+    "sequence": 1,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:30:02Z",
+    "event_id": "quote:3",
+    "event_time": "2026-01-02T09:30:02Z",
+    "instrument_id": "SYNTH.L1",
+    "payload": {
+      "ask_price": "100.25",
+      "ask_size": "2",
+      "bid_price": "100.15",
+      "bid_size": "9",
+      "kind": "quote_l1"
+    },
+    "receive_time": "2026-01-02T09:30:02Z",
+    "sequence": 2,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:30:03Z",
+    "event_id": "quote:4",
+    "event_time": "2026-01-02T09:30:03Z",
+    "instrument_id": "SYNTH.L1",
+    "payload": {
+      "ask_price": "100.35",
+      "ask_size": "9",
+      "bid_price": "100.25",
+      "bid_size": "2",
+      "kind": "quote_l1"
+    },
+    "receive_time": "2026-01-02T09:30:03Z",
+    "sequence": 3,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:30:04Z",
+    "event_id": "quote:5",
+    "event_time": "2026-01-02T09:30:04Z",
+    "instrument_id": "SYNTH.L1",
+    "payload": {
+      "ask_price": "100.45",
+      "ask_size": "2",
+      "bid_price": "100.35",
+      "bid_size": "9",
+      "kind": "quote_l1"
+    },
+    "receive_time": "2026-01-02T09:30:04Z",
+    "sequence": 4,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:30:05Z",
+    "event_id": "quote:6",
+    "event_time": "2026-01-02T09:30:05Z",
+    "instrument_id": "SYNTH.L1",
+    "payload": {
+      "ask_price": "100.55",
+      "ask_size": "9",
+      "bid_price": "100.45",
+      "bid_size": "2",
+      "kind": "quote_l1"
+    },
+    "receive_time": "2026-01-02T09:30:05Z",
+    "sequence": 5,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:30:06Z",
+    "event_id": "quote:7",
+    "event_time": "2026-01-02T09:30:06Z",
+    "instrument_id": "SYNTH.L1",
+    "payload": {
+      "ask_price": "100.65",
+      "ask_size": "2",
+      "bid_price": "100.55",
+      "bid_size": "9",
+      "kind": "quote_l1"
+    },
+    "receive_time": "2026-01-02T09:30:06Z",
+    "sequence": 6,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:30:07Z",
+    "event_id": "quote:8",
+    "event_time": "2026-01-02T09:30:07Z",
+    "instrument_id": "SYNTH.L1",
+    "payload": {
+      "ask_price": "100.75",
+      "ask_size": "9",
+      "bid_price": "100.65",
+      "bid_size": "2",
+      "kind": "quote_l1"
+    },
+    "receive_time": "2026-01-02T09:30:07Z",
+    "sequence": 7,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:30:08Z",
+    "event_id": "quote:9",
+    "event_time": "2026-01-02T09:30:08Z",
+    "instrument_id": "SYNTH.L1",
+    "payload": {
+      "ask_price": "100.85",
+      "ask_size": "2",
+      "bid_price": "100.75",
+      "bid_size": "9",
+      "kind": "quote_l1"
+    },
+    "receive_time": "2026-01-02T09:30:08Z",
+    "sequence": 8,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:30:09Z",
+    "event_id": "quote:10",
+    "event_time": "2026-01-02T09:30:09Z",
+    "instrument_id": "SYNTH.L1",
+    "payload": {
+      "ask_price": "100.95",
+      "ask_size": "9",
+      "bid_price": "100.85",
+      "bid_size": "2",
+      "kind": "quote_l1"
+    },
+    "receive_time": "2026-01-02T09:30:09Z",
+    "sequence": 9,
+    "source": "synthetic.v1"
+  }
+]

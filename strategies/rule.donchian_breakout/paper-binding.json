@@ -1,0 +1,95 @@
+{
+  "algorithm_fidelity": "A2_algorithm_exact",
+  "assumptions": [
+    "The rolling window is formed only from prior completed daily bars; each public AAPL bar becomes available on the following UTC day."
+  ],
+  "claim_links": [
+    {
+      "claim_id": "donchian.rule",
+      "implementation_path": "src/psrc/strategies/rule.py",
+      "symbol": "DonchianBreakoutStrategy",
+      "verification_test": "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.donchian_breakout]"
+    },
+    {
+      "claim_id": "donchian.levels",
+      "implementation_path": "src/psrc/strategies/rule.py",
+      "symbol": "DonchianBreakoutStrategy",
+      "verification_test": "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.donchian_breakout]"
+    }
+  ],
+  "claims": [
+    {
+      "anchor": "Trading range break-out",
+      "claim_id": "donchian.rule",
+      "interpretation": "The paper defines trading-range breakout rules as support/resistance rules.",
+      "locator": "Section 2.2, PDF p.3",
+      "page": 3
+    },
+    {
+      "anchor": "minimum and maximum",
+      "claim_id": "donchian.levels",
+      "interpretation": "Support and resistance are rolling minimum and maximum price levels.",
+      "locator": "Section 2.2, PDF p.3",
+      "page": 3
+    }
+  ],
+  "data_fidelity": "D1_public_proxy",
+  "data_mode": "public_historical",
+  "deviations": [
+    "Uses a fixed-hash public AAPL proxy instead of the paper’s Chinese index sample, a five-bar channel, and no paper-specific holding-period or significance analysis."
+  ],
+  "empirical_results_reproduced": false,
+  "experimental_fidelity": "E0_runtime_only",
+  "fidelity": "formula_reproduction",
+  "implementation": [
+    {
+      "path": "src/psrc/strategies/rule.py",
+      "sha256": "6cc6d335e5c9e7db298267b849291d06e061a7446693435cc7b4378d222adc9c",
+      "symbols": [
+        "DonchianBreakoutStrategy"
+      ]
+    },
+    {
+      "path": "strategies/rule.donchian_breakout/strategy.py",
+      "sha256": "c0d06f7a7a54b1d642061b0283ac6a1115f75a3c646ab686a27139c1f84956b3",
+      "symbols": [
+        "DonchianBreakoutStrategy",
+        "class Strategy"
+      ]
+    }
+  ],
+  "mapping_review": "Manual claim-to-code review completed; hashes bind the reviewed paper, implementation module, and executable package wrapper.",
+  "original_paper_dataset": false,
+  "runtime_expectation": {
+    "artifact_algorithm": null,
+    "artifact_id": null,
+    "data_kinds": [
+      "bar"
+    ],
+    "decision_sha256": "73f44df9a63e2a794526ddad4d7e7df9f4c9205f81269de02bd2fba7eb7e6a0b",
+    "expected_decisions": 506,
+    "expected_fills": 34,
+    "expected_orders": 129,
+    "observed_action_kinds": [
+      "no_op",
+      "target_position"
+    ],
+    "observed_reason_codes": [
+      "signal.donchian_breakout",
+      "signal.inside_channel",
+      "warmup.donchian"
+    ],
+    "source_data_sha256": "05efc4bf60c94b87171c2bbc53908bd65f93fa336f5596964f25ec9dc55cbd82",
+    "timeframes": [
+      "P1D"
+    ]
+  },
+  "runtime_fidelity": "R1_unified_contract",
+  "source_id": "ma2015",
+  "strategy_id": "rule.donchian_breakout",
+  "strategy_kind": "rule",
+  "verification_tests": [
+    "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.donchian_breakout]"
+  ],
+  "version": "1.1"
+}

@@ -1,0 +1,137 @@
+{
+  "$id": "urn:psrc:schema/data-source-evidence.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Data origin is independent from paper and algorithm fidelity.",
+  "properties": {
+    "dataset_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "empirical_results_reproduced": {
+      "const": false,
+      "default": false,
+      "title": "Empirical Results Reproduced",
+      "type": "boolean"
+    },
+    "instrument_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Instrument Id",
+      "type": "string"
+    },
+    "license_name": {
+      "title": "License Name",
+      "type": "string"
+    },
+    "license_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "License Sha256"
+    },
+    "license_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "License Url"
+    },
+    "origin": {
+      "enum": [
+        "public_historical",
+        "synthetic_fixture"
+      ],
+      "title": "Origin",
+      "type": "string"
+    },
+    "original_paper_dataset": {
+      "const": false,
+      "default": false,
+      "title": "Original Paper Dataset",
+      "type": "boolean"
+    },
+    "period_end": {
+      "title": "Period End",
+      "type": "string"
+    },
+    "period_start": {
+      "title": "Period Start",
+      "type": "string"
+    },
+    "provenance_record_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Provenance Record Sha256"
+    },
+    "record_count": {
+      "exclusiveMinimum": 0,
+      "title": "Record Count",
+      "type": "integer"
+    },
+    "source_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "source_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Url"
+    },
+    "transforms": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Transforms",
+      "type": "array"
+    },
+    "version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "dataset_id",
+    "instrument_id",
+    "license_name",
+    "origin",
+    "period_end",
+    "period_start",
+    "record_count",
+    "source_sha256",
+    "transforms"
+  ],
+  "title": "DataSourceEvidence",
+  "type": "object"
+}

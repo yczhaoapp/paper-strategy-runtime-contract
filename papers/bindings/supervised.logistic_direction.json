@@ -1,0 +1,94 @@
+{
+  "version": "1.1",
+  "strategy_id": "supervised.logistic_direction",
+  "strategy_kind": "supervised",
+  "source_id": "chipwanya2023",
+  "fidelity": "algorithm_reproduction",
+  "claims": [
+    {
+      "claim_id": "logistic.ohlcv",
+      "page": 2,
+      "anchor": "features that are retrieved and used for training",
+      "locator": "Method framework, PDF p.2",
+      "interpretation": "The directional classifier uses daily OHLCV inputs."
+    },
+    {
+      "claim_id": "logistic.gradient",
+      "page": 3,
+      "anchor": "logistic_regression(X, y, alpha, epochs)",
+      "locator": "Table I, PDF p.3",
+      "interpretation": "Logistic regression is trained by gradient descent with learning rate 0.01 for 1000 epochs."
+    }
+  ],
+  "implementation": [
+    {
+      "path": "src/psrc/strategies/supervised.py",
+      "sha256": "43954f41c1375d1b661a9c751686d6bd15edbf75a186698c5e17aac6baaa9c1c",
+      "symbols": [
+        "LogisticDirectionStrategy"
+      ]
+    },
+    {
+      "path": "strategies/supervised.logistic_direction/strategy.py",
+      "sha256": "1498f76709ab7c42d1d5cc2ae47fd1d8a7706b5d1b35792a6bd88eb960e3bd15",
+      "symbols": [
+        "LogisticDirectionStrategy",
+        "class Strategy"
+      ]
+    }
+  ],
+  "verification_tests": [
+    "tests/papers/test_reproduction_oracles.py::test_directional_logistic_reproduces_paper_gradient_descent"
+  ],
+  "claim_links": [
+    {
+      "claim_id": "logistic.ohlcv",
+      "implementation_path": "src/psrc/strategies/supervised.py",
+      "symbol": "LogisticDirectionStrategy",
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_directional_logistic_reproduces_paper_gradient_descent"
+    },
+    {
+      "claim_id": "logistic.gradient",
+      "implementation_path": "src/psrc/strategies/supervised.py",
+      "symbol": "LogisticDirectionStrategy",
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_directional_logistic_reproduces_paper_gradient_descent"
+    }
+  ],
+  "runtime_expectation": {
+    "source_data_sha256": "2708326df26a85ab68d420790ebc7b0c9f24b70faae9bdf5d84893d5d65f3e6f",
+    "decision_sha256": "65f710227ea2e77e3f47f346c45a6f92090d80f14867f8af4da9ea5c37140fca",
+    "data_kinds": [
+      "bar"
+    ],
+    "timeframes": [
+      "P1D"
+    ],
+    "observed_action_kinds": [
+      "prediction",
+      "target_position"
+    ],
+    "observed_reason_codes": [
+      "allocation.logistic_threshold",
+      "model.logistic_probability"
+    ],
+    "expected_decisions": 106,
+    "expected_orders": 106,
+    "expected_fills": 1,
+    "artifact_algorithm": "ohlcv-logistic-gradient-descent-v1",
+    "artifact_id": "sha256-1ee9519501c9ef801ad13b0db52629399d6643915a81b1eab15d1d5528ee63a0"
+  },
+  "data_mode": "public_historical",
+  "original_paper_dataset": false,
+  "empirical_results_reproduced": false,
+  "assumptions": [
+    "OHLCV fields are normalized into five finite scale-compatible features; the first 400 public AAPL bars train the model and the remaining 106 bars are held out chronologically."
+  ],
+  "deviations": [
+    "Uses a fixed-hash public AAPL proxy rather than the paper’s market and does not claim the paper’s reported accuracy."
+  ],
+  "mapping_review": "The previous unrelated ensemble binding was replaced; the implementation follows the paper’s logistic sigmoid, gradient descent and published hyperparameters.",
+  "algorithm_fidelity": "A2_algorithm_exact",
+  "data_fidelity": "D1_public_proxy",
+  "experimental_fidelity": "E0_runtime_only",
+  "runtime_fidelity": "R1_unified_contract"
+}

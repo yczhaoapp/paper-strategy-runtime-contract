@@ -1,0 +1,196 @@
+{
+  "$defs": {
+    "ActionKind": {
+      "enum": [
+        "cancel_order",
+        "no_op",
+        "prediction",
+        "replace_order",
+        "submit_order",
+        "target_position",
+        "target_weight"
+      ],
+      "title": "ActionKind",
+      "type": "string"
+    },
+    "DataKind": {
+      "enum": [
+        "bar",
+        "book_snapshot_l2",
+        "quote_l1",
+        "trade"
+      ],
+      "title": "DataKind",
+      "type": "string"
+    },
+    "ExecutionSemantics": {
+      "additionalProperties": false,
+      "properties": {
+        "cancel": {
+          "title": "Cancel",
+          "type": "boolean"
+        },
+        "fee_model": {
+          "title": "Fee Model",
+          "type": "string"
+        },
+        "fill_model": {
+          "title": "Fill Model",
+          "type": "string"
+        },
+        "latency_model": {
+          "title": "Latency Model",
+          "type": "string"
+        },
+        "partial_fills": {
+          "title": "Partial Fills",
+          "type": "boolean"
+        },
+        "queue_model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Queue Model"
+        },
+        "replace": {
+          "enum": [
+            "cancel_new",
+            "native",
+            "unsupported"
+          ],
+          "title": "Replace",
+          "type": "string"
+        },
+        "same_timestamp_ordering": {
+          "title": "Same Timestamp Ordering",
+          "type": "string"
+        },
+        "slippage_model": {
+          "title": "Slippage Model",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cancel",
+        "fee_model",
+        "fill_model",
+        "latency_model",
+        "partial_fills",
+        "replace",
+        "same_timestamp_ordering",
+        "slippage_model"
+      ],
+      "title": "ExecutionSemantics",
+      "type": "object"
+    },
+    "SandboxMode": {
+      "enum": [
+        "development",
+        "strict_container"
+      ],
+      "title": "SandboxMode",
+      "type": "string"
+    },
+    "SupportLevel": {
+      "enum": [
+        "ADAPTER_AVAILABLE",
+        "CONFORMANCE_VERIFIED",
+        "PRODUCTION_CERTIFIED",
+        "PROFILED"
+      ],
+      "title": "SupportLevel",
+      "type": "string"
+    }
+  },
+  "$id": "urn:psrc:schema/engine-capabilities.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action_kinds": {
+      "items": {
+        "$ref": "#/$defs/ActionKind"
+      },
+      "title": "Action Kinds",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "adapter_version": {
+      "title": "Adapter Version",
+      "type": "string"
+    },
+    "contract_version": {
+      "default": "1.1.0",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "data_kinds": {
+      "items": {
+        "$ref": "#/$defs/DataKind"
+      },
+      "title": "Data Kinds",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "engine_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Engine Id",
+      "type": "string"
+    },
+    "engine_version": {
+      "title": "Engine Version",
+      "type": "string"
+    },
+    "execution": {
+      "$ref": "#/$defs/ExecutionSemantics"
+    },
+    "extensions": {
+      "patternProperties": {
+        "^(?:[a-z](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z](?:[a-z0-9-]*[a-z0-9])?$": {
+          "additionalProperties": true,
+          "type": "object"
+        }
+      },
+      "title": "Extensions",
+      "type": "object"
+    },
+    "profiles": {
+      "items": {
+        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+        "type": "string"
+      },
+      "title": "Profiles",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "sandbox_modes": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/SandboxMode"
+      },
+      "title": "Sandbox Modes",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "support_level": {
+      "$ref": "#/$defs/SupportLevel"
+    }
+  },
+  "required": [
+    "action_kinds",
+    "adapter_version",
+    "data_kinds",
+    "engine_id",
+    "engine_version",
+    "execution",
+    "profiles",
+    "support_level"
+  ],
+  "title": "EngineCapabilities",
+  "type": "object"
+}

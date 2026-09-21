@@ -1,0 +1,8 @@
+{
+  "contract_version": "1.1.0",
+  "dataset_id": "public.plotly.aapl-2015-2017.train",
+  "input_width": 5,
+  "kind": "supervised",
+  "record_count": 399,
+  "request_sha256": "e0fdf82bba425c4b1bf0ab2780b9641ff19d054356dc1af38ad79e8ef90d55ad"
+}

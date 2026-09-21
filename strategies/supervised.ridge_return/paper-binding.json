@@ -1,0 +1,94 @@
+{
+  "algorithm_fidelity": "A1_method_equivalent",
+  "assumptions": [
+    "A fixed L2 penalty is fit on the first 400 hash-pinned public AAPL daily bars; the remaining 106 bars are held out chronologically."
+  ],
+  "claim_links": [
+    {
+      "claim_id": "ridge.model",
+      "implementation_path": "src/psrc/strategies/supervised.py",
+      "symbol": "RidgeReturnStrategy",
+      "verification_test": "tests/integration/test_supervised_strategy_matrix.py::test_every_supervised_strategy_trains_reloads_and_backtests[supervised.ridge_return]"
+    },
+    {
+      "claim_id": "ridge.window",
+      "implementation_path": "src/psrc/strategies/supervised.py",
+      "symbol": "RidgeReturnStrategy",
+      "verification_test": "tests/integration/test_supervised_strategy_matrix.py::test_every_supervised_strategy_trains_reloads_and_backtests[supervised.ridge_return]"
+    }
+  ],
+  "claims": [
+    {
+      "anchor": "Ridge Regression",
+      "claim_id": "ridge.model",
+      "interpretation": "The paper evaluates ridge regression for Apple price prediction.",
+      "locator": "Abstract, PDF p.1",
+      "page": 1
+    },
+    {
+      "anchor": "3-day time window",
+      "claim_id": "ridge.window",
+      "interpretation": "A lagged three-day window turns price prediction into supervised learning.",
+      "locator": "Method, PDF p.11",
+      "page": 11
+    }
+  ],
+  "data_fidelity": "D1_public_proxy",
+  "data_mode": "public_historical",
+  "deviations": [
+    "Predicts next-day return from three causal OHLCV features rather than Apple closing price from the paper’s 123 technical indicators, and does not claim the paper’s reported error metrics."
+  ],
+  "empirical_results_reproduced": false,
+  "experimental_fidelity": "E0_runtime_only",
+  "fidelity": "method_reproduction",
+  "implementation": [
+    {
+      "path": "src/psrc/strategies/supervised.py",
+      "sha256": "43954f41c1375d1b661a9c751686d6bd15edbf75a186698c5e17aac6baaa9c1c",
+      "symbols": [
+        "RidgeReturnStrategy"
+      ]
+    },
+    {
+      "path": "strategies/supervised.ridge_return/strategy.py",
+      "sha256": "4370e3a18813dd82c456c4cb009a459f150261159d7df38a0ead40981f533795",
+      "symbols": [
+        "RidgeReturnStrategy",
+        "class Strategy"
+      ]
+    }
+  ],
+  "mapping_review": "Manual claim-to-code review completed; hashes bind the reviewed paper, implementation module, and executable package wrapper.",
+  "original_paper_dataset": false,
+  "runtime_expectation": {
+    "artifact_algorithm": "ridge-closed-form-v1",
+    "artifact_id": "sha256-c2645b90ecace5856f60a4b12f99c1d3d2ebc157e7874833a5ced2abd1812d53",
+    "data_kinds": [
+      "bar"
+    ],
+    "decision_sha256": "57267b8f0eede8e646e3cfaf2ce9d44bb1d39f7a0adab1a14d3fb4dedad8a015",
+    "expected_decisions": 106,
+    "expected_fills": 4,
+    "expected_orders": 106,
+    "observed_action_kinds": [
+      "prediction",
+      "target_position"
+    ],
+    "observed_reason_codes": [
+      "allocation.forecast_band",
+      "model.ridge_return"
+    ],
+    "source_data_sha256": "2708326df26a85ab68d420790ebc7b0c9f24b70faae9bdf5d84893d5d65f3e6f",
+    "timeframes": [
+      "P1D"
+    ]
+  },
+  "runtime_fidelity": "R1_unified_contract",
+  "source_id": "moodi2023",
+  "strategy_id": "supervised.ridge_return",
+  "strategy_kind": "supervised",
+  "verification_tests": [
+    "tests/integration/test_supervised_strategy_matrix.py::test_every_supervised_strategy_trains_reloads_and_backtests[supervised.ridge_return]"
+  ],
+  "version": "1.1"
+}

@@ -1,0 +1,3466 @@
+{
+  "$defs": {
+    "AccountSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "base_currency": {
+          "default": "USD",
+          "title": "Base Currency",
+          "type": "string"
+        },
+        "cash": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Cash"
+        },
+        "equity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Equity"
+        },
+        "open_orders": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/OpenOrder"
+          },
+          "title": "Open Orders",
+          "type": "array"
+        },
+        "positions": {
+          "items": {
+            "$ref": "#/$defs/Position"
+          },
+          "title": "Positions",
+          "type": "array"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cash",
+        "equity",
+        "positions",
+        "timestamp"
+      ],
+      "title": "AccountSnapshot",
+      "type": "object"
+    },
+    "ActionKind": {
+      "enum": [
+        "cancel_order",
+        "no_op",
+        "prediction",
+        "replace_order",
+        "submit_order",
+        "target_position",
+        "target_weight"
+      ],
+      "title": "ActionKind",
+      "type": "string"
+    },
+    "ActionRequirements": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed": {
+          "items": {
+            "$ref": "#/$defs/ActionKind"
+          },
+          "title": "Allowed",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "max_abs_position": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Abs Position"
+        },
+        "max_order_quantity": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Order Quantity"
+        }
+      },
+      "required": [
+        "allowed"
+      ],
+      "title": "ActionRequirements",
+      "type": "object"
+    },
+    "AgentAuditIssue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "error",
+            "warning"
+          ],
+          "title": "Severity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "path",
+        "severity"
+      ],
+      "title": "AgentAuditIssue",
+      "type": "object"
+    },
+    "AgentAuditReport": {
+      "additionalProperties": false,
+      "properties": {
+        "approved_for_compilation": {
+          "title": "Approved For Compilation",
+          "type": "boolean"
+        },
+        "checked_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Checked Fields",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "contract_version": {
+          "default": "1.1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "human_review_required": {
+          "default": true,
+          "title": "Human Review Required",
+          "type": "boolean"
+        },
+        "issues": {
+          "items": {
+            "$ref": "#/$defs/AgentAuditIssue"
+          },
+          "title": "Issues",
+          "type": "array"
+        },
+        "runtime_authority_granted": {
+          "const": false,
+          "default": false,
+          "title": "Runtime Authority Granted",
+          "type": "boolean"
+        },
+        "spec_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Spec Id",
+          "type": "string"
+        },
+        "strategy_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Strategy Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "approved_for_compilation",
+        "issues",
+        "spec_id",
+        "strategy_id"
+      ],
+      "title": "AgentAuditReport",
+      "type": "object"
+    },
+    "ArtifactFile": {
+      "additionalProperties": false,
+      "properties": {
+        "logical_name": {
+          "title": "Logical Name",
+          "type": "string"
+        },
+        "media_type": {
+          "title": "Media Type",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "logical_name",
+        "media_type",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "ArtifactFile",
+      "type": "object"
+    },
+    "ArtifactManifest": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "artifact_kind": {
+          "enum": [
+            "model",
+            "not_applicable",
+            "policy",
+            "state"
+          ],
+          "title": "Artifact Kind",
+          "type": "string"
+        },
+        "contract_version": {
+          "default": "1.1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "files": {
+          "items": {
+            "$ref": "#/$defs/ArtifactFile"
+          },
+          "title": "Files",
+          "type": "array"
+        },
+        "framework": {
+          "title": "Framework",
+          "type": "string"
+        },
+        "metadata": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Metadata",
+          "type": "object"
+        },
+        "seed": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Seed"
+        },
+        "strategy_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Strategy Id",
+          "type": "string"
+        },
+        "strategy_version": {
+          "title": "Strategy Version",
+          "type": "string"
+        },
+        "training_dataset_id": {
+          "anyOf": [
+            {
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Training Dataset Id"
+        }
+      },
+      "required": [
+        "artifact_id",
+        "artifact_kind",
+        "created_at",
+        "files",
+        "framework",
+        "strategy_id",
+        "strategy_version"
+      ],
+      "title": "ArtifactManifest",
+      "type": "object"
+    },
+    "BarPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "close": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Close"
+        },
+        "high": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "High"
+        },
+        "kind": {
+          "const": "bar",
+          "default": "bar",
+          "title": "Kind",
+          "type": "string"
+        },
+        "low": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Low"
+        },
+        "open": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Open"
+        },
+        "volume": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Volume"
+        }
+      },
+      "required": [
+        "close",
+        "high",
+        "low",
+        "open",
+        "volume"
+      ],
+      "title": "BarPayload",
+      "type": "object"
+    },
+    "BookLevel": {
+      "additionalProperties": false,
+      "properties": {
+        "price": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Price"
+        },
+        "size": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Size"
+        }
+      },
+      "required": [
+        "price",
+        "size"
+      ],
+      "title": "BookLevel",
+      "type": "object"
+    },
+    "BookSnapshotL2Payload": {
+      "additionalProperties": false,
+      "properties": {
+        "asks": {
+          "items": {
+            "$ref": "#/$defs/BookLevel"
+          },
+          "title": "Asks",
+          "type": "array"
+        },
+        "bids": {
+          "items": {
+            "$ref": "#/$defs/BookLevel"
+          },
+          "title": "Bids",
+          "type": "array"
+        },
+        "kind": {
+          "const": "book_snapshot_l2",
+          "default": "book_snapshot_l2",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asks",
+        "bids"
+      ],
+      "title": "BookSnapshotL2Payload",
+      "type": "object"
+    },
+    "CancelOrder": {
+      "additionalProperties": false,
+      "properties": {
+        "client_order_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Client Order Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "cancel_order",
+          "default": "cancel_order",
+          "title": "Kind",
+          "type": "string"
+        },
+        "reason_code": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Reason Code",
+          "type": "string"
+        }
+      },
+      "required": [
+        "client_order_id",
+        "reason_code"
+      ],
+      "title": "CancelOrder",
+      "type": "object"
+    },
+    "CompatibilityRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "affected_records": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Affected Records",
+          "type": "integer"
+        },
+        "disableable": {
+          "const": true,
+          "default": true,
+          "title": "Disableable",
+          "type": "boolean"
+        },
+        "input_schema_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Input Schema Sha256"
+        },
+        "output_schema_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Schema Sha256"
+        },
+        "parameters": {
+          "additionalProperties": true,
+          "title": "Parameters",
+          "type": "object"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/$defs/CompatibilityResult"
+        },
+        "reversible": {
+          "title": "Reversible",
+          "type": "boolean"
+        },
+        "transformation_id": {
+          "anyOf": [
+            {
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Transformation Id"
+        },
+        "transformation_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Transformation Version"
+        }
+      },
+      "required": [
+        "rationale",
+        "result",
+        "reversible"
+      ],
+      "title": "CompatibilityRecord",
+      "type": "object"
+    },
+    "CompatibilityResult": {
+      "enum": [
+        "EXACT",
+        "TRANSFORMED_LOSSLESS",
+        "TRANSFORMED_LOSSY",
+        "UNSUPPORTED"
+      ],
+      "title": "CompatibilityResult",
+      "type": "string"
+    },
+    "DataKind": {
+      "enum": [
+        "bar",
+        "book_snapshot_l2",
+        "quote_l1",
+        "trade"
+      ],
+      "title": "DataKind",
+      "type": "string"
+    },
+    "DataRequirement": {
+      "additionalProperties": false,
+      "properties": {
+        "depth": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Depth"
+        },
+        "kind": {
+          "$ref": "#/$defs/DataKind"
+        },
+        "lookback": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Lookback",
+          "type": "integer"
+        },
+        "max_staleness_ns": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Staleness Ns"
+        },
+        "optional_fields": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Optional Fields",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "required_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Fields",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "stream_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Stream Id",
+          "type": "string"
+        },
+        "symbols": {
+          "default": [],
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Symbols",
+          "type": "array"
+        },
+        "timeframe": {
+          "$ref": "#/$defs/Timeframe"
+        }
+      },
+      "required": [
+        "kind",
+        "required_fields",
+        "stream_id",
+        "timeframe"
+      ],
+      "title": "DataRequirement",
+      "type": "object"
+    },
+    "DatasetManifest": {
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "default": "1.1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "dataset_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Dataset Id",
+          "type": "string"
+        },
+        "dataset_version": {
+          "title": "Dataset Version",
+          "type": "string"
+        },
+        "extensions": {
+          "patternProperties": {
+            "^(?:[a-z](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z](?:[a-z0-9-]*[a-z0-9])?$": {
+              "additionalProperties": true,
+              "type": "object"
+            }
+          },
+          "title": "Extensions",
+          "type": "object"
+        },
+        "generated_at": {
+          "format": "date-time",
+          "title": "Generated At",
+          "type": "string"
+        },
+        "public_or_synthetic": {
+          "title": "Public Or Synthetic",
+          "type": "boolean"
+        },
+        "streams": {
+          "items": {
+            "$ref": "#/$defs/DatasetStream"
+          },
+          "title": "Streams",
+          "type": "array"
+        }
+      },
+      "required": [
+        "dataset_id",
+        "dataset_version",
+        "generated_at",
+        "public_or_synthetic",
+        "streams"
+      ],
+      "title": "DatasetManifest",
+      "type": "object"
+    },
+    "DatasetStream": {
+      "additionalProperties": false,
+      "properties": {
+        "data_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Data Sha256",
+          "type": "string"
+        },
+        "fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Fields",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "kind": {
+          "$ref": "#/$defs/DataKind"
+        },
+        "record_count": {
+          "minimum": 0,
+          "title": "Record Count",
+          "type": "integer"
+        },
+        "schema_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Schema Sha256",
+          "type": "string"
+        },
+        "stream_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Stream Id",
+          "type": "string"
+        },
+        "symbols": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Symbols",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "timeframe": {
+          "$ref": "#/$defs/Timeframe"
+        }
+      },
+      "required": [
+        "data_sha256",
+        "fields",
+        "kind",
+        "record_count",
+        "schema_sha256",
+        "stream_id",
+        "symbols",
+        "timeframe"
+      ],
+      "title": "DatasetStream",
+      "type": "object"
+    },
+    "DecisionRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "actions": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "cancel_order": "#/$defs/CancelOrder",
+                "no_op": "#/$defs/NoOp",
+                "prediction": "#/$defs/Prediction",
+                "replace_order": "#/$defs/ReplaceOrder",
+                "submit_order": "#/$defs/SubmitOrder",
+                "target_position": "#/$defs/TargetPosition",
+                "target_weight": "#/$defs/TargetWeight"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/NoOp"
+              },
+              {
+                "$ref": "#/$defs/Prediction"
+              },
+              {
+                "$ref": "#/$defs/TargetPosition"
+              },
+              {
+                "$ref": "#/$defs/TargetWeight"
+              },
+              {
+                "$ref": "#/$defs/SubmitOrder"
+              },
+              {
+                "$ref": "#/$defs/CancelOrder"
+              },
+              {
+                "$ref": "#/$defs/ReplaceOrder"
+              }
+            ]
+          },
+          "title": "Actions",
+          "type": "array"
+        },
+        "event_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "event_time": {
+          "format": "date-time",
+          "title": "Event Time",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "title": "Sequence",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "actions",
+        "event_id",
+        "event_time",
+        "sequence"
+      ],
+      "title": "DecisionRecord",
+      "type": "object"
+    },
+    "EngineCapabilities": {
+      "additionalProperties": false,
+      "properties": {
+        "action_kinds": {
+          "items": {
+            "$ref": "#/$defs/ActionKind"
+          },
+          "title": "Action Kinds",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "adapter_version": {
+          "title": "Adapter Version",
+          "type": "string"
+        },
+        "contract_version": {
+          "default": "1.1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "data_kinds": {
+          "items": {
+            "$ref": "#/$defs/DataKind"
+          },
+          "title": "Data Kinds",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "engine_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Engine Id",
+          "type": "string"
+        },
+        "engine_version": {
+          "title": "Engine Version",
+          "type": "string"
+        },
+        "execution": {
+          "$ref": "#/$defs/ExecutionSemantics"
+        },
+        "extensions": {
+          "patternProperties": {
+            "^(?:[a-z](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z](?:[a-z0-9-]*[a-z0-9])?$": {
+              "additionalProperties": true,
+              "type": "object"
+            }
+          },
+          "title": "Extensions",
+          "type": "object"
+        },
+        "profiles": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Profiles",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "sandbox_modes": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/SandboxMode"
+          },
+          "title": "Sandbox Modes",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "support_level": {
+          "$ref": "#/$defs/SupportLevel"
+        }
+      },
+      "required": [
+        "action_kinds",
+        "adapter_version",
+        "data_kinds",
+        "engine_id",
+        "engine_version",
+        "execution",
+        "profiles",
+        "support_level"
+      ],
+      "title": "EngineCapabilities",
+      "type": "object"
+    },
+    "ExecutionPlan": {
+      "additionalProperties": false,
+      "properties": {
+        "compatibility": {
+          "items": {
+            "$ref": "#/$defs/CompatibilityRecord"
+          },
+          "title": "Compatibility",
+          "type": "array"
+        },
+        "compiled_at": {
+          "format": "date-time",
+          "title": "Compiled At",
+          "type": "string"
+        },
+        "contract_version": {
+          "default": "1.1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "dataset_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Dataset Id",
+          "type": "string"
+        },
+        "dataset_manifest_sha256": {
+          "title": "Dataset Manifest Sha256",
+          "type": "string"
+        },
+        "dataset_streams": {
+          "items": {
+            "$ref": "#/$defs/DatasetStream"
+          },
+          "title": "Dataset Streams",
+          "type": "array"
+        },
+        "engine_capabilities_sha256": {
+          "title": "Engine Capabilities Sha256",
+          "type": "string"
+        },
+        "engine_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Engine Id",
+          "type": "string"
+        },
+        "external_strategy_admission_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "External Strategy Admission Sha256"
+        },
+        "run_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "run_policy_sha256": {
+          "title": "Run Policy Sha256",
+          "type": "string"
+        },
+        "strategy_code_evidence_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Strategy Code Evidence Sha256"
+        },
+        "strategy_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Strategy Id",
+          "type": "string"
+        },
+        "strategy_manifest_sha256": {
+          "title": "Strategy Manifest Sha256",
+          "type": "string"
+        },
+        "training_input_evidence_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Training Input Evidence Sha256"
+        }
+      },
+      "required": [
+        "compatibility",
+        "compiled_at",
+        "dataset_id",
+        "dataset_manifest_sha256",
+        "dataset_streams",
+        "engine_capabilities_sha256",
+        "engine_id",
+        "run_id",
+        "run_policy_sha256",
+        "strategy_id",
+        "strategy_manifest_sha256"
+      ],
+      "title": "ExecutionPlan",
+      "type": "object"
+    },
+    "ExecutionSemantics": {
+      "additionalProperties": false,
+      "properties": {
+        "cancel": {
+          "title": "Cancel",
+          "type": "boolean"
+        },
+        "fee_model": {
+          "title": "Fee Model",
+          "type": "string"
+        },
+        "fill_model": {
+          "title": "Fill Model",
+          "type": "string"
+        },
+        "latency_model": {
+          "title": "Latency Model",
+          "type": "string"
+        },
+        "partial_fills": {
+          "title": "Partial Fills",
+          "type": "boolean"
+        },
+        "queue_model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Queue Model"
+        },
+        "replace": {
+          "enum": [
+            "cancel_new",
+            "native",
+            "unsupported"
+          ],
+          "title": "Replace",
+          "type": "string"
+        },
+        "same_timestamp_ordering": {
+          "title": "Same Timestamp Ordering",
+          "type": "string"
+        },
+        "slippage_model": {
+          "title": "Slippage Model",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cancel",
+        "fee_model",
+        "fill_model",
+        "latency_model",
+        "partial_fills",
+        "replace",
+        "same_timestamp_ordering",
+        "slippage_model"
+      ],
+      "title": "ExecutionSemantics",
+      "type": "object"
+    },
+    "ExternalStrategyAdmission": {
+      "additionalProperties": false,
+      "description": "Hash-bound review record for an externally authored strategy package.",
+      "properties": {
+        "approved_for_runtime_validation": {
+          "title": "Approved For Runtime Validation",
+          "type": "boolean"
+        },
+        "audit": {
+          "$ref": "#/$defs/AgentAuditReport"
+        },
+        "contract_version": {
+          "default": "1.1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "implementation_mode": {
+          "const": "external_implementation",
+          "default": "external_implementation",
+          "title": "Implementation Mode",
+          "type": "string"
+        },
+        "paper_document_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Paper Document Sha256",
+          "type": "string"
+        },
+        "paper_source_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Paper Source Sha256",
+          "type": "string"
+        },
+        "paper_spec": {
+          "$ref": "#/$defs/PaperStrategySpec"
+        },
+        "paper_spec_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Paper Spec Sha256",
+          "type": "string"
+        },
+        "runtime_authority_granted": {
+          "const": false,
+          "default": false,
+          "title": "Runtime Authority Granted",
+          "type": "boolean"
+        },
+        "strategy_code_evidence_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Strategy Code Evidence Sha256",
+          "type": "string"
+        },
+        "strategy_manifest_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Strategy Manifest Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "approved_for_runtime_validation",
+        "audit",
+        "paper_document_sha256",
+        "paper_source_sha256",
+        "paper_spec",
+        "paper_spec_sha256",
+        "strategy_code_evidence_sha256",
+        "strategy_manifest_sha256"
+      ],
+      "title": "ExternalStrategyAdmission",
+      "type": "object"
+    },
+    "Fill": {
+      "additionalProperties": false,
+      "properties": {
+        "client_order_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Client Order Id",
+          "type": "string"
+        },
+        "fee": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Fee"
+        },
+        "fill_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Fill Id",
+          "type": "string"
+        },
+        "instrument_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "price": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Price"
+        },
+        "quantity": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Quantity"
+        },
+        "side": {
+          "enum": [
+            "buy",
+            "sell"
+          ],
+          "title": "Side",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        }
+      },
+      "required": [
+        "client_order_id",
+        "fee",
+        "fill_id",
+        "instrument_id",
+        "price",
+        "quantity",
+        "side",
+        "timestamp"
+      ],
+      "title": "Fill",
+      "type": "object"
+    },
+    "LifecycleRequirements": {
+      "additionalProperties": false,
+      "properties": {
+        "backtest": {
+          "const": "required",
+          "default": "required",
+          "title": "Backtest",
+          "type": "string"
+        },
+        "inference": {
+          "const": "required",
+          "default": "required",
+          "title": "Inference",
+          "type": "string"
+        },
+        "state_checkpointing": {
+          "default": false,
+          "title": "State Checkpointing",
+          "type": "boolean"
+        },
+        "training": {
+          "$ref": "#/$defs/TrainingMode"
+        }
+      },
+      "required": [
+        "training"
+      ],
+      "title": "LifecycleRequirements",
+      "type": "object"
+    },
+    "MarketEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "available_time": {
+          "format": "date-time",
+          "title": "Available Time",
+          "type": "string"
+        },
+        "event_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "event_time": {
+          "format": "date-time",
+          "title": "Event Time",
+          "type": "string"
+        },
+        "instrument_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "payload": {
+          "discriminator": {
+            "mapping": {
+              "bar": "#/$defs/BarPayload",
+              "book_snapshot_l2": "#/$defs/BookSnapshotL2Payload",
+              "quote_l1": "#/$defs/QuoteL1Payload",
+              "trade": "#/$defs/TradePayload"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/BarPayload"
+            },
+            {
+              "$ref": "#/$defs/TradePayload"
+            },
+            {
+              "$ref": "#/$defs/QuoteL1Payload"
+            },
+            {
+              "$ref": "#/$defs/BookSnapshotL2Payload"
+            }
+          ],
+          "title": "Payload"
+        },
+        "receive_time": {
+          "format": "date-time",
+          "title": "Receive Time",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "source": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "available_time",
+        "event_id",
+        "event_time",
+        "instrument_id",
+        "payload",
+        "receive_time",
+        "sequence",
+        "source"
+      ],
+      "title": "MarketEvent",
+      "type": "object"
+    },
+    "NoOp": {
+      "additionalProperties": false,
+      "properties": {
+        "explanation": {
+          "title": "Explanation",
+          "type": "string"
+        },
+        "kind": {
+          "const": "no_op",
+          "default": "no_op",
+          "title": "Kind",
+          "type": "string"
+        },
+        "reason_code": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Reason Code",
+          "type": "string"
+        }
+      },
+      "required": [
+        "explanation",
+        "reason_code"
+      ],
+      "title": "NoOp",
+      "type": "object"
+    },
+    "OpenOrder": {
+      "additionalProperties": false,
+      "properties": {
+        "client_order_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Client Order Id",
+          "type": "string"
+        },
+        "instrument_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "limit_price": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Limit Price"
+        },
+        "order_type": {
+          "enum": [
+            "limit",
+            "market",
+            "target"
+          ],
+          "title": "Order Type",
+          "type": "string"
+        },
+        "quantity": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quantity"
+        },
+        "side": {
+          "anyOf": [
+            {
+              "enum": [
+                "buy",
+                "sell"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Side"
+        },
+        "status": {
+          "default": "accepted",
+          "enum": [
+            "accepted",
+            "partially_filled",
+            "replaced"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "target_quantity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Quantity"
+        }
+      },
+      "required": [
+        "client_order_id",
+        "instrument_id",
+        "order_type"
+      ],
+      "title": "OpenOrder",
+      "type": "object"
+    },
+    "OrderEventRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "client_order_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Client Order Id",
+          "type": "string"
+        },
+        "details": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Details",
+          "type": "object"
+        },
+        "event_time": {
+          "format": "date-time",
+          "title": "Event Time",
+          "type": "string"
+        },
+        "instrument_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "status": {
+          "enum": [
+            "accepted",
+            "canceled",
+            "expired",
+            "filled",
+            "replaced",
+            "satisfied"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "client_order_id",
+        "event_time",
+        "instrument_id",
+        "sequence",
+        "status"
+      ],
+      "title": "OrderEventRecord",
+      "type": "object"
+    },
+    "PaperAmbiguity": {
+      "additionalProperties": false,
+      "properties": {
+        "ambiguity_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Ambiguity Id",
+          "type": "string"
+        },
+        "resolution": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resolution"
+        },
+        "resolved_by": {
+          "anyOf": [
+            {
+              "enum": [
+                "experiment",
+                "operator",
+                "paper"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resolved By"
+        },
+        "severity": {
+          "enum": [
+            "blocking",
+            "info",
+            "warning"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "source_excerpt_locator": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Excerpt Locator"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ambiguity_id",
+        "severity",
+        "statement"
+      ],
+      "title": "PaperAmbiguity",
+      "type": "object"
+    },
+    "PaperDocument": {
+      "additionalProperties": false,
+      "properties": {
+        "media_type": {
+          "enum": [
+            "application/pdf",
+            "text/html",
+            "text/plain"
+          ],
+          "title": "Media Type",
+          "type": "string"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/SourcePage"
+          },
+          "minItems": 1,
+          "title": "Pages",
+          "type": "array"
+        },
+        "parser": {
+          "title": "Parser",
+          "type": "string"
+        },
+        "source_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "source_uri": {
+          "title": "Source Uri",
+          "type": "string"
+        },
+        "version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "media_type",
+        "pages",
+        "parser",
+        "source_sha256",
+        "source_uri"
+      ],
+      "title": "PaperDocument",
+      "type": "object"
+    },
+    "PaperEvidenceReference": {
+      "additionalProperties": false,
+      "properties": {
+        "anchor": {
+          "maxLength": 100,
+          "minLength": 3,
+          "title": "Anchor",
+          "type": "string"
+        },
+        "claim_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "interpretation": {
+          "minLength": 3,
+          "title": "Interpretation",
+          "type": "string"
+        },
+        "locator": {
+          "minLength": 3,
+          "title": "Locator",
+          "type": "string"
+        },
+        "page": {
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "anchor",
+        "claim_id",
+        "interpretation",
+        "locator",
+        "page"
+      ],
+      "title": "PaperEvidenceReference",
+      "type": "object"
+    },
+    "PaperReference": {
+      "additionalProperties": false,
+      "properties": {
+        "citation": {
+          "minLength": 3,
+          "title": "Citation",
+          "type": "string"
+        },
+        "locator": {
+          "minLength": 3,
+          "title": "Locator",
+          "type": "string"
+        },
+        "media_type": {
+          "anyOf": [
+            {
+              "enum": [
+                "application/pdf",
+                "text/html",
+                "text/plain"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Media Type"
+        },
+        "source_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Sha256"
+        },
+        "title": {
+          "minLength": 3,
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "citation",
+        "locator",
+        "title"
+      ],
+      "title": "PaperReference",
+      "type": "object"
+    },
+    "PaperStrategySpec": {
+      "additionalProperties": false,
+      "properties": {
+        "ambiguities": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/PaperAmbiguity"
+          },
+          "title": "Ambiguities",
+          "type": "array"
+        },
+        "contract_version": {
+          "default": "1.1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "data_requirements": {
+          "items": {
+            "$ref": "#/$defs/DataRequirement"
+          },
+          "minItems": 1,
+          "title": "Data Requirements",
+          "type": "array"
+        },
+        "evidence": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/PaperEvidenceReference"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "execution_assumptions": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Execution Assumptions",
+          "type": "array"
+        },
+        "feature_definitions": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Feature Definitions",
+          "type": "array"
+        },
+        "hypothesis": {
+          "minLength": 3,
+          "title": "Hypothesis",
+          "type": "string"
+        },
+        "inference_rule": {
+          "anyOf": [
+            {
+              "minLength": 3,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Inference Rule"
+        },
+        "label_definition": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Label Definition"
+        },
+        "output_actions": {
+          "items": {
+            "$ref": "#/$defs/ActionKind"
+          },
+          "minItems": 1,
+          "title": "Output Actions",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "reference": {
+          "$ref": "#/$defs/PaperReference"
+        },
+        "reward_definition": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reward Definition"
+        },
+        "spec_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Spec Id",
+          "type": "string"
+        },
+        "strategy_kind": {
+          "$ref": "#/$defs/StrategyKind"
+        },
+        "training_objective": {
+          "anyOf": [
+            {
+              "minLength": 3,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Training Objective"
+        }
+      },
+      "required": [
+        "data_requirements",
+        "execution_assumptions",
+        "hypothesis",
+        "output_actions",
+        "reference",
+        "spec_id",
+        "strategy_kind"
+      ],
+      "title": "PaperStrategySpec",
+      "type": "object"
+    },
+    "Position": {
+      "additionalProperties": false,
+      "properties": {
+        "average_price": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Average Price"
+        },
+        "instrument_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "quantity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Quantity"
+        },
+        "realized_pnl": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "default": "0",
+          "title": "Realized Pnl"
+        },
+        "unrealized_pnl": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "default": "0",
+          "title": "Unrealized Pnl"
+        }
+      },
+      "required": [
+        "average_price",
+        "instrument_id",
+        "quantity"
+      ],
+      "title": "Position",
+      "type": "object"
+    },
+    "Prediction": {
+      "additionalProperties": false,
+      "properties": {
+        "horizon": {
+          "title": "Horizon",
+          "type": "string"
+        },
+        "instrument_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "prediction",
+          "default": "prediction",
+          "title": "Kind",
+          "type": "string"
+        },
+        "model_artifact_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Model Artifact Id",
+          "type": "string"
+        },
+        "reason_code": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "horizon",
+        "instrument_id",
+        "model_artifact_id",
+        "reason_code",
+        "value"
+      ],
+      "title": "Prediction",
+      "type": "object"
+    },
+    "QuoteL1Payload": {
+      "additionalProperties": false,
+      "properties": {
+        "ask_price": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Ask Price"
+        },
+        "ask_size": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Ask Size"
+        },
+        "bid_price": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Bid Price"
+        },
+        "bid_size": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Bid Size"
+        },
+        "kind": {
+          "const": "quote_l1",
+          "default": "quote_l1",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ask_price",
+        "ask_size",
+        "bid_price",
+        "bid_size"
+      ],
+      "title": "QuoteL1Payload",
+      "type": "object"
+    },
+    "RLTransition": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "minimum": 0,
+          "title": "Action",
+          "type": "integer"
+        },
+        "episode_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Episode Id",
+          "type": "string"
+        },
+        "next_action": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Next Action"
+        },
+        "next_state": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Next State",
+          "type": "array"
+        },
+        "reward": {
+          "title": "Reward",
+          "type": "number"
+        },
+        "state": {
+          "items": {
+            "type": "number"
+          },
+          "title": "State",
+          "type": "array"
+        },
+        "step": {
+          "minimum": 0,
+          "title": "Step",
+          "type": "integer"
+        },
+        "terminated": {
+          "title": "Terminated",
+          "type": "boolean"
+        },
+        "truncated": {
+          "default": false,
+          "title": "Truncated",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "action",
+        "episode_id",
+        "next_state",
+        "reward",
+        "state",
+        "step",
+        "terminated"
+      ],
+      "title": "RLTransition",
+      "type": "object"
+    },
+    "ReplaceOrder": {
+      "additionalProperties": false,
+      "properties": {
+        "client_order_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Client Order Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "replace_order",
+          "default": "replace_order",
+          "title": "Kind",
+          "type": "string"
+        },
+        "new_limit_price": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "New Limit Price"
+        },
+        "new_quantity": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "New Quantity"
+        },
+        "reason_code": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Reason Code",
+          "type": "string"
+        }
+      },
+      "required": [
+        "client_order_id",
+        "reason_code"
+      ],
+      "title": "ReplaceOrder",
+      "type": "object"
+    },
+    "ResourcePolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_imports": {
+          "default": [
+            "math",
+            "numpy",
+            "statistics"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Imports",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "filesystem": {
+          "default": "artifact_store_only",
+          "enum": [
+            "artifact_store_only",
+            "read_only_data",
+            "unrestricted"
+          ],
+          "title": "Filesystem",
+          "type": "string"
+        },
+        "memory_mb": {
+          "default": 512,
+          "maximum": 16384,
+          "minimum": 64,
+          "title": "Memory Mb",
+          "type": "integer"
+        },
+        "network": {
+          "default": "deny",
+          "enum": [
+            "allow",
+            "deny"
+          ],
+          "title": "Network",
+          "type": "string"
+        },
+        "process_limit": {
+          "default": 32,
+          "maximum": 1024,
+          "minimum": 1,
+          "title": "Process Limit",
+          "type": "integer"
+        },
+        "sandbox": {
+          "$ref": "#/$defs/SandboxMode",
+          "default": "strict_container"
+        },
+        "timeout_seconds": {
+          "default": 60,
+          "maximum": 3600,
+          "minimum": 1,
+          "title": "Timeout Seconds",
+          "type": "integer"
+        }
+      },
+      "title": "ResourcePolicy",
+      "type": "object"
+    },
+    "RunInputEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "default": "1.1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "dataset_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Dataset Id",
+          "type": "string"
+        },
+        "effective_data_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Effective Data Sha256",
+          "type": "string"
+        },
+        "effective_events": {
+          "items": {
+            "$ref": "#/$defs/MarketEvent"
+          },
+          "title": "Effective Events",
+          "type": "array"
+        },
+        "source_data_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Source Data Sha256",
+          "type": "string"
+        },
+        "source_events": {
+          "items": {
+            "$ref": "#/$defs/MarketEvent"
+          },
+          "title": "Source Events",
+          "type": "array"
+        },
+        "transformation_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Transformation Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "dataset_id",
+        "effective_data_sha256",
+        "effective_events",
+        "source_data_sha256",
+        "source_events"
+      ],
+      "title": "RunInputEvidence",
+      "type": "object"
+    },
+    "RunMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "decisions": {
+          "minimum": 0,
+          "title": "Decisions",
+          "type": "integer"
+        },
+        "fills": {
+          "minimum": 0,
+          "title": "Fills",
+          "type": "integer"
+        },
+        "final_cash": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Final Cash"
+        },
+        "final_equity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Final Equity"
+        },
+        "initial_cash": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Initial Cash"
+        },
+        "no_ops": {
+          "minimum": 0,
+          "title": "No Ops",
+          "type": "integer"
+        },
+        "orders": {
+          "minimum": 0,
+          "title": "Orders",
+          "type": "integer"
+        },
+        "total_return": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Total Return"
+        }
+      },
+      "required": [
+        "decisions",
+        "fills",
+        "final_cash",
+        "final_equity",
+        "initial_cash",
+        "no_ops",
+        "orders",
+        "total_return"
+      ],
+      "title": "RunMetrics",
+      "type": "object"
+    },
+    "RunPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "allow_engine_substitution": {
+          "const": false,
+          "default": false,
+          "title": "Allow Engine Substitution",
+          "type": "boolean"
+        },
+        "allow_lossy": {
+          "default": false,
+          "title": "Allow Lossy",
+          "type": "boolean"
+        },
+        "allowed_transformations": {
+          "default": [],
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Allowed Transformations",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "minimum_engine_support": {
+          "$ref": "#/$defs/SupportLevel",
+          "default": "ADAPTER_AVAILABLE"
+        },
+        "required_sandbox": {
+          "$ref": "#/$defs/SandboxMode",
+          "default": "strict_container"
+        },
+        "strict": {
+          "default": true,
+          "title": "Strict",
+          "type": "boolean"
+        },
+        "transformation_parameters": {
+          "patternProperties": {
+            "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$": {
+              "additionalProperties": true,
+              "type": "object"
+            }
+          },
+          "title": "Transformation Parameters",
+          "type": "object"
+        }
+      },
+      "title": "RunPolicy",
+      "type": "object"
+    },
+    "RunReport": {
+      "additionalProperties": false,
+      "properties": {
+        "account_snapshots": {
+          "items": {
+            "$ref": "#/$defs/AccountSnapshot"
+          },
+          "title": "Account Snapshots",
+          "type": "array"
+        },
+        "artifacts": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ArtifactManifest"
+          },
+          "title": "Artifacts",
+          "type": "array"
+        },
+        "assumptions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Assumptions",
+          "type": "array"
+        },
+        "contract_version": {
+          "default": "1.1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "decisions": {
+          "items": {
+            "$ref": "#/$defs/DecisionRecord"
+          },
+          "title": "Decisions",
+          "type": "array"
+        },
+        "errors": {
+          "default": [],
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Errors",
+          "type": "array"
+        },
+        "execution_plan": {
+          "$ref": "#/$defs/ExecutionPlan"
+        },
+        "fills": {
+          "items": {
+            "$ref": "#/$defs/Fill"
+          },
+          "title": "Fills",
+          "type": "array"
+        },
+        "finished_at": {
+          "format": "date-time",
+          "title": "Finished At",
+          "type": "string"
+        },
+        "lifecycle": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Lifecycle",
+          "type": "array"
+        },
+        "logs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/RuntimeLogRecord"
+          },
+          "title": "Logs",
+          "type": "array"
+        },
+        "metrics": {
+          "$ref": "#/$defs/RunMetrics"
+        },
+        "orders": {
+          "items": {
+            "$ref": "#/$defs/OrderEventRecord"
+          },
+          "title": "Orders",
+          "type": "array"
+        },
+        "run_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "sandbox_mode": {
+          "$ref": "#/$defs/SandboxMode"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "status": {
+          "const": "succeeded",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "account_snapshots",
+        "assumptions",
+        "decisions",
+        "execution_plan",
+        "fills",
+        "finished_at",
+        "metrics",
+        "orders",
+        "run_id",
+        "sandbox_mode",
+        "started_at",
+        "status"
+      ],
+      "title": "RunReport",
+      "type": "object"
+    },
+    "RuntimeLogRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "fields": {
+          "additionalProperties": true,
+          "title": "Fields",
+          "type": "object"
+        },
+        "level": {
+          "enum": [
+            "debug",
+            "error",
+            "info",
+            "warning"
+          ],
+          "title": "Level",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "stage": {
+          "title": "Stage",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        }
+      },
+      "required": [
+        "level",
+        "message",
+        "sequence",
+        "stage",
+        "timestamp"
+      ],
+      "title": "RuntimeLogRecord",
+      "type": "object"
+    },
+    "SandboxMode": {
+      "enum": [
+        "development",
+        "strict_container"
+      ],
+      "title": "SandboxMode",
+      "type": "string"
+    },
+    "SourceFileEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "maxLength": 512,
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "SourceFileEvidence",
+      "type": "object"
+    },
+    "SourcePage": {
+      "additionalProperties": false,
+      "properties": {
+        "number": {
+          "minimum": 1,
+          "title": "Number",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "number",
+        "sha256",
+        "text"
+      ],
+      "title": "SourcePage",
+      "type": "object"
+    },
+    "StrategyCodeEvidence": {
+      "additionalProperties": false,
+      "description": "Content-addressed strategy package and trusted runtime implementation.",
+      "properties": {
+        "entrypoint": {
+          "title": "Entrypoint",
+          "type": "string"
+        },
+        "package_files": {
+          "items": {
+            "$ref": "#/$defs/SourceFileEvidence"
+          },
+          "title": "Package Files",
+          "type": "array"
+        },
+        "package_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Package Sha256",
+          "type": "string"
+        },
+        "runtime_distribution": {
+          "const": "paper-strategy-runtime-contract",
+          "default": "paper-strategy-runtime-contract",
+          "title": "Runtime Distribution",
+          "type": "string"
+        },
+        "runtime_file_count": {
+          "minimum": 1,
+          "title": "Runtime File Count",
+          "type": "integer"
+        },
+        "runtime_source_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Runtime Source Sha256",
+          "type": "string"
+        },
+        "runtime_version": {
+          "default": "1.1.0",
+          "title": "Runtime Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entrypoint",
+        "package_files",
+        "package_sha256",
+        "runtime_file_count",
+        "runtime_source_sha256"
+      ],
+      "title": "StrategyCodeEvidence",
+      "type": "object"
+    },
+    "StrategyKind": {
+      "enum": [
+        "reinforcement_learning",
+        "rule",
+        "supervised"
+      ],
+      "title": "StrategyKind",
+      "type": "string"
+    },
+    "StrategyManifest": {
+      "additionalProperties": false,
+      "properties": {
+        "action_requirements": {
+          "$ref": "#/$defs/ActionRequirements"
+        },
+        "contract_version": {
+          "default": "1.1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "data_requirements": {
+          "items": {
+            "$ref": "#/$defs/DataRequirement"
+          },
+          "title": "Data Requirements",
+          "type": "array"
+        },
+        "deterministic": {
+          "default": true,
+          "title": "Deterministic",
+          "type": "boolean"
+        },
+        "entrypoint": {
+          "title": "Entrypoint",
+          "type": "string"
+        },
+        "extensions": {
+          "patternProperties": {
+            "^(?:[a-z](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z](?:[a-z0-9-]*[a-z0-9])?$": {
+              "additionalProperties": true,
+              "type": "object"
+            }
+          },
+          "title": "Extensions",
+          "type": "object"
+        },
+        "kind": {
+          "$ref": "#/$defs/StrategyKind"
+        },
+        "lifecycle": {
+          "$ref": "#/$defs/LifecycleRequirements"
+        },
+        "required_profiles": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Required Profiles",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "resources": {
+          "$ref": "#/$defs/ResourcePolicy",
+          "default": {
+            "allowed_imports": [
+              "math",
+              "numpy",
+              "statistics"
+            ],
+            "filesystem": "artifact_store_only",
+            "memory_mb": 512,
+            "network": "deny",
+            "process_limit": 32,
+            "sandbox": "strict_container",
+            "timeout_seconds": 60
+          }
+        },
+        "seed": {
+          "default": 0,
+          "title": "Seed",
+          "type": "integer"
+        },
+        "strategy_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Strategy Id",
+          "type": "string"
+        },
+        "strategy_version": {
+          "title": "Strategy Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "action_requirements",
+        "data_requirements",
+        "entrypoint",
+        "kind",
+        "lifecycle",
+        "required_profiles",
+        "strategy_id",
+        "strategy_version"
+      ],
+      "title": "StrategyManifest",
+      "type": "object"
+    },
+    "SubmitOrder": {
+      "additionalProperties": false,
+      "properties": {
+        "client_order_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Client Order Id",
+          "type": "string"
+        },
+        "instrument_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "submit_order",
+          "default": "submit_order",
+          "title": "Kind",
+          "type": "string"
+        },
+        "limit_price": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Limit Price"
+        },
+        "order_type": {
+          "enum": [
+            "limit",
+            "market",
+            "stop",
+            "stop_limit"
+          ],
+          "title": "Order Type",
+          "type": "string"
+        },
+        "quantity": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Quantity"
+        },
+        "reason_code": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "side": {
+          "enum": [
+            "buy",
+            "sell"
+          ],
+          "title": "Side",
+          "type": "string"
+        },
+        "stop_price": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stop Price"
+        },
+        "time_in_force": {
+          "default": "day",
+          "enum": [
+            "day",
+            "fok",
+            "gtc",
+            "ioc"
+          ],
+          "title": "Time In Force",
+          "type": "string"
+        }
+      },
+      "required": [
+        "client_order_id",
+        "instrument_id",
+        "order_type",
+        "quantity",
+        "reason_code",
+        "side"
+      ],
+      "title": "SubmitOrder",
+      "type": "object"
+    },
+    "SupportLevel": {
+      "enum": [
+        "ADAPTER_AVAILABLE",
+        "CONFORMANCE_VERIFIED",
+        "PRODUCTION_CERTIFIED",
+        "PROFILED"
+      ],
+      "title": "SupportLevel",
+      "type": "string"
+    },
+    "TargetPosition": {
+      "additionalProperties": false,
+      "properties": {
+        "instrument_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "target_position",
+          "default": "target_position",
+          "title": "Kind",
+          "type": "string"
+        },
+        "quantity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Quantity"
+        },
+        "reason_code": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Reason Code",
+          "type": "string"
+        }
+      },
+      "required": [
+        "instrument_id",
+        "quantity",
+        "reason_code"
+      ],
+      "title": "TargetPosition",
+      "type": "object"
+    },
+    "TargetWeight": {
+      "additionalProperties": false,
+      "properties": {
+        "instrument_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "target_weight",
+          "default": "target_weight",
+          "title": "Kind",
+          "type": "string"
+        },
+        "reason_code": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "weight": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Weight"
+        }
+      },
+      "required": [
+        "instrument_id",
+        "reason_code",
+        "weight"
+      ],
+      "title": "TargetWeight",
+      "type": "object"
+    },
+    "Timeframe": {
+      "additionalProperties": false,
+      "properties": {
+        "alignment": {
+          "default": "epoch",
+          "title": "Alignment",
+          "type": "string"
+        },
+        "calendar": {
+          "default": "24/7",
+          "title": "Calendar",
+          "type": "string"
+        },
+        "interval": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "ISO-8601 duration, e.g. PT1M or P1D",
+          "title": "Interval"
+        },
+        "mode": {
+          "$ref": "#/$defs/TimeframeMode"
+        },
+        "timezone": {
+          "default": "UTC",
+          "title": "Timezone",
+          "type": "string"
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "title": "Timeframe",
+      "type": "object"
+    },
+    "TimeframeMode": {
+      "enum": [
+        "bar",
+        "event"
+      ],
+      "title": "TimeframeMode",
+      "type": "string"
+    },
+    "TradePayload": {
+      "additionalProperties": false,
+      "properties": {
+        "aggressor_side": {
+          "default": "unknown",
+          "enum": [
+            "buy",
+            "sell",
+            "unknown"
+          ],
+          "title": "Aggressor Side",
+          "type": "string"
+        },
+        "kind": {
+          "const": "trade",
+          "default": "trade",
+          "title": "Kind",
+          "type": "string"
+        },
+        "price": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Price"
+        },
+        "size": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Size"
+        },
+        "trade_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Trade Id"
+        }
+      },
+      "required": [
+        "price",
+        "size"
+      ],
+      "title": "TradePayload",
+      "type": "object"
+    },
+    "TrainingInputEvidence": {
+      "additionalProperties": false,
+      "description": "Immutable declaration of the exact embedded training payload.",
+      "properties": {
+        "contract_version": {
+          "default": "1.1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "dataset_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Dataset Id",
+          "type": "string"
+        },
+        "input_width": {
+          "exclusiveMinimum": 0,
+          "title": "Input Width",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "reinforcement_learning",
+            "supervised"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "record_count": {
+          "exclusiveMinimum": 0,
+          "title": "Record Count",
+          "type": "integer"
+        },
+        "request_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Request Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "dataset_id",
+        "input_width",
+        "kind",
+        "record_count",
+        "request_sha256"
+      ],
+      "title": "TrainingInputEvidence",
+      "type": "object"
+    },
+    "TrainingMode": {
+      "enum": [
+        "not_required",
+        "required"
+      ],
+      "title": "TrainingMode",
+      "type": "string"
+    },
+    "TrainingRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "dataset_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Dataset Id",
+          "type": "string"
+        },
+        "features": {
+          "default": [],
+          "items": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "title": "Features",
+          "type": "array"
+        },
+        "labels": {
+          "default": [],
+          "items": {
+            "type": "number"
+          },
+          "title": "Labels",
+          "type": "array"
+        },
+        "metadata": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Metadata",
+          "type": "object"
+        },
+        "run_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "seed": {
+          "title": "Seed",
+          "type": "integer"
+        },
+        "transitions": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/RLTransition"
+          },
+          "title": "Transitions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "dataset_id",
+        "run_id",
+        "seed"
+      ],
+      "title": "TrainingRequest",
+      "type": "object"
+    }
+  },
+  "$id": "urn:psrc:schema/run-bundle.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "default": "1.1.0",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "dataset_manifest": {
+      "$ref": "#/$defs/DatasetManifest"
+    },
+    "engine_capabilities": {
+      "$ref": "#/$defs/EngineCapabilities"
+    },
+    "external_paper_document": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PaperDocument"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "external_strategy_admission": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ExternalStrategyAdmission"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "input_evidence": {
+      "$ref": "#/$defs/RunInputEvidence"
+    },
+    "report": {
+      "$ref": "#/$defs/RunReport"
+    },
+    "run_policy": {
+      "$ref": "#/$defs/RunPolicy"
+    },
+    "strategy_code_evidence": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/StrategyCodeEvidence"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "strategy_manifest": {
+      "$ref": "#/$defs/StrategyManifest"
+    },
+    "training_input_evidence": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TrainingInputEvidence"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "training_request": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TrainingRequest"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "dataset_manifest",
+    "engine_capabilities",
+    "input_evidence",
+    "report",
+    "run_policy",
+    "strategy_manifest"
+  ],
+  "title": "RunBundle",
+  "type": "object"
+}

@@ -1,0 +1,43 @@
+{
+  "version": "1.0",
+  "paper_id": "ma2015",
+  "title": "Profitability of simple technical trading rules of Chinese stock exchange indexes",
+  "source_url": "https://arxiv.org/pdf/1504.04254",
+  "source_sha256": "6908ca31e92e750881255742a99ffc3daf00ca2e9d0b0012652809d0f538b87a",
+  "algorithm": "moving_average_band",
+  "execution_engine": "backtrader",
+  "strategy_kind": "rule",
+  "data_mode": "public_historical",
+  "parameters": {
+    "short_window": 1,
+    "long_window": 20,
+    "band": 0.01
+  },
+  "claims": [
+    {
+      "claim_id": "ma.definition",
+      "page": 3,
+      "anchor": "averaging window",
+      "locator": "Section 2.1, equation (1), p.3",
+      "interpretation": "Arithmetic mean of the current and preceding n-1 closes."
+    },
+    {
+      "claim_id": "ma.position",
+      "page": 3,
+      "anchor": "position states",
+      "locator": "Section 2.1, equations (2)-(4), p.3",
+      "interpretation": "VMA is +1 above upper percentage band, -1 below lower band, and zero inside the band."
+    }
+  ],
+  "assumptions": [
+    "Use VMA(1,20,0.01), a configuration listed in the paper; causal completed daily bars.",
+    "Canonical +/-1 unit positions execute at the next bar via Backtrader with 5bps commission."
+  ],
+  "deviations": [
+    "Public AAPL 2015-2017 daily OHLCV replaces the original Shanghai and Shenzhen index histories.",
+    "Only VMA equations (1)-(4); FMA, TRB, White Reality Check, original significance and return results are not reproduced.",
+    "Direct short index exposure is a research position convention; no A-share execution feasibility claim."
+  ],
+  "fidelity": "algorithm_reproduction",
+  "mapping_review": "Author mapping from section 2.1 equations (1)-(4), validated with independent sign/band tests and native Backtrader execution."
+}

@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "dataset_id": "public.plotly.aapl-2015-2017",
+  "file": "finance-charts-apple.csv",
+  "source_url": "https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv",
+  "source_sha256": "24c7604edfd5afe862ddb9f9535e2fd7351f43711bfc442bca52055e15e37bcd",
+  "retrieved_at": "2026-09-21",
+  "records": 506,
+  "instrument": "AAPL",
+  "period": ["2015-02-17", "2017-02-16"],
+  "columns_used": [
+    "Date",
+    "AAPL.Open",
+    "AAPL.High",
+    "AAPL.Low",
+    "AAPL.Close",
+    "AAPL.Volume"
+  ],
+  "repository_license": "MIT",
+  "repository_license_file": "PLOTLY-DATASETS-LICENSE",
+  "repository_license_url": "https://github.com/plotly/datasets/blob/master/LICENSE",
+  "repository_license_sha256": "842e29495d9d99eef9b6d5f2e442785cdd0ab39d81792b2c6302d17bb0cc6030",
+  "rights_note": "The source repository applies an MIT license, but its README does not separately identify the upstream origin of this particular market-data file. This fixture is therefore public and reproducible, but is not claimed to be public-domain or the original paper dataset.",
+  "availability_rule": "Each daily bar becomes available at the next UTC day, preventing same-bar look-ahead.",
+  "paper_dataset": false,
+  "empirical_paper_results_reproduced": false
+}

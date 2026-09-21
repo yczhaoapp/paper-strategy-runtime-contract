@@ -1,0 +1,92 @@
+{
+  "algorithm_fidelity": "A2_algorithm_exact",
+  "assumptions": [
+    "The counted strategy reproduces the paper’s weighted-mid toy model, using positive non-crossed L1 quotes."
+  ],
+  "claim_links": [
+    {
+      "claim_id": "microprice.weighted_formula",
+      "implementation_path": "src/psrc/strategies/rule.py",
+      "symbol": "L1MicropriceStrategy",
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_weighted_microprice_reproduces_stoikov_toy_formula"
+    },
+    {
+      "claim_id": "microprice.toy_equivalence",
+      "implementation_path": "src/psrc/strategies/rule.py",
+      "symbol": "L1MicropriceStrategy",
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_weighted_microprice_reproduces_stoikov_toy_formula"
+    }
+  ],
+  "claims": [
+    {
+      "anchor": "The weighted mid-price",
+      "claim_id": "microprice.weighted_formula",
+      "interpretation": "The weighted price is I times the ask plus one minus I times the bid, with I equal to bid size over total best-quote size.",
+      "locator": "Weighted mid-price slide, PDF p.5",
+      "page": 5
+    },
+    {
+      "anchor": "micro-price = weighted mid price",
+      "claim_id": "microprice.toy_equivalence",
+      "interpretation": "The source explicitly identifies a toy-model case in which the micro-price equals the weighted mid-price.",
+      "locator": "Toy-model outline, PDF p.8",
+      "page": 8
+    }
+  ],
+  "data_fidelity": "D0_synthetic",
+  "data_mode": "synthetic_fixture",
+  "deviations": [
+    "It does not claim to estimate the paper’s full discrete Markov-chain distant-future micro-price."
+  ],
+  "empirical_results_reproduced": false,
+  "experimental_fidelity": "E0_runtime_only",
+  "fidelity": "formula_reproduction",
+  "implementation": [
+    {
+      "path": "src/psrc/strategies/rule.py",
+      "sha256": "6cc6d335e5c9e7db298267b849291d06e061a7446693435cc7b4378d222adc9c",
+      "symbols": [
+        "L1MicropriceStrategy"
+      ]
+    },
+    {
+      "path": "strategies/rule.l1_microprice/strategy.py",
+      "sha256": "fca55c58b5f6e1de84c0fd2221e8e084c6aeb42f0108ac3ea6243deba5054d19",
+      "symbols": [
+        "L1MicropriceStrategy",
+        "class Strategy"
+      ]
+    }
+  ],
+  "mapping_review": "Equation-level review limits the claim to the explicitly stated weighted-mid toy model; the full Markov estimator and empirical results remain out of scope.",
+  "original_paper_dataset": false,
+  "runtime_expectation": {
+    "artifact_algorithm": null,
+    "artifact_id": null,
+    "data_kinds": [
+      "quote_l1"
+    ],
+    "decision_sha256": "1d6f86f404176fc47f087a66391a48fb7918b94b9de5dadf47a6b7d44e7ba323",
+    "expected_decisions": 10,
+    "expected_fills": 9,
+    "expected_orders": 10,
+    "observed_action_kinds": [
+      "submit_order"
+    ],
+    "observed_reason_codes": [
+      "signal.microprice"
+    ],
+    "source_data_sha256": "4497637c0e9bbf116623cb67b303971a077a23e1b94c28657acf1db3f246ee2b",
+    "timeframes": [
+      "event"
+    ]
+  },
+  "runtime_fidelity": "R1_unified_contract",
+  "source_id": "stoikov2017",
+  "strategy_id": "rule.l1_microprice",
+  "strategy_kind": "rule",
+  "verification_tests": [
+    "tests/papers/test_reproduction_oracles.py::test_weighted_microprice_reproduces_stoikov_toy_formula"
+  ],
+  "version": "1.1"
+}

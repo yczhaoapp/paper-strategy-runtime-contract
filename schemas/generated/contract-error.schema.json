@@ -1,0 +1,139 @@
+{
+  "$defs": {
+    "ErrorCode": {
+      "enum": [
+        "ACTION_INVALID",
+        "ARTIFACT_HASH_MISMATCH",
+        "ARTIFACT_NOT_FOUND",
+        "BACKTEST_FAILED",
+        "COMPATIBILITY_TRANSFORM_FAILED",
+        "CONTRACT_VERSION_UNSUPPORTED",
+        "DATA_FIELD_MISSING",
+        "DATA_HASH_MISMATCH",
+        "DATA_KIND_MISMATCH",
+        "DATA_ORDERING_INVALID",
+        "DATA_RECORD_COUNT_MISMATCH",
+        "DATA_STREAM_MISSING",
+        "DATA_TIMEFRAME_MISMATCH",
+        "ENGINE_CAPABILITY_UNSUPPORTED",
+        "ENGINE_DEPENDENCY_MISSING",
+        "INFERENCE_FAILED",
+        "LIFECYCLE_TRANSITION_INVALID",
+        "MANIFEST_INVALID",
+        "ORDER_REJECTED",
+        "PAPER_COMPILATION_FAILED",
+        "PAPER_EVIDENCE_MISSING",
+        "PAPER_INPUT_INVALID",
+        "PAPER_PARSE_FAILED",
+        "PAPER_RECIPE_INVALID",
+        "PAPER_SOURCE_MISMATCH",
+        "SANDBOX_EXECUTION_FAILED",
+        "SANDBOX_POLICY_DENIED",
+        "SANDBOX_POLICY_DOWNGRADE",
+        "SANDBOX_RESOURCE_EXHAUSTED",
+        "SANDBOX_TIMEOUT",
+        "SANDBOX_UNAVAILABLE",
+        "SOURCE_HASH_MISMATCH",
+        "SYMBOL_MAPPING_FAILED",
+        "TRAINING_DATA_MISMATCH",
+        "TRAINING_FAILED"
+      ],
+      "title": "ErrorCode",
+      "type": "string"
+    },
+    "ErrorStage": {
+      "enum": [
+        "action_validation",
+        "artifact",
+        "backtest",
+        "capability_negotiation",
+        "discovery",
+        "inference",
+        "initialization",
+        "reporting",
+        "sandbox",
+        "training",
+        "validation"
+      ],
+      "title": "ErrorStage",
+      "type": "string"
+    }
+  },
+  "$id": "urn:psrc:schema/contract-error.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "cause_chain": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Cause Chain",
+      "type": "array"
+    },
+    "code": {
+      "$ref": "#/$defs/ErrorCode"
+    },
+    "contract_version": {
+      "default": "1.1.0",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "details": {
+      "additionalProperties": true,
+      "title": "Details",
+      "type": "object"
+    },
+    "engine_id": {
+      "anyOf": [
+        {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Engine Id"
+    },
+    "message": {
+      "title": "Message",
+      "type": "string"
+    },
+    "retryable": {
+      "default": false,
+      "title": "Retryable",
+      "type": "boolean"
+    },
+    "run_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "stage": {
+      "$ref": "#/$defs/ErrorStage"
+    },
+    "strategy_id": {
+      "anyOf": [
+        {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Strategy Id"
+    }
+  },
+  "required": [
+    "code",
+    "message",
+    "run_id",
+    "stage"
+  ],
+  "title": "ContractError",
+  "type": "object"
+}

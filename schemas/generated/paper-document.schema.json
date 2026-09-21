@@ -1,0 +1,80 @@
+{
+  "$defs": {
+    "SourcePage": {
+      "additionalProperties": false,
+      "properties": {
+        "number": {
+          "minimum": 1,
+          "title": "Number",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "number",
+        "sha256",
+        "text"
+      ],
+      "title": "SourcePage",
+      "type": "object"
+    }
+  },
+  "$id": "urn:psrc:schema/paper-document.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "media_type": {
+      "enum": [
+        "application/pdf",
+        "text/html",
+        "text/plain"
+      ],
+      "title": "Media Type",
+      "type": "string"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/SourcePage"
+      },
+      "minItems": 1,
+      "title": "Pages",
+      "type": "array"
+    },
+    "parser": {
+      "title": "Parser",
+      "type": "string"
+    },
+    "source_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "source_uri": {
+      "title": "Source Uri",
+      "type": "string"
+    },
+    "version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "media_type",
+    "pages",
+    "parser",
+    "source_sha256",
+    "source_uri"
+  ],
+  "title": "PaperDocument",
+  "type": "object"
+}

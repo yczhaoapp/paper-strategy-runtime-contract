@@ -1,0 +1,8 @@
+{
+  "contract_version": "1.1.0",
+  "dataset_id": "synthetic.rl-transitions",
+  "input_width": 3,
+  "kind": "reinforcement_learning",
+  "record_count": 30,
+  "request_sha256": "f13d88ede73a41b6ac93890ace829a4a1cc3105c7fe916e31324944f470e95c3"
+}

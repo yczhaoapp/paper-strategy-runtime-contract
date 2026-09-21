@@ -1,0 +1,633 @@
+{
+  "$defs": {
+    "ActionKind": {
+      "enum": [
+        "cancel_order",
+        "no_op",
+        "prediction",
+        "replace_order",
+        "submit_order",
+        "target_position",
+        "target_weight"
+      ],
+      "title": "ActionKind",
+      "type": "string"
+    },
+    "AgentAuditIssue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "error",
+            "warning"
+          ],
+          "title": "Severity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "path",
+        "severity"
+      ],
+      "title": "AgentAuditIssue",
+      "type": "object"
+    },
+    "AgentAuditReport": {
+      "additionalProperties": false,
+      "properties": {
+        "approved_for_compilation": {
+          "title": "Approved For Compilation",
+          "type": "boolean"
+        },
+        "checked_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Checked Fields",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "contract_version": {
+          "default": "1.1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "human_review_required": {
+          "default": true,
+          "title": "Human Review Required",
+          "type": "boolean"
+        },
+        "issues": {
+          "items": {
+            "$ref": "#/$defs/AgentAuditIssue"
+          },
+          "title": "Issues",
+          "type": "array"
+        },
+        "runtime_authority_granted": {
+          "const": false,
+          "default": false,
+          "title": "Runtime Authority Granted",
+          "type": "boolean"
+        },
+        "spec_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Spec Id",
+          "type": "string"
+        },
+        "strategy_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Strategy Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "approved_for_compilation",
+        "issues",
+        "spec_id",
+        "strategy_id"
+      ],
+      "title": "AgentAuditReport",
+      "type": "object"
+    },
+    "DataKind": {
+      "enum": [
+        "bar",
+        "book_snapshot_l2",
+        "quote_l1",
+        "trade"
+      ],
+      "title": "DataKind",
+      "type": "string"
+    },
+    "DataRequirement": {
+      "additionalProperties": false,
+      "properties": {
+        "depth": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Depth"
+        },
+        "kind": {
+          "$ref": "#/$defs/DataKind"
+        },
+        "lookback": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Lookback",
+          "type": "integer"
+        },
+        "max_staleness_ns": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Staleness Ns"
+        },
+        "optional_fields": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Optional Fields",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "required_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Fields",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "stream_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Stream Id",
+          "type": "string"
+        },
+        "symbols": {
+          "default": [],
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Symbols",
+          "type": "array"
+        },
+        "timeframe": {
+          "$ref": "#/$defs/Timeframe"
+        }
+      },
+      "required": [
+        "kind",
+        "required_fields",
+        "stream_id",
+        "timeframe"
+      ],
+      "title": "DataRequirement",
+      "type": "object"
+    },
+    "PaperAmbiguity": {
+      "additionalProperties": false,
+      "properties": {
+        "ambiguity_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Ambiguity Id",
+          "type": "string"
+        },
+        "resolution": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resolution"
+        },
+        "resolved_by": {
+          "anyOf": [
+            {
+              "enum": [
+                "experiment",
+                "operator",
+                "paper"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resolved By"
+        },
+        "severity": {
+          "enum": [
+            "blocking",
+            "info",
+            "warning"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "source_excerpt_locator": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Excerpt Locator"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ambiguity_id",
+        "severity",
+        "statement"
+      ],
+      "title": "PaperAmbiguity",
+      "type": "object"
+    },
+    "PaperEvidenceReference": {
+      "additionalProperties": false,
+      "properties": {
+        "anchor": {
+          "maxLength": 100,
+          "minLength": 3,
+          "title": "Anchor",
+          "type": "string"
+        },
+        "claim_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "interpretation": {
+          "minLength": 3,
+          "title": "Interpretation",
+          "type": "string"
+        },
+        "locator": {
+          "minLength": 3,
+          "title": "Locator",
+          "type": "string"
+        },
+        "page": {
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "anchor",
+        "claim_id",
+        "interpretation",
+        "locator",
+        "page"
+      ],
+      "title": "PaperEvidenceReference",
+      "type": "object"
+    },
+    "PaperReference": {
+      "additionalProperties": false,
+      "properties": {
+        "citation": {
+          "minLength": 3,
+          "title": "Citation",
+          "type": "string"
+        },
+        "locator": {
+          "minLength": 3,
+          "title": "Locator",
+          "type": "string"
+        },
+        "media_type": {
+          "anyOf": [
+            {
+              "enum": [
+                "application/pdf",
+                "text/html",
+                "text/plain"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Media Type"
+        },
+        "source_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Sha256"
+        },
+        "title": {
+          "minLength": 3,
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "citation",
+        "locator",
+        "title"
+      ],
+      "title": "PaperReference",
+      "type": "object"
+    },
+    "PaperStrategySpec": {
+      "additionalProperties": false,
+      "properties": {
+        "ambiguities": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/PaperAmbiguity"
+          },
+          "title": "Ambiguities",
+          "type": "array"
+        },
+        "contract_version": {
+          "default": "1.1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "data_requirements": {
+          "items": {
+            "$ref": "#/$defs/DataRequirement"
+          },
+          "minItems": 1,
+          "title": "Data Requirements",
+          "type": "array"
+        },
+        "evidence": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/PaperEvidenceReference"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "execution_assumptions": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Execution Assumptions",
+          "type": "array"
+        },
+        "feature_definitions": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Feature Definitions",
+          "type": "array"
+        },
+        "hypothesis": {
+          "minLength": 3,
+          "title": "Hypothesis",
+          "type": "string"
+        },
+        "inference_rule": {
+          "anyOf": [
+            {
+              "minLength": 3,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Inference Rule"
+        },
+        "label_definition": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Label Definition"
+        },
+        "output_actions": {
+          "items": {
+            "$ref": "#/$defs/ActionKind"
+          },
+          "minItems": 1,
+          "title": "Output Actions",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "reference": {
+          "$ref": "#/$defs/PaperReference"
+        },
+        "reward_definition": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reward Definition"
+        },
+        "spec_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Spec Id",
+          "type": "string"
+        },
+        "strategy_kind": {
+          "$ref": "#/$defs/StrategyKind"
+        },
+        "training_objective": {
+          "anyOf": [
+            {
+              "minLength": 3,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Training Objective"
+        }
+      },
+      "required": [
+        "data_requirements",
+        "execution_assumptions",
+        "hypothesis",
+        "output_actions",
+        "reference",
+        "spec_id",
+        "strategy_kind"
+      ],
+      "title": "PaperStrategySpec",
+      "type": "object"
+    },
+    "StrategyKind": {
+      "enum": [
+        "reinforcement_learning",
+        "rule",
+        "supervised"
+      ],
+      "title": "StrategyKind",
+      "type": "string"
+    },
+    "Timeframe": {
+      "additionalProperties": false,
+      "properties": {
+        "alignment": {
+          "default": "epoch",
+          "title": "Alignment",
+          "type": "string"
+        },
+        "calendar": {
+          "default": "24/7",
+          "title": "Calendar",
+          "type": "string"
+        },
+        "interval": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "ISO-8601 duration, e.g. PT1M or P1D",
+          "title": "Interval"
+        },
+        "mode": {
+          "$ref": "#/$defs/TimeframeMode"
+        },
+        "timezone": {
+          "default": "UTC",
+          "title": "Timezone",
+          "type": "string"
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "title": "Timeframe",
+      "type": "object"
+    },
+    "TimeframeMode": {
+      "enum": [
+        "bar",
+        "event"
+      ],
+      "title": "TimeframeMode",
+      "type": "string"
+    }
+  },
+  "$id": "urn:psrc:schema/external-strategy-admission.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Hash-bound review record for an externally authored strategy package.",
+  "properties": {
+    "approved_for_runtime_validation": {
+      "title": "Approved For Runtime Validation",
+      "type": "boolean"
+    },
+    "audit": {
+      "$ref": "#/$defs/AgentAuditReport"
+    },
+    "contract_version": {
+      "default": "1.1.0",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "implementation_mode": {
+      "const": "external_implementation",
+      "default": "external_implementation",
+      "title": "Implementation Mode",
+      "type": "string"
+    },
+    "paper_document_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Paper Document Sha256",
+      "type": "string"
+    },
+    "paper_source_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Paper Source Sha256",
+      "type": "string"
+    },
+    "paper_spec": {
+      "$ref": "#/$defs/PaperStrategySpec"
+    },
+    "paper_spec_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Paper Spec Sha256",
+      "type": "string"
+    },
+    "runtime_authority_granted": {
+      "const": false,
+      "default": false,
+      "title": "Runtime Authority Granted",
+      "type": "boolean"
+    },
+    "strategy_code_evidence_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Strategy Code Evidence Sha256",
+      "type": "string"
+    },
+    "strategy_manifest_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Strategy Manifest Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "approved_for_runtime_validation",
+    "audit",
+    "paper_document_sha256",
+    "paper_source_sha256",
+    "paper_spec",
+    "paper_spec_sha256",
+    "strategy_code_evidence_sha256",
+    "strategy_manifest_sha256"
+  ],
+  "title": "ExternalStrategyAdmission",
+  "type": "object"
+}

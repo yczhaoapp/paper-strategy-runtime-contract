@@ -1,0 +1,56 @@
+{
+  "contract_version": "1.1.0",
+  "dataset_id": "public.plotly.aapl-2015-2017.logistic-test",
+  "dataset_version": "1.0.0",
+  "extensions": {
+    "org.singularityx.data-provenance": {
+      "dataset_id": "public.plotly.aapl-2015-2017",
+      "empirical_results_reproduced": false,
+      "instrument_id": "PUBLIC.AAPL",
+      "license_name": "MIT repository license; upstream market-data origin not separately stated",
+      "license_sha256": "842e29495d9d99eef9b6d5f2e442785cdd0ab39d81792b2c6302d17bb0cc6030",
+      "license_url": "https://github.com/plotly/datasets/blob/master/LICENSE",
+      "origin": "public_historical",
+      "original_paper_dataset": false,
+      "period_end": "2017-02-16",
+      "period_start": "2015-02-17",
+      "provenance_record_sha256": "0dd7da6d0d876495d3a065db08e8b004a3cc80601942139bd664c6d50216b740",
+      "record_count": 506,
+      "source_sha256": "24c7604edfd5afe862ddb9f9535e2fd7351f43711bfc442bca52055e15e37bcd",
+      "source_url": "https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv",
+      "transforms": [
+        "Parse published Date and AAPL OHLCV columns without price adjustment",
+        "Set availability to the next UTC day to prevent same-bar look-ahead"
+      ],
+      "version": "1.0"
+    }
+  },
+  "generated_at": "2026-01-01T00:00:00Z",
+  "public_or_synthetic": true,
+  "streams": [
+    {
+      "data_sha256": "2708326df26a85ab68d420790ebc7b0c9f24b70faae9bdf5d84893d5d65f3e6f",
+      "fields": [
+        "close",
+        "high",
+        "low",
+        "open",
+        "volume"
+      ],
+      "kind": "bar",
+      "record_count": 106,
+      "schema_sha256": "f58dbc46db0cc5c40fc318557cb937277e01a3d9fa0ab04c10b074a18893146c",
+      "stream_id": "bars",
+      "symbols": [
+        "PUBLIC.AAPL"
+      ],
+      "timeframe": {
+        "alignment": "epoch",
+        "calendar": "24/7",
+        "interval": "P1D",
+        "mode": "bar",
+        "timezone": "UTC"
+      }
+    }
+  ]
+}

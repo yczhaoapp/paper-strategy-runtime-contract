@@ -1,0 +1,44 @@
+{
+  "version": "1.0",
+  "paper_id": "avellaneda2008",
+  "title": "High-frequency trading in a limit order book",
+  "source_url": "https://math.nyu.edu/inmemoriam/avellaneda/HighFrequencyTrading.pdf",
+  "source_sha256": "71fa9268339ae82365171caa7416833b3a5d584f05e4f4c087c4ae72d7121a8d",
+  "algorithm": "avellaneda_stoikov",
+  "strategy_kind": "rule",
+  "parameters": {
+    "gamma": 0.1,
+    "sigma": 0.2,
+    "k": 40.0,
+    "tick": 0.01,
+    "inventory_limit": 4,
+    "horizon_events": 80
+  },
+  "claims": [
+    {
+      "claim_id": "avellaneda2008.claim1",
+      "page": 3,
+      "anchor": "reservation or",
+      "locator": "Equation (8), printed p.219",
+      "interpretation": "Reservation midprice shifts by -q*gamma*sigma^2*(T-t)."
+    },
+    {
+      "claim_id": "avellaneda2008.claim2",
+      "page": 5,
+      "anchor": "bid/ask spread",
+      "locator": "Equations (29)-(30), printed p.221",
+      "interpretation": "Symmetric exponential arrival approximation gives spread gamma*sigma^2*(T-t)+2/gamma*log(1+gamma/k)."
+    }
+  ],
+  "assumptions": [
+    "Normalized unit horizon; gamma, sigma and k are explicit experiment inputs, not fitted values.",
+    "Quotes rounded outward to the declared 0.01 tick; one share per quote, inventory cap 4."
+  ],
+  "deviations": [
+    "Implements the approximate formulas (29)-(30), not the nonlinear HJB solution.",
+    "Uses next-event deterministic L1 crossing, not the paper Poisson arrival experiment.",
+    "Synthetic quotes; no claim to replicate published PnL or calibrated market parameters."
+  ],
+  "fidelity": "algorithm_reproduction",
+  "mapping_review": "Repository author mapping checked against cited source pages; anchors prove provenance, mathematical tests check implementation; external review remains independent."
+}

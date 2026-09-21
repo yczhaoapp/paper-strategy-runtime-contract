@@ -1,0 +1,400 @@
+{
+  "$defs": {
+    "CancelOrder": {
+      "additionalProperties": false,
+      "properties": {
+        "client_order_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Client Order Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "cancel_order",
+          "default": "cancel_order",
+          "title": "Kind",
+          "type": "string"
+        },
+        "reason_code": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Reason Code",
+          "type": "string"
+        }
+      },
+      "required": [
+        "client_order_id",
+        "reason_code"
+      ],
+      "title": "CancelOrder",
+      "type": "object"
+    },
+    "NoOp": {
+      "additionalProperties": false,
+      "properties": {
+        "explanation": {
+          "title": "Explanation",
+          "type": "string"
+        },
+        "kind": {
+          "const": "no_op",
+          "default": "no_op",
+          "title": "Kind",
+          "type": "string"
+        },
+        "reason_code": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Reason Code",
+          "type": "string"
+        }
+      },
+      "required": [
+        "explanation",
+        "reason_code"
+      ],
+      "title": "NoOp",
+      "type": "object"
+    },
+    "Prediction": {
+      "additionalProperties": false,
+      "properties": {
+        "horizon": {
+          "title": "Horizon",
+          "type": "string"
+        },
+        "instrument_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "prediction",
+          "default": "prediction",
+          "title": "Kind",
+          "type": "string"
+        },
+        "model_artifact_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Model Artifact Id",
+          "type": "string"
+        },
+        "reason_code": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "horizon",
+        "instrument_id",
+        "model_artifact_id",
+        "reason_code",
+        "value"
+      ],
+      "title": "Prediction",
+      "type": "object"
+    },
+    "ReplaceOrder": {
+      "additionalProperties": false,
+      "properties": {
+        "client_order_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Client Order Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "replace_order",
+          "default": "replace_order",
+          "title": "Kind",
+          "type": "string"
+        },
+        "new_limit_price": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "New Limit Price"
+        },
+        "new_quantity": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "New Quantity"
+        },
+        "reason_code": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Reason Code",
+          "type": "string"
+        }
+      },
+      "required": [
+        "client_order_id",
+        "reason_code"
+      ],
+      "title": "ReplaceOrder",
+      "type": "object"
+    },
+    "SubmitOrder": {
+      "additionalProperties": false,
+      "properties": {
+        "client_order_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Client Order Id",
+          "type": "string"
+        },
+        "instrument_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "submit_order",
+          "default": "submit_order",
+          "title": "Kind",
+          "type": "string"
+        },
+        "limit_price": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Limit Price"
+        },
+        "order_type": {
+          "enum": [
+            "limit",
+            "market",
+            "stop",
+            "stop_limit"
+          ],
+          "title": "Order Type",
+          "type": "string"
+        },
+        "quantity": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Quantity"
+        },
+        "reason_code": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "side": {
+          "enum": [
+            "buy",
+            "sell"
+          ],
+          "title": "Side",
+          "type": "string"
+        },
+        "stop_price": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stop Price"
+        },
+        "time_in_force": {
+          "default": "day",
+          "enum": [
+            "day",
+            "fok",
+            "gtc",
+            "ioc"
+          ],
+          "title": "Time In Force",
+          "type": "string"
+        }
+      },
+      "required": [
+        "client_order_id",
+        "instrument_id",
+        "order_type",
+        "quantity",
+        "reason_code",
+        "side"
+      ],
+      "title": "SubmitOrder",
+      "type": "object"
+    },
+    "TargetPosition": {
+      "additionalProperties": false,
+      "properties": {
+        "instrument_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "target_position",
+          "default": "target_position",
+          "title": "Kind",
+          "type": "string"
+        },
+        "quantity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Quantity"
+        },
+        "reason_code": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Reason Code",
+          "type": "string"
+        }
+      },
+      "required": [
+        "instrument_id",
+        "quantity",
+        "reason_code"
+      ],
+      "title": "TargetPosition",
+      "type": "object"
+    },
+    "TargetWeight": {
+      "additionalProperties": false,
+      "properties": {
+        "instrument_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "target_weight",
+          "default": "target_weight",
+          "title": "Kind",
+          "type": "string"
+        },
+        "reason_code": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "weight": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Weight"
+        }
+      },
+      "required": [
+        "instrument_id",
+        "reason_code",
+        "weight"
+      ],
+      "title": "TargetWeight",
+      "type": "object"
+    }
+  },
+  "$id": "urn:psrc:schema/action.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Schema-export wrapper for the discriminated canonical action union.",
+  "discriminator": {
+    "mapping": {
+      "cancel_order": "#/$defs/CancelOrder",
+      "no_op": "#/$defs/NoOp",
+      "prediction": "#/$defs/Prediction",
+      "replace_order": "#/$defs/ReplaceOrder",
+      "submit_order": "#/$defs/SubmitOrder",
+      "target_position": "#/$defs/TargetPosition",
+      "target_weight": "#/$defs/TargetWeight"
+    },
+    "propertyName": "kind"
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/NoOp"
+    },
+    {
+      "$ref": "#/$defs/Prediction"
+    },
+    {
+      "$ref": "#/$defs/TargetPosition"
+    },
+    {
+      "$ref": "#/$defs/TargetWeight"
+    },
+    {
+      "$ref": "#/$defs/SubmitOrder"
+    },
+    {
+      "$ref": "#/$defs/CancelOrder"
+    },
+    {
+      "$ref": "#/$defs/ReplaceOrder"
+    }
+  ],
+  "title": "ActionEnvelope"
+}

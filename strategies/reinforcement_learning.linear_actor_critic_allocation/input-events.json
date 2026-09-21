@@ -1,0 +1,1804 @@
+[
+  {
+    "available_time": "2016-09-17T00:00:00Z",
+    "event_id": "public.aapl:400",
+    "event_time": "2016-09-16T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "114.919998",
+      "high": "116.129997",
+      "kind": "bar",
+      "low": "114.040001",
+      "open": "115.120003",
+      "volume": "79886900"
+    },
+    "receive_time": "2016-09-17T00:00:00Z",
+    "sequence": 400,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-09-20T00:00:00Z",
+    "event_id": "public.aapl:401",
+    "event_time": "2016-09-19T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "113.580002",
+      "high": "116.18",
+      "kind": "bar",
+      "low": "113.25",
+      "open": "115.190002",
+      "volume": "47023000"
+    },
+    "receive_time": "2016-09-20T00:00:00Z",
+    "sequence": 401,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-09-21T00:00:00Z",
+    "event_id": "public.aapl:402",
+    "event_time": "2016-09-20T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "113.57",
+      "high": "114.120003",
+      "kind": "bar",
+      "low": "112.510002",
+      "open": "113.050003",
+      "volume": "34514300"
+    },
+    "receive_time": "2016-09-21T00:00:00Z",
+    "sequence": 402,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-09-22T00:00:00Z",
+    "event_id": "public.aapl:403",
+    "event_time": "2016-09-21T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "113.550003",
+      "high": "113.989998",
+      "kind": "bar",
+      "low": "112.440002",
+      "open": "113.849998",
+      "volume": "36003200"
+    },
+    "receive_time": "2016-09-22T00:00:00Z",
+    "sequence": 403,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-09-23T00:00:00Z",
+    "event_id": "public.aapl:404",
+    "event_time": "2016-09-22T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "114.620003",
+      "high": "114.940002",
+      "kind": "bar",
+      "low": "114",
+      "open": "114.349998",
+      "volume": "31074000"
+    },
+    "receive_time": "2016-09-23T00:00:00Z",
+    "sequence": 404,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-09-24T00:00:00Z",
+    "event_id": "public.aapl:405",
+    "event_time": "2016-09-23T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "112.709999",
+      "high": "114.790001",
+      "kind": "bar",
+      "low": "111.550003",
+      "open": "114.419998",
+      "volume": "52481200"
+    },
+    "receive_time": "2016-09-24T00:00:00Z",
+    "sequence": 405,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-09-27T00:00:00Z",
+    "event_id": "public.aapl:406",
+    "event_time": "2016-09-26T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "112.879997",
+      "high": "113.389999",
+      "kind": "bar",
+      "low": "111.550003",
+      "open": "111.639999",
+      "volume": "29869400"
+    },
+    "receive_time": "2016-09-27T00:00:00Z",
+    "sequence": 406,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-09-28T00:00:00Z",
+    "event_id": "public.aapl:407",
+    "event_time": "2016-09-27T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "113.089996",
+      "high": "113.18",
+      "kind": "bar",
+      "low": "112.339996",
+      "open": "113",
+      "volume": "24607400"
+    },
+    "receive_time": "2016-09-28T00:00:00Z",
+    "sequence": 407,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-09-29T00:00:00Z",
+    "event_id": "public.aapl:408",
+    "event_time": "2016-09-28T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "113.949997",
+      "high": "114.639999",
+      "kind": "bar",
+      "low": "113.43",
+      "open": "113.690002",
+      "volume": "29641100"
+    },
+    "receive_time": "2016-09-29T00:00:00Z",
+    "sequence": 408,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-09-30T00:00:00Z",
+    "event_id": "public.aapl:409",
+    "event_time": "2016-09-29T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "112.18",
+      "high": "113.800003",
+      "kind": "bar",
+      "low": "111.800003",
+      "open": "113.160004",
+      "volume": "35887000"
+    },
+    "receive_time": "2016-09-30T00:00:00Z",
+    "sequence": 409,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-01T00:00:00Z",
+    "event_id": "public.aapl:410",
+    "event_time": "2016-09-30T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "113.050003",
+      "high": "113.370003",
+      "kind": "bar",
+      "low": "111.800003",
+      "open": "112.459999",
+      "volume": "36379100"
+    },
+    "receive_time": "2016-10-01T00:00:00Z",
+    "sequence": 410,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-04T00:00:00Z",
+    "event_id": "public.aapl:411",
+    "event_time": "2016-10-03T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "112.519997",
+      "high": "113.050003",
+      "kind": "bar",
+      "low": "112.279999",
+      "open": "112.709999",
+      "volume": "21701800"
+    },
+    "receive_time": "2016-10-04T00:00:00Z",
+    "sequence": 411,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-05T00:00:00Z",
+    "event_id": "public.aapl:412",
+    "event_time": "2016-10-04T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "113",
+      "high": "114.309998",
+      "kind": "bar",
+      "low": "112.629997",
+      "open": "113.059998",
+      "volume": "29736800"
+    },
+    "receive_time": "2016-10-05T00:00:00Z",
+    "sequence": 412,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-06T00:00:00Z",
+    "event_id": "public.aapl:413",
+    "event_time": "2016-10-05T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "113.050003",
+      "high": "113.660004",
+      "kind": "bar",
+      "low": "112.690002",
+      "open": "113.400002",
+      "volume": "21453100"
+    },
+    "receive_time": "2016-10-06T00:00:00Z",
+    "sequence": 413,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-07T00:00:00Z",
+    "event_id": "public.aapl:414",
+    "event_time": "2016-10-06T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "113.889999",
+      "high": "114.339996",
+      "kind": "bar",
+      "low": "113.129997",
+      "open": "113.699997",
+      "volume": "28779300"
+    },
+    "receive_time": "2016-10-07T00:00:00Z",
+    "sequence": 414,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-08T00:00:00Z",
+    "event_id": "public.aapl:415",
+    "event_time": "2016-10-07T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "114.059998",
+      "high": "114.559998",
+      "kind": "bar",
+      "low": "113.510002",
+      "open": "114.309998",
+      "volume": "24358400"
+    },
+    "receive_time": "2016-10-08T00:00:00Z",
+    "sequence": 415,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-11T00:00:00Z",
+    "event_id": "public.aapl:416",
+    "event_time": "2016-10-10T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "116.050003",
+      "high": "116.75",
+      "kind": "bar",
+      "low": "114.720001",
+      "open": "115.019997",
+      "volume": "36236000"
+    },
+    "receive_time": "2016-10-11T00:00:00Z",
+    "sequence": 416,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-12T00:00:00Z",
+    "event_id": "public.aapl:417",
+    "event_time": "2016-10-11T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "116.300003",
+      "high": "118.690002",
+      "kind": "bar",
+      "low": "116.199997",
+      "open": "117.699997",
+      "volume": "64041000"
+    },
+    "receive_time": "2016-10-12T00:00:00Z",
+    "sequence": 417,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-13T00:00:00Z",
+    "event_id": "public.aapl:418",
+    "event_time": "2016-10-12T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "117.339996",
+      "high": "117.980003",
+      "kind": "bar",
+      "low": "116.75",
+      "open": "117.349998",
+      "volume": "37586800"
+    },
+    "receive_time": "2016-10-13T00:00:00Z",
+    "sequence": 418,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-14T00:00:00Z",
+    "event_id": "public.aapl:419",
+    "event_time": "2016-10-13T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "116.980003",
+      "high": "117.440002",
+      "kind": "bar",
+      "low": "115.720001",
+      "open": "116.790001",
+      "volume": "35192400"
+    },
+    "receive_time": "2016-10-14T00:00:00Z",
+    "sequence": 419,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-15T00:00:00Z",
+    "event_id": "public.aapl:420",
+    "event_time": "2016-10-14T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "117.629997",
+      "high": "118.169998",
+      "kind": "bar",
+      "low": "117.129997",
+      "open": "117.879997",
+      "volume": "35652200"
+    },
+    "receive_time": "2016-10-15T00:00:00Z",
+    "sequence": 420,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-18T00:00:00Z",
+    "event_id": "public.aapl:421",
+    "event_time": "2016-10-17T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "117.550003",
+      "high": "117.839996",
+      "kind": "bar",
+      "low": "116.779999",
+      "open": "117.330002",
+      "volume": "23624900"
+    },
+    "receive_time": "2016-10-18T00:00:00Z",
+    "sequence": 421,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-19T00:00:00Z",
+    "event_id": "public.aapl:422",
+    "event_time": "2016-10-18T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "117.470001",
+      "high": "118.209999",
+      "kind": "bar",
+      "low": "117.449997",
+      "open": "118.18",
+      "volume": "24553500"
+    },
+    "receive_time": "2016-10-19T00:00:00Z",
+    "sequence": 422,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-20T00:00:00Z",
+    "event_id": "public.aapl:423",
+    "event_time": "2016-10-19T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "117.120003",
+      "high": "117.760002",
+      "kind": "bar",
+      "low": "113.800003",
+      "open": "117.25",
+      "volume": "20034600"
+    },
+    "receive_time": "2016-10-20T00:00:00Z",
+    "sequence": 423,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-21T00:00:00Z",
+    "event_id": "public.aapl:424",
+    "event_time": "2016-10-20T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "117.059998",
+      "high": "117.379997",
+      "kind": "bar",
+      "low": "116.330002",
+      "open": "116.860001",
+      "volume": "24125800"
+    },
+    "receive_time": "2016-10-21T00:00:00Z",
+    "sequence": 424,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-22T00:00:00Z",
+    "event_id": "public.aapl:425",
+    "event_time": "2016-10-21T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "116.599998",
+      "high": "116.910004",
+      "kind": "bar",
+      "low": "116.279999",
+      "open": "116.809998",
+      "volume": "23192700"
+    },
+    "receive_time": "2016-10-22T00:00:00Z",
+    "sequence": 425,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-25T00:00:00Z",
+    "event_id": "public.aapl:426",
+    "event_time": "2016-10-24T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "117.650002",
+      "high": "117.739998",
+      "kind": "bar",
+      "low": "117",
+      "open": "117.099998",
+      "volume": "23538700"
+    },
+    "receive_time": "2016-10-25T00:00:00Z",
+    "sequence": 426,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-26T00:00:00Z",
+    "event_id": "public.aapl:427",
+    "event_time": "2016-10-25T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "118.25",
+      "high": "118.360001",
+      "kind": "bar",
+      "low": "117.309998",
+      "open": "117.949997",
+      "volume": "48129000"
+    },
+    "receive_time": "2016-10-26T00:00:00Z",
+    "sequence": 427,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-27T00:00:00Z",
+    "event_id": "public.aapl:428",
+    "event_time": "2016-10-26T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "115.589996",
+      "high": "115.699997",
+      "kind": "bar",
+      "low": "113.309998",
+      "open": "114.309998",
+      "volume": "66134200"
+    },
+    "receive_time": "2016-10-27T00:00:00Z",
+    "sequence": 428,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-28T00:00:00Z",
+    "event_id": "public.aapl:429",
+    "event_time": "2016-10-27T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "114.480003",
+      "high": "115.860001",
+      "kind": "bar",
+      "low": "114.099998",
+      "open": "115.389999",
+      "volume": "34562000"
+    },
+    "receive_time": "2016-10-28T00:00:00Z",
+    "sequence": 429,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-10-29T00:00:00Z",
+    "event_id": "public.aapl:430",
+    "event_time": "2016-10-28T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "113.720001",
+      "high": "115.209999",
+      "kind": "bar",
+      "low": "113.449997",
+      "open": "113.870003",
+      "volume": "37861700"
+    },
+    "receive_time": "2016-10-29T00:00:00Z",
+    "sequence": 430,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-01T00:00:00Z",
+    "event_id": "public.aapl:431",
+    "event_time": "2016-10-31T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "113.540001",
+      "high": "114.230003",
+      "kind": "bar",
+      "low": "113.199997",
+      "open": "113.650002",
+      "volume": "26419400"
+    },
+    "receive_time": "2016-11-01T00:00:00Z",
+    "sequence": 431,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-02T00:00:00Z",
+    "event_id": "public.aapl:432",
+    "event_time": "2016-11-01T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "111.489998",
+      "high": "113.769997",
+      "kind": "bar",
+      "low": "110.529999",
+      "open": "113.459999",
+      "volume": "43825800"
+    },
+    "receive_time": "2016-11-02T00:00:00Z",
+    "sequence": 432,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-03T00:00:00Z",
+    "event_id": "public.aapl:433",
+    "event_time": "2016-11-02T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "111.589996",
+      "high": "112.349998",
+      "kind": "bar",
+      "low": "111.230003",
+      "open": "111.400002",
+      "volume": "28331700"
+    },
+    "receive_time": "2016-11-03T00:00:00Z",
+    "sequence": 433,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-04T00:00:00Z",
+    "event_id": "public.aapl:434",
+    "event_time": "2016-11-03T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "109.830002",
+      "high": "111.459999",
+      "kind": "bar",
+      "low": "109.550003",
+      "open": "110.980003",
+      "volume": "26932600"
+    },
+    "receive_time": "2016-11-04T00:00:00Z",
+    "sequence": 434,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-05T00:00:00Z",
+    "event_id": "public.aapl:435",
+    "event_time": "2016-11-04T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "108.839996",
+      "high": "110.25",
+      "kind": "bar",
+      "low": "108.110001",
+      "open": "108.529999",
+      "volume": "30837000"
+    },
+    "receive_time": "2016-11-05T00:00:00Z",
+    "sequence": 435,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-08T00:00:00Z",
+    "event_id": "public.aapl:436",
+    "event_time": "2016-11-07T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "110.410004",
+      "high": "110.510002",
+      "kind": "bar",
+      "low": "109.459999",
+      "open": "110.080002",
+      "volume": "32560000"
+    },
+    "receive_time": "2016-11-08T00:00:00Z",
+    "sequence": 436,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-09T00:00:00Z",
+    "event_id": "public.aapl:437",
+    "event_time": "2016-11-08T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "111.059998",
+      "high": "111.720001",
+      "kind": "bar",
+      "low": "109.699997",
+      "open": "110.309998",
+      "volume": "24054500"
+    },
+    "receive_time": "2016-11-09T00:00:00Z",
+    "sequence": 437,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-10T00:00:00Z",
+    "event_id": "public.aapl:438",
+    "event_time": "2016-11-09T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "110.879997",
+      "high": "111.32",
+      "kind": "bar",
+      "low": "108.050003",
+      "open": "109.879997",
+      "volume": "59176400"
+    },
+    "receive_time": "2016-11-10T00:00:00Z",
+    "sequence": 438,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-11T00:00:00Z",
+    "event_id": "public.aapl:439",
+    "event_time": "2016-11-10T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "107.790001",
+      "high": "111.089996",
+      "kind": "bar",
+      "low": "105.830002",
+      "open": "111.089996",
+      "volume": "57134500"
+    },
+    "receive_time": "2016-11-11T00:00:00Z",
+    "sequence": 439,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-12T00:00:00Z",
+    "event_id": "public.aapl:440",
+    "event_time": "2016-11-11T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "108.43",
+      "high": "108.870003",
+      "kind": "bar",
+      "low": "106.550003",
+      "open": "107.120003",
+      "volume": "34143900"
+    },
+    "receive_time": "2016-11-12T00:00:00Z",
+    "sequence": 440,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-15T00:00:00Z",
+    "event_id": "public.aapl:441",
+    "event_time": "2016-11-14T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "105.709999",
+      "high": "107.809998",
+      "kind": "bar",
+      "low": "104.080002",
+      "open": "107.709999",
+      "volume": "51175500"
+    },
+    "receive_time": "2016-11-15T00:00:00Z",
+    "sequence": 441,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-16T00:00:00Z",
+    "event_id": "public.aapl:442",
+    "event_time": "2016-11-15T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "107.110001",
+      "high": "107.68",
+      "kind": "bar",
+      "low": "106.160004",
+      "open": "106.57",
+      "volume": "32264500"
+    },
+    "receive_time": "2016-11-16T00:00:00Z",
+    "sequence": 442,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-17T00:00:00Z",
+    "event_id": "public.aapl:443",
+    "event_time": "2016-11-16T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "109.989998",
+      "high": "110.230003",
+      "kind": "bar",
+      "low": "106.599998",
+      "open": "106.699997",
+      "volume": "58840500"
+    },
+    "receive_time": "2016-11-17T00:00:00Z",
+    "sequence": 443,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-18T00:00:00Z",
+    "event_id": "public.aapl:444",
+    "event_time": "2016-11-17T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "109.949997",
+      "high": "110.349998",
+      "kind": "bar",
+      "low": "108.830002",
+      "open": "109.809998",
+      "volume": "27632000"
+    },
+    "receive_time": "2016-11-18T00:00:00Z",
+    "sequence": 444,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-19T00:00:00Z",
+    "event_id": "public.aapl:445",
+    "event_time": "2016-11-18T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "110.059998",
+      "high": "110.540001",
+      "kind": "bar",
+      "low": "109.660004",
+      "open": "109.720001",
+      "volume": "28428900"
+    },
+    "receive_time": "2016-11-19T00:00:00Z",
+    "sequence": 445,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-22T00:00:00Z",
+    "event_id": "public.aapl:446",
+    "event_time": "2016-11-21T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "111.730003",
+      "high": "111.989998",
+      "kind": "bar",
+      "low": "110.010002",
+      "open": "110.120003",
+      "volume": "29264600"
+    },
+    "receive_time": "2016-11-22T00:00:00Z",
+    "sequence": 446,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-23T00:00:00Z",
+    "event_id": "public.aapl:447",
+    "event_time": "2016-11-22T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "111.800003",
+      "high": "112.419998",
+      "kind": "bar",
+      "low": "111.400002",
+      "open": "111.949997",
+      "volume": "25965500"
+    },
+    "receive_time": "2016-11-23T00:00:00Z",
+    "sequence": 447,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-24T00:00:00Z",
+    "event_id": "public.aapl:448",
+    "event_time": "2016-11-23T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "111.230003",
+      "high": "111.510002",
+      "kind": "bar",
+      "low": "110.330002",
+      "open": "111.360001",
+      "volume": "27426400"
+    },
+    "receive_time": "2016-11-24T00:00:00Z",
+    "sequence": 448,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-26T00:00:00Z",
+    "event_id": "public.aapl:449",
+    "event_time": "2016-11-25T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "111.790001",
+      "high": "111.870003",
+      "kind": "bar",
+      "low": "110.949997",
+      "open": "111.129997",
+      "volume": "11475900"
+    },
+    "receive_time": "2016-11-26T00:00:00Z",
+    "sequence": 449,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-29T00:00:00Z",
+    "event_id": "public.aapl:450",
+    "event_time": "2016-11-28T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "111.57",
+      "high": "112.470001",
+      "kind": "bar",
+      "low": "111.389999",
+      "open": "111.43",
+      "volume": "27194000"
+    },
+    "receive_time": "2016-11-29T00:00:00Z",
+    "sequence": 450,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-11-30T00:00:00Z",
+    "event_id": "public.aapl:451",
+    "event_time": "2016-11-29T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "111.459999",
+      "high": "112.029999",
+      "kind": "bar",
+      "low": "110.07",
+      "open": "110.779999",
+      "volume": "28528800"
+    },
+    "receive_time": "2016-11-30T00:00:00Z",
+    "sequence": 451,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-01T00:00:00Z",
+    "event_id": "public.aapl:452",
+    "event_time": "2016-11-30T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "110.519997",
+      "high": "112.199997",
+      "kind": "bar",
+      "low": "110.269997",
+      "open": "111.599998",
+      "volume": "36162300"
+    },
+    "receive_time": "2016-12-01T00:00:00Z",
+    "sequence": 452,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-02T00:00:00Z",
+    "event_id": "public.aapl:453",
+    "event_time": "2016-12-01T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "109.489998",
+      "high": "110.940002",
+      "kind": "bar",
+      "low": "109.029999",
+      "open": "110.370003",
+      "volume": "37086900"
+    },
+    "receive_time": "2016-12-02T00:00:00Z",
+    "sequence": 453,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-03T00:00:00Z",
+    "event_id": "public.aapl:454",
+    "event_time": "2016-12-02T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "109.900002",
+      "high": "110.089996",
+      "kind": "bar",
+      "low": "108.849998",
+      "open": "109.169998",
+      "volume": "26528000"
+    },
+    "receive_time": "2016-12-03T00:00:00Z",
+    "sequence": 454,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-06T00:00:00Z",
+    "event_id": "public.aapl:455",
+    "event_time": "2016-12-05T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "109.110001",
+      "high": "110.029999",
+      "kind": "bar",
+      "low": "108.25",
+      "open": "110",
+      "volume": "34324500"
+    },
+    "receive_time": "2016-12-06T00:00:00Z",
+    "sequence": 455,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-07T00:00:00Z",
+    "event_id": "public.aapl:456",
+    "event_time": "2016-12-06T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "109.949997",
+      "high": "110.360001",
+      "kind": "bar",
+      "low": "109.190002",
+      "open": "109.5",
+      "volume": "26195500"
+    },
+    "receive_time": "2016-12-07T00:00:00Z",
+    "sequence": 456,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-08T00:00:00Z",
+    "event_id": "public.aapl:457",
+    "event_time": "2016-12-07T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "111.029999",
+      "high": "111.190002",
+      "kind": "bar",
+      "low": "109.160004",
+      "open": "109.260002",
+      "volume": "29998700"
+    },
+    "receive_time": "2016-12-08T00:00:00Z",
+    "sequence": 457,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-09T00:00:00Z",
+    "event_id": "public.aapl:458",
+    "event_time": "2016-12-08T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "112.120003",
+      "high": "112.43",
+      "kind": "bar",
+      "low": "110.599998",
+      "open": "110.860001",
+      "volume": "27068300"
+    },
+    "receive_time": "2016-12-09T00:00:00Z",
+    "sequence": 458,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-10T00:00:00Z",
+    "event_id": "public.aapl:459",
+    "event_time": "2016-12-09T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "113.949997",
+      "high": "114.699997",
+      "kind": "bar",
+      "low": "112.309998",
+      "open": "112.309998",
+      "volume": "34402600"
+    },
+    "receive_time": "2016-12-10T00:00:00Z",
+    "sequence": 459,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-13T00:00:00Z",
+    "event_id": "public.aapl:460",
+    "event_time": "2016-12-12T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "113.300003",
+      "high": "115",
+      "kind": "bar",
+      "low": "112.489998",
+      "open": "113.290001",
+      "volume": "26374400"
+    },
+    "receive_time": "2016-12-13T00:00:00Z",
+    "sequence": 460,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-14T00:00:00Z",
+    "event_id": "public.aapl:461",
+    "event_time": "2016-12-13T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "115.190002",
+      "high": "115.919998",
+      "kind": "bar",
+      "low": "113.75",
+      "open": "113.839996",
+      "volume": "43733800"
+    },
+    "receive_time": "2016-12-14T00:00:00Z",
+    "sequence": 461,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-15T00:00:00Z",
+    "event_id": "public.aapl:462",
+    "event_time": "2016-12-14T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "115.190002",
+      "high": "116.199997",
+      "kind": "bar",
+      "low": "114.980003",
+      "open": "115.040001",
+      "volume": "34031800"
+    },
+    "receive_time": "2016-12-15T00:00:00Z",
+    "sequence": 462,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-16T00:00:00Z",
+    "event_id": "public.aapl:463",
+    "event_time": "2016-12-15T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "115.82",
+      "high": "116.730003",
+      "kind": "bar",
+      "low": "115.230003",
+      "open": "115.379997",
+      "volume": "46524500"
+    },
+    "receive_time": "2016-12-16T00:00:00Z",
+    "sequence": 463,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-17T00:00:00Z",
+    "event_id": "public.aapl:464",
+    "event_time": "2016-12-16T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "115.970001",
+      "high": "116.5",
+      "kind": "bar",
+      "low": "115.650002",
+      "open": "116.470001",
+      "volume": "44351100"
+    },
+    "receive_time": "2016-12-17T00:00:00Z",
+    "sequence": 464,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-20T00:00:00Z",
+    "event_id": "public.aapl:465",
+    "event_time": "2016-12-19T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "116.639999",
+      "high": "117.379997",
+      "kind": "bar",
+      "low": "115.75",
+      "open": "115.800003",
+      "volume": "27779400"
+    },
+    "receive_time": "2016-12-20T00:00:00Z",
+    "sequence": 465,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-21T00:00:00Z",
+    "event_id": "public.aapl:466",
+    "event_time": "2016-12-20T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "116.949997",
+      "high": "117.5",
+      "kind": "bar",
+      "low": "116.68",
+      "open": "116.739998",
+      "volume": "21425000"
+    },
+    "receive_time": "2016-12-21T00:00:00Z",
+    "sequence": 466,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-22T00:00:00Z",
+    "event_id": "public.aapl:467",
+    "event_time": "2016-12-21T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "117.059998",
+      "high": "117.400002",
+      "kind": "bar",
+      "low": "116.779999",
+      "open": "116.800003",
+      "volume": "23783200"
+    },
+    "receive_time": "2016-12-22T00:00:00Z",
+    "sequence": 467,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-23T00:00:00Z",
+    "event_id": "public.aapl:468",
+    "event_time": "2016-12-22T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "116.290001",
+      "high": "116.510002",
+      "kind": "bar",
+      "low": "115.639999",
+      "open": "116.349998",
+      "volume": "26085900"
+    },
+    "receive_time": "2016-12-23T00:00:00Z",
+    "sequence": 468,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-24T00:00:00Z",
+    "event_id": "public.aapl:469",
+    "event_time": "2016-12-23T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "116.519997",
+      "high": "116.519997",
+      "kind": "bar",
+      "low": "115.589996",
+      "open": "115.589996",
+      "volume": "14249500"
+    },
+    "receive_time": "2016-12-24T00:00:00Z",
+    "sequence": 469,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-28T00:00:00Z",
+    "event_id": "public.aapl:470",
+    "event_time": "2016-12-27T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "117.260002",
+      "high": "117.800003",
+      "kind": "bar",
+      "low": "116.489998",
+      "open": "116.519997",
+      "volume": "18296900"
+    },
+    "receive_time": "2016-12-28T00:00:00Z",
+    "sequence": 470,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-29T00:00:00Z",
+    "event_id": "public.aapl:471",
+    "event_time": "2016-12-28T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "116.760002",
+      "high": "118.019997",
+      "kind": "bar",
+      "low": "116.199997",
+      "open": "117.519997",
+      "volume": "20905900"
+    },
+    "receive_time": "2016-12-29T00:00:00Z",
+    "sequence": 471,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-30T00:00:00Z",
+    "event_id": "public.aapl:472",
+    "event_time": "2016-12-29T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "116.730003",
+      "high": "117.110001",
+      "kind": "bar",
+      "low": "116.400002",
+      "open": "116.449997",
+      "volume": "15039500"
+    },
+    "receive_time": "2016-12-30T00:00:00Z",
+    "sequence": 472,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2016-12-31T00:00:00Z",
+    "event_id": "public.aapl:473",
+    "event_time": "2016-12-30T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "115.82",
+      "high": "117.199997",
+      "kind": "bar",
+      "low": "115.43",
+      "open": "116.650002",
+      "volume": "30586300"
+    },
+    "receive_time": "2016-12-31T00:00:00Z",
+    "sequence": 473,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-04T00:00:00Z",
+    "event_id": "public.aapl:474",
+    "event_time": "2017-01-03T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "116.150002",
+      "high": "116.330002",
+      "kind": "bar",
+      "low": "114.760002",
+      "open": "115.800003",
+      "volume": "28781900"
+    },
+    "receive_time": "2017-01-04T00:00:00Z",
+    "sequence": 474,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-05T00:00:00Z",
+    "event_id": "public.aapl:475",
+    "event_time": "2017-01-04T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "116.019997",
+      "high": "116.510002",
+      "kind": "bar",
+      "low": "115.75",
+      "open": "115.849998",
+      "volume": "21118100"
+    },
+    "receive_time": "2017-01-05T00:00:00Z",
+    "sequence": 475,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-06T00:00:00Z",
+    "event_id": "public.aapl:476",
+    "event_time": "2017-01-05T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "116.610001",
+      "high": "116.860001",
+      "kind": "bar",
+      "low": "115.809998",
+      "open": "115.919998",
+      "volume": "22193600"
+    },
+    "receive_time": "2017-01-06T00:00:00Z",
+    "sequence": 476,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-07T00:00:00Z",
+    "event_id": "public.aapl:477",
+    "event_time": "2017-01-06T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "117.910004",
+      "high": "118.160004",
+      "kind": "bar",
+      "low": "116.470001",
+      "open": "116.779999",
+      "volume": "31751900"
+    },
+    "receive_time": "2017-01-07T00:00:00Z",
+    "sequence": 477,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-10T00:00:00Z",
+    "event_id": "public.aapl:478",
+    "event_time": "2017-01-09T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "118.989998",
+      "high": "119.43",
+      "kind": "bar",
+      "low": "117.940002",
+      "open": "117.949997",
+      "volume": "33387600"
+    },
+    "receive_time": "2017-01-10T00:00:00Z",
+    "sequence": 478,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-11T00:00:00Z",
+    "event_id": "public.aapl:479",
+    "event_time": "2017-01-10T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "119.110001",
+      "high": "119.379997",
+      "kind": "bar",
+      "low": "118.300003",
+      "open": "118.769997",
+      "volume": "24462100"
+    },
+    "receive_time": "2017-01-11T00:00:00Z",
+    "sequence": 479,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-12T00:00:00Z",
+    "event_id": "public.aapl:480",
+    "event_time": "2017-01-11T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "119.75",
+      "high": "119.93",
+      "kind": "bar",
+      "low": "118.599998",
+      "open": "118.739998",
+      "volume": "27588600"
+    },
+    "receive_time": "2017-01-12T00:00:00Z",
+    "sequence": 480,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-13T00:00:00Z",
+    "event_id": "public.aapl:481",
+    "event_time": "2017-01-12T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "119.25",
+      "high": "119.300003",
+      "kind": "bar",
+      "low": "118.209999",
+      "open": "118.900002",
+      "volume": "27086200"
+    },
+    "receive_time": "2017-01-13T00:00:00Z",
+    "sequence": 481,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-14T00:00:00Z",
+    "event_id": "public.aapl:482",
+    "event_time": "2017-01-13T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "119.040001",
+      "high": "119.620003",
+      "kind": "bar",
+      "low": "118.809998",
+      "open": "119.110001",
+      "volume": "26111900"
+    },
+    "receive_time": "2017-01-14T00:00:00Z",
+    "sequence": 482,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-18T00:00:00Z",
+    "event_id": "public.aapl:483",
+    "event_time": "2017-01-17T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "120",
+      "high": "120.239998",
+      "kind": "bar",
+      "low": "118.220001",
+      "open": "118.339996",
+      "volume": "34439800"
+    },
+    "receive_time": "2017-01-18T00:00:00Z",
+    "sequence": 483,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-19T00:00:00Z",
+    "event_id": "public.aapl:484",
+    "event_time": "2017-01-18T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "119.989998",
+      "high": "120.5",
+      "kind": "bar",
+      "low": "119.709999",
+      "open": "120",
+      "volume": "23713000"
+    },
+    "receive_time": "2017-01-19T00:00:00Z",
+    "sequence": 484,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-20T00:00:00Z",
+    "event_id": "public.aapl:485",
+    "event_time": "2017-01-19T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "119.779999",
+      "high": "120.089996",
+      "kind": "bar",
+      "low": "119.370003",
+      "open": "119.400002",
+      "volume": "25597300"
+    },
+    "receive_time": "2017-01-20T00:00:00Z",
+    "sequence": 485,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-21T00:00:00Z",
+    "event_id": "public.aapl:486",
+    "event_time": "2017-01-20T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "120",
+      "high": "120.449997",
+      "kind": "bar",
+      "low": "119.730003",
+      "open": "120.449997",
+      "volume": "32597900"
+    },
+    "receive_time": "2017-01-21T00:00:00Z",
+    "sequence": 486,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-24T00:00:00Z",
+    "event_id": "public.aapl:487",
+    "event_time": "2017-01-23T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "120.080002",
+      "high": "120.809998",
+      "kind": "bar",
+      "low": "119.769997",
+      "open": "120",
+      "volume": "22050200"
+    },
+    "receive_time": "2017-01-24T00:00:00Z",
+    "sequence": 487,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-25T00:00:00Z",
+    "event_id": "public.aapl:488",
+    "event_time": "2017-01-24T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "119.970001",
+      "high": "120.099998",
+      "kind": "bar",
+      "low": "119.5",
+      "open": "119.550003",
+      "volume": "23211000"
+    },
+    "receive_time": "2017-01-25T00:00:00Z",
+    "sequence": 488,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-26T00:00:00Z",
+    "event_id": "public.aapl:489",
+    "event_time": "2017-01-25T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "121.879997",
+      "high": "122.099998",
+      "kind": "bar",
+      "low": "120.279999",
+      "open": "120.419998",
+      "volume": "32377600"
+    },
+    "receive_time": "2017-01-26T00:00:00Z",
+    "sequence": 489,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-27T00:00:00Z",
+    "event_id": "public.aapl:490",
+    "event_time": "2017-01-26T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "121.940002",
+      "high": "122.440002",
+      "kind": "bar",
+      "low": "121.599998",
+      "open": "121.669998",
+      "volume": "26337600"
+    },
+    "receive_time": "2017-01-27T00:00:00Z",
+    "sequence": 490,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-28T00:00:00Z",
+    "event_id": "public.aapl:491",
+    "event_time": "2017-01-27T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "121.949997",
+      "high": "122.349998",
+      "kind": "bar",
+      "low": "121.599998",
+      "open": "122.139999",
+      "volume": "20562900"
+    },
+    "receive_time": "2017-01-28T00:00:00Z",
+    "sequence": 491,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-01-31T00:00:00Z",
+    "event_id": "public.aapl:492",
+    "event_time": "2017-01-30T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "121.629997",
+      "high": "121.629997",
+      "kind": "bar",
+      "low": "120.660004",
+      "open": "120.93",
+      "volume": "30377500"
+    },
+    "receive_time": "2017-01-31T00:00:00Z",
+    "sequence": 492,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-02-01T00:00:00Z",
+    "event_id": "public.aapl:493",
+    "event_time": "2017-01-31T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "121.349998",
+      "high": "121.389999",
+      "kind": "bar",
+      "low": "120.620003",
+      "open": "121.150002",
+      "volume": "49201000"
+    },
+    "receive_time": "2017-02-01T00:00:00Z",
+    "sequence": 493,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-02-02T00:00:00Z",
+    "event_id": "public.aapl:494",
+    "event_time": "2017-02-01T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "128.75",
+      "high": "130.490005",
+      "kind": "bar",
+      "low": "127.010002",
+      "open": "127.029999",
+      "volume": "111985000"
+    },
+    "receive_time": "2017-02-02T00:00:00Z",
+    "sequence": 494,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-02-03T00:00:00Z",
+    "event_id": "public.aapl:495",
+    "event_time": "2017-02-02T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "128.529999",
+      "high": "129.389999",
+      "kind": "bar",
+      "low": "127.779999",
+      "open": "127.980003",
+      "volume": "33710400"
+    },
+    "receive_time": "2017-02-03T00:00:00Z",
+    "sequence": 495,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-02-04T00:00:00Z",
+    "event_id": "public.aapl:496",
+    "event_time": "2017-02-03T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "129.080002",
+      "high": "129.190002",
+      "kind": "bar",
+      "low": "128.160004",
+      "open": "128.309998",
+      "volume": "24507300"
+    },
+    "receive_time": "2017-02-04T00:00:00Z",
+    "sequence": 496,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-02-07T00:00:00Z",
+    "event_id": "public.aapl:497",
+    "event_time": "2017-02-06T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "130.289993",
+      "high": "130.5",
+      "kind": "bar",
+      "low": "128.899994",
+      "open": "129.130005",
+      "volume": "26845900"
+    },
+    "receive_time": "2017-02-07T00:00:00Z",
+    "sequence": 497,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-02-08T00:00:00Z",
+    "event_id": "public.aapl:498",
+    "event_time": "2017-02-07T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "131.529999",
+      "high": "132.089996",
+      "kind": "bar",
+      "low": "130.449997",
+      "open": "130.539993",
+      "volume": "38183800"
+    },
+    "receive_time": "2017-02-08T00:00:00Z",
+    "sequence": 498,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-02-09T00:00:00Z",
+    "event_id": "public.aapl:499",
+    "event_time": "2017-02-08T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "132.039993",
+      "high": "132.220001",
+      "kind": "bar",
+      "low": "131.220001",
+      "open": "131.350006",
+      "volume": "23004100"
+    },
+    "receive_time": "2017-02-09T00:00:00Z",
+    "sequence": 499,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-02-10T00:00:00Z",
+    "event_id": "public.aapl:500",
+    "event_time": "2017-02-09T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "132.419998",
+      "high": "132.449997",
+      "kind": "bar",
+      "low": "131.119995",
+      "open": "131.649994",
+      "volume": "28349900"
+    },
+    "receive_time": "2017-02-10T00:00:00Z",
+    "sequence": 500,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-02-11T00:00:00Z",
+    "event_id": "public.aapl:501",
+    "event_time": "2017-02-10T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "132.119995",
+      "high": "132.940002",
+      "kind": "bar",
+      "low": "132.050003",
+      "open": "132.460007",
+      "volume": "20065500"
+    },
+    "receive_time": "2017-02-11T00:00:00Z",
+    "sequence": 501,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-02-14T00:00:00Z",
+    "event_id": "public.aapl:502",
+    "event_time": "2017-02-13T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "133.289993",
+      "high": "133.820007",
+      "kind": "bar",
+      "low": "132.75",
+      "open": "133.080002",
+      "volume": "23035400"
+    },
+    "receive_time": "2017-02-14T00:00:00Z",
+    "sequence": 502,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-02-15T00:00:00Z",
+    "event_id": "public.aapl:503",
+    "event_time": "2017-02-14T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "135.020004",
+      "high": "135.089996",
+      "kind": "bar",
+      "low": "133.25",
+      "open": "133.470001",
+      "volume": "32815500"
+    },
+    "receive_time": "2017-02-15T00:00:00Z",
+    "sequence": 503,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-02-16T00:00:00Z",
+    "event_id": "public.aapl:504",
+    "event_time": "2017-02-15T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "135.509995",
+      "high": "136.270004",
+      "kind": "bar",
+      "low": "134.619995",
+      "open": "135.520004",
+      "volume": "35501600"
+    },
+    "receive_time": "2017-02-16T00:00:00Z",
+    "sequence": 504,
+    "source": "public.fixture.sha256-24c7604e"
+  },
+  {
+    "available_time": "2017-02-17T00:00:00Z",
+    "event_id": "public.aapl:505",
+    "event_time": "2017-02-16T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "135.350006",
+      "high": "135.899994",
+      "kind": "bar",
+      "low": "134.839996",
+      "open": "135.669998",
+      "volume": "22118000"
+    },
+    "receive_time": "2017-02-17T00:00:00Z",
+    "sequence": 505,
+    "source": "public.fixture.sha256-24c7604e"
+  }
+]

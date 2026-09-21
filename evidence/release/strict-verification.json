@@ -1,0 +1,55 @@
+{
+  "error": null,
+  "python": "3.12.14 (main, Aug 31 2026, 23:47:53) [GCC 14.2.0]",
+  "scope": "strict_container",
+  "software_version": "2.6.0",
+  "status": "passed",
+  "steps": [
+    {
+      "returncode": 0,
+      "step": "ruff"
+    },
+    {
+      "returncode": 0,
+      "step": "mypy"
+    },
+    {
+      "returncode": 0,
+      "step": "schema"
+    },
+    {
+      "returncode": 0,
+      "step": "packages"
+    },
+    {
+      "returncode": 0,
+      "step": "pytest"
+    },
+    {
+      "returncode": 0,
+      "step": "all"
+    },
+    {
+      "returncode": 0,
+      "step": "failures"
+    },
+    {
+      "returncode": 0,
+      "step": "adapters"
+    },
+    {
+      "returncode": 0,
+      "step": "compatibility"
+    },
+    {
+      "returncode": 0,
+      "step": "papers"
+    },
+    {
+      "returncode": 0,
+      "step": "acceptance"
+    }
+  ],
+  "strict_requested": true,
+  "verification_input_sha256": "cfedf3f9296ef6f0cb666fc68b8cf7d8940bdca00a8f0ec7cdbf3d2f79d92b22"
+}

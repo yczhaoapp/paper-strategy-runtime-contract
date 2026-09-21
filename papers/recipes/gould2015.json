@@ -1,0 +1,41 @@
+{
+  "version": "1.0",
+  "paper_id": "gould2015",
+  "title": "Queue Imbalance as a One-Tick-Ahead Price Predictor in a Limit Order Book",
+  "source_url": "https://arxiv.org/pdf/1512.03492",
+  "source_sha256": "a5051285adfe2d8a2d7f46a758486f357d556a46a964bc89b245de7e7a0bc338",
+  "algorithm": "queue_logistic",
+  "strategy_kind": "supervised",
+  "parameters": {
+    "iterations": 100,
+    "tolerance": 1e-07,
+    "trade_threshold": 0.55
+  },
+  "claims": [
+    {
+      "claim_id": "gould2015.claim1",
+      "page": 7,
+      "anchor": "queue imbalance",
+      "locator": "Equation (7), p.7",
+      "interpretation": "Feature I=(bid_size-ask_size)/(bid_size+ask_size)."
+    },
+    {
+      "claim_id": "gould2015.claim2",
+      "page": 14,
+      "anchor": "logistic",
+      "locator": "Equation (17), p.14",
+      "interpretation": "Fit a Bernoulli logistic model with intercept and one imbalance coefficient by maximum likelihood."
+    }
+  ],
+  "assumptions": [
+    "Label is direction of the next nonzero midprice change.",
+    "Fit training partition only; serialization and reload precede holdout inference."
+  ],
+  "deviations": [
+    "Uses every quote and chronological split instead of randomized sampling/splitting.",
+    "The paper predicts prices; threshold-based target positions are an explicitly added trading policy.",
+    "No local logistic variant or proprietary NASDAQ sample; simulation performance is not paper performance."
+  ],
+  "fidelity": "algorithm_reproduction",
+  "mapping_review": "Repository author mapping checked against cited source pages; anchors prove provenance, mathematical tests check implementation; external review remains independent."
+}

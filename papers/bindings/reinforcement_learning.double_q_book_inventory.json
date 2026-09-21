@@ -1,0 +1,92 @@
+{
+  "version": "1.1",
+  "strategy_id": "reinforcement_learning.double_q_book_inventory",
+  "strategy_kind": "reinforcement_learning",
+  "source_id": "spooner2018",
+  "fidelity": "method_reproduction",
+  "claims": [
+    {
+      "claim_id": "doubleq.variant",
+      "page": 4,
+      "anchor": "Double Q- learning",
+      "locator": "Section 4.4, PDF p.4",
+      "interpretation": "Double Q-learning is explicitly evaluated as a market-making learner."
+    },
+    {
+      "claim_id": "doubleq.inventory",
+      "page": 4,
+      "anchor": "inventory",
+      "locator": "State and reward design, PDF p.4",
+      "interpretation": "Inventory is an explicit part of the agent state and risk-controlled reward."
+    }
+  ],
+  "implementation": [
+    {
+      "path": "src/psrc/strategies/reinforcement_learning.py",
+      "sha256": "854f91e3b116a7cdc7aa4897f033c81654d5df3b29301efec016dc9468b63271",
+      "symbols": [
+        "DoubleQBookInventoryStrategy"
+      ]
+    },
+    {
+      "path": "strategies/reinforcement_learning.double_q_book_inventory/strategy.py",
+      "sha256": "3619a7eeffe78f8edb5b380ecd53c20dc40f5f023b65eb246d6652d74ba05492",
+      "symbols": [
+        "DoubleQBookInventoryStrategy",
+        "class Strategy"
+      ]
+    }
+  ],
+  "verification_tests": [
+    "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.double_q_book_inventory]"
+  ],
+  "claim_links": [
+    {
+      "claim_id": "doubleq.variant",
+      "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
+      "symbol": "DoubleQBookInventoryStrategy",
+      "verification_test": "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.double_q_book_inventory]"
+    },
+    {
+      "claim_id": "doubleq.inventory",
+      "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
+      "symbol": "DoubleQBookInventoryStrategy",
+      "verification_test": "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.double_q_book_inventory]"
+    }
+  ],
+  "runtime_expectation": {
+    "source_data_sha256": "ae71a1d713137b0d3029474773bf04977870b69e2b422dd98555aff935fe7cda",
+    "decision_sha256": "c3693cb57a899d6be4c99ab8a377d39835d5cbb08be3b56834835db7f663a498",
+    "data_kinds": [
+      "book_snapshot_l2"
+    ],
+    "timeframes": [
+      "event"
+    ],
+    "observed_action_kinds": [
+      "target_position"
+    ],
+    "observed_reason_codes": [
+      "policy.double_q_book_inventory"
+    ],
+    "expected_decisions": 10,
+    "expected_orders": 10,
+    "expected_fills": 8,
+    "artifact_algorithm": "double-q-learning-v1",
+    "artifact_id": "sha256-2cb59d1995c3f509fd26ee912cf1bc39deb54b658218383c7e8e9bb4d8dc61d9"
+  },
+  "data_mode": "synthetic_fixture",
+  "original_paper_dataset": false,
+  "empirical_results_reproduced": false,
+  "assumptions": [
+    "Two value tables alternate updates and the opposite table evaluates the greedy next action."
+  ],
+  "deviations": [
+    "Uses a compact rounded L2 state and target positions rather than tile coding, quote actions, and the paper simulator."
+  ],
+  "mapping_review": "Manual claim-to-code review completed; hashes bind the reviewed paper, implementation module, and executable package wrapper.",
+  "algorithm_fidelity": "A1_method_equivalent",
+  "data_fidelity": "D0_synthetic",
+  "experimental_fidelity": "E0_runtime_only",
+  "runtime_fidelity": "R1_unified_contract"
+}

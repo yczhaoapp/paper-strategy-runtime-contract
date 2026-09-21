@@ -1,0 +1,42 @@
+{
+  "version": "1.0",
+  "paper_id": "nevmyvaka2006",
+  "title": "Reinforcement Learning for Optimized Trade Execution",
+  "source_url": "https://www.cis.upenn.edu/~mkearns/papers/rlexec.pdf",
+  "source_sha256": "3157e2d6ace0bb95ff8fb7215f1b2bb79e7c27f5434137bab4fdd2e9507dcae4",
+  "algorithm": "execution_dynamic_q",
+  "strategy_kind": "reinforcement_learning",
+  "parameters": {
+    "horizon_events": 4,
+    "target_quantity": 4,
+    "tick": 0.01
+  },
+  "claims": [
+    {
+      "claim_id": "nevmyvaka2006.claim1",
+      "page": 3,
+      "anchor": "remaining",
+      "locator": "Section 3, private state and actions, p.3",
+      "interpretation": "Private state is time/inventory; market state is queue-imbalance sign; actions reprice all remaining shares."
+    },
+    {
+      "claim_id": "nevmyvaka2006.claim2",
+      "page": 4,
+      "anchor": "backwards in time",
+      "locator": "Section 3 algorithm and pseudocode, p.4",
+      "interpretation": "Empirical mean Bellman backups sweep remaining-time states from one to horizon; deadline forces market completion."
+    }
+  ],
+  "assumptions": [
+    "Counterfactual transitions enumerate every private state and action on training quotes.",
+    "Low impact assumption: own actions do not change subsequent market events.",
+    "Reward is negative implementation shortfall with explicit reference fees and slippage."
+  ],
+  "deviations": [
+    "Reduced L1/full-fill environment and three actions; does not reproduce millisecond NASDAQ partial-fill experiment.",
+    "Buy execution is mirrored from the paper sell example; one holdout episode contains a final settlement event.",
+    "Uses market-order urgency as third action, two passive offsets, and one imbalance-sign market feature."
+  ],
+  "fidelity": "algorithm_reproduction",
+  "mapping_review": "Repository author mapping checked against cited source pages; anchors prove provenance, mathematical tests check implementation; external review remains independent."
+}

@@ -1,0 +1,96 @@
+{
+  "algorithm_fidelity": "A1_method_equivalent",
+  "assumptions": [
+    "Actions map to long-spread, flat and short-spread paired target positions; the first 400 synchronized public AAPL/MSFT days train the policy and the next 106 days are held out."
+  ],
+  "claim_links": [
+    {
+      "claim_id": "a2cpairs.zspread",
+      "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
+      "symbol": "A2CPairsStrategy",
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_a2c_pairs_reproduces_advantage_actor_critic_update"
+    },
+    {
+      "claim_id": "a2cpairs.algorithm",
+      "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
+      "symbol": "A2CPairsStrategy",
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_a2c_pairs_reproduces_advantage_actor_critic_update"
+    }
+  ],
+  "claims": [
+    {
+      "anchor": "normalize the spread with z-score",
+      "claim_id": "a2cpairs.zspread",
+      "interpretation": "The implementation keeps the paper's normalized-spread state shape but uses a disclosed fixed 1:-2 proxy spread instead of the paper's moving-window regression residual.",
+      "locator": "Equations (7)-(8), PDF p.7",
+      "page": 7
+    },
+    {
+      "anchor": "Advantage Actor-Critic",
+      "claim_id": "a2cpairs.algorithm",
+      "interpretation": "The pair-trading experiments include Advantage Actor-Critic with three trading actions.",
+      "locator": "RL algorithm selection, PDF p.4",
+      "page": 4
+    }
+  ],
+  "data_fidelity": "D1_public_proxy",
+  "data_mode": "public_historical",
+  "deviations": [
+    "Uses a small linear A2C policy, a six-observation window and public AAPL/MSFT proxy closes rather than Stable-Baselines3 networks, 900 intervals and the paper’s BTC currency pairs; source rows are deterministically expanded to flat OHLC bars."
+  ],
+  "empirical_results_reproduced": false,
+  "experimental_fidelity": "E0_runtime_only",
+  "fidelity": "method_reproduction",
+  "implementation": [
+    {
+      "path": "src/psrc/strategies/reinforcement_learning.py",
+      "sha256": "854f91e3b116a7cdc7aa4897f033c81654d5df3b29301efec016dc9468b63271",
+      "symbols": [
+        "A2CPairsStrategy"
+      ]
+    },
+    {
+      "path": "strategies/reinforcement_learning.a2c_pairs/strategy.py",
+      "sha256": "22f3f76cecbc3d39fbdc87c55b28c91aa17c1c2a6e83ab45e41621a8e5104bcb",
+      "symbols": [
+        "A2CPairsStrategy",
+        "class Strategy"
+      ]
+    }
+  ],
+  "mapping_review": "The learner now performs a verified advantage actor-critic update over synchronized z-scored pair observations. Because the proxy uses a fixed 1:-2 spread and unit paired positions instead of a rolling hedge regression, it is classified as an equivalent-method reproduction rather than an exact algorithm reproduction.",
+  "original_paper_dataset": false,
+  "runtime_expectation": {
+    "artifact_algorithm": "advantage-actor-critic-pairs-v1",
+    "artifact_id": "sha256-3fb894a634c75e2053aa85959f00a6dd7210fa8883495a361da8adc15f5735a7",
+    "data_kinds": [
+      "bar"
+    ],
+    "decision_sha256": "ded146da788ef48c1c56789e05514b3ed52c1b93a5bbb8ee80e6609da3fa9db7",
+    "expected_decisions": 212,
+    "expected_fills": 64,
+    "expected_orders": 212,
+    "observed_action_kinds": [
+      "no_op",
+      "target_position"
+    ],
+    "observed_reason_codes": [
+      "pair.awaiting_peer",
+      "pair.not_synchronized",
+      "policy.a2c_pair_left",
+      "policy.a2c_pair_right"
+    ],
+    "source_data_sha256": "d76a6a207d18ba63217381d162a08839bcf9b35dab5dbdb04a035b1a2b3a6714",
+    "timeframes": [
+      "P1D"
+    ]
+  },
+  "runtime_fidelity": "R1_unified_contract",
+  "source_id": "yang2024",
+  "strategy_id": "reinforcement_learning.a2c_pairs",
+  "strategy_kind": "reinforcement_learning",
+  "verification_tests": [
+    "tests/papers/test_reproduction_oracles.py::test_a2c_pairs_reproduces_advantage_actor_critic_update"
+  ],
+  "version": "1.1"
+}

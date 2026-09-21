@@ -1,0 +1,58 @@
+{
+  "contract_version": "1.1.0",
+  "dataset_id": "public.plotly.aapl-msft-2007-2016.a2c-pairs-test",
+  "dataset_version": "1.0.0",
+  "extensions": {
+    "org.singularityx.data-provenance": {
+      "dataset_id": "public.plotly.aapl-msft-2007-2016",
+      "empirical_results_reproduced": false,
+      "instrument_id": "PUBLIC.AAPL-MSFT",
+      "license_name": "MIT repository license; upstream market-data origin not separately stated",
+      "license_sha256": "842e29495d9d99eef9b6d5f2e442785cdd0ab39d81792b2c6302d17bb0cc6030",
+      "license_url": "https://github.com/plotly/datasets/blob/master/LICENSE",
+      "origin": "public_historical",
+      "original_paper_dataset": false,
+      "period_end": "2016-03-01",
+      "period_start": "2007-01-03",
+      "provenance_record_sha256": "5246f0e8f757b8fbf1c0652329d0eac41234d0f9f5db9660f07b2a8e6bcf85b3",
+      "record_count": 4612,
+      "source_sha256": "60bf505fec160ce05ba959382adee32ea6e53ce14fe22886db27c58fe1b0d26b",
+      "source_url": "https://raw.githubusercontent.com/plotly/datasets/master/stockdata.csv",
+      "transforms": [
+        "Select published Date, AAPL and MSFT close columns",
+        "Expand each close to a flat OHLC bar with unit placeholder volume",
+        "Set availability to the next UTC day to prevent same-bar look-ahead"
+      ],
+      "version": "1.0"
+    }
+  },
+  "generated_at": "2026-01-01T00:00:00Z",
+  "public_or_synthetic": true,
+  "streams": [
+    {
+      "data_sha256": "d76a6a207d18ba63217381d162a08839bcf9b35dab5dbdb04a035b1a2b3a6714",
+      "fields": [
+        "close",
+        "high",
+        "low",
+        "open",
+        "volume"
+      ],
+      "kind": "bar",
+      "record_count": 212,
+      "schema_sha256": "f58dbc46db0cc5c40fc318557cb937277e01a3d9fa0ab04c10b074a18893146c",
+      "stream_id": "bars",
+      "symbols": [
+        "PUBLIC.AAPL",
+        "PUBLIC.MSFT"
+      ],
+      "timeframe": {
+        "alignment": "epoch",
+        "calendar": "24/7",
+        "interval": "P1D",
+        "mode": "bar",
+        "timezone": "UTC"
+      }
+    }
+  ]
+}

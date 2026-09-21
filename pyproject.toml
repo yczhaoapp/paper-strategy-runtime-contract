@@ -1,0 +1,79 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "paper-strategy-runtime-contract"
+version = "2.6.0"
+description = "A versioned, auditable runtime contract between paper-derived trading strategies and backtest engines."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Paper Strategy Runtime Contract contributors" }]
+dependencies = [
+  "numpy>=1.26,<3",
+  "pydantic>=2.8,<3",
+  "PyYAML>=6.0.1,<7",
+  "pypdf==6.1.1",
+]
+
+[project.optional-dependencies]
+adapters = [
+  "backtrader>=1.9.78.123",
+  "pandas>=2.2,<3",
+]
+nautilus = ["nautilus-trader==1.231.0"]
+dev = [
+  "hypothesis>=6.112,<7",
+  "jsonschema>=4.23,<5",
+  "mypy>=1.11,<2",
+  "pandas-stubs>=2.2,<3",
+  "pytest>=8.3,<9",
+  "pytest-cov>=5,<7",
+  "ruff>=0.6,<1",
+  "types-PyYAML>=6.0.12,<7",
+]
+
+[project.scripts]
+psrc = "psrc.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/psrc"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-config --strict-markers"
+testpaths = ["tests"]
+markers = [
+  "adapter: optional external-engine adapter tests",
+  "sandbox: operating-system sandbox tests",
+  "e2e: end-to-end verification tests",
+]
+filterwarnings = [
+  "ignore:The 'generic' unit for NumPy timedelta is deprecated:DeprecationWarning",
+  "ignore:invalid escape sequence:SyntaxWarning:backtrader",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+allowed-confusables = ["，", "：", "（", "）", "；"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["psrc"]
+
+[[tool.mypy.overrides]]
+module = ["nautilus_trader.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["psrc.adapters.nautilus"]
+disallow_subclassing_any = false
+disable_error_code = ["call-arg"]
+
+[tool.coverage.run]
+omit = ["src/psrc/adapters/nautilus.py"]

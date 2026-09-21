@@ -1,0 +1,97 @@
+{
+  "version": "1.1",
+  "strategy_id": "supervised.cross_sectional_ranker",
+  "strategy_kind": "supervised",
+  "source_id": "gu2019",
+  "fidelity": "method_reproduction",
+  "claims": [
+    {
+      "claim_id": "ranker.pooled_ols",
+      "page": 11,
+      "anchor": "linear predictive regression model",
+      "locator": "Equations (3)-(4), PDF p.11",
+      "interpretation": "Conditional returns are fitted by a pooled linear model using the least-squares objective."
+    },
+    {
+      "claim_id": "ranker.long_short_sort",
+      "page": 3,
+      "anchor": "long-short decile spread strategy",
+      "locator": "Introduction, PDF p.3",
+      "interpretation": "Stocks are sorted by predicted returns to form low and high forecast portfolios."
+    }
+  ],
+  "implementation": [
+    {
+      "path": "src/psrc/strategies/supervised.py",
+      "sha256": "43954f41c1375d1b661a9c751686d6bd15edbf75a186698c5e17aac6baaa9c1c",
+      "symbols": [
+        "CrossSectionalRankerStrategy"
+      ]
+    },
+    {
+      "path": "strategies/supervised.cross_sectional_ranker/strategy.py",
+      "sha256": "60eed375ce040431391ba400998b7f3b79a321a2476312329f8d85cb884f9c21",
+      "symbols": [
+        "CrossSectionalRankerStrategy",
+        "class Strategy"
+      ]
+    }
+  ],
+  "verification_tests": [
+    "tests/papers/test_reproduction_oracles.py::test_cross_sectional_ranker_reproduces_pooled_ols_and_sort"
+  ],
+  "claim_links": [
+    {
+      "claim_id": "ranker.pooled_ols",
+      "implementation_path": "src/psrc/strategies/supervised.py",
+      "symbol": "CrossSectionalRankerStrategy",
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_cross_sectional_ranker_reproduces_pooled_ols_and_sort"
+    },
+    {
+      "claim_id": "ranker.long_short_sort",
+      "implementation_path": "src/psrc/strategies/supervised.py",
+      "symbol": "CrossSectionalRankerStrategy",
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_cross_sectional_ranker_reproduces_pooled_ols_and_sort"
+    }
+  ],
+  "runtime_expectation": {
+    "source_data_sha256": "de41149497f346149e804e6eddedd214ea2486f0fede953e499036f4d95985b8",
+    "decision_sha256": "1e7d609f6765bc6dbf47e75267dad4b76d8a833dd11298f6923ed2aa0e752eae",
+    "data_kinds": [
+      "bar"
+    ],
+    "timeframes": [
+      "P1D"
+    ],
+    "observed_action_kinds": [
+      "no_op",
+      "prediction",
+      "target_weight"
+    ],
+    "observed_reason_codes": [
+      "allocation.long_short_rank",
+      "cross_section.awaiting_symbols",
+      "cross_section.not_synchronized",
+      "model.cross_section_score"
+    ],
+    "expected_decisions": 18,
+    "expected_orders": 18,
+    "expected_fills": 12,
+    "artifact_algorithm": "pooled-ols-cross-sectional-ranker-v1",
+    "artifact_id": "sha256-01ed55f9c108205ec777d26e61d823ffc6ec0964458f223eb7a58024aa78ba7f"
+  },
+  "data_mode": "synthetic_fixture",
+  "original_paper_dataset": false,
+  "empirical_results_reproduced": false,
+  "assumptions": [
+    "All assets in a decision cross-section share one timestamp and forward-return labels are aligned chronologically."
+  ],
+  "deviations": [
+    "Uses three liquid proxy assets and three bar-derived characteristics rather than the CRSP panel, 900 predictors, value weights and ten deciles."
+  ],
+  "mapping_review": "The centroid heuristic was replaced by the paper’s pooled OLS conditional-return estimator; inference ranks synchronized predictions into a market-neutral low/middle/high portfolio.",
+  "algorithm_fidelity": "A1_method_equivalent",
+  "data_fidelity": "D0_synthetic",
+  "experimental_fidelity": "E0_runtime_only",
+  "runtime_fidelity": "R1_unified_contract"
+}

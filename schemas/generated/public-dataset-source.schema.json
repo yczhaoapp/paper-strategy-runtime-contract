@@ -1,0 +1,127 @@
+{
+  "$id": "urn:psrc:schema/public-dataset-source.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed, hash-pinned redistribution record for a bundled public fixture.",
+  "properties": {
+    "availability_rule": {
+      "minLength": 20,
+      "title": "Availability Rule",
+      "type": "string"
+    },
+    "columns_used": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Columns Used",
+      "type": "array"
+    },
+    "dataset_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "empirical_paper_results_reproduced": {
+      "const": false,
+      "default": false,
+      "title": "Empirical Paper Results Reproduced",
+      "type": "boolean"
+    },
+    "file": {
+      "title": "File",
+      "type": "string"
+    },
+    "instrument": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Instrument",
+      "type": "string"
+    },
+    "paper_dataset": {
+      "const": false,
+      "default": false,
+      "title": "Paper Dataset",
+      "type": "boolean"
+    },
+    "period": {
+      "maxItems": 2,
+      "minItems": 2,
+      "prefixItems": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "title": "Period",
+      "type": "array"
+    },
+    "records": {
+      "exclusiveMinimum": 0,
+      "title": "Records",
+      "type": "integer"
+    },
+    "repository_license": {
+      "minLength": 1,
+      "title": "Repository License",
+      "type": "string"
+    },
+    "repository_license_file": {
+      "title": "Repository License File",
+      "type": "string"
+    },
+    "repository_license_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Repository License Sha256",
+      "type": "string"
+    },
+    "repository_license_url": {
+      "title": "Repository License Url",
+      "type": "string"
+    },
+    "retrieved_at": {
+      "title": "Retrieved At",
+      "type": "string"
+    },
+    "rights_note": {
+      "minLength": 20,
+      "title": "Rights Note",
+      "type": "string"
+    },
+    "source_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "source_url": {
+      "title": "Source Url",
+      "type": "string"
+    },
+    "version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "availability_rule",
+    "columns_used",
+    "dataset_id",
+    "file",
+    "instrument",
+    "period",
+    "records",
+    "repository_license",
+    "repository_license_file",
+    "repository_license_sha256",
+    "repository_license_url",
+    "retrieved_at",
+    "rights_note",
+    "source_sha256",
+    "source_url"
+  ],
+  "title": "PublicDatasetSource",
+  "type": "object"
+}

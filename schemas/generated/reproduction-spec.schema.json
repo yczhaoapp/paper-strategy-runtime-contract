@@ -1,0 +1,253 @@
+{
+  "$defs": {
+    "EvidenceClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "anchor": {
+          "maxLength": 100,
+          "minLength": 3,
+          "title": "Anchor",
+          "type": "string"
+        },
+        "claim_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "interpretation": {
+          "title": "Interpretation",
+          "type": "string"
+        },
+        "locator": {
+          "title": "Locator",
+          "type": "string"
+        },
+        "page": {
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "anchor",
+        "claim_id",
+        "interpretation",
+        "locator",
+        "page"
+      ],
+      "title": "EvidenceClaim",
+      "type": "object"
+    },
+    "GroundedClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "claim": {
+          "$ref": "#/$defs/EvidenceClaim"
+        },
+        "normalized_end": {
+          "exclusiveMinimum": 0,
+          "title": "Normalized End",
+          "type": "integer"
+        },
+        "normalized_start": {
+          "minimum": 0,
+          "title": "Normalized Start",
+          "type": "integer"
+        },
+        "page_sha256": {
+          "title": "Page Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim",
+        "normalized_end",
+        "normalized_start",
+        "page_sha256"
+      ],
+      "title": "GroundedClaim",
+      "type": "object"
+    },
+    "PaperRecipe": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "enum": [
+            "avellaneda_stoikov",
+            "execution_dynamic_q",
+            "moving_average_band",
+            "queue_logistic"
+          ],
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "assumptions": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Assumptions",
+          "type": "array"
+        },
+        "claims": {
+          "items": {
+            "$ref": "#/$defs/EvidenceClaim"
+          },
+          "minItems": 2,
+          "title": "Claims",
+          "type": "array"
+        },
+        "data_mode": {
+          "default": "synthetic_fixture",
+          "enum": [
+            "public_historical",
+            "synthetic_fixture"
+          ],
+          "title": "Data Mode",
+          "type": "string"
+        },
+        "deviations": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Deviations",
+          "type": "array"
+        },
+        "execution_engine": {
+          "default": "reference",
+          "enum": [
+            "backtrader",
+            "reference"
+          ],
+          "title": "Execution Engine",
+          "type": "string"
+        },
+        "fidelity": {
+          "const": "algorithm_reproduction",
+          "default": "algorithm_reproduction",
+          "title": "Fidelity",
+          "type": "string"
+        },
+        "mapping_review": {
+          "minLength": 10,
+          "title": "Mapping Review",
+          "type": "string"
+        },
+        "paper_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Paper Id",
+          "type": "string"
+        },
+        "parameters": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Parameters",
+          "type": "object"
+        },
+        "source_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "source_url": {
+          "title": "Source Url",
+          "type": "string"
+        },
+        "strategy_kind": {
+          "$ref": "#/$defs/StrategyKind"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "algorithm",
+        "assumptions",
+        "claims",
+        "deviations",
+        "mapping_review",
+        "paper_id",
+        "parameters",
+        "source_sha256",
+        "source_url",
+        "strategy_kind",
+        "title"
+      ],
+      "title": "PaperRecipe",
+      "type": "object"
+    },
+    "StrategyKind": {
+      "enum": [
+        "reinforcement_learning",
+        "rule",
+        "supervised"
+      ],
+      "title": "StrategyKind",
+      "type": "string"
+    }
+  },
+  "$id": "urn:psrc:schema/reproduction-spec.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "arbitrary_code_execution": {
+      "const": false,
+      "default": false,
+      "title": "Arbitrary Code Execution",
+      "type": "boolean"
+    },
+    "compiler": {
+      "const": "psrc-paper-compiler.v1",
+      "default": "psrc-paper-compiler.v1",
+      "title": "Compiler",
+      "type": "string"
+    },
+    "document_sha256": {
+      "title": "Document Sha256",
+      "type": "string"
+    },
+    "empirical_results_reproduced": {
+      "const": false,
+      "default": false,
+      "title": "Empirical Results Reproduced",
+      "type": "boolean"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/GroundedClaim"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "recipe": {
+      "$ref": "#/$defs/PaperRecipe"
+    },
+    "recipe_sha256": {
+      "title": "Recipe Sha256",
+      "type": "string"
+    },
+    "version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "document_sha256",
+    "evidence",
+    "recipe",
+    "recipe_sha256"
+  ],
+  "title": "ReproductionSpec",
+  "type": "object"
+}

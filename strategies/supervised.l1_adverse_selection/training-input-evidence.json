@@ -1,0 +1,8 @@
+{
+  "contract_version": "1.1.0",
+  "dataset_id": "synthetic.training-matrix",
+  "input_width": 3,
+  "kind": "supervised",
+  "record_count": 18,
+  "request_sha256": "a5a9751444bf86ecff2fe87adf56ee1af496dc182466b0a91e7b720d209c723a"
+}

@@ -1,0 +1,104 @@
+[
+  {
+    "available_time": "2026-01-02T09:30:00Z",
+    "event_id": "twap:1",
+    "event_time": "2026-01-02T09:30:00Z",
+    "instrument_id": "SYNTH.TWAP",
+    "payload": {
+      "close": "25",
+      "high": "25.5",
+      "kind": "bar",
+      "low": "24.5",
+      "open": "25",
+      "volume": "1000"
+    },
+    "receive_time": "2026-01-02T09:30:00Z",
+    "sequence": 0,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:31:00Z",
+    "event_id": "twap:2",
+    "event_time": "2026-01-02T09:31:00Z",
+    "instrument_id": "SYNTH.TWAP",
+    "payload": {
+      "close": "25.1",
+      "high": "25.6",
+      "kind": "bar",
+      "low": "24.5",
+      "open": "25",
+      "volume": "1001"
+    },
+    "receive_time": "2026-01-02T09:31:00Z",
+    "sequence": 1,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:32:00Z",
+    "event_id": "twap:3",
+    "event_time": "2026-01-02T09:32:00Z",
+    "instrument_id": "SYNTH.TWAP",
+    "payload": {
+      "close": "25.2",
+      "high": "25.7",
+      "kind": "bar",
+      "low": "24.6",
+      "open": "25.1",
+      "volume": "1002"
+    },
+    "receive_time": "2026-01-02T09:32:00Z",
+    "sequence": 2,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:33:00Z",
+    "event_id": "twap:4",
+    "event_time": "2026-01-02T09:33:00Z",
+    "instrument_id": "SYNTH.TWAP",
+    "payload": {
+      "close": "25.1",
+      "high": "25.7",
+      "kind": "bar",
+      "low": "24.6",
+      "open": "25.2",
+      "volume": "1003"
+    },
+    "receive_time": "2026-01-02T09:33:00Z",
+    "sequence": 3,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:34:00Z",
+    "event_id": "twap:5",
+    "event_time": "2026-01-02T09:34:00Z",
+    "instrument_id": "SYNTH.TWAP",
+    "payload": {
+      "close": "25.3",
+      "high": "25.8",
+      "kind": "bar",
+      "low": "24.6",
+      "open": "25.1",
+      "volume": "1004"
+    },
+    "receive_time": "2026-01-02T09:34:00Z",
+    "sequence": 4,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:35:00Z",
+    "event_id": "twap:6",
+    "event_time": "2026-01-02T09:35:00Z",
+    "instrument_id": "SYNTH.TWAP",
+    "payload": {
+      "close": "25.4",
+      "high": "25.9",
+      "kind": "bar",
+      "low": "24.8",
+      "open": "25.3",
+      "volume": "1005"
+    },
+    "receive_time": "2026-01-02T09:35:00Z",
+    "sequence": 5,
+    "source": "synthetic.v1"
+  }
+]

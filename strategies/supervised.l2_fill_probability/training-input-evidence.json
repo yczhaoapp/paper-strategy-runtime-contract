@@ -1,0 +1,8 @@
+{
+  "contract_version": "1.1.0",
+  "dataset_id": "synthetic.queue-race-events",
+  "input_width": 3,
+  "kind": "supervised",
+  "record_count": 24,
+  "request_sha256": "722bb25043ba13554d336bf2549872f139a3ce6c4a2d29eb6c40b0efac233ef2"
+}

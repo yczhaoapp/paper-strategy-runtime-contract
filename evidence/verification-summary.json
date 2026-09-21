@@ -1,0 +1,43 @@
+{
+  "contract_version": "1.1.0",
+  "host": {
+    "acceptance_checks_passed": 18,
+    "acceptance_checks_total": 18,
+    "acceptance_report": "evidence/release/host-acceptance.json",
+    "coverage_percent": 92.54,
+    "errors": 0,
+    "failures": 0,
+    "full_receipt": "evidence/release/host-verification.json",
+    "python": "3.13.7 (main, Sep 18 2025, 22:52:34) [Clang 20.1.4 ]",
+    "scope": "development_preflight",
+    "skipped": 0,
+    "status": "passed",
+    "tests": 186
+  },
+  "published_files": {
+    "evidence/release/host-acceptance.json": "5ee66dd10c4781d4377b2712eeb1c3ae99f2385350224e677702f2c106548d5b",
+    "evidence/release/host-verification.json": "3b67588f3a53bda2b30a4ad5f5ae2a63eb22bbb0c9fc5c9f20eb3709d122da93",
+    "evidence/release/strict-acceptance.json": "5c0b56c66d0365350072117d2901be95f52d037c29858060f81589b6c04d4602",
+    "evidence/release/strict-verification.json": "269726abf4d537fa51c3ca987be3cad4d4df8ff2dd5f19d9ea35a785671c81c3"
+  },
+  "remote_ci": {
+    "claims": [],
+    "status": "pending_repository_creation"
+  },
+  "software_version": "2.6.0",
+  "strict_container": {
+    "acceptance_checks_passed": 18,
+    "acceptance_checks_total": 18,
+    "acceptance_report": "evidence/release/strict-acceptance.json",
+    "coverage_percent": 92.79,
+    "errors": 0,
+    "failures": 0,
+    "full_receipt": "evidence/release/strict-verification.json",
+    "python": "3.12.14 (main, Aug 31 2026, 23:47:53) [GCC 14.2.0]",
+    "scope": "strict_container",
+    "skipped": 0,
+    "status": "passed",
+    "tests": 186
+  },
+  "verification_input_sha256": "cfedf3f9296ef6f0cb666fc68b8cf7d8940bdca00a8f0ec7cdbf3d2f79d92b22"
+}

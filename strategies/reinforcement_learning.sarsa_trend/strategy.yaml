@@ -1,0 +1,55 @@
+contract_version: 1.1.0
+strategy_id: reinforcement_learning.sarsa_trend
+strategy_version: 1.0.0
+kind: reinforcement_learning
+entrypoint: strategy.py:Strategy
+required_profiles:
+- core.bar.v1
+- execution.basic.v1
+- training.rl.v1
+lifecycle:
+  training: required
+  inference: required
+  backtest: required
+  state_checkpointing: true
+data_requirements:
+- stream_id: bars
+  kind: bar
+  timeframe:
+    mode: bar
+    interval: PT1M
+    timezone: UTC
+    calendar: 24/7
+    alignment: epoch
+  symbols:
+  - SYNTH.TEST
+  required_fields:
+  - close
+  - high
+  - low
+  - open
+  - volume
+  optional_fields: []
+  lookback: 3
+  depth: null
+  max_staleness_ns: null
+action_requirements:
+  allowed:
+  - no_op
+  - target_position
+  max_abs_position: '2'
+  max_order_quantity: '10'
+resources:
+  sandbox: development
+  network: deny
+  filesystem: artifact_store_only
+  allowed_imports:
+  - math
+  - numpy
+  - statistics
+  timeout_seconds: 60
+  memory_mb: 512
+  process_limit: 32
+deterministic: true
+seed: 7
+extensions: {}

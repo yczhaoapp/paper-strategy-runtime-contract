@@ -1,0 +1,24 @@
+contract_version: 1.0.0
+engine_id: vnpy
+engine_version: profile-2026.09
+adapter_version: 0.0.0
+support_level: PROFILED
+profiles: [core.bar.v1, event.trade.v1, event.l1.v1, execution.basic.v1, execution.advanced.v1]
+data_kinds: [bar, trade, quote_l1]
+action_kinds: [no_op, prediction, target_position, submit_order, cancel_order, replace_order]
+execution:
+  partial_fills: true
+  cancel: true
+  replace: cancel_new
+  same_timestamp_ordering: gateway-or-backtesting-module-dependent
+  queue_model: module-dependent
+  fill_model: cta-or-portfolio-engine-dependent
+  fee_model: contract-settings-dependent
+  slippage_model: contract-settings-dependent
+  latency_model: event-engine-dependent
+sandbox_modes: []
+extensions:
+  org.vnpy:
+    adapter_status: design-only
+    required_mapping: BarData/TickData -> MarketEvent; OrderData/TradeData -> order/fill; AccountData/PositionData -> AccountSnapshot
+    risk: gateway identifiers and exchange calendars require explicit symbol maps

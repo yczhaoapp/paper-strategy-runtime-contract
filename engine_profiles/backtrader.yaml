@@ -1,0 +1,25 @@
+contract_version: 1.0.0
+engine_id: backtrader
+engine_version: 1.9.78.123
+adapter_version: 0.1.0
+support_level: CONFORMANCE_VERIFIED
+profiles: [core.bar.v1, execution.basic.v1]
+data_kinds: [bar]
+action_kinds: [no_op, prediction, target_position]
+execution:
+  partial_fills: false
+  cancel: true
+  replace: cancel_new
+  same_timestamp_ordering: broker_notifications_then_strategy_next
+  queue_model: null
+  fill_model: backtrader.default-broker-market-next-bar.v1
+  fee_model: backtrader.percentage-commission.v1
+  slippage_model: backtrader.none.v1
+  latency_model: next-bar.v1
+sandbox_modes: [development]
+extensions:
+  org.backtrader:
+    cheat_on_open: false
+    cheat_on_close: false
+    volume_filler: null
+    evidence: tests/adapters/test_backtrader_adapter.py

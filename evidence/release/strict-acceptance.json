@@ -1,0 +1,787 @@
+{
+  "challenge": "SX-CH-003",
+  "checks": {
+    "automated_tests_no_failures_or_skips": {
+      "detail": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 186
+      },
+      "passed": true
+    },
+    "chinese_review_materials": {
+      "detail": {
+        "machine_contract_language": "stable English identifiers",
+        "review_documents": 19,
+        "strategy_cards": 18,
+        "untranslated_documents": [],
+        "untranslated_strategy_cards": []
+      },
+      "passed": true
+    },
+    "code_coverage": {
+      "detail": {
+        "minimum": 90,
+        "percent_covered": 92.79
+      },
+      "passed": true
+    },
+    "compatibility_transform_executed_and_audited": {
+      "detail": {
+        "bundle": "runs/compatibility/bundle.json",
+        "expected_event_reduction": "10 -> 2"
+      },
+      "passed": true
+    },
+    "eight_required_structured_failures": {
+      "detail": {
+        "observed": [
+          "ACTION_INVALID",
+          "ARTIFACT_NOT_FOUND",
+          "BACKTEST_FAILED",
+          "DATA_FIELD_MISSING",
+          "DATA_TIMEFRAME_MISMATCH",
+          "ORDER_REJECTED",
+          "SYMBOL_MAPPING_FAILED",
+          "TRAINING_FAILED"
+        ],
+        "required": [
+          "ACTION_INVALID",
+          "ARTIFACT_NOT_FOUND",
+          "BACKTEST_FAILED",
+          "DATA_FIELD_MISSING",
+          "DATA_TIMEFRAME_MISMATCH",
+          "ORDER_REJECTED",
+          "SYMBOL_MAPPING_FAILED",
+          "TRAINING_FAILED"
+        ]
+      },
+      "passed": true
+    },
+    "eighteen_paper_grounded_strategy_bindings": {
+      "detail": {
+        "algorithm_exact_by_kind": {
+          "reinforcement_learning": 1,
+          "rule": 6,
+          "supervised": 3
+        },
+        "algorithm_exact_count": 10,
+        "bindings": [
+          {
+            "claim_count": 2,
+            "claim_link_count": 2,
+            "fidelity": "method_reproduction",
+            "kind": "reinforcement_learning",
+            "runtime_behavior": {
+              "bundle": "runs/all/reinforcement_learning.a2c_pairs/bundle.json",
+              "data_fidelity_observed": "D1_public_proxy",
+              "decision_sha256": "ded146da788ef48c1c56789e05514b3ed52c1b93a5bbb8ee80e6609da3fa9db7",
+              "metrics": {
+                "decisions": 212,
+                "fills": 64,
+                "orders": 212
+              },
+              "runtime_fidelity_observed": "R2_independent_strict",
+              "source_data_sha256": "d76a6a207d18ba63217381d162a08839bcf9b35dab5dbdb04a035b1a2b3a6714",
+              "tests_executed": [
+                "tests/papers/test_reproduction_oracles.py::test_a2c_pairs_reproduces_advantage_actor_critic_update"
+              ]
+            },
+            "runtime_verified": true,
+            "source_id": "yang2024",
+            "source_sha256": "9b30affe7f856c1add02ff4fb8bb7f3eac670e877a19bf3c91a18bbf4fc98eb3",
+            "status": "passed",
+            "strategy_id": "reinforcement_learning.a2c_pairs"
+          },
+          {
+            "claim_count": 2,
+            "claim_link_count": 2,
+            "fidelity": "method_reproduction",
+            "kind": "reinforcement_learning",
+            "runtime_behavior": {
+              "bundle": "runs/all/reinforcement_learning.double_q_book_inventory/bundle.json",
+              "data_fidelity_observed": "D0_synthetic",
+              "decision_sha256": "c3693cb57a899d6be4c99ab8a377d39835d5cbb08be3b56834835db7f663a498",
+              "metrics": {
+                "decisions": 10,
+                "fills": 8,
+                "orders": 10
+              },
+              "runtime_fidelity_observed": "R2_independent_strict",
+              "source_data_sha256": "ae71a1d713137b0d3029474773bf04977870b69e2b422dd98555aff935fe7cda",
+              "tests_executed": [
+                "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.double_q_book_inventory]"
+              ]
+            },
+            "runtime_verified": true,
+            "source_id": "spooner2018",
+            "source_sha256": "1f653c9b625fa068f521660006194796a835da239b1da529f124841af9f82762",
+            "status": "passed",
+            "strategy_id": "reinforcement_learning.double_q_book_inventory"
+          },
+          {
+            "claim_count": 2,
+            "claim_link_count": 2,
+            "fidelity": "algorithm_reproduction",
+            "kind": "reinforcement_learning",
+            "runtime_behavior": {
+              "bundle": "runs/all/reinforcement_learning.linear_actor_critic_allocation/bundle.json",
+              "data_fidelity_observed": "D1_public_proxy",
+              "decision_sha256": "969339e904b3d969f7ebaf00030709ff7d760366651facca1433ac4297c50f29",
+              "metrics": {
+                "decisions": 106,
+                "fills": 105,
+                "orders": 106
+              },
+              "runtime_fidelity_observed": "R2_independent_strict",
+              "source_data_sha256": "2708326df26a85ab68d420790ebc7b0c9f24b70faae9bdf5d84893d5d65f3e6f",
+              "tests_executed": [
+                "tests/papers/test_reproduction_oracles.py::test_continuous_actor_critic_reproduces_policy_and_value_updates"
+              ]
+            },
+            "runtime_verified": true,
+            "source_id": "li2023",
+            "source_sha256": "28bac43b974c41a9acd602fdd6b3033341fd9a9f25aac739591be58a7bbf9a7b",
+            "status": "passed",
+            "strategy_id": "reinforcement_learning.linear_actor_critic_allocation"
+          },
+          {
+            "claim_count": 2,
+            "claim_link_count": 2,
+            "fidelity": "method_reproduction",
+            "kind": "reinforcement_learning",
+            "runtime_behavior": {
+              "bundle": "runs/all/reinforcement_learning.risk_averse_contextual_bandit/bundle.json",
+              "data_fidelity_observed": "D0_synthetic",
+              "decision_sha256": "2a6cc950890cde9ebc295acb09ce8602076892428d922bfa4d8d5336a04bfd29",
+              "metrics": {
+                "decisions": 10,
+                "fills": 8,
+                "orders": 10
+              },
+              "runtime_fidelity_observed": "R2_independent_strict",
+              "source_data_sha256": "e989804ddac4ac04a762e1cd027844e135664b27dda3d30f23c5fc61fbf9519a",
+              "tests_executed": [
+                "tests/papers/test_reproduction_oracles.py::test_risk_averse_bandit_reproduces_mean_variance_thompson_objective"
+              ]
+            },
+            "runtime_verified": true,
+            "source_id": "lin2022",
+            "source_sha256": "3e538c2468d69e084a06f231d86254c0672e91d69f565e7418bf5fce45f665bf",
+            "status": "passed",
+            "strategy_id": "reinforcement_learning.risk_averse_contextual_bandit"
+          },
+          {
+            "claim_count": 2,
+            "claim_link_count": 2,
+            "fidelity": "method_reproduction",
+            "kind": "reinforcement_learning",
+            "runtime_behavior": {
+              "bundle": "runs/all/reinforcement_learning.sarsa_trend/bundle.json",
+              "data_fidelity_observed": "D0_synthetic",
+              "decision_sha256": "039592b452ad4c0128afa043456abc77ec571d1a98bce103fbec1a2a461ed3f8",
+              "metrics": {
+                "decisions": 10,
+                "fills": 5,
+                "orders": 10
+              },
+              "runtime_fidelity_observed": "R2_independent_strict",
+              "source_data_sha256": "6993433f37d1cd97bff46b9b1c19bb48c3a62fd0912b9489fca49b07a87bc2a8",
+              "tests_executed": [
+                "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.sarsa_trend]"
+              ]
+            },
+            "runtime_verified": true,
+            "source_id": "spooner2018",
+            "source_sha256": "1f653c9b625fa068f521660006194796a835da239b1da529f124841af9f82762",
+            "status": "passed",
+            "strategy_id": "reinforcement_learning.sarsa_trend"
+          },
+          {
+            "claim_count": 2,
+            "claim_link_count": 2,
+            "fidelity": "method_reproduction",
+            "kind": "reinforcement_learning",
+            "runtime_behavior": {
+              "bundle": "runs/all/reinforcement_learning.tabular_q_inventory/bundle.json",
+              "data_fidelity_observed": "D0_synthetic",
+              "decision_sha256": "cfed02ca3c2687f602b5b2c56cbf72da7ef7e7bc2eed483a85447d6cd5b1f7f2",
+              "metrics": {
+                "decisions": 10,
+                "fills": 8,
+                "orders": 10
+              },
+              "runtime_fidelity_observed": "R2_independent_strict",
+              "source_data_sha256": "e989804ddac4ac04a762e1cd027844e135664b27dda3d30f23c5fc61fbf9519a",
+              "tests_executed": [
+                "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.tabular_q_inventory]"
+              ]
+            },
+            "runtime_verified": true,
+            "source_id": "spooner2018",
+            "source_sha256": "1f653c9b625fa068f521660006194796a835da239b1da529f124841af9f82762",
+            "status": "passed",
+            "strategy_id": "reinforcement_learning.tabular_q_inventory"
+          },
+          {
+            "claim_count": 2,
+            "claim_link_count": 2,
+            "fidelity": "formula_reproduction",
+            "kind": "rule",
+            "runtime_behavior": {
+              "bundle": "runs/all/rule.donchian_breakout/bundle.json",
+              "data_fidelity_observed": "D1_public_proxy",
+              "decision_sha256": "73f44df9a63e2a794526ddad4d7e7df9f4c9205f81269de02bd2fba7eb7e6a0b",
+              "metrics": {
+                "decisions": 506,
+                "fills": 34,
+                "orders": 129
+              },
+              "runtime_fidelity_observed": "R2_independent_strict",
+              "source_data_sha256": "05efc4bf60c94b87171c2bbc53908bd65f93fa336f5596964f25ec9dc55cbd82",
+              "tests_executed": [
+                "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.donchian_breakout]"
+              ]
+            },
+            "runtime_verified": true,
+            "source_id": "ma2015",
+            "source_sha256": "6908ca31e92e750881255742a99ffc3daf00ca2e9d0b0012652809d0f538b87a",
+            "status": "passed",
+            "strategy_id": "rule.donchian_breakout"
+          },
+          {
+            "claim_count": 2,
+            "claim_link_count": 2,
+            "fidelity": "formula_reproduction",
+            "kind": "rule",
+            "runtime_behavior": {
+              "bundle": "runs/all/rule.l1_microprice/bundle.json",
+              "data_fidelity_observed": "D0_synthetic",
+              "decision_sha256": "1d6f86f404176fc47f087a66391a48fb7918b94b9de5dadf47a6b7d44e7ba323",
+              "metrics": {
+                "decisions": 10,
+                "fills": 9,
+                "orders": 10
+              },
+              "runtime_fidelity_observed": "R2_independent_strict",
+              "source_data_sha256": "4497637c0e9bbf116623cb67b303971a077a23e1b94c28657acf1db3f246ee2b",
+              "tests_executed": [
+                "tests/papers/test_reproduction_oracles.py::test_weighted_microprice_reproduces_stoikov_toy_formula"
+              ]
+            },
+            "runtime_verified": true,
+            "source_id": "stoikov2017",
+            "source_sha256": "906b3d99cc38e511d3cea86fa381000809c217c231e6cdc4a0353e62bbad2fdd",
+            "status": "passed",
+            "strategy_id": "rule.l1_microprice"
+          },
+          {
+            "claim_count": 2,
+            "claim_link_count": 2,
+            "fidelity": "formula_reproduction",
+            "kind": "rule",
+            "runtime_behavior": {
+              "bundle": "runs/all/rule.l2_imbalance_maker/bundle.json",
+              "data_fidelity_observed": "D0_synthetic",
+              "decision_sha256": "c1ae8b32628830fcf6d6ef8fb9621607fcb878ee16d9efbe250b2ce2d5082871",
+              "metrics": {
+                "decisions": 10,
+                "fills": 9,
+                "orders": 11
+              },
+              "runtime_fidelity_observed": "R2_independent_strict",
+              "source_data_sha256": "ae71a1d713137b0d3029474773bf04977870b69e2b422dd98555aff935fe7cda",
+              "tests_executed": [
+                "tests/papers/test_reproduction_oracles.py::test_avellaneda_stoikov_quotes_reproduce_equations_29_30"
+              ]
+            },
+            "runtime_verified": true,
+            "source_id": "avellaneda2008",
+            "source_sha256": "71fa9268339ae82365171caa7416833b3a5d584f05e4f4c087c4ae72d7121a8d",
+            "status": "passed",
+            "strategy_id": "rule.l2_imbalance_maker"
+          },
+          {
+            "claim_count": 2,
+            "claim_link_count": 2,
+            "fidelity": "formula_reproduction",
+            "kind": "rule",
+            "runtime_behavior": {
+              "bundle": "runs/all/rule.pairs_zscore/bundle.json",
+              "data_fidelity_observed": "D1_public_proxy",
+              "decision_sha256": "4a852c64d2ca22da11ba70b831e9cd239a6466d170c079fe498c6209769836fd",
+              "metrics": {
+                "decisions": 1012,
+                "fills": 388,
+                "orders": 1000
+              },
+              "runtime_fidelity_observed": "R2_independent_strict",
+              "source_data_sha256": "4f65db76b8b3fdde3cae3dcf38fa004eb91a0529b4ee93afe5a12a01ddd628ac",
+              "tests_executed": [
+                "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.pairs_zscore]"
+              ]
+            },
+            "runtime_verified": true,
+            "source_id": "khizbullin2023",
+            "source_sha256": "504f8375e6eee3098be63123d7858124b0a9917d0430d6ced0a22eb15ac2da8a",
+            "status": "passed",
+            "strategy_id": "rule.pairs_zscore"
+          },
+          {
+            "claim_count": 2,
+            "claim_link_count": 2,
+            "fidelity": "formula_reproduction",
+            "kind": "rule",
+            "runtime_behavior": {
+              "bundle": "runs/all/rule.sma_cross/bundle.json",
+              "data_fidelity_observed": "D0_synthetic",
+              "decision_sha256": "523e8612653c0ad39b1c818ce3ce40d3d7e4a8e6ddbc3b8595021ac1deea62eb",
+              "metrics": {
+                "decisions": 10,
+                "fills": 2,
+                "orders": 6
+              },
+              "runtime_fidelity_observed": "R2_independent_strict",
+              "source_data_sha256": "6993433f37d1cd97bff46b9b1c19bb48c3a62fd0912b9489fca49b07a87bc2a8",
+              "tests_executed": [
+                "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.sma_cross]"
+              ]
+            },
+            "runtime_verified": true,
+            "source_id": "ma2015",
+            "source_sha256": "6908ca31e92e750881255742a99ffc3daf00ca2e9d0b0012652809d0f538b87a",
+            "status": "passed",
+            "strategy_id": "rule.sma_cross"
+          },
+          {
+            "claim_count": 2,
+            "claim_link_count": 2,
+            "fidelity": "formula_reproduction",
+            "kind": "rule",
+            "runtime_behavior": {
+              "bundle": "runs/all/rule.twap_execution/bundle.json",
+              "data_fidelity_observed": "D0_synthetic",
+              "decision_sha256": "c67b3c19b326178cf70b92cb44b0a33d65e9e024d2bc161255c5c9e3e0addb52",
+              "metrics": {
+                "decisions": 6,
+                "fills": 4,
+                "orders": 4
+              },
+              "runtime_fidelity_observed": "R2_independent_strict",
+              "source_data_sha256": "83b9884f4b54b381744efb554df89690a61f8f7d2b274a0c0f156b140e795489",
+              "tests_executed": [
+                "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.twap_execution]"
+              ]
+            },
+            "runtime_verified": true,
+            "source_id": "pardo2022",
+            "source_sha256": "289db4306c3f73189511586bf128793f4eeaa3b6d36991508458c3062d83d838",
+            "status": "passed",
+            "strategy_id": "rule.twap_execution"
+          },
+          {
+            "claim_count": 2,
+            "claim_link_count": 2,
+            "fidelity": "method_reproduction",
+            "kind": "supervised",
+            "runtime_behavior": {
+              "bundle": "runs/all/supervised.cross_sectional_ranker/bundle.json",
+              "data_fidelity_observed": "D0_synthetic",
+              "decision_sha256": "1e7d609f6765bc6dbf47e75267dad4b76d8a833dd11298f6923ed2aa0e752eae",
+              "metrics": {
+                "decisions": 18,
+                "fills": 12,
+                "orders": 18
+              },
+              "runtime_fidelity_observed": "R2_independent_strict",
+              "source_data_sha256": "de41149497f346149e804e6eddedd214ea2486f0fede953e499036f4d95985b8",
+              "tests_executed": [
+                "tests/papers/test_reproduction_oracles.py::test_cross_sectional_ranker_reproduces_pooled_ols_and_sort"
+              ]
+            },
+            "runtime_verified": true,
+            "source_id": "gu2019",
+            "source_sha256": "cf4ebd0a103c7714235c8e464e060c96f9f7332c4e82b2219f2560767d928c66",
+            "status": "passed",
+            "strategy_id": "supervised.cross_sectional_ranker"
+          },
+          {
+            "claim_count": 2,
+            "claim_link_count": 2,
+            "fidelity": "method_reproduction",
+            "kind": "supervised",
+            "runtime_behavior": {
+              "bundle": "runs/all/supervised.gaussian_volume_breakout/bundle.json",
+              "data_fidelity_observed": "D0_synthetic",
+              "decision_sha256": "b8728ffa687e8392c26dc32140ba7c4187313b56d208ff2406fd48c15c2874f9",
+              "metrics": {
+                "decisions": 6,
+                "fills": 1,
+                "orders": 6
+              },
+              "runtime_fidelity_observed": "R2_independent_strict",
+              "source_data_sha256": "83b9884f4b54b381744efb554df89690a61f8f7d2b274a0c0f156b140e795489",
+              "tests_executed": [
+                "tests/integration/test_supervised_strategy_matrix.py::test_every_supervised_strategy_trains_reloads_and_backtests[supervised.gaussian_volume_breakout]"
+              ]
+            },
+            "runtime_verified": true,
+            "source_id": "saifan2021",
+            "source_sha256": "7af54057ce8fc74068583b2251d249f68f13c960e70517653d74556020fb28c3",
+            "status": "passed",
+            "strategy_id": "supervised.gaussian_volume_breakout"
+          },
+          {
+            "claim_count": 2,
+            "claim_link_count": 2,
+            "fidelity": "algorithm_reproduction",
+            "kind": "supervised",
+            "runtime_behavior": {
+              "bundle": "runs/all/supervised.l1_adverse_selection/bundle.json",
+              "data_fidelity_observed": "D0_synthetic",
+              "decision_sha256": "4134c062c68a4e334252114111aa05a66db575823acf7dbb6749efd0ee1dd519",
+              "metrics": {
+                "decisions": 10,
+                "fills": 9,
+                "orders": 10
+              },
+              "runtime_fidelity_observed": "R2_independent_strict",
+              "source_data_sha256": "4497637c0e9bbf116623cb67b303971a077a23e1b94c28657acf1db3f246ee2b",
+              "tests_executed": [
+                "tests/papers/test_reproduction_oracles.py::test_queue_imbalance_logistic_matches_maximum_likelihood_direction"
+              ]
+            },
+            "runtime_verified": true,
+            "source_id": "gould2015",
+            "source_sha256": "a5051285adfe2d8a2d7f46a758486f357d556a46a964bc89b245de7e7a0bc338",
+            "status": "passed",
+            "strategy_id": "supervised.l1_adverse_selection"
+          },
+          {
+            "claim_count": 2,
+            "claim_link_count": 2,
+            "fidelity": "algorithm_reproduction",
+            "kind": "supervised",
+            "runtime_behavior": {
+              "bundle": "runs/all/supervised.l2_fill_probability/bundle.json",
+              "data_fidelity_observed": "D0_synthetic",
+              "decision_sha256": "d82115e57b7cb2667d094960bdefa16622b92f8c7149b29f317be7b3d0caf59c",
+              "metrics": {
+                "decisions": 10,
+                "fills": 5,
+                "orders": 10
+              },
+              "runtime_fidelity_observed": "R2_independent_strict",
+              "source_data_sha256": "ae71a1d713137b0d3029474773bf04977870b69e2b422dd98555aff935fe7cda",
+              "tests_executed": [
+                "tests/papers/test_reproduction_oracles.py::test_fill_probability_reproduces_constant_rate_queue_race"
+              ]
+            },
+            "runtime_verified": true,
+            "source_id": "lokin2026",
+            "source_sha256": "7b6f6923cb5a1975353f522caa558e29fc9eca6e906530250463b16046a25785",
+            "status": "passed",
+            "strategy_id": "supervised.l2_fill_probability"
+          },
+          {
+            "claim_count": 2,
+            "claim_link_count": 2,
+            "fidelity": "algorithm_reproduction",
+            "kind": "supervised",
+            "runtime_behavior": {
+              "bundle": "runs/all/supervised.logistic_direction/bundle.json",
+              "data_fidelity_observed": "D1_public_proxy",
+              "decision_sha256": "65f710227ea2e77e3f47f346c45a6f92090d80f14867f8af4da9ea5c37140fca",
+              "metrics": {
+                "decisions": 106,
+                "fills": 1,
+                "orders": 106
+              },
+              "runtime_fidelity_observed": "R2_independent_strict",
+              "source_data_sha256": "2708326df26a85ab68d420790ebc7b0c9f24b70faae9bdf5d84893d5d65f3e6f",
+              "tests_executed": [
+                "tests/papers/test_reproduction_oracles.py::test_directional_logistic_reproduces_paper_gradient_descent"
+              ]
+            },
+            "runtime_verified": true,
+            "source_id": "chipwanya2023",
+            "source_sha256": "ce5644b3dc03932fca64156631ddcb2ef3f2abab9a44ec6d8364f5c0ba2fe7c1",
+            "status": "passed",
+            "strategy_id": "supervised.logistic_direction"
+          },
+          {
+            "claim_count": 2,
+            "claim_link_count": 2,
+            "fidelity": "method_reproduction",
+            "kind": "supervised",
+            "runtime_behavior": {
+              "bundle": "runs/all/supervised.ridge_return/bundle.json",
+              "data_fidelity_observed": "D1_public_proxy",
+              "decision_sha256": "57267b8f0eede8e646e3cfaf2ce9d44bb1d39f7a0adab1a14d3fb4dedad8a015",
+              "metrics": {
+                "decisions": 106,
+                "fills": 4,
+                "orders": 106
+              },
+              "runtime_fidelity_observed": "R2_independent_strict",
+              "source_data_sha256": "2708326df26a85ab68d420790ebc7b0c9f24b70faae9bdf5d84893d5d65f3e6f",
+              "tests_executed": [
+                "tests/integration/test_supervised_strategy_matrix.py::test_every_supervised_strategy_trains_reloads_and_backtests[supervised.ridge_return]"
+              ]
+            },
+            "runtime_verified": true,
+            "source_id": "moodi2023",
+            "source_sha256": "f2b1f92613d1db365206481427daec60cc491dfe3464d41890733aba18d523d5",
+            "status": "passed",
+            "strategy_id": "supervised.ridge_return"
+          }
+        ],
+        "counts_by_kind": {
+          "reinforcement_learning": 6,
+          "rule": 6,
+          "supervised": 6
+        },
+        "coverage_is_one_to_one": true,
+        "data_fidelity_counts": {
+          "D0_synthetic": 12,
+          "D1_public_proxy": 6
+        },
+        "declared_runtime_fidelity_counts": {
+          "R1_unified_contract": 18
+        },
+        "errors": [],
+        "experimental_fidelity_counts": {
+          "E0_runtime_only": 18
+        },
+        "fidelity_counts": {
+          "algorithm_reproduction": 4,
+          "formula_reproduction": 6,
+          "method_reproduction": 8
+        },
+        "observed_runtime_fidelity_counts": {
+          "R2_independent_strict": 18
+        },
+        "policy": {
+          "empirical_claims_allowed": false,
+          "maximum_method_adaptations": 0,
+          "minimum_algorithm_exact": 9,
+          "minimum_distinct_sources": 15,
+          "minimum_formula_reproductions": 6,
+          "minimum_public_data_bindings": 6,
+          "minimum_public_data_bindings_per_kind": 2,
+          "required_reproductions": 18
+        },
+        "public_data_by_kind": {
+          "reinforcement_learning": 2,
+          "rule": 2,
+          "supervised": 2
+        },
+        "reproduction_by_kind": {
+          "reinforcement_learning": 6,
+          "rule": 6,
+          "supervised": 6
+        },
+        "reproduction_count": 18,
+        "runtime_evidence_required": true,
+        "source_count": 15,
+        "status": "passed",
+        "strategy_count": 18
+      },
+      "passed": true
+    },
+    "engine_capability_inventory": {
+      "detail": {
+        "conformance_verified": [
+          "backtrader",
+          "reference"
+        ],
+        "profiled_only": [
+          "lean",
+          "qlib",
+          "vnpy"
+        ]
+      },
+      "passed": true
+    },
+    "evidence_sandbox_mode_consistency": {
+      "detail": {
+        "expected_mode": "strict_container",
+        "observed_modes": [
+          "strict_container"
+        ],
+        "process_strict_container_attested": true,
+        "strict_dynamic_evidence": true,
+        "strict_evidence_required": true
+      },
+      "passed": true
+    },
+    "executable_agent_audit_boundary": {
+      "detail": {
+        "machine_readable_cli": true,
+        "runtime_authority_fixed_false": true
+      },
+      "passed": true
+    },
+    "fail_closed_sandbox": {
+      "detail": {
+        "base_image_digest_pinned": true,
+        "dependency_lock_enforced": true,
+        "missing_controls": [],
+        "missing_runtime_attestation_checks": [],
+        "non_root_image": true,
+        "package_source_policy_enforced": true,
+        "single_package_docker_entrypoint": true,
+        "strategy_minimum_sandbox_enforced": true
+      },
+      "passed": true
+    },
+    "public_interface_and_unseen_paper_execution": {
+      "detail": {
+        "missing_interface_tests": [],
+        "required_unseen_paper_strategy_shapes": 3,
+        "unseen_paper_strategy_shapes_executed": 3
+      },
+      "passed": true
+    },
+    "real_paper_to_runtime_evidence": {
+      "detail": {
+        "data_origins": [
+          "public_historical",
+          "synthetic_fixture"
+        ],
+        "papers": [
+          {
+            "data_origin": "synthetic_fixture",
+            "fills": 55,
+            "paper_id": "avellaneda2008",
+            "status": "passed"
+          },
+          {
+            "data_origin": "synthetic_fixture",
+            "fills": 53,
+            "paper_id": "gould2015",
+            "status": "passed"
+          },
+          {
+            "data_origin": "public_historical",
+            "fills": 100,
+            "paper_id": "ma2015",
+            "status": "passed"
+          },
+          {
+            "data_origin": "synthetic_fixture",
+            "fills": 1,
+            "paper_id": "nevmyvaka2006",
+            "status": "passed"
+          }
+        ],
+        "status": "passed",
+        "verification": "source reparse, spec rebuild, package recompile, runtime and artifact hashes"
+      },
+      "passed": true
+    },
+    "repository_delivery": {
+      "detail": {
+        "missing": []
+      },
+      "passed": true
+    },
+    "strategy_packages_6x3": {
+      "detail": {
+        "counts": {
+          "reinforcement_learning": 6,
+          "rule": 6,
+          "supervised": 6
+        },
+        "incomplete_executable_packages": [],
+        "materially_distinct_contract_shapes": 18,
+        "total": 18
+      },
+      "passed": true
+    },
+    "strict_container_complete_gate": {
+      "detail": {
+        "generated_content_drift_checked": true,
+        "missing_steps": [],
+        "root_execution_rejected": true
+      },
+      "passed": true
+    },
+    "two_native_engine_conformance": {
+      "detail": {
+        "decision_sha256": {
+          "backtrader": "7f2a29dd55ba31618a70a9d828301e40e0a31c5bb6c58319e29e56a235254fd7",
+          "reference": "7f2a29dd55ba31618a70a9d828301e40e0a31c5bb6c58319e29e56a235254fd7"
+        },
+        "decisions_equal": true,
+        "engines": [
+          "reference",
+          "backtrader"
+        ],
+        "execution_prices_intentionally_engine_specific": true,
+        "fill_shapes": {
+          "backtrader": [
+            {
+              "quantity": "1",
+              "side": "buy",
+              "timestamp": "2026-01-02T09:36:00+00:00"
+            },
+            {
+              "quantity": "2",
+              "side": "sell",
+              "timestamp": "2026-01-02T09:39:00+00:00"
+            }
+          ],
+          "reference": [
+            {
+              "quantity": "1",
+              "side": "buy",
+              "timestamp": "2026-01-02T09:36:00+00:00"
+            },
+            {
+              "quantity": "2",
+              "side": "sell",
+              "timestamp": "2026-01-02T09:39:00+00:00"
+            }
+          ]
+        },
+        "fill_shapes_equal": true,
+        "native_engine_count": 2,
+        "status": "passed"
+      },
+      "passed": true
+    },
+    "unified_train_infer_backtest_reports": {
+      "detail": {
+        "complete_bundles": 18,
+        "content_addressed_artifact_files": 12,
+        "runs_with_native_or_reference_fills": 18,
+        "schema_validated_bundles": 18,
+        "source_attested_bundles": 18,
+        "stage_complete_bundles": 18,
+        "successful_runs": 18,
+        "trainable_artifact_runs": 12
+      },
+      "passed": true
+    },
+    "versioned_public_schemas": {
+      "detail": {
+        "dialect": "https://json-schema.org/draft/2020-12/schema",
+        "external_references": {},
+        "issues": [],
+        "reverse_dns_extensions_enforced": true,
+        "schema_count": 31,
+        "standalone_references": true,
+        "unique_ids": 31
+      },
+      "passed": true
+    }
+  },
+  "contract_version": "1.1.0",
+  "passed_checks": 18,
+  "status": "passed",
+  "total_checks": 18,
+  "verification_scope": "strict_container_verification",
+  "verifier_policy": "generated evidence only; matrix narrative is not a result"
+}

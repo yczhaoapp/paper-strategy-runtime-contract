@@ -1,0 +1,92 @@
+{
+  "version": "1.1",
+  "strategy_id": "reinforcement_learning.linear_actor_critic_allocation",
+  "strategy_kind": "reinforcement_learning",
+  "source_id": "li2023",
+  "fidelity": "algorithm_reproduction",
+  "claims": [
+    {
+      "claim_id": "actorcritic.policy_gradient",
+      "page": 4,
+      "anchor": "continuous space",
+      "locator": "Equation (2) and following text, PDF p.4",
+      "interpretation": "Continuous actions use a Gaussian policy and the actor is updated with the advantage-weighted log-policy gradient."
+    },
+    {
+      "claim_id": "actorcritic.bounded_weight",
+      "page": 7,
+      "anchor": "tanh",
+      "locator": "Implementation description, PDF p.7",
+      "interpretation": "The policy uses tanh to emit continuous asset weights in the interval from minus one to one, enabling short positions."
+    }
+  ],
+  "implementation": [
+    {
+      "path": "src/psrc/strategies/reinforcement_learning.py",
+      "sha256": "854f91e3b116a7cdc7aa4897f033c81654d5df3b29301efec016dc9468b63271",
+      "symbols": [
+        "LinearActorCriticAllocationStrategy"
+      ]
+    },
+    {
+      "path": "strategies/reinforcement_learning.linear_actor_critic_allocation/strategy.py",
+      "sha256": "d1fba5158d376e7b347987597b4739be13cfb9fdfebf3cb13316f55359b4a7a0",
+      "symbols": [
+        "LinearActorCriticAllocationStrategy",
+        "class Strategy"
+      ]
+    }
+  ],
+  "verification_tests": [
+    "tests/papers/test_reproduction_oracles.py::test_continuous_actor_critic_reproduces_policy_and_value_updates"
+  ],
+  "claim_links": [
+    {
+      "claim_id": "actorcritic.policy_gradient",
+      "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
+      "symbol": "LinearActorCriticAllocationStrategy",
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_continuous_actor_critic_reproduces_policy_and_value_updates"
+    },
+    {
+      "claim_id": "actorcritic.bounded_weight",
+      "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
+      "symbol": "LinearActorCriticAllocationStrategy",
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_continuous_actor_critic_reproduces_policy_and_value_updates"
+    }
+  ],
+  "runtime_expectation": {
+    "source_data_sha256": "2708326df26a85ab68d420790ebc7b0c9f24b70faae9bdf5d84893d5d65f3e6f",
+    "decision_sha256": "969339e904b3d969f7ebaf00030709ff7d760366651facca1433ac4297c50f29",
+    "data_kinds": [
+      "bar"
+    ],
+    "timeframes": [
+      "P1D"
+    ],
+    "observed_action_kinds": [
+      "target_weight"
+    ],
+    "observed_reason_codes": [
+      "policy.linear_actor_allocation"
+    ],
+    "expected_decisions": 106,
+    "expected_orders": 106,
+    "expected_fills": 105,
+    "artifact_algorithm": "linear-actor-critic-v1",
+    "artifact_id": "sha256-387d864128ef054f80ea62970a254ea819714f3b4790dc0dd3e590f4493e3e2b"
+  },
+  "data_mode": "public_historical",
+  "original_paper_dataset": false,
+  "empirical_results_reproduced": false,
+  "assumptions": [
+    "The third state component is a portfolio weight in both training and inference; public AAPL daily bars supply causal price states, with the first 400 bars reserved for offline training."
+  ],
+  "deviations": [
+    "Uses one public AAPL risky-asset proxy, deterministic offline exploratory weights {-0.8, 0, 0.8} and a linear policy rather than the paper’s multi-asset neural-network experiment."
+  ],
+  "mapping_review": "The unrelated pair-trading citation was replaced. The actor now follows a continuous-policy score-function update, the critic uses a TD advantage, and inference applies the paper’s tanh weight bound.",
+  "algorithm_fidelity": "A2_algorithm_exact",
+  "data_fidelity": "D1_public_proxy",
+  "experimental_fidelity": "E0_runtime_only",
+  "runtime_fidelity": "R1_unified_contract"
+}

@@ -1,0 +1,135 @@
+{
+  "$defs": {
+    "RLTransition": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "minimum": 0,
+          "title": "Action",
+          "type": "integer"
+        },
+        "episode_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Episode Id",
+          "type": "string"
+        },
+        "next_action": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Next Action"
+        },
+        "next_state": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Next State",
+          "type": "array"
+        },
+        "reward": {
+          "title": "Reward",
+          "type": "number"
+        },
+        "state": {
+          "items": {
+            "type": "number"
+          },
+          "title": "State",
+          "type": "array"
+        },
+        "step": {
+          "minimum": 0,
+          "title": "Step",
+          "type": "integer"
+        },
+        "terminated": {
+          "title": "Terminated",
+          "type": "boolean"
+        },
+        "truncated": {
+          "default": false,
+          "title": "Truncated",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "action",
+        "episode_id",
+        "next_state",
+        "reward",
+        "state",
+        "step",
+        "terminated"
+      ],
+      "title": "RLTransition",
+      "type": "object"
+    }
+  },
+  "$id": "urn:psrc:schema/training-request.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "dataset_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "features": {
+      "default": [],
+      "items": {
+        "items": {
+          "type": "number"
+        },
+        "type": "array"
+      },
+      "title": "Features",
+      "type": "array"
+    },
+    "labels": {
+      "default": [],
+      "items": {
+        "type": "number"
+      },
+      "title": "Labels",
+      "type": "array"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Metadata",
+      "type": "object"
+    },
+    "run_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "seed": {
+      "title": "Seed",
+      "type": "integer"
+    },
+    "transitions": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/RLTransition"
+      },
+      "title": "Transitions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "dataset_id",
+    "run_id",
+    "seed"
+  ],
+  "title": "TrainingRequest",
+  "type": "object"
+}

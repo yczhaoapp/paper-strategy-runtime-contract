@@ -1,0 +1,3606 @@
+[
+  {
+    "available_time": "2008-08-06T00:00:00Z",
+    "event_id": "public.aapl-msft:400:aapl",
+    "event_time": "2008-08-05T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "21.252427",
+      "high": "21.252427",
+      "kind": "bar",
+      "low": "21.252427",
+      "open": "21.252427",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-06T00:00:00Z",
+    "sequence": 800,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-06T00:00:00Z",
+    "event_id": "public.aapl-msft:400:msft",
+    "event_time": "2008-08-05T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "21.470222",
+      "high": "21.470222",
+      "kind": "bar",
+      "low": "21.470222",
+      "open": "21.470222",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-06T00:00:00Z",
+    "sequence": 801,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-07T00:00:00Z",
+    "event_id": "public.aapl-msft:401:aapl",
+    "event_time": "2008-08-06T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "21.722087",
+      "high": "21.722087",
+      "kind": "bar",
+      "low": "21.722087",
+      "open": "21.722087",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-07T00:00:00Z",
+    "sequence": 802,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-07T00:00:00Z",
+    "event_id": "public.aapl-msft:401:msft",
+    "event_time": "2008-08-06T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.133743",
+      "high": "22.133743",
+      "kind": "bar",
+      "low": "22.133743",
+      "open": "22.133743",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-07T00:00:00Z",
+    "sequence": 803,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-08T00:00:00Z",
+    "event_id": "public.aapl-msft:402:aapl",
+    "event_time": "2008-08-07T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "21.640061",
+      "high": "21.640061",
+      "kind": "bar",
+      "low": "21.640061",
+      "open": "21.640061",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-08T00:00:00Z",
+    "sequence": 804,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-08T00:00:00Z",
+    "event_id": "public.aapl-msft:402:msft",
+    "event_time": "2008-08-07T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.436832",
+      "high": "22.436832",
+      "kind": "bar",
+      "low": "22.436832",
+      "open": "22.436832",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-08T00:00:00Z",
+    "sequence": 805,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-09T00:00:00Z",
+    "event_id": "public.aapl-msft:403:aapl",
+    "event_time": "2008-08-08T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "22.431205",
+      "high": "22.431205",
+      "kind": "bar",
+      "low": "22.431205",
+      "open": "22.431205",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-09T00:00:00Z",
+    "sequence": 806,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-09T00:00:00Z",
+    "event_id": "public.aapl-msft:403:msft",
+    "event_time": "2008-08-08T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "23.043012",
+      "high": "23.043012",
+      "kind": "bar",
+      "low": "23.043012",
+      "open": "23.043012",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-09T00:00:00Z",
+    "sequence": 807,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-12T00:00:00Z",
+    "event_id": "public.aapl-msft:404:aapl",
+    "event_time": "2008-08-11T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "22.961722",
+      "high": "22.961722",
+      "kind": "bar",
+      "low": "22.961722",
+      "open": "22.961722",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-12T00:00:00Z",
+    "sequence": 808,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-12T00:00:00Z",
+    "event_id": "public.aapl-msft:404:msft",
+    "event_time": "2008-08-11T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.854605",
+      "high": "22.854605",
+      "kind": "bar",
+      "low": "22.854605",
+      "open": "22.854605",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-12T00:00:00Z",
+    "sequence": 809,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-13T00:00:00Z",
+    "event_id": "public.aapl-msft:405:aapl",
+    "event_time": "2008-08-12T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "23.381108",
+      "high": "23.381108",
+      "kind": "bar",
+      "low": "23.381108",
+      "open": "23.381108",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-13T00:00:00Z",
+    "sequence": 810,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-13T00:00:00Z",
+    "event_id": "public.aapl-msft:405:msft",
+    "event_time": "2008-08-12T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "23.034821",
+      "high": "23.034821",
+      "kind": "bar",
+      "low": "23.034821",
+      "open": "23.034821",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-13T00:00:00Z",
+    "sequence": 811,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-14T00:00:00Z",
+    "event_id": "public.aapl-msft:406:aapl",
+    "event_time": "2008-08-13T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "23.721116",
+      "high": "23.721116",
+      "kind": "bar",
+      "low": "23.721116",
+      "open": "23.721116",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-14T00:00:00Z",
+    "sequence": 812,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-14T00:00:00Z",
+    "event_id": "public.aapl-msft:406:msft",
+    "event_time": "2008-08-13T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.862797",
+      "high": "22.862797",
+      "kind": "bar",
+      "low": "22.862797",
+      "open": "22.862797",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-14T00:00:00Z",
+    "sequence": 813,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-15T00:00:00Z",
+    "event_id": "public.aapl-msft:407:aapl",
+    "event_time": "2008-08-14T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "23.723762",
+      "high": "23.723762",
+      "kind": "bar",
+      "low": "23.723762",
+      "open": "23.723762",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-15T00:00:00Z",
+    "sequence": 814,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-15T00:00:00Z",
+    "event_id": "public.aapl-msft:407:msft",
+    "event_time": "2008-08-14T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.862797",
+      "high": "22.862797",
+      "kind": "bar",
+      "low": "22.862797",
+      "open": "22.862797",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-15T00:00:00Z",
+    "sequence": 815,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-16T00:00:00Z",
+    "event_id": "public.aapl-msft:408:aapl",
+    "event_time": "2008-08-15T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "23.250134",
+      "high": "23.250134",
+      "kind": "bar",
+      "low": "23.250134",
+      "open": "23.250134",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-16T00:00:00Z",
+    "sequence": 816,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-16T00:00:00Z",
+    "event_id": "public.aapl-msft:408:msft",
+    "event_time": "2008-08-15T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.78088",
+      "high": "22.78088",
+      "kind": "bar",
+      "low": "22.78088",
+      "open": "22.78088",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-16T00:00:00Z",
+    "sequence": 817,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-19T00:00:00Z",
+    "event_id": "public.aapl-msft:409:aapl",
+    "event_time": "2008-08-18T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "23.203828",
+      "high": "23.203828",
+      "kind": "bar",
+      "low": "23.203828",
+      "open": "23.203828",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-19T00:00:00Z",
+    "sequence": 818,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-19T00:00:00Z",
+    "event_id": "public.aapl-msft:409:msft",
+    "event_time": "2008-08-18T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.682582",
+      "high": "22.682582",
+      "kind": "bar",
+      "low": "22.682582",
+      "open": "22.682582",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-19T00:00:00Z",
+    "sequence": 819,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-20T00:00:00Z",
+    "event_id": "public.aapl-msft:410:aapl",
+    "event_time": "2008-08-19T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "22.957754",
+      "high": "22.957754",
+      "kind": "bar",
+      "low": "22.957754",
+      "open": "22.957754",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-20T00:00:00Z",
+    "sequence": 820,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-20T00:00:00Z",
+    "event_id": "public.aapl-msft:410:msft",
+    "event_time": "2008-08-19T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.46875",
+      "high": "22.46875",
+      "kind": "bar",
+      "low": "22.46875",
+      "open": "22.46875",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-20T00:00:00Z",
+    "sequence": 821,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-21T00:00:00Z",
+    "event_id": "public.aapl-msft:411:aapl",
+    "event_time": "2008-08-20T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "23.263364",
+      "high": "23.263364",
+      "kind": "bar",
+      "low": "23.263364",
+      "open": "23.263364",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-21T00:00:00Z",
+    "sequence": 822,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-21T00:00:00Z",
+    "event_id": "public.aapl-msft:411:msft",
+    "event_time": "2008-08-20T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.444078",
+      "high": "22.444078",
+      "kind": "bar",
+      "low": "22.444078",
+      "open": "22.444078",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-21T00:00:00Z",
+    "sequence": 823,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-22T00:00:00Z",
+    "event_id": "public.aapl-msft:412:aapl",
+    "event_time": "2008-08-21T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "23.0583",
+      "high": "23.0583",
+      "kind": "bar",
+      "low": "23.0583",
+      "open": "23.0583",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-22T00:00:00Z",
+    "sequence": 824,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-22T00:00:00Z",
+    "event_id": "public.aapl-msft:412:msft",
+    "event_time": "2008-08-21T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.353611",
+      "high": "22.353611",
+      "kind": "bar",
+      "low": "22.353611",
+      "open": "22.353611",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-22T00:00:00Z",
+    "sequence": 825,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-23T00:00:00Z",
+    "event_id": "public.aapl-msft:413:aapl",
+    "event_time": "2008-08-22T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "23.389047",
+      "high": "23.389047",
+      "kind": "bar",
+      "low": "23.389047",
+      "open": "23.389047",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-23T00:00:00Z",
+    "sequence": 826,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-23T00:00:00Z",
+    "event_id": "public.aapl-msft:413:msft",
+    "event_time": "2008-08-22T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.896414",
+      "high": "22.896414",
+      "kind": "bar",
+      "low": "22.896414",
+      "open": "22.896414",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-23T00:00:00Z",
+    "sequence": 827,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-26T00:00:00Z",
+    "event_id": "public.aapl-msft:414:aapl",
+    "event_time": "2008-08-25T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "22.828101",
+      "high": "22.828101",
+      "kind": "bar",
+      "low": "22.828101",
+      "open": "22.828101",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-26T00:00:00Z",
+    "sequence": 828,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-26T00:00:00Z",
+    "event_id": "public.aapl-msft:414:msft",
+    "event_time": "2008-08-25T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.748376",
+      "high": "22.748376",
+      "kind": "bar",
+      "low": "22.748376",
+      "open": "22.748376",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-26T00:00:00Z",
+    "sequence": 829,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-27T00:00:00Z",
+    "event_id": "public.aapl-msft:415:aapl",
+    "event_time": "2008-08-26T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "22.972306",
+      "high": "22.972306",
+      "kind": "bar",
+      "low": "22.972306",
+      "open": "22.972306",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-27T00:00:00Z",
+    "sequence": 830,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-27T00:00:00Z",
+    "event_id": "public.aapl-msft:415:msft",
+    "event_time": "2008-08-26T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.427629",
+      "high": "22.427629",
+      "kind": "bar",
+      "low": "22.427629",
+      "open": "22.427629",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-27T00:00:00Z",
+    "sequence": 831,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-28T00:00:00Z",
+    "event_id": "public.aapl-msft:416:aapl",
+    "event_time": "2008-08-27T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "23.108574",
+      "high": "23.108574",
+      "kind": "bar",
+      "low": "23.108574",
+      "open": "23.108574",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-28T00:00:00Z",
+    "sequence": 832,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-28T00:00:00Z",
+    "event_id": "public.aapl-msft:416:msft",
+    "event_time": "2008-08-27T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.666133",
+      "high": "22.666133",
+      "kind": "bar",
+      "low": "22.666133",
+      "open": "22.666133",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-28T00:00:00Z",
+    "sequence": 833,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-29T00:00:00Z",
+    "event_id": "public.aapl-msft:417:aapl",
+    "event_time": "2008-08-28T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "22.985536",
+      "high": "22.985536",
+      "kind": "bar",
+      "low": "22.985536",
+      "open": "22.985536",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-29T00:00:00Z",
+    "sequence": 834,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-29T00:00:00Z",
+    "event_id": "public.aapl-msft:417:msft",
+    "event_time": "2008-08-28T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.978657",
+      "high": "22.978657",
+      "kind": "bar",
+      "low": "22.978657",
+      "open": "22.978657",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-29T00:00:00Z",
+    "sequence": 835,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-30T00:00:00Z",
+    "event_id": "public.aapl-msft:418:aapl",
+    "event_time": "2008-08-29T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "22.428559",
+      "high": "22.428559",
+      "kind": "bar",
+      "low": "22.428559",
+      "open": "22.428559",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-30T00:00:00Z",
+    "sequence": 836,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-08-30T00:00:00Z",
+    "event_id": "public.aapl-msft:418:msft",
+    "event_time": "2008-08-29T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.444078",
+      "high": "22.444078",
+      "kind": "bar",
+      "low": "22.444078",
+      "open": "22.444078",
+      "volume": "1"
+    },
+    "receive_time": "2008-08-30T00:00:00Z",
+    "sequence": 837,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-03T00:00:00Z",
+    "event_id": "public.aapl-msft:419:aapl",
+    "event_time": "2008-09-02T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "21.986682",
+      "high": "21.986682",
+      "kind": "bar",
+      "low": "21.986682",
+      "open": "21.986682",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-03T00:00:00Z",
+    "sequence": 838,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-03T00:00:00Z",
+    "event_id": "public.aapl-msft:419:msft",
+    "event_time": "2008-09-02T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.287817",
+      "high": "22.287817",
+      "kind": "bar",
+      "low": "22.287817",
+      "open": "22.287817",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-03T00:00:00Z",
+    "sequence": 839,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-04T00:00:00Z",
+    "event_id": "public.aapl-msft:420:aapl",
+    "event_time": "2008-09-03T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "22.088553",
+      "high": "22.088553",
+      "kind": "bar",
+      "low": "22.088553",
+      "open": "22.088553",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-04T00:00:00Z",
+    "sequence": 840,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-04T00:00:00Z",
+    "event_id": "public.aapl-msft:420:msft",
+    "event_time": "2008-09-03T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.12333",
+      "high": "22.12333",
+      "kind": "bar",
+      "low": "22.12333",
+      "open": "22.12333",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-04T00:00:00Z",
+    "sequence": 841,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-05T00:00:00Z",
+    "event_id": "public.aapl-msft:421:aapl",
+    "event_time": "2008-09-04T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "21.32916",
+      "high": "21.32916",
+      "kind": "bar",
+      "low": "21.32916",
+      "open": "21.32916",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-05T00:00:00Z",
+    "sequence": 842,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-05T00:00:00Z",
+    "event_id": "public.aapl-msft:421:msft",
+    "event_time": "2008-09-04T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "21.670995",
+      "high": "21.670995",
+      "kind": "bar",
+      "low": "21.670995",
+      "open": "21.670995",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-05T00:00:00Z",
+    "sequence": 843,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-06T00:00:00Z",
+    "event_id": "public.aapl-msft:422:aapl",
+    "event_time": "2008-09-05T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "21.191568",
+      "high": "21.191568",
+      "kind": "bar",
+      "low": "21.191568",
+      "open": "21.191568",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-06T00:00:00Z",
+    "sequence": 844,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-06T00:00:00Z",
+    "event_id": "public.aapl-msft:422:msft",
+    "event_time": "2008-09-05T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "21.095294",
+      "high": "21.095294",
+      "kind": "bar",
+      "low": "21.095294",
+      "open": "21.095294",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-06T00:00:00Z",
+    "sequence": 845,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-09T00:00:00Z",
+    "event_id": "public.aapl-msft:423:aapl",
+    "event_time": "2008-09-08T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "20.892574",
+      "high": "20.892574",
+      "kind": "bar",
+      "low": "20.892574",
+      "open": "20.892574",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-09T00:00:00Z",
+    "sequence": 846,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-09T00:00:00Z",
+    "event_id": "public.aapl-msft:423:msft",
+    "event_time": "2008-09-08T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "21.481837",
+      "high": "21.481837",
+      "kind": "bar",
+      "low": "21.481837",
+      "open": "21.481837",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-09T00:00:00Z",
+    "sequence": 847,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-10T00:00:00Z",
+    "event_id": "public.aapl-msft:424:aapl",
+    "event_time": "2008-09-09T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "20.067032",
+      "high": "20.067032",
+      "kind": "bar",
+      "low": "20.067032",
+      "open": "20.067032",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-10T00:00:00Z",
+    "sequence": 848,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-10T00:00:00Z",
+    "event_id": "public.aapl-msft:424:msft",
+    "event_time": "2008-09-09T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "21.465388",
+      "high": "21.465388",
+      "kind": "bar",
+      "low": "21.465388",
+      "open": "21.465388",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-10T00:00:00Z",
+    "sequence": 849,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-11T00:00:00Z",
+    "event_id": "public.aapl-msft:425:aapl",
+    "event_time": "2008-09-10T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "20.057771",
+      "high": "20.057771",
+      "kind": "bar",
+      "low": "20.057771",
+      "open": "20.057771",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-11T00:00:00Z",
+    "sequence": 850,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-11T00:00:00Z",
+    "event_id": "public.aapl-msft:425:msft",
+    "event_time": "2008-09-10T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "21.745014",
+      "high": "21.745014",
+      "kind": "bar",
+      "low": "21.745014",
+      "open": "21.745014",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-11T00:00:00Z",
+    "sequence": 851,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-12T00:00:00Z",
+    "event_id": "public.aapl-msft:426:aapl",
+    "event_time": "2008-09-11T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "20.195361",
+      "high": "20.195361",
+      "kind": "bar",
+      "low": "20.195361",
+      "open": "20.195361",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-12T00:00:00Z",
+    "sequence": 852,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-12T00:00:00Z",
+    "event_id": "public.aapl-msft:426:msft",
+    "event_time": "2008-09-11T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.485199",
+      "high": "22.485199",
+      "kind": "bar",
+      "low": "22.485199",
+      "open": "22.485199",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-12T00:00:00Z",
+    "sequence": 853,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-13T00:00:00Z",
+    "event_id": "public.aapl-msft:427:aapl",
+    "event_time": "2008-09-12T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "19.704535",
+      "high": "19.704535",
+      "kind": "bar",
+      "low": "19.704535",
+      "open": "19.704535",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-13T00:00:00Z",
+    "sequence": 854,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-13T00:00:00Z",
+    "event_id": "public.aapl-msft:427:msft",
+    "event_time": "2008-09-12T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.71548",
+      "high": "22.71548",
+      "kind": "bar",
+      "low": "22.71548",
+      "open": "22.71548",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-13T00:00:00Z",
+    "sequence": 855,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-16T00:00:00Z",
+    "event_id": "public.aapl-msft:428:aapl",
+    "event_time": "2008-09-15T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "18.569413",
+      "high": "18.569413",
+      "kind": "bar",
+      "low": "18.569413",
+      "open": "18.569413",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-16T00:00:00Z",
+    "sequence": 856,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-16T00:00:00Z",
+    "event_id": "public.aapl-msft:428:msft",
+    "event_time": "2008-09-15T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.057536",
+      "high": "22.057536",
+      "kind": "bar",
+      "low": "22.057536",
+      "open": "22.057536",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-16T00:00:00Z",
+    "sequence": 857,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-17T00:00:00Z",
+    "event_id": "public.aapl-msft:429:aapl",
+    "event_time": "2008-09-16T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "18.50591",
+      "high": "18.50591",
+      "kind": "bar",
+      "low": "18.50591",
+      "open": "18.50591",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-17T00:00:00Z",
+    "sequence": 858,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-17T00:00:00Z",
+    "event_id": "public.aapl-msft:429:msft",
+    "event_time": "2008-09-16T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "21.37492",
+      "high": "21.37492",
+      "kind": "bar",
+      "low": "21.37492",
+      "open": "21.37492",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-17T00:00:00Z",
+    "sequence": 859,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-18T00:00:00Z",
+    "event_id": "public.aapl-msft:430:aapl",
+    "event_time": "2008-09-17T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "16.911714",
+      "high": "16.911714",
+      "kind": "bar",
+      "low": "16.911714",
+      "open": "16.911714",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-18T00:00:00Z",
+    "sequence": 860,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-18T00:00:00Z",
+    "event_id": "public.aapl-msft:430:msft",
+    "event_time": "2008-09-17T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "20.207072",
+      "high": "20.207072",
+      "kind": "bar",
+      "low": "20.207072",
+      "open": "20.207072",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-18T00:00:00Z",
+    "sequence": 861,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-19T00:00:00Z",
+    "event_id": "public.aapl-msft:431:aapl",
+    "event_time": "2008-09-18T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "17.739902",
+      "high": "17.739902",
+      "kind": "bar",
+      "low": "17.739902",
+      "open": "17.739902",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-19T00:00:00Z",
+    "sequence": 862,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-19T00:00:00Z",
+    "event_id": "public.aapl-msft:431:msft",
+    "event_time": "2008-09-18T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "20.774548",
+      "high": "20.774548",
+      "kind": "bar",
+      "low": "20.774548",
+      "open": "20.774548",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-19T00:00:00Z",
+    "sequence": 863,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-20T00:00:00Z",
+    "event_id": "public.aapl-msft:432:aapl",
+    "event_time": "2008-09-19T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "18.642177",
+      "high": "18.642177",
+      "kind": "bar",
+      "low": "18.642177",
+      "open": "18.642177",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-20T00:00:00Z",
+    "sequence": 864,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-20T00:00:00Z",
+    "event_id": "public.aapl-msft:432:msft",
+    "event_time": "2008-09-19T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "20.692305",
+      "high": "20.692305",
+      "kind": "bar",
+      "low": "20.692305",
+      "open": "20.692305",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-20T00:00:00Z",
+    "sequence": 865,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-23T00:00:00Z",
+    "event_id": "public.aapl-msft:433:aapl",
+    "event_time": "2008-09-22T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "17.337714",
+      "high": "17.337714",
+      "kind": "bar",
+      "low": "17.337714",
+      "open": "17.337714",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-23T00:00:00Z",
+    "sequence": 866,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-23T00:00:00Z",
+    "event_id": "public.aapl-msft:433:msft",
+    "event_time": "2008-09-22T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "20.889687",
+      "high": "20.889687",
+      "kind": "bar",
+      "low": "20.889687",
+      "open": "20.889687",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-23T00:00:00Z",
+    "sequence": 867,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-24T00:00:00Z",
+    "event_id": "public.aapl-msft:434:aapl",
+    "event_time": "2008-09-23T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "16.780739",
+      "high": "16.780739",
+      "kind": "bar",
+      "low": "16.780739",
+      "open": "16.780739",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-24T00:00:00Z",
+    "sequence": 868,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-24T00:00:00Z",
+    "event_id": "public.aapl-msft:434:msft",
+    "event_time": "2008-09-23T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "20.922585",
+      "high": "20.922585",
+      "kind": "bar",
+      "low": "20.922585",
+      "open": "20.922585",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-24T00:00:00Z",
+    "sequence": 869,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-25T00:00:00Z",
+    "event_id": "public.aapl-msft:435:aapl",
+    "event_time": "2008-09-24T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "17.028135",
+      "high": "17.028135",
+      "kind": "bar",
+      "low": "17.028135",
+      "open": "17.028135",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-25T00:00:00Z",
+    "sequence": 870,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-25T00:00:00Z",
+    "event_id": "public.aapl-msft:435:msft",
+    "event_time": "2008-09-24T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "21.152864",
+      "high": "21.152864",
+      "kind": "bar",
+      "low": "21.152864",
+      "open": "21.152864",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-25T00:00:00Z",
+    "sequence": 871,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-26T00:00:00Z",
+    "event_id": "public.aapl-msft:436:aapl",
+    "event_time": "2008-09-25T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "17.454137",
+      "high": "17.454137",
+      "kind": "bar",
+      "low": "17.454137",
+      "open": "17.454137",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-26T00:00:00Z",
+    "sequence": 872,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-26T00:00:00Z",
+    "event_id": "public.aapl-msft:436:msft",
+    "event_time": "2008-09-25T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "21.884827",
+      "high": "21.884827",
+      "kind": "bar",
+      "low": "21.884827",
+      "open": "21.884827",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-26T00:00:00Z",
+    "sequence": 873,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-27T00:00:00Z",
+    "event_id": "public.aapl-msft:437:aapl",
+    "event_time": "2008-09-26T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "16.965955",
+      "high": "16.965955",
+      "kind": "bar",
+      "low": "16.965955",
+      "open": "16.965955",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-27T00:00:00Z",
+    "sequence": 874,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-27T00:00:00Z",
+    "event_id": "public.aapl-msft:437:msft",
+    "event_time": "2008-09-26T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "22.534545",
+      "high": "22.534545",
+      "kind": "bar",
+      "low": "22.534545",
+      "open": "22.534545",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-27T00:00:00Z",
+    "sequence": 875,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-30T00:00:00Z",
+    "event_id": "public.aapl-msft:438:aapl",
+    "event_time": "2008-09-29T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "13.925737",
+      "high": "13.925737",
+      "kind": "bar",
+      "low": "13.925737",
+      "open": "13.925737",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-30T00:00:00Z",
+    "sequence": 876,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-09-30T00:00:00Z",
+    "event_id": "public.aapl-msft:438:msft",
+    "event_time": "2008-09-29T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "20.568941",
+      "high": "20.568941",
+      "kind": "bar",
+      "low": "20.568941",
+      "open": "20.568941",
+      "volume": "1"
+    },
+    "receive_time": "2008-09-30T00:00:00Z",
+    "sequence": 877,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-01T00:00:00Z",
+    "event_id": "public.aapl-msft:439:aapl",
+    "event_time": "2008-09-30T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "15.037044",
+      "high": "15.037044",
+      "kind": "bar",
+      "low": "15.037044",
+      "open": "15.037044",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-01T00:00:00Z",
+    "sequence": 878,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-01T00:00:00Z",
+    "event_id": "public.aapl-msft:439:msft",
+    "event_time": "2008-09-30T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "21.950621",
+      "high": "21.950621",
+      "kind": "bar",
+      "low": "21.950621",
+      "open": "21.950621",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-01T00:00:00Z",
+    "sequence": 879,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-02T00:00:00Z",
+    "event_id": "public.aapl-msft:440:aapl",
+    "event_time": "2008-10-01T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "14.436409",
+      "high": "14.436409",
+      "kind": "bar",
+      "low": "14.436409",
+      "open": "14.436409",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-02T00:00:00Z",
+    "sequence": 880,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-02T00:00:00Z",
+    "event_id": "public.aapl-msft:440:msft",
+    "event_time": "2008-10-01T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "21.77791",
+      "high": "21.77791",
+      "kind": "bar",
+      "low": "21.77791",
+      "open": "21.77791",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-02T00:00:00Z",
+    "sequence": 881,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-03T00:00:00Z",
+    "event_id": "public.aapl-msft:441:aapl",
+    "event_time": "2008-10-02T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "13.243077",
+      "high": "13.243077",
+      "kind": "bar",
+      "low": "13.243077",
+      "open": "13.243077",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-03T00:00:00Z",
+    "sequence": 882,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-03T00:00:00Z",
+    "event_id": "public.aapl-msft:441:msft",
+    "event_time": "2008-10-02T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "21.588752",
+      "high": "21.588752",
+      "kind": "bar",
+      "low": "21.588752",
+      "open": "21.588752",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-03T00:00:00Z",
+    "sequence": 883,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-04T00:00:00Z",
+    "event_id": "public.aapl-msft:442:aapl",
+    "event_time": "2008-10-03T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.842212",
+      "high": "12.842212",
+      "kind": "bar",
+      "low": "12.842212",
+      "open": "12.842212",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-04T00:00:00Z",
+    "sequence": 884,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-04T00:00:00Z",
+    "event_id": "public.aapl-msft:442:msft",
+    "event_time": "2008-10-03T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "21.646322",
+      "high": "21.646322",
+      "kind": "bar",
+      "low": "21.646322",
+      "open": "21.646322",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-04T00:00:00Z",
+    "sequence": 885,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-07T00:00:00Z",
+    "event_id": "public.aapl-msft:443:aapl",
+    "event_time": "2008-10-06T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.983772",
+      "high": "12.983772",
+      "kind": "bar",
+      "low": "12.983772",
+      "open": "12.983772",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-07T00:00:00Z",
+    "sequence": 886,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-07T00:00:00Z",
+    "event_id": "public.aapl-msft:443:msft",
+    "event_time": "2008-10-06T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "20.486697",
+      "high": "20.486697",
+      "kind": "bar",
+      "low": "20.486697",
+      "open": "20.486697",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-07T00:00:00Z",
+    "sequence": 887,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-08T00:00:00Z",
+    "event_id": "public.aapl-msft:444:aapl",
+    "event_time": "2008-10-07T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.795731",
+      "high": "11.795731",
+      "kind": "bar",
+      "low": "11.795731",
+      "open": "11.795731",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-08T00:00:00Z",
+    "sequence": 888,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-08T00:00:00Z",
+    "event_id": "public.aapl-msft:444:msft",
+    "event_time": "2008-10-07T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "19.105017",
+      "high": "19.105017",
+      "kind": "bar",
+      "low": "19.105017",
+      "open": "19.105017",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-08T00:00:00Z",
+    "sequence": 889,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-09T00:00:00Z",
+    "event_id": "public.aapl-msft:445:aapl",
+    "event_time": "2008-10-08T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.879079",
+      "high": "11.879079",
+      "kind": "bar",
+      "low": "11.879079",
+      "open": "11.879079",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-09T00:00:00Z",
+    "sequence": 890,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-09T00:00:00Z",
+    "event_id": "public.aapl-msft:445:msft",
+    "event_time": "2008-10-08T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "18.924083",
+      "high": "18.924083",
+      "kind": "bar",
+      "low": "18.924083",
+      "open": "18.924083",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-09T00:00:00Z",
+    "sequence": 891,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-10T00:00:00Z",
+    "event_id": "public.aapl-msft:446:aapl",
+    "event_time": "2008-10-09T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.740166",
+      "high": "11.740166",
+      "kind": "bar",
+      "low": "11.740166",
+      "open": "11.740166",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-10T00:00:00Z",
+    "sequence": 892,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-10T00:00:00Z",
+    "event_id": "public.aapl-msft:446:msft",
+    "event_time": "2008-10-09T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "18.340158",
+      "high": "18.340158",
+      "kind": "bar",
+      "low": "18.340158",
+      "open": "18.340158",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-10T00:00:00Z",
+    "sequence": 893,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-11T00:00:00Z",
+    "event_id": "public.aapl-msft:447:aapl",
+    "event_time": "2008-10-10T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.806492",
+      "high": "12.806492",
+      "kind": "bar",
+      "low": "12.806492",
+      "open": "12.806492",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-11T00:00:00Z",
+    "sequence": 894,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-11T00:00:00Z",
+    "event_id": "public.aapl-msft:447:msft",
+    "event_time": "2008-10-10T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "17.682216",
+      "high": "17.682216",
+      "kind": "bar",
+      "low": "17.682216",
+      "open": "17.682216",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-11T00:00:00Z",
+    "sequence": 895,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-14T00:00:00Z",
+    "event_id": "public.aapl-msft:448:aapl",
+    "event_time": "2008-10-13T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "14.587229",
+      "high": "14.587229",
+      "kind": "bar",
+      "low": "14.587229",
+      "open": "14.587229",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-14T00:00:00Z",
+    "sequence": 896,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-14T00:00:00Z",
+    "event_id": "public.aapl-msft:448:msft",
+    "event_time": "2008-10-13T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "20.97193",
+      "high": "20.97193",
+      "kind": "bar",
+      "low": "20.97193",
+      "open": "20.97193",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-14T00:00:00Z",
+    "sequence": 897,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-15T00:00:00Z",
+    "event_id": "public.aapl-msft:449:aapl",
+    "event_time": "2008-10-14T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "13.769625",
+      "high": "13.769625",
+      "kind": "bar",
+      "low": "13.769625",
+      "open": "13.769625",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-15T00:00:00Z",
+    "sequence": 898,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-15T00:00:00Z",
+    "event_id": "public.aapl-msft:449:msft",
+    "event_time": "2008-10-14T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "19.820531",
+      "high": "19.820531",
+      "kind": "bar",
+      "low": "19.820531",
+      "open": "19.820531",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-15T00:00:00Z",
+    "sequence": 899,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-16T00:00:00Z",
+    "event_id": "public.aapl-msft:450:aapl",
+    "event_time": "2008-10-15T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.958635",
+      "high": "12.958635",
+      "kind": "bar",
+      "low": "12.958635",
+      "open": "12.958635",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-16T00:00:00Z",
+    "sequence": 900,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-16T00:00:00Z",
+    "event_id": "public.aapl-msft:450:msft",
+    "event_time": "2008-10-15T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "18.636233",
+      "high": "18.636233",
+      "kind": "bar",
+      "low": "18.636233",
+      "open": "18.636233",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-16T00:00:00Z",
+    "sequence": 901,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-17T00:00:00Z",
+    "event_id": "public.aapl-msft:451:aapl",
+    "event_time": "2008-10-16T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "13.479891",
+      "high": "13.479891",
+      "kind": "bar",
+      "low": "13.479891",
+      "open": "13.479891",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-17T00:00:00Z",
+    "sequence": 902,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-17T00:00:00Z",
+    "event_id": "public.aapl-msft:451:msft",
+    "event_time": "2008-10-16T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "19.894549",
+      "high": "19.894549",
+      "kind": "bar",
+      "low": "19.894549",
+      "open": "19.894549",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-17T00:00:00Z",
+    "sequence": 903,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-18T00:00:00Z",
+    "event_id": "public.aapl-msft:452:aapl",
+    "event_time": "2008-10-17T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.885871",
+      "high": "12.885871",
+      "kind": "bar",
+      "low": "12.885871",
+      "open": "12.885871",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-18T00:00:00Z",
+    "sequence": 904,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-18T00:00:00Z",
+    "event_id": "public.aapl-msft:452:msft",
+    "event_time": "2008-10-17T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "19.680718",
+      "high": "19.680718",
+      "kind": "bar",
+      "low": "19.680718",
+      "open": "19.680718",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-18T00:00:00Z",
+    "sequence": 905,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-21T00:00:00Z",
+    "event_id": "public.aapl-msft:453:aapl",
+    "event_time": "2008-10-20T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "13.023461",
+      "high": "13.023461",
+      "kind": "bar",
+      "low": "13.023461",
+      "open": "13.023461",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-21T00:00:00Z",
+    "sequence": 906,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-21T00:00:00Z",
+    "event_id": "public.aapl-msft:453:msft",
+    "event_time": "2008-10-20T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "20.330436",
+      "high": "20.330436",
+      "kind": "bar",
+      "low": "20.330436",
+      "open": "20.330436",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-21T00:00:00Z",
+    "sequence": 907,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-22T00:00:00Z",
+    "event_id": "public.aapl-msft:454:aapl",
+    "event_time": "2008-10-21T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.103987",
+      "high": "12.103987",
+      "kind": "bar",
+      "low": "12.103987",
+      "open": "12.103987",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-22T00:00:00Z",
+    "sequence": 908,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-22T00:00:00Z",
+    "event_id": "public.aapl-msft:454:msft",
+    "event_time": "2008-10-21T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "19.211934",
+      "high": "19.211934",
+      "kind": "bar",
+      "low": "19.211934",
+      "open": "19.211934",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-22T00:00:00Z",
+    "sequence": 909,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-23T00:00:00Z",
+    "event_id": "public.aapl-msft:455:aapl",
+    "event_time": "2008-10-22T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.815753",
+      "high": "12.815753",
+      "kind": "bar",
+      "low": "12.815753",
+      "open": "12.815753",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-23T00:00:00Z",
+    "sequence": 910,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-23T00:00:00Z",
+    "event_id": "public.aapl-msft:455:msft",
+    "event_time": "2008-10-22T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "17.706889",
+      "high": "17.706889",
+      "kind": "bar",
+      "low": "17.706889",
+      "open": "17.706889",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-23T00:00:00Z",
+    "sequence": 911,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-24T00:00:00Z",
+    "event_id": "public.aapl-msft:456:aapl",
+    "event_time": "2008-10-23T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.995678",
+      "high": "12.995678",
+      "kind": "bar",
+      "low": "12.995678",
+      "open": "12.995678",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-24T00:00:00Z",
+    "sequence": 912,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-24T00:00:00Z",
+    "event_id": "public.aapl-msft:456:msft",
+    "event_time": "2008-10-23T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "18.356607",
+      "high": "18.356607",
+      "kind": "bar",
+      "low": "18.356607",
+      "open": "18.356607",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-24T00:00:00Z",
+    "sequence": 913,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-25T00:00:00Z",
+    "event_id": "public.aapl-msft:457:aapl",
+    "event_time": "2008-10-24T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.750927",
+      "high": "12.750927",
+      "kind": "bar",
+      "low": "12.750927",
+      "open": "12.750927",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-25T00:00:00Z",
+    "sequence": 914,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-25T00:00:00Z",
+    "event_id": "public.aapl-msft:457:msft",
+    "event_time": "2008-10-24T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "18.060532",
+      "high": "18.060532",
+      "kind": "bar",
+      "low": "18.060532",
+      "open": "18.060532",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-25T00:00:00Z",
+    "sequence": 915,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-28T00:00:00Z",
+    "event_id": "public.aapl-msft:458:aapl",
+    "event_time": "2008-10-27T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.183366",
+      "high": "12.183366",
+      "kind": "bar",
+      "low": "12.183366",
+      "open": "12.183366",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-28T00:00:00Z",
+    "sequence": 916,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-28T00:00:00Z",
+    "event_id": "public.aapl-msft:458:msft",
+    "event_time": "2008-10-27T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "17.419039",
+      "high": "17.419039",
+      "kind": "bar",
+      "low": "17.419039",
+      "open": "17.419039",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-28T00:00:00Z",
+    "sequence": 917,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-29T00:00:00Z",
+    "event_id": "public.aapl-msft:459:aapl",
+    "event_time": "2008-10-28T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "13.21794",
+      "high": "13.21794",
+      "kind": "bar",
+      "low": "13.21794",
+      "open": "13.21794",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-29T00:00:00Z",
+    "sequence": 918,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-29T00:00:00Z",
+    "event_id": "public.aapl-msft:459:msft",
+    "event_time": "2008-10-28T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "18.998102",
+      "high": "18.998102",
+      "kind": "bar",
+      "low": "18.998102",
+      "open": "18.998102",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-29T00:00:00Z",
+    "sequence": 919,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-30T00:00:00Z",
+    "event_id": "public.aapl-msft:460:aapl",
+    "event_time": "2008-10-29T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "13.831805",
+      "high": "13.831805",
+      "kind": "bar",
+      "low": "13.831805",
+      "open": "13.831805",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-30T00:00:00Z",
+    "sequence": 920,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-30T00:00:00Z",
+    "event_id": "public.aapl-msft:460:msft",
+    "event_time": "2008-10-29T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "18.915859",
+      "high": "18.915859",
+      "kind": "bar",
+      "low": "18.915859",
+      "open": "18.915859",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-30T00:00:00Z",
+    "sequence": 921,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-31T00:00:00Z",
+    "event_id": "public.aapl-msft:461:aapl",
+    "event_time": "2008-10-30T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "14.690422",
+      "high": "14.690422",
+      "kind": "bar",
+      "low": "14.690422",
+      "open": "14.690422",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-31T00:00:00Z",
+    "sequence": 922,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-10-31T00:00:00Z",
+    "event_id": "public.aapl-msft:461:msft",
+    "event_time": "2008-10-30T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "18.61156",
+      "high": "18.61156",
+      "kind": "bar",
+      "low": "18.61156",
+      "open": "18.61156",
+      "volume": "1"
+    },
+    "receive_time": "2008-10-31T00:00:00Z",
+    "sequence": 923,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-01T00:00:00Z",
+    "event_id": "public.aapl-msft:462:aapl",
+    "event_time": "2008-10-31T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "14.233992",
+      "high": "14.233992",
+      "kind": "bar",
+      "low": "14.233992",
+      "open": "14.233992",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-01T00:00:00Z",
+    "sequence": 924,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-01T00:00:00Z",
+    "event_id": "public.aapl-msft:462:msft",
+    "event_time": "2008-10-31T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "18.364832",
+      "high": "18.364832",
+      "kind": "bar",
+      "low": "18.364832",
+      "open": "18.364832",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-01T00:00:00Z",
+    "sequence": 925,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-04T00:00:00Z",
+    "event_id": "public.aapl-msft:463:aapl",
+    "event_time": "2008-11-03T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "14.150644",
+      "high": "14.150644",
+      "kind": "bar",
+      "low": "14.150644",
+      "open": "14.150644",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-04T00:00:00Z",
+    "sequence": 926,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-04T00:00:00Z",
+    "event_id": "public.aapl-msft:463:msft",
+    "event_time": "2008-11-03T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "18.603337",
+      "high": "18.603337",
+      "kind": "bar",
+      "low": "18.603337",
+      "open": "18.603337",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-04T00:00:00Z",
+    "sequence": 927,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-05T00:00:00Z",
+    "event_id": "public.aapl-msft:464:aapl",
+    "event_time": "2008-11-04T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "14.683807",
+      "high": "14.683807",
+      "kind": "bar",
+      "low": "14.683807",
+      "open": "14.683807",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-05T00:00:00Z",
+    "sequence": 928,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-05T00:00:00Z",
+    "event_id": "public.aapl-msft:464:msft",
+    "event_time": "2008-11-04T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "19.351747",
+      "high": "19.351747",
+      "kind": "bar",
+      "low": "19.351747",
+      "open": "19.351747",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-05T00:00:00Z",
+    "sequence": 929,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-06T00:00:00Z",
+    "event_id": "public.aapl-msft:465:aapl",
+    "event_time": "2008-11-05T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "13.666432",
+      "high": "13.666432",
+      "kind": "bar",
+      "low": "13.666432",
+      "open": "13.666432",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-06T00:00:00Z",
+    "sequence": 930,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-06T00:00:00Z",
+    "event_id": "public.aapl-msft:465:msft",
+    "event_time": "2008-11-05T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "18.159224",
+      "high": "18.159224",
+      "kind": "bar",
+      "low": "18.159224",
+      "open": "18.159224",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-06T00:00:00Z",
+    "sequence": 931,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-07T00:00:00Z",
+    "event_id": "public.aapl-msft:466:aapl",
+    "event_time": "2008-11-06T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "13.110778",
+      "high": "13.110778",
+      "kind": "bar",
+      "low": "13.110778",
+      "open": "13.110778",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-07T00:00:00Z",
+    "sequence": 932,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-07T00:00:00Z",
+    "event_id": "public.aapl-msft:466:msft",
+    "event_time": "2008-11-06T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "17.172309",
+      "high": "17.172309",
+      "kind": "bar",
+      "low": "17.172309",
+      "open": "17.172309",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-07T00:00:00Z",
+    "sequence": 933,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-08T00:00:00Z",
+    "event_id": "public.aapl-msft:467:aapl",
+    "event_time": "2008-11-07T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.997001",
+      "high": "12.997001",
+      "kind": "bar",
+      "low": "12.997001",
+      "open": "12.997001",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-08T00:00:00Z",
+    "sequence": 934,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-08T00:00:00Z",
+    "event_id": "public.aapl-msft:467:msft",
+    "event_time": "2008-11-07T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "17.682216",
+      "high": "17.682216",
+      "kind": "bar",
+      "low": "17.682216",
+      "open": "17.682216",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-08T00:00:00Z",
+    "sequence": 935,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-11T00:00:00Z",
+    "event_id": "public.aapl-msft:468:aapl",
+    "event_time": "2008-11-10T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.684777",
+      "high": "12.684777",
+      "kind": "bar",
+      "low": "12.684777",
+      "open": "12.684777",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-11T00:00:00Z",
+    "sequence": 936,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-11T00:00:00Z",
+    "event_id": "public.aapl-msft:468:msft",
+    "event_time": "2008-11-10T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "17.517729",
+      "high": "17.517729",
+      "kind": "bar",
+      "low": "17.517729",
+      "open": "17.517729",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-11T00:00:00Z",
+    "sequence": 937,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-12T00:00:00Z",
+    "event_id": "public.aapl-msft:469:aapl",
+    "event_time": "2008-11-11T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.537926",
+      "high": "12.537926",
+      "kind": "bar",
+      "low": "12.537926",
+      "open": "12.537926",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-12T00:00:00Z",
+    "sequence": 938,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-12T00:00:00Z",
+    "event_id": "public.aapl-msft:469:msft",
+    "event_time": "2008-11-11T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "17.435488",
+      "high": "17.435488",
+      "kind": "bar",
+      "low": "17.435488",
+      "open": "17.435488",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-12T00:00:00Z",
+    "sequence": 939,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-13T00:00:00Z",
+    "event_id": "public.aapl-msft:470:aapl",
+    "event_time": "2008-11-12T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.922738",
+      "high": "11.922738",
+      "kind": "bar",
+      "low": "11.922738",
+      "open": "11.922738",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-13T00:00:00Z",
+    "sequence": 940,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-13T00:00:00Z",
+    "event_id": "public.aapl-msft:470:msft",
+    "event_time": "2008-11-12T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "16.695301",
+      "high": "16.695301",
+      "kind": "bar",
+      "low": "16.695301",
+      "open": "16.695301",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-13T00:00:00Z",
+    "sequence": 941,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-14T00:00:00Z",
+    "event_id": "public.aapl-msft:471:aapl",
+    "event_time": "2008-11-13T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.758864",
+      "high": "12.758864",
+      "kind": "bar",
+      "low": "12.758864",
+      "open": "12.758864",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-14T00:00:00Z",
+    "sequence": 942,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-14T00:00:00Z",
+    "event_id": "public.aapl-msft:471:msft",
+    "event_time": "2008-11-13T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "17.476609",
+      "high": "17.476609",
+      "kind": "bar",
+      "low": "17.476609",
+      "open": "17.476609",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-14T00:00:00Z",
+    "sequence": 943,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-15T00:00:00Z",
+    "event_id": "public.aapl-msft:472:aapl",
+    "event_time": "2008-11-14T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.938614",
+      "high": "11.938614",
+      "kind": "bar",
+      "low": "11.938614",
+      "open": "11.938614",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-15T00:00:00Z",
+    "sequence": 944,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-15T00:00:00Z",
+    "event_id": "public.aapl-msft:472:msft",
+    "event_time": "2008-11-14T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "16.497918",
+      "high": "16.497918",
+      "kind": "bar",
+      "low": "16.497918",
+      "open": "16.497918",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-15T00:00:00Z",
+    "sequence": 945,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-18T00:00:00Z",
+    "event_id": "public.aapl-msft:473:aapl",
+    "event_time": "2008-11-17T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.660787",
+      "high": "11.660787",
+      "kind": "bar",
+      "low": "11.660787",
+      "open": "11.660787",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-18T00:00:00Z",
+    "sequence": 946,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-18T00:00:00Z",
+    "event_id": "public.aapl-msft:473:msft",
+    "event_time": "2008-11-17T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "15.889321",
+      "high": "15.889321",
+      "kind": "bar",
+      "low": "15.889321",
+      "open": "15.889321",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-18T00:00:00Z",
+    "sequence": 947,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-19T00:00:00Z",
+    "event_id": "public.aapl-msft:474:aapl",
+    "event_time": "2008-11-18T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.894956",
+      "high": "11.894956",
+      "kind": "bar",
+      "low": "11.894956",
+      "open": "11.894956",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-19T00:00:00Z",
+    "sequence": 948,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-19T00:00:00Z",
+    "event_id": "public.aapl-msft:474:msft",
+    "event_time": "2008-11-18T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "16.245362",
+      "high": "16.245362",
+      "kind": "bar",
+      "low": "16.245362",
+      "open": "16.245362",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-19T00:00:00Z",
+    "sequence": 949,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-20T00:00:00Z",
+    "event_id": "public.aapl-msft:475:aapl",
+    "event_time": "2008-11-19T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.416035",
+      "high": "11.416035",
+      "kind": "bar",
+      "low": "11.416035",
+      "open": "11.416035",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-20T00:00:00Z",
+    "sequence": 950,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-20T00:00:00Z",
+    "event_id": "public.aapl-msft:475:msft",
+    "event_time": "2008-11-19T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "15.144122",
+      "high": "15.144122",
+      "kind": "bar",
+      "low": "15.144122",
+      "open": "15.144122",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-20T00:00:00Z",
+    "sequence": 951,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-21T00:00:00Z",
+    "event_id": "public.aapl-msft:476:aapl",
+    "event_time": "2008-11-20T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "10.648704",
+      "high": "10.648704",
+      "kind": "bar",
+      "low": "10.648704",
+      "open": "10.648704",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-21T00:00:00Z",
+    "sequence": 952,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-21T00:00:00Z",
+    "event_id": "public.aapl-msft:476:msft",
+    "event_time": "2008-11-20T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "14.514842",
+      "high": "14.514842",
+      "kind": "bar",
+      "low": "14.514842",
+      "open": "14.514842",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-21T00:00:00Z",
+    "sequence": 953,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-22T00:00:00Z",
+    "event_id": "public.aapl-msft:477:aapl",
+    "event_time": "2008-11-21T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "10.925208",
+      "high": "10.925208",
+      "kind": "bar",
+      "low": "10.925208",
+      "open": "10.925208",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-22T00:00:00Z",
+    "sequence": 954,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-22T00:00:00Z",
+    "event_id": "public.aapl-msft:477:msft",
+    "event_time": "2008-11-21T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "16.295042",
+      "high": "16.295042",
+      "kind": "bar",
+      "low": "16.295042",
+      "open": "16.295042",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-22T00:00:00Z",
+    "sequence": 955,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-25T00:00:00Z",
+    "event_id": "public.aapl-msft:478:aapl",
+    "event_time": "2008-11-24T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.297142",
+      "high": "12.297142",
+      "kind": "bar",
+      "low": "12.297142",
+      "open": "12.297142",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-25T00:00:00Z",
+    "sequence": 956,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-25T00:00:00Z",
+    "event_id": "public.aapl-msft:478:msft",
+    "event_time": "2008-11-24T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "17.131322",
+      "high": "17.131322",
+      "kind": "bar",
+      "low": "17.131322",
+      "open": "17.131322",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-25T00:00:00Z",
+    "sequence": 957,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-26T00:00:00Z",
+    "event_id": "public.aapl-msft:479:aapl",
+    "event_time": "2008-11-25T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.012701",
+      "high": "12.012701",
+      "kind": "bar",
+      "low": "12.012701",
+      "open": "12.012701",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-26T00:00:00Z",
+    "sequence": 958,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-26T00:00:00Z",
+    "event_id": "public.aapl-msft:479:msft",
+    "event_time": "2008-11-25T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "16.551721",
+      "high": "16.551721",
+      "kind": "bar",
+      "low": "16.551721",
+      "open": "16.551721",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-26T00:00:00Z",
+    "sequence": 959,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-27T00:00:00Z",
+    "event_id": "public.aapl-msft:480:aapl",
+    "event_time": "2008-11-26T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.568354",
+      "high": "12.568354",
+      "kind": "bar",
+      "low": "12.568354",
+      "open": "12.568354",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-27T00:00:00Z",
+    "sequence": 960,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-27T00:00:00Z",
+    "event_id": "public.aapl-msft:480:msft",
+    "event_time": "2008-11-26T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "16.965721",
+      "high": "16.965721",
+      "kind": "bar",
+      "low": "16.965721",
+      "open": "16.965721",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-27T00:00:00Z",
+    "sequence": 961,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-29T00:00:00Z",
+    "event_id": "public.aapl-msft:481:aapl",
+    "event_time": "2008-11-28T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.260099",
+      "high": "12.260099",
+      "kind": "bar",
+      "low": "12.260099",
+      "open": "12.260099",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-29T00:00:00Z",
+    "sequence": 962,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-11-29T00:00:00Z",
+    "event_id": "public.aapl-msft:481:msft",
+    "event_time": "2008-11-28T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "16.742161",
+      "high": "16.742161",
+      "kind": "bar",
+      "low": "16.742161",
+      "open": "16.742161",
+      "volume": "1"
+    },
+    "receive_time": "2008-11-29T00:00:00Z",
+    "sequence": 963,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-02T00:00:00Z",
+    "event_id": "public.aapl-msft:482:aapl",
+    "event_time": "2008-12-01T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.765303",
+      "high": "11.765303",
+      "kind": "bar",
+      "low": "11.765303",
+      "open": "11.765303",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-02T00:00:00Z",
+    "sequence": 964,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-02T00:00:00Z",
+    "event_id": "public.aapl-msft:482:msft",
+    "event_time": "2008-12-01T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "15.409082",
+      "high": "15.409082",
+      "kind": "bar",
+      "low": "15.409082",
+      "open": "15.409082",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-02T00:00:00Z",
+    "sequence": 965,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-03T00:00:00Z",
+    "event_id": "public.aapl-msft:483:aapl",
+    "event_time": "2008-12-02T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.23364",
+      "high": "12.23364",
+      "kind": "bar",
+      "low": "12.23364",
+      "open": "12.23364",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-03T00:00:00Z",
+    "sequence": 966,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-03T00:00:00Z",
+    "event_id": "public.aapl-msft:483:msft",
+    "event_time": "2008-12-02T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "15.856201",
+      "high": "15.856201",
+      "kind": "bar",
+      "low": "15.856201",
+      "open": "15.856201",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-03T00:00:00Z",
+    "sequence": 967,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-04T00:00:00Z",
+    "event_id": "public.aapl-msft:484:aapl",
+    "event_time": "2008-12-03T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.687423",
+      "high": "12.687423",
+      "kind": "bar",
+      "low": "12.687423",
+      "open": "12.687423",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-04T00:00:00Z",
+    "sequence": 968,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-04T00:00:00Z",
+    "event_id": "public.aapl-msft:484:msft",
+    "event_time": "2008-12-03T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "16.452362",
+      "high": "16.452362",
+      "kind": "bar",
+      "low": "16.452362",
+      "open": "16.452362",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-04T00:00:00Z",
+    "sequence": 969,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-05T00:00:00Z",
+    "event_id": "public.aapl-msft:485:aapl",
+    "event_time": "2008-12-04T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.093403",
+      "high": "12.093403",
+      "kind": "bar",
+      "low": "12.093403",
+      "open": "12.093403",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-05T00:00:00Z",
+    "sequence": 970,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-05T00:00:00Z",
+    "event_id": "public.aapl-msft:485:msft",
+    "event_time": "2008-12-04T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "15.823082",
+      "high": "15.823082",
+      "kind": "bar",
+      "low": "15.823082",
+      "open": "15.823082",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-05T00:00:00Z",
+    "sequence": 971,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-06T00:00:00Z",
+    "event_id": "public.aapl-msft:486:aapl",
+    "event_time": "2008-12-05T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.436056",
+      "high": "12.436056",
+      "kind": "bar",
+      "low": "12.436056",
+      "open": "12.436056",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-06T00:00:00Z",
+    "sequence": 972,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-06T00:00:00Z",
+    "event_id": "public.aapl-msft:486:msft",
+    "event_time": "2008-12-05T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "16.452362",
+      "high": "16.452362",
+      "kind": "bar",
+      "low": "16.452362",
+      "open": "16.452362",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-06T00:00:00Z",
+    "sequence": 973,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-09T00:00:00Z",
+    "event_id": "public.aapl-msft:487:aapl",
+    "event_time": "2008-12-08T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "13.192803",
+      "high": "13.192803",
+      "kind": "bar",
+      "low": "13.192803",
+      "open": "13.192803",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-09T00:00:00Z",
+    "sequence": 974,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-09T00:00:00Z",
+    "event_id": "public.aapl-msft:487:msft",
+    "event_time": "2008-12-08T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "17.396282",
+      "high": "17.396282",
+      "kind": "bar",
+      "low": "17.396282",
+      "open": "17.396282",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-09T00:00:00Z",
+    "sequence": 975,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-10T00:00:00Z",
+    "event_id": "public.aapl-msft:488:aapl",
+    "event_time": "2008-12-09T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "13.237785",
+      "high": "13.237785",
+      "kind": "bar",
+      "low": "13.237785",
+      "open": "13.237785",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-10T00:00:00Z",
+    "sequence": 976,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-10T00:00:00Z",
+    "event_id": "public.aapl-msft:488:msft",
+    "event_time": "2008-12-09T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "17.056802",
+      "high": "17.056802",
+      "kind": "bar",
+      "low": "17.056802",
+      "open": "17.056802",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-10T00:00:00Z",
+    "sequence": 977,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-11T00:00:00Z",
+    "event_id": "public.aapl-msft:489:aapl",
+    "event_time": "2008-12-10T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.993032",
+      "high": "12.993032",
+      "kind": "bar",
+      "low": "12.993032",
+      "open": "12.993032",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-11T00:00:00Z",
+    "sequence": 978,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-11T00:00:00Z",
+    "event_id": "public.aapl-msft:489:msft",
+    "event_time": "2008-12-10T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "17.065082",
+      "high": "17.065082",
+      "kind": "bar",
+      "low": "17.065082",
+      "open": "17.065082",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-11T00:00:00Z",
+    "sequence": 979,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-12T00:00:00Z",
+    "event_id": "public.aapl-msft:490:aapl",
+    "event_time": "2008-12-11T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.568354",
+      "high": "12.568354",
+      "kind": "bar",
+      "low": "12.568354",
+      "open": "12.568354",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-12T00:00:00Z",
+    "sequence": 980,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-12T00:00:00Z",
+    "event_id": "public.aapl-msft:490:msft",
+    "event_time": "2008-12-11T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "16.104602",
+      "high": "16.104602",
+      "kind": "bar",
+      "low": "16.104602",
+      "open": "16.104602",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-12T00:00:00Z",
+    "sequence": 981,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-13T00:00:00Z",
+    "event_id": "public.aapl-msft:491:aapl",
+    "event_time": "2008-12-12T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "13.000971",
+      "high": "13.000971",
+      "kind": "bar",
+      "low": "13.000971",
+      "open": "13.000971",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-13T00:00:00Z",
+    "sequence": 982,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-13T00:00:00Z",
+    "event_id": "public.aapl-msft:491:msft",
+    "event_time": "2008-12-12T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "16.030082",
+      "high": "16.030082",
+      "kind": "bar",
+      "low": "16.030082",
+      "open": "16.030082",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-13T00:00:00Z",
+    "sequence": 983,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-16T00:00:00Z",
+    "event_id": "public.aapl-msft:492:aapl",
+    "event_time": "2008-12-15T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.53528",
+      "high": "12.53528",
+      "kind": "bar",
+      "low": "12.53528",
+      "open": "12.53528",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-16T00:00:00Z",
+    "sequence": 984,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-16T00:00:00Z",
+    "event_id": "public.aapl-msft:492:msft",
+    "event_time": "2008-12-15T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "15.765122",
+      "high": "15.765122",
+      "kind": "bar",
+      "low": "15.765122",
+      "open": "15.765122",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-16T00:00:00Z",
+    "sequence": 985,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-17T00:00:00Z",
+    "event_id": "public.aapl-msft:493:aapl",
+    "event_time": "2008-12-16T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.625243",
+      "high": "12.625243",
+      "kind": "bar",
+      "low": "12.625243",
+      "open": "12.625243",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-17T00:00:00Z",
+    "sequence": 986,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-17T00:00:00Z",
+    "event_id": "public.aapl-msft:493:msft",
+    "event_time": "2008-12-16T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "16.651082",
+      "high": "16.651082",
+      "kind": "bar",
+      "low": "16.651082",
+      "open": "16.651082",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-17T00:00:00Z",
+    "sequence": 987,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-18T00:00:00Z",
+    "event_id": "public.aapl-msft:494:aapl",
+    "event_time": "2008-12-17T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.795731",
+      "high": "11.795731",
+      "kind": "bar",
+      "low": "11.795731",
+      "open": "11.795731",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-18T00:00:00Z",
+    "sequence": 988,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-18T00:00:00Z",
+    "event_id": "public.aapl-msft:494:msft",
+    "event_time": "2008-12-17T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "16.278481",
+      "high": "16.278481",
+      "kind": "bar",
+      "low": "16.278481",
+      "open": "16.278481",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-18T00:00:00Z",
+    "sequence": 989,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-19T00:00:00Z",
+    "event_id": "public.aapl-msft:495:aapl",
+    "event_time": "2008-12-18T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.831452",
+      "high": "11.831452",
+      "kind": "bar",
+      "low": "11.831452",
+      "open": "11.831452",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-19T00:00:00Z",
+    "sequence": 990,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-19T00:00:00Z",
+    "event_id": "public.aapl-msft:495:msft",
+    "event_time": "2008-12-18T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "15.980401",
+      "high": "15.980401",
+      "kind": "bar",
+      "low": "15.980401",
+      "open": "15.980401",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-19T00:00:00Z",
+    "sequence": 991,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-20T00:00:00Z",
+    "event_id": "public.aapl-msft:496:aapl",
+    "event_time": "2008-12-19T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.906862",
+      "high": "11.906862",
+      "kind": "bar",
+      "low": "11.906862",
+      "open": "11.906862",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-20T00:00:00Z",
+    "sequence": 992,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-20T00:00:00Z",
+    "event_id": "public.aapl-msft:496:msft",
+    "event_time": "2008-12-19T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "15.831362",
+      "high": "15.831362",
+      "kind": "bar",
+      "low": "15.831362",
+      "open": "15.831362",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-20T00:00:00Z",
+    "sequence": 993,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-23T00:00:00Z",
+    "event_id": "public.aapl-msft:497:aapl",
+    "event_time": "2008-12-22T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.343271",
+      "high": "11.343271",
+      "kind": "bar",
+      "low": "11.343271",
+      "open": "11.343271",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-23T00:00:00Z",
+    "sequence": 994,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-23T00:00:00Z",
+    "event_id": "public.aapl-msft:497:msft",
+    "event_time": "2008-12-22T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "15.881042",
+      "high": "15.881042",
+      "kind": "bar",
+      "low": "15.881042",
+      "open": "15.881042",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-23T00:00:00Z",
+    "sequence": 995,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-24T00:00:00Z",
+    "event_id": "public.aapl-msft:498:aapl",
+    "event_time": "2008-12-23T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.427942",
+      "high": "11.427942",
+      "kind": "bar",
+      "low": "11.427942",
+      "open": "11.427942",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-24T00:00:00Z",
+    "sequence": 996,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-24T00:00:00Z",
+    "event_id": "public.aapl-msft:498:msft",
+    "event_time": "2008-12-23T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "15.963842",
+      "high": "15.963842",
+      "kind": "bar",
+      "low": "15.963842",
+      "open": "15.963842",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-24T00:00:00Z",
+    "sequence": 997,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-25T00:00:00Z",
+    "event_id": "public.aapl-msft:499:aapl",
+    "event_time": "2008-12-24T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.250661",
+      "high": "11.250661",
+      "kind": "bar",
+      "low": "11.250661",
+      "open": "11.250661",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-25T00:00:00Z",
+    "sequence": 998,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-25T00:00:00Z",
+    "event_id": "public.aapl-msft:499:msft",
+    "event_time": "2008-12-24T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "15.872761",
+      "high": "15.872761",
+      "kind": "bar",
+      "low": "15.872761",
+      "open": "15.872761",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-25T00:00:00Z",
+    "sequence": 999,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-27T00:00:00Z",
+    "event_id": "public.aapl-msft:500:aapl",
+    "event_time": "2008-12-26T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.352532",
+      "high": "11.352532",
+      "kind": "bar",
+      "low": "11.352532",
+      "open": "11.352532",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-27T00:00:00Z",
+    "sequence": 1000,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-27T00:00:00Z",
+    "event_id": "public.aapl-msft:500:msft",
+    "event_time": "2008-12-26T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "15.839641",
+      "high": "15.839641",
+      "kind": "bar",
+      "low": "15.839641",
+      "open": "15.839641",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-27T00:00:00Z",
+    "sequence": 1001,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-30T00:00:00Z",
+    "event_id": "public.aapl-msft:501:aapl",
+    "event_time": "2008-12-29T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.45837",
+      "high": "11.45837",
+      "kind": "bar",
+      "low": "11.45837",
+      "open": "11.45837",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-30T00:00:00Z",
+    "sequence": 1002,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-30T00:00:00Z",
+    "event_id": "public.aapl-msft:501:msft",
+    "event_time": "2008-12-29T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "15.698881",
+      "high": "15.698881",
+      "kind": "bar",
+      "low": "15.698881",
+      "open": "15.698881",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-30T00:00:00Z",
+    "sequence": 1003,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-31T00:00:00Z",
+    "event_id": "public.aapl-msft:502:aapl",
+    "event_time": "2008-12-30T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.416035",
+      "high": "11.416035",
+      "kind": "bar",
+      "low": "11.416035",
+      "open": "11.416035",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-31T00:00:00Z",
+    "sequence": 1004,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2008-12-31T00:00:00Z",
+    "event_id": "public.aapl-msft:502:msft",
+    "event_time": "2008-12-30T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "16.013521",
+      "high": "16.013521",
+      "kind": "bar",
+      "low": "16.013521",
+      "open": "16.013521",
+      "volume": "1"
+    },
+    "receive_time": "2008-12-31T00:00:00Z",
+    "sequence": 1005,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2009-01-01T00:00:00Z",
+    "event_id": "public.aapl-msft:503:aapl",
+    "event_time": "2008-12-31T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "11.291674",
+      "high": "11.291674",
+      "kind": "bar",
+      "low": "11.291674",
+      "open": "11.291674",
+      "volume": "1"
+    },
+    "receive_time": "2009-01-01T00:00:00Z",
+    "sequence": 1006,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2009-01-01T00:00:00Z",
+    "event_id": "public.aapl-msft:503:msft",
+    "event_time": "2008-12-31T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "16.096322",
+      "high": "16.096322",
+      "kind": "bar",
+      "low": "16.096322",
+      "open": "16.096322",
+      "volume": "1"
+    },
+    "receive_time": "2009-01-01T00:00:00Z",
+    "sequence": 1007,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2009-01-03T00:00:00Z",
+    "event_id": "public.aapl-msft:504:aapl",
+    "event_time": "2009-01-02T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.006086",
+      "high": "12.006086",
+      "kind": "bar",
+      "low": "12.006086",
+      "open": "12.006086",
+      "volume": "1"
+    },
+    "receive_time": "2009-01-03T00:00:00Z",
+    "sequence": 1008,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2009-01-03T00:00:00Z",
+    "event_id": "public.aapl-msft:504:msft",
+    "event_time": "2009-01-02T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "16.833241",
+      "high": "16.833241",
+      "kind": "bar",
+      "low": "16.833241",
+      "open": "16.833241",
+      "volume": "1"
+    },
+    "receive_time": "2009-01-03T00:00:00Z",
+    "sequence": 1009,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2009-01-06T00:00:00Z",
+    "event_id": "public.aapl-msft:505:aapl",
+    "event_time": "2009-01-05T00:00:00Z",
+    "instrument_id": "PUBLIC.AAPL",
+    "payload": {
+      "close": "12.512789",
+      "high": "12.512789",
+      "kind": "bar",
+      "low": "12.512789",
+      "open": "12.512789",
+      "volume": "1"
+    },
+    "receive_time": "2009-01-06T00:00:00Z",
+    "sequence": 1010,
+    "source": "public.fixture.sha256-60bf505f"
+  },
+  {
+    "available_time": "2009-01-06T00:00:00Z",
+    "event_id": "public.aapl-msft:505:msft",
+    "event_time": "2009-01-05T00:00:00Z",
+    "instrument_id": "PUBLIC.MSFT",
+    "payload": {
+      "close": "16.990562",
+      "high": "16.990562",
+      "kind": "bar",
+      "low": "16.990562",
+      "open": "16.990562",
+      "volume": "1"
+    },
+    "receive_time": "2009-01-06T00:00:00Z",
+    "sequence": 1011,
+    "source": "public.fixture.sha256-60bf505f"
+  }
+]

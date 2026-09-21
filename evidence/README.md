@@ -1,0 +1,7 @@
+# Verification receipts
+
+`verification-summary.json` is the compact, reviewable receipt committed with the source. It identifies the exact verification input tree and summarizes the local host and strict-container gates. `release/` contains the corresponding complete verification and acceptance JSON documents; every published file has a SHA-256 in the summary.
+
+Full logs, JUnit, coverage, run bundles, paper evidence and HTML reports are generated under `reports/generated/` and `reports/strict/`. They are excluded from Git because they are large and environment-specific. `python scripts/publish-evidence.py` accepts only two passing receipts for the current input tree and rejects acceptance documents containing absolute local paths before refreshing the committed portable evidence. A future GitHub workflow uploads the complete directories as per-commit artifacts for Linux, Windows, macOS and the strict Linux container.
+
+The local receipt does not claim that GitHub-hosted runners or Windows have passed. Those claims require a remote CI run attached to the eventual repository commit.

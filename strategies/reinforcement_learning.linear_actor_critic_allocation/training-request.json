@@ -1,0 +1,7597 @@
+{
+  "dataset_id": "public.plotly.aapl-2015-2017.train",
+  "features": [],
+  "labels": [],
+  "metadata": {
+    "actions": "deterministic offline exploration cycle {-0.8,0,0.8}",
+    "origin": "public_historical",
+    "reward": "next-day-return-minus-5bps-turnover",
+    "source_events_sha256": "9cbd0b767b5060763a40d4321005c1851705d0183d567d1e140bece2e45c72bb",
+    "split": "first-400-bars-train-next-106-bars-test"
+  },
+  "run_id": "train.reinforcement_learning.linear_actor_critic_allocation",
+  "seed": 7,
+  "transitions": [
+    {
+      "action": 0,
+      "episode_id": "public-aapl:0",
+      "next_action": 1,
+      "next_state": [
+        0.08540343380247827,
+        0.10420763388406254,
+        -0.8
+      ],
+      "reward": -0.005969891174686832,
+      "state": [
+        0.02666907250245623,
+        0.15373809951742254,
+        0.0
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:0",
+      "next_action": 2,
+      "next_state": [
+        -0.002334916012917684,
+        0.05448295624168606,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.08540343380247827,
+        0.10420763388406254,
+        -0.8
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:0",
+      "next_action": 0,
+      "next_state": [
+        0.06841898882051738,
+        0.11273496006589022,
+        0.8
+      ],
+      "reward": 0.006139528373830947,
+      "state": [
+        -0.002334916012917684,
+        0.05448295624168606,
+        0.0
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:0",
+      "next_action": 1,
+      "next_state": [
+        0.22919519368727292,
+        0.25688324082808056,
+        -0.8
+      ],
+      "reward": -0.02242162162162162,
+      "state": [
+        0.06841898882051738,
+        0.11273496006589022,
+        0.8
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:0",
+      "next_action": 2,
+      "next_state": [
+        -0.05792116657257159,
+        0.18278982724853576,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.22919519368727292,
+        0.25688324082808056,
+        -0.8
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:0",
+      "next_action": 0,
+      "next_state": [
+        -0.2105507025015309,
+        0.26223867835571113,
+        0.8
+      ],
+      "reward": -0.020858530989763653,
+      "state": [
+        -0.05792116657257159,
+        0.18278982724853576,
+        0.0
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:0",
+      "next_action": 1,
+      "next_state": [
+        0.12656301642938983,
+        0.33077057469829974,
+        -0.8
+      ],
+      "reward": -0.010925041314351186,
+      "state": [
+        -0.2105507025015309,
+        0.26223867835571113,
+        0.8
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:0",
+      "next_action": 2,
+      "next_state": [
+        -0.118461,
+        0.17923092307692307,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.12656301642938983,
+        0.33077057469829974,
+        -0.8
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:0",
+      "next_action": 0,
+      "next_state": [
+        -0.012379419729206963,
+        0.15319117988394584,
+        0.8
+      ],
+      "reward": 0.003523331562639569,
+      "state": [
+        -0.118461,
+        0.17923092307692307,
+        0.0
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:0",
+      "next_action": 1,
+      "next_state": [
+        0.03101690278289144,
+        0.1108877111025591,
+        -0.8
+      ],
+      "reward": -0.002473282258061268,
+      "state": [
+        -0.012379419729206963,
+        0.15319117988394584,
+        0.8
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:0",
+      "next_action": 2,
+      "next_state": [
+        -0.04337823191115886,
+        0.09604887237573018,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.03101690278289144,
+        0.1108877111025591,
+        -0.8
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:0",
+      "next_action": 0,
+      "next_state": [
+        -0.1687663685057339,
+        0.23253989372313122,
+        0.8
+      ],
+      "reward": -0.013656506089898417,
+      "state": [
+        -0.04337823191115886,
+        0.09604887237573018,
+        0.0
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:0",
+      "next_action": 1,
+      "next_state": [
+        -0.14018661091214693,
+        0.2422113041531762,
+        -0.8
+      ],
+      "reward": -0.0020023985063713787,
+      "state": [
+        -0.1687663685057339,
+        0.23253989372313122,
+        0.8
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:0",
+      "next_action": 2,
+      "next_state": [
+        -0.0640825262901104,
+        0.3524545979404079,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.14018661091214693,
+        0.2422113041531762,
+        -0.8
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:0",
+      "next_action": 0,
+      "next_state": [
+        -0.15030471797153017,
+        0.2705480493458413,
+        0.8
+      ],
+      "reward": -0.01694866774066909,
+      "state": [
+        -0.0640825262901104,
+        0.3524545979404079,
+        0.0
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:0",
+      "next_action": 1,
+      "next_state": [
+        -0.20120256513026052,
+        0.21322613226452905,
+        -0.8
+      ],
+      "reward": 0.013785199348081291,
+      "state": [
+        -0.15030471797153017,
+        0.2705480493458413,
+        0.8
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:0",
+      "next_action": 2,
+      "next_state": [
+        0.17496517332949346,
+        0.2673538593304531,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.20120256513026052,
+        0.21322613226452905,
+        -0.8
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:0",
+      "next_action": 0,
+      "next_state": [
+        -0.06511302146120544,
+        0.22668809924938746,
+        0.8
+      ],
+      "reward": -0.005928331189915577,
+      "state": [
+        0.17496517332949346,
+        0.2673538593304531,
+        0.0
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:0",
+      "next_action": 1,
+      "next_state": [
+        0.08637391232742765,
+        0.16790394336222014,
+        -0.8
+      ],
+      "reward": -0.009603307995899604,
+      "state": [
+        -0.06511302146120544,
+        0.22668809924938746,
+        0.8
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:0",
+      "next_action": 2,
+      "next_state": [
+        0.09054797314459137,
+        0.13264479535115495,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.08637391232742765,
+        0.16790394336222014,
+        -0.8
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:1",
+      "next_action": 0,
+      "next_state": [
+        0.11574811023622048,
+        0.21968511811023622,
+        0.8
+      ],
+      "reward": 0.008605037712491832,
+      "state": [
+        0.09054797314459137,
+        0.13264479535115495,
+        0.0
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:1",
+      "next_action": 1,
+      "next_state": [
+        -0.0970873786407767,
+        0.14368916504854368,
+        -0.8
+      ],
+      "reward": 0.005240326877556418,
+      "state": [
+        0.11574811023622048,
+        0.21968511811023622,
+        0.8
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:1",
+      "next_action": 2,
+      "next_state": [
+        -0.18323571150097465,
+        0.25263079922027293,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.0970873786407767,
+        0.14368916504854368,
+        -0.8
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:1",
+      "next_action": 0,
+      "next_state": [
+        0.0070796096504182745,
+        0.10462562685748206,
+        0.8
+      ],
+      "reward": 0.007924047524637847,
+      "state": [
+        -0.18323571150097465,
+        0.25263079922027293,
+        0.0
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:1",
+      "next_action": 1,
+      "next_state": [
+        -0.042442897686640786,
+        0.11632437043957312,
+        -0.8
+      ],
+      "reward": 0.0024701643209666248,
+      "state": [
+        0.0070796096504182745,
+        0.10462562685748206,
+        0.8
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:1",
+      "next_action": 2,
+      "next_state": [
+        -0.24972372175024718,
+        0.27185103309743136,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.042442897686640786,
+        0.11632437043957312,
+        -0.8
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:1",
+      "next_action": 0,
+      "next_state": [
+        0.1205601153378932,
+        0.18572816575874607,
+        0.8
+      ],
+      "reward": 0.0051762750585899265,
+      "state": [
+        -0.24972372175024718,
+        0.27185103309743136,
+        0.0
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:1",
+      "next_action": 1,
+      "next_state": [
+        -0.10596451794171952,
+        0.14369374648791844,
+        -0.8
+      ],
+      "reward": 0.005574745756193589,
+      "state": [
+        0.1205601153378932,
+        0.18572816575874607,
+        0.8
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:1",
+      "next_action": 2,
+      "next_state": [
+        0.18702135783100304,
+        0.19347053139531162,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.10596451794171952,
+        0.14369374648791844,
+        -0.8
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:1",
+      "next_action": 0,
+      "next_state": [
+        -0.13165168154974008,
+        0.16892672436915615,
+        0.8
+      ],
+      "reward": -0.012681414601216714,
+      "state": [
+        0.18702135783100304,
+        0.19347053139531162,
+        0.0
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:1",
+      "next_action": 1,
+      "next_state": [
+        -0.045665758692517225,
+        0.1618334401538215,
+        -0.8
+      ],
+      "reward": 0.0003572771839588524,
+      "state": [
+        -0.13165168154974008,
+        0.16892672436915615,
+        0.8
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:1",
+      "next_action": 2,
+      "next_state": [
+        0.023194513502315554,
+        0.10957338326460356,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.045665758692517225,
+        0.1618334401538215,
+        -0.8
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:1",
+      "next_action": 0,
+      "next_state": [
+        0.23138081279520517,
+        0.25548324692308794,
+        0.8
+      ],
+      "reward": 0.012558812639642515,
+      "state": [
+        0.023194513502315554,
+        0.10957338326460356,
+        0.0
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:1",
+      "next_action": 1,
+      "next_state": [
+        -0.12770268041133406,
+        0.16765841560371683,
+        -0.8
+      ],
+      "reward": 0.007617721372873519,
+      "state": [
+        0.23138081279520517,
+        0.25548324692308794,
+        0.8
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:1",
+      "next_action": 2,
+      "next_state": [
+        -0.019864918869525926,
+        0.11362741539336377,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.12770268041133406,
+        0.16765841560371683,
+        -0.8
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:1",
+      "next_action": 0,
+      "next_state": [
+        0.056416369589453626,
+        0.15256241799860815,
+        0.8
+      ],
+      "reward": 0.0057146497788956975,
+      "state": [
+        -0.019864918869525926,
+        0.11362741539336377,
+        0.0
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:1",
+      "next_action": 1,
+      "next_state": [
+        0.09130615541022999,
+        0.15482310809423838,
+        -0.8
+      ],
+      "reward": -0.004213400812474729,
+      "state": [
+        0.056416369589453626,
+        0.15256241799860815,
+        0.8
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:1",
+      "next_action": 2,
+      "next_state": [
+        -0.11840749857472535,
+        0.15268412217356556,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.09130615541022999,
+        0.15482310809423838,
+        -0.8
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:1",
+      "next_action": 0,
+      "next_state": [
+        -0.05511787401574803,
+        0.10866118110236221,
+        0.8
+      ],
+      "reward": -0.0038686322974951885,
+      "state": [
+        -0.11840749857472535,
+        0.15268412217356556,
+        0.0
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:1",
+      "next_action": 1,
+      "next_state": [
+        0.02926943978262986,
+        0.08860018705481569,
+        -0.8
+      ],
+      "reward": -0.0038403546387880926,
+      "state": [
+        -0.05511787401574803,
+        0.10866118110236221,
+        0.8
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:2",
+      "next_action": 2,
+      "next_state": [
+        -0.008710880651812485,
+        0.0783969755970619,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.02926943978262986,
+        0.08860018705481569,
+        -0.8
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:2",
+      "next_action": 0,
+      "next_state": [
+        -0.06371987103815521,
+        0.13381122738802323,
+        0.8
+      ],
+      "reward": -0.009403712594177896,
+      "state": [
+        -0.008710880651812485,
+        0.0783969755970619,
+        0.0
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:2",
+      "next_action": 1,
+      "next_state": [
+        0.1616626582782512,
+        0.23492848610336864,
+        -0.8
+      ],
+      "reward": -0.01907654028056112,
+      "state": [
+        -0.06371987103815521,
+        0.13381122738802323,
+        0.8
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:2",
+      "next_action": 2,
+      "next_state": [
+        -0.09289632664029696,
+        0.11943785545177882,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.1616626582782512,
+        0.23492848610336864,
+        -0.8
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:2",
+      "next_action": 0,
+      "next_state": [
+        0.12835632929138246,
+        0.2008028222821139,
+        0.8
+      ],
+      "reward": 0.010379235339083278,
+      "state": [
+        -0.09289632664029696,
+        0.11943785545177882,
+        0.0
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:2",
+      "next_action": 1,
+      "next_state": [
+        0.10678058986483421,
+        0.17770841361554762,
+        -0.8
+      ],
+      "reward": -0.007330885030745025,
+      "state": [
+        0.12835632929138246,
+        0.2008028222821139,
+        0.8
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:2",
+      "next_action": 2,
+      "next_state": [
+        -0.016093646406098307,
+        0.10728860037977621,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.10678058986483421,
+        0.17770841361554762,
+        -0.8
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:2",
+      "next_action": 0,
+      "next_state": [
+        0.025696924279297473,
+        0.14964938628447413,
+        0.8
+      ],
+      "reward": 0.014153239288864288,
+      "state": [
+        -0.016093646406098307,
+        0.10728860037977621,
+        0.0
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:2",
+      "next_action": 1,
+      "next_state": [
+        -0.2900497394738348,
+        0.3696255943226301,
+        -0.8
+      ],
+      "reward": 0.011804575014153414,
+      "state": [
+        0.025696924279297473,
+        0.14964938628447413,
+        0.8
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:2",
+      "next_action": 2,
+      "next_state": [
+        -0.11677972904794932,
+        0.25276528110739765,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.2900497394738348,
+        0.3696255943226301,
+        -0.8
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:2",
+      "next_action": 0,
+      "next_state": [
+        -0.2712995201438085,
+        0.3156092219807931,
+        0.8
+      ],
+      "reward": -0.02210396161150468,
+      "state": [
+        -0.11677972904794932,
+        0.25276528110739765,
+        0.0
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:2",
+      "next_action": 1,
+      "next_state": [
+        0.2260110265822526,
+        0.38302950647152273,
+        -0.8
+      ],
+      "reward": -0.025090818628992113,
+      "state": [
+        -0.2712995201438085,
+        0.3156092219807931,
+        0.8
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:2",
+      "next_action": 2,
+      "next_state": [
+        -0.061776293436293435,
+        0.17837930501930502,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.2260110265822526,
+        0.38302950647152273,
+        -0.8
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:2",
+      "next_action": 0,
+      "next_state": [
+        -0.18337815919054978,
+        0.208349444011679,
+        0.8
+      ],
+      "reward": -0.0184263811505761,
+      "state": [
+        -0.061776293436293435,
+        0.17837930501930502,
+        0.0
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:2",
+      "next_action": 1,
+      "next_state": [
+        -0.12247124087343933,
+        0.2678570680761231,
+        -0.8
+      ],
+      "reward": 0.0042238536162833,
+      "state": [
+        -0.18337815919054978,
+        0.208349444011679,
+        0.8
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:2",
+      "next_action": 2,
+      "next_state": [
+        0.039272662641804824,
+        0.1651041956825566,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.12247124087343933,
+        0.2678570680761231,
+        -0.8
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:2",
+      "next_action": 0,
+      "next_state": [
+        0.07420295232080834,
+        0.1191981370382065,
+        0.8
+      ],
+      "reward": 0.014672655036361889,
+      "state": [
+        0.039272662641804824,
+        0.1651041956825566,
+        0.0
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:2",
+      "next_action": 1,
+      "next_state": [
+        -0.08399395622885593,
+        0.1515033374009211,
+        -0.8
+      ],
+      "reward": 0.007349211530734723,
+      "state": [
+        0.07420295232080834,
+        0.1191981370382065,
+        0.8
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:2",
+      "next_action": 2,
+      "next_state": [
+        0.021497213718108497,
+        0.16401250261166406,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.08399395622885593,
+        0.1515033374009211,
+        -0.8
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:2",
+      "next_action": 0,
+      "next_state": [
+        -0.011097899150251302,
+        0.10463725557451835,
+        0.8
+      ],
+      "reward": 0.0004898005667005505,
+      "state": [
+        0.021497213718108497,
+        0.16401250261166406,
+        0.0
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:3",
+      "next_action": 1,
+      "next_state": [
+        0.12086908026468628,
+        0.14049077339327296,
+        -0.8
+      ],
+      "reward": -0.019465153262992568,
+      "state": [
+        -0.011097899150251302,
+        0.10463725557451835,
+        0.8
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:3",
+      "next_action": 2,
+      "next_state": [
+        -0.02324343253502729,
+        0.09917083215157801,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.12086908026468628,
+        0.14049077339327296,
+        -0.8
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:3",
+      "next_action": 0,
+      "next_state": [
+        0.14098745361475878,
+        0.18382924973402207,
+        0.8
+      ],
+      "reward": 0.008421917874600674,
+      "state": [
+        -0.02324343253502729,
+        0.09917083215157801,
+        0.0
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:3",
+      "next_action": 1,
+      "next_state": [
+        -0.04744012476180083,
+        0.09488147379475899,
+        -0.8
+      ],
+      "reward": -6.264691201095457e-05,
+      "state": [
+        0.14098745361475878,
+        0.18382924973402207,
+        0.8
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:3",
+      "next_action": 2,
+      "next_state": [
+        0.004615230769230769,
+        0.12615384615384614,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.04744012476180083,
+        0.09488147379475899,
+        -0.8
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:3",
+      "next_action": 0,
+      "next_state": [
+        0.1014831958915786,
+        0.13838724556999524,
+        0.8
+      ],
+      "reward": 0.007780845889294878,
+      "state": [
+        0.004615230769230769,
+        0.12615384615384614,
+        0.0
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:3",
+      "next_action": 1,
+      "next_state": [
+        0.07142758033004953,
+        0.11930143832972166,
+        -0.8
+      ],
+      "reward": -0.007802018471740761,
+      "state": [
+        0.1014831958915786,
+        0.13838724556999524,
+        0.8
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:3",
+      "next_action": 2,
+      "next_state": [
+        -0.22473686765896528,
+        0.2858226869160172,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.07142758033004953,
+        0.11930143832972166,
+        -0.8
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:3",
+      "next_action": 0,
+      "next_state": [
+        0.1304278849295039,
+        0.16955593584643044,
+        0.8
+      ],
+      "reward": 0.014535954904179714,
+      "state": [
+        -0.22473686765896528,
+        0.2858226869160172,
+        0.0
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:3",
+      "next_action": 1,
+      "next_state": [
+        -0.006067192430857027,
+        0.0644616254780705,
+        -0.8
+      ],
+      "reward": 0.0007752439490056625,
+      "state": [
+        0.1304278849295039,
+        0.16955593584643044,
+        0.8
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:3",
+      "next_action": 2,
+      "next_state": [
+        -0.07239175714064641,
+        0.11811346850913568,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.006067192430857027,
+        0.0644616254780705,
+        -0.8
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:3",
+      "next_action": 0,
+      "next_state": [
+        0.019956555265248352,
+        0.10285508215271018,
+        0.8
+      ],
+      "reward": 0.0011965244212198683,
+      "state": [
+        -0.07239175714064641,
+        0.11811346850913568,
+        0.0
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:3",
+      "next_action": 1,
+      "next_state": [
+        0.0077010626235864575,
+        0.10318781685516851,
+        -0.8
+      ],
+      "reward": 0.002754380457182957,
+      "state": [
+        0.019956555265248352,
+        0.10285508215271018,
+        0.8
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:3",
+      "next_action": 2,
+      "next_state": [
+        -0.041329326761692126,
+        0.07959650758926963,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.0077010626235864575,
+        0.10318781685516851,
+        -0.8
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:3",
+      "next_action": 0,
+      "next_state": [
+        -0.01697800560305594,
+        0.12887775692425132,
+        0.8
+      ],
+      "reward": -0.005072573189078282,
+      "state": [
+        -0.041329326761692126,
+        0.07959650758926963,
+        0.0
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:3",
+      "next_action": 1,
+      "next_state": [
+        -0.06563752895752896,
+        0.10270277992277992,
+        -0.8
+      ],
+      "reward": 0.0035908905040902095,
+      "state": [
+        -0.01697800560305594,
+        0.12887775692425132,
+        0.8
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:3",
+      "next_action": 2,
+      "next_state": [
+        -0.08533677666424096,
+        0.18463965172876579,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.06563752895752896,
+        0.10270277992277992,
+        -0.8
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:3",
+      "next_action": 0,
+      "next_state": [
+        0.05682723102195496,
+        0.19415935739919551,
+        0.8
+      ],
+      "reward": -0.002778747987979312,
+      "state": [
+        -0.08533677666424096,
+        0.18463965172876579,
+        0.0
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:3",
+      "next_action": 1,
+      "next_state": [
+        0.07504745270555742,
+        0.11647889487928229,
+        -0.8
+      ],
+      "reward": -0.009966579958665515,
+      "state": [
+        0.05682723102195496,
+        0.19415935739919551,
+        0.8
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:3",
+      "next_action": 2,
+      "next_state": [
+        -0.045672474993863794,
+        0.13159909367699069,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.07504745270555742,
+        0.11647889487928229,
+        -0.8
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:4",
+      "next_action": 0,
+      "next_state": [
+        -0.0795696999833107,
+        0.0951713067295217,
+        0.8
+      ],
+      "reward": -0.009234267325119132,
+      "state": [
+        -0.045672474993863794,
+        0.13159909367699069,
+        0.0
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:4",
+      "next_action": 1,
+      "next_state": [
+        0.0650277567807733,
+        0.1213321985936907,
+        -0.8
+      ],
+      "reward": 0.0007726979880899265,
+      "state": [
+        -0.0795696999833107,
+        0.0951713067295217,
+        0.8
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:4",
+      "next_action": 2,
+      "next_state": [
+        0.04487121187806984,
+        0.1165075188263207,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.0650277567807733,
+        0.1213321985936907,
+        -0.8
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:4",
+      "next_action": 0,
+      "next_state": [
+        -0.0328842778508904,
+        0.08925767233590924,
+        0.8
+      ],
+      "reward": -0.002280846424464678,
+      "state": [
+        0.04487121187806984,
+        0.1165075188263207,
+        0.0
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:4",
+      "next_action": 1,
+      "next_state": [
+        0.05108810694596934,
+        0.08567138051549052,
+        -0.8
+      ],
+      "reward": -0.004444895436491074,
+      "state": [
+        -0.0328842778508904,
+        0.08925767233590924,
+        0.8
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:4",
+      "next_action": 2,
+      "next_state": [
+        -0.08691574729399222,
+        0.11118925778082576,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.05108810694596934,
+        0.08567138051549052,
+        -0.8
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:4",
+      "next_action": 0,
+      "next_state": [
+        0.009412738401643084,
+        0.0768684614772682,
+        0.8
+      ],
+      "reward": 0.005982325535265807,
+      "state": [
+        -0.08691574729399222,
+        0.11118925778082576,
+        0.0
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:4",
+      "next_action": 1,
+      "next_state": [
+        -0.035299967791811236,
+        0.05726419695801231,
+        -0.8
+      ],
+      "reward": 0.0028360911869282097,
+      "state": [
+        0.009412738401643084,
+        0.0768684614772682,
+        0.8
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:4",
+      "next_action": 2,
+      "next_state": [
+        0.07074931271715519,
+        0.2106752630349443,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.035299967791811236,
+        0.05726419695801231,
+        -0.8
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:4",
+      "next_action": 0,
+      "next_state": [
+        -0.10554097388219018,
+        0.13192588753743684,
+        0.8
+      ],
+      "reward": -0.00420923266092239,
+      "state": [
+        0.07074931271715519,
+        0.2106752630349443,
+        0.0
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:4",
+      "next_action": 1,
+      "next_state": [
+        -0.07206062617781196,
+        0.11592355472583309,
+        -0.8
+      ],
+      "reward": 0.003905882352941177,
+      "state": [
+        -0.10554097388219018,
+        0.13192588753743684,
+        0.8
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:4",
+      "next_action": 2,
+      "next_state": [
+        -0.0741272124511973,
+        0.15861613389619109,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.07206062617781196,
+        0.11592355472583309,
+        -0.8
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:4",
+      "next_action": 0,
+      "next_state": [
+        -0.011149159831169866,
+        0.10034259775424066,
+        0.8
+      ],
+      "reward": 0.005381745810501452,
+      "state": [
+        -0.0741272124511973,
+        0.15861613389619109,
+        0.0
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:4",
+      "next_action": 1,
+      "next_state": [
+        -0.0236409767747679,
+        0.0748624101676531,
+        -0.8
+      ],
+      "reward": -0.00826231683010444,
+      "state": [
+        -0.011149159831169866,
+        0.10034259775424066,
+        0.8
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:4",
+      "next_action": 2,
+      "next_state": [
+        0.000791109704975085,
+        0.0727679348255952,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.0236409767747679,
+        0.0748624101676531,
+        -0.8
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:4",
+      "next_action": 0,
+      "next_state": [
+        0.08484056211236495,
+        0.11045341587236408,
+        0.8
+      ],
+      "reward": -0.003183941746536828,
+      "state": [
+        0.000791109704975085,
+        0.0727679348255952,
+        0.0
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:4",
+      "next_action": 1,
+      "next_state": [
+        -0.01588664719903604,
+        0.18905433464972862,
+        -0.8
+      ],
+      "reward": 0.00116824126984127,
+      "state": [
+        0.08484056211236495,
+        0.11045341587236408,
+        0.8
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:4",
+      "next_action": 2,
+      "next_state": [
+        -0.15343854064656473,
+        0.16870163475172795,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.01588664719903604,
+        0.18905433464972862,
+        -0.8
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:4",
+      "next_action": 0,
+      "next_state": [
+        -0.30520775624073887,
+        0.390795080997902,
+        0.8
+      ],
+      "reward": -0.016717206494248186,
+      "state": [
+        -0.15343854064656473,
+        0.16870163475172795,
+        0.0
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:4",
+      "next_action": 1,
+      "next_state": [
+        0.10988986206511625,
+        0.21649983243398668,
+        -0.8
+      ],
+      "reward": -0.02218751728158574,
+      "state": [
+        -0.30520775624073887,
+        0.390795080997902,
+        0.8
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:5",
+      "next_action": 2,
+      "next_state": [
+        0.050388307209376204,
+        0.11517251951669615,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.10988986206511625,
+        0.21649983243398668,
+        -0.8
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:5",
+      "next_action": 0,
+      "next_state": [
+        -0.034116153331353906,
+        0.10552221433257526,
+        0.8
+      ],
+      "reward": -0.000718338363255185,
+      "state": [
+        0.050388307209376204,
+        0.11517251951669615,
+        0.0
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:5",
+      "next_action": 1,
+      "next_state": [
+        0.0874959426702518,
+        0.12488068624816508,
+        -0.8
+      ],
+      "reward": -0.008506386372849404,
+      "state": [
+        -0.034116153331353906,
+        0.10552221433257526,
+        0.8
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:5",
+      "next_action": 2,
+      "next_state": [
+        0.06027845718300387,
+        0.09550720362466265,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.0874959426702518,
+        0.12488068624816508,
+        -0.8
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:5",
+      "next_action": 0,
+      "next_state": [
+        0.04183397827960988,
+        0.10148721565715502,
+        0.8
+      ],
+      "reward": 0.0065099683647174686,
+      "state": [
+        0.06027845718300387,
+        0.09550720362466265,
+        0.0
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:5",
+      "next_action": 1,
+      "next_state": [
+        0.08398915718111662,
+        0.17332243893011806,
+        -0.8
+      ],
+      "reward": -0.015921197929378104,
+      "state": [
+        0.04183397827960988,
+        0.10148721565715502,
+        0.8
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:5",
+      "next_action": 2,
+      "next_state": [
+        -0.1580734591762081,
+        0.19570876044973606,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.08398915718111662,
+        0.17332243893011806,
+        -0.8
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:5",
+      "next_action": 0,
+      "next_state": [
+        0.2647760515579318,
+        0.2877286710013718,
+        0.8
+      ],
+      "reward": -0.03423555793499044,
+      "state": [
+        -0.1580734591762081,
+        0.19570876044973606,
+        0.0
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:5",
+      "next_action": 1,
+      "next_state": [
+        -0.08240832208577628,
+        0.16085562981431767,
+        -0.8
+      ],
+      "reward": -0.00041669382193983536,
+      "state": [
+        0.2647760515579318,
+        0.2877286710013718,
+        0.8
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:5",
+      "next_action": 2,
+      "next_state": [
+        -0.06543249281838494,
+        0.14682381104372805,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.08240832208577628,
+        0.16085562981431767,
+        -0.8
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:5",
+      "next_action": 0,
+      "next_state": [
+        -0.02599715739693419,
+        0.12104947992686586,
+        0.8
+      ],
+      "reward": -0.01151648514056225,
+      "state": [
+        -0.06543249281838494,
+        0.14682381104372805,
+        0.0
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:5",
+      "next_action": 1,
+      "next_state": [
+        0.0,
+        0.1102286458963036,
+        -0.8
+      ],
+      "reward": -0.004774912535022707,
+      "state": [
+        -0.02599715739693419,
+        0.12104947992686586,
+        0.8
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:5",
+      "next_action": 2,
+      "next_state": [
+        -0.012992610426429388,
+        0.09987843930363882,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.0,
+        0.1102286458963036,
+        -0.8
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:5",
+      "next_action": 0,
+      "next_state": [
+        0.0040878842380640944,
+        0.07030747220405494,
+        0.8
+      ],
+      "reward": -0.004432815741650797,
+      "state": [
+        -0.012992610426429388,
+        0.09987843930363882,
+        0.0
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:5",
+      "next_action": 1,
+      "next_state": [
+        -0.10603548296958373,
+        0.1411088930034077,
+        -0.8
+      ],
+      "reward": 0.006195178385343342,
+      "state": [
+        0.0040878842380640944,
+        0.07030747220405494,
+        0.8
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:5",
+      "next_action": 2,
+      "next_state": [
+        -0.2518516872427983,
+        0.41563810699588477,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.10603548296958373,
+        0.1411088930034077,
+        -0.8
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:5",
+      "next_action": 0,
+      "next_state": [
+        -0.23675685976421154,
+        0.378981185129981,
+        0.8
+      ],
+      "reward": -0.026067024220414993,
+      "state": [
+        -0.2518516872427983,
+        0.41563810699588477,
+        0.0
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:5",
+      "next_action": 1,
+      "next_state": [
+        0.2169105856638491,
+        0.47277593110515975,
+        -0.8
+      ],
+      "reward": -0.0061035799485657715,
+      "state": [
+        -0.23675685976421154,
+        0.378981185129981,
+        0.8
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:5",
+      "next_action": 2,
+      "next_state": [
+        -0.07243286994539216,
+        0.20522522889346184,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.2169105856638491,
+        0.47277593110515975,
+        -0.8
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:5",
+      "next_action": 0,
+      "next_state": [
+        0.08203831240987411,
+        0.1527317131657931,
+        0.8
+      ],
+      "reward": 0.002309980093198474,
+      "state": [
+        -0.07243286994539216,
+        0.20522522889346184,
+        0.0
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:6",
+      "next_action": 1,
+      "next_state": [
+        0.273749423099197,
+        0.29691916499544463,
+        -0.8
+      ],
+      "reward": -0.029885901032355465,
+      "state": [
+        0.08203831240987411,
+        0.1527317131657931,
+        0.8
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:6",
+      "next_action": 2,
+      "next_state": [
+        -0.3666921376231583,
+        0.41167966066852835,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.273749423099197,
+        0.29691916499544463,
+        -0.8
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:6",
+      "next_action": 0,
+      "next_state": [
+        0.2408245822520624,
+        0.514529552248552,
+        0.8
+      ],
+      "reward": 0.011935888841940063,
+      "state": [
+        -0.3666921376231583,
+        0.41167966066852835,
+        0.0
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:6",
+      "next_action": 1,
+      "next_state": [
+        -0.07669760361342982,
+        0.1602896401215991,
+        -0.8
+      ],
+      "reward": -0.00017524469585638138,
+      "state": [
+        0.2408245822520624,
+        0.514529552248552,
+        0.8
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:6",
+      "next_action": 2,
+      "next_state": [
+        0.1434568754373688,
+        0.20118929321203638,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.07669760361342982,
+        0.1602896401215991,
+        -0.8
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:6",
+      "next_action": 0,
+      "next_state": [
+        0.0965186996163504,
+        0.1852811083653817,
+        0.8
+      ],
+      "reward": 0.007878751364942666,
+      "state": [
+        0.1434568754373688,
+        0.20118929321203638,
+        0.0
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:6",
+      "next_action": 1,
+      "next_state": [
+        0.006012196169372155,
+        0.1228205788886026,
+        -0.8
+      ],
+      "reward": 0.0037066847215198122,
+      "state": [
+        0.0965186996163504,
+        0.1852811083653817,
+        0.8
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:6",
+      "next_action": 2,
+      "next_state": [
+        -0.09388423934339775,
+        0.15848380979300275,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.006012196169372155,
+        0.1228205788886026,
+        -0.8
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:6",
+      "next_action": 0,
+      "next_state": [
+        -0.1253506289384532,
+        0.2384292559882669,
+        0.8
+      ],
+      "reward": -0.01681596354376205,
+      "state": [
+        -0.09388423934339775,
+        0.15848380979300275,
+        0.0
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:6",
+      "next_action": 1,
+      "next_state": [
+        -0.42289214887258897,
+        0.5659693923752603,
+        -0.8
+      ],
+      "reward": 0.04813031426666108,
+      "state": [
+        -0.1253506289384532,
+        0.2384292559882669,
+        0.8
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:6",
+      "next_action": 2,
+      "next_state": [
+        0.8696110191964471,
+        1.7708445734949538,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.42289214887258897,
+        0.5659693923752603,
+        -0.8
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:6",
+      "next_action": 0,
+      "next_state": [
+        -0.6633068970992089,
+        0.6849069329051667,
+        0.8
+      ],
+      "reward": 0.004409891248742497,
+      "state": [
+        0.8696110191964471,
+        1.7708445734949538,
+        0.0
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:6",
+      "next_action": 1,
+      "next_state": [
+        0.24278701065597202,
+        0.451955941804312,
+        -0.8
+      ],
+      "reward": -0.04668397235172494,
+      "state": [
+        -0.6633068970992089,
+        0.6849069329051667,
+        0.8
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:6",
+      "next_action": 2,
+      "next_state": [
+        0.06148044030614523,
+        0.2869108895951825,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.24278701065597202,
+        0.451955941804312,
+        -0.8
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:6",
+      "next_action": 0,
+      "next_state": [
+        0.09984871355707789,
+        0.15779593755542368,
+        0.8
+      ],
+      "reward": 0.002221346132152783,
+      "state": [
+        0.06148044030614523,
+        0.2869108895951825,
+        0.0
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:6",
+      "next_action": 1,
+      "next_state": [
+        0.06516138592485393,
+        0.22583227908446202,
+        -0.8
+      ],
+      "reward": 0.002942600373002027,
+      "state": [
+        0.09984871355707789,
+        0.15779593755542368,
+        0.8
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:6",
+      "next_action": 2,
+      "next_state": [
+        -0.2206083482413373,
+        0.41034915278530815,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.06516138592485393,
+        0.22583227908446202,
+        -0.8
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:6",
+      "next_action": 0,
+      "next_state": [
+        0.19141730405287208,
+        0.29120919102215753,
+        0.8
+      ],
+      "reward": 0.03391113967405181,
+      "state": [
+        -0.2206083482413373,
+        0.41034915278530815,
+        0.0
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:6",
+      "next_action": 1,
+      "next_state": [
+        -0.18846075541756166,
+        0.24357703339989392,
+        -0.8
+      ],
+      "reward": 0.01322879166917542,
+      "state": [
+        0.19141730405287208,
+        0.29120919102215753,
+        0.8
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:6",
+      "next_action": 2,
+      "next_state": [
+        0.027530145659079144,
+        0.17803019016215296,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.18846075541756166,
+        0.24357703339989392,
+        -0.8
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:7",
+      "next_action": 0,
+      "next_state": [
+        0.05011167785234899,
+        0.20044724832214766,
+        0.8
+      ],
+      "reward": 0.021856803027092607,
+      "state": [
+        0.027530145659079144,
+        0.17803019016215296,
+        0.0
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:7",
+      "next_action": 1,
+      "next_state": [
+        -0.3173347342240729,
+        0.37359352367099996,
+        -0.8
+      ],
+      "reward": 0.014585957000907436,
+      "state": [
+        0.05011167785234899,
+        0.20044724832214766,
+        0.8
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:7",
+      "next_action": 2,
+      "next_state": [
+        0.20857922032953352,
+        0.306520095398207,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.3173347342240729,
+        0.37359352367099996,
+        -0.8
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:7",
+      "next_action": 0,
+      "next_state": [
+        0.21647714270974916,
+        0.21916065641684715,
+        0.8
+      ],
+      "reward": 0.011254963134049925,
+      "state": [
+        0.20857922032953352,
+        0.306520095398207,
+        0.0
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:7",
+      "next_action": 1,
+      "next_state": [
+        -0.10893840952241535,
+        0.17412917869052705,
+        -0.8
+      ],
+      "reward": -0.008505097694642307,
+      "state": [
+        0.21647714270974916,
+        0.21916065641684715,
+        0.8
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:7",
+      "next_action": 2,
+      "next_state": [
+        0.030190546019149486,
+        0.18200646942120244,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.10893840952241535,
+        0.17412917869052705,
+        -0.8
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:7",
+      "next_action": 0,
+      "next_state": [
+        0.013763784946236559,
+        0.09462356989247311,
+        0.8
+      ],
+      "reward": 0.0004944272522740562,
+      "state": [
+        0.030190546019149486,
+        0.18200646942120244,
+        0.0
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:7",
+      "next_action": 1,
+      "next_state": [
+        -0.15044146116405113,
+        0.2394948040983986,
+        -0.8
+      ],
+      "reward": 0.01631197261018907,
+      "state": [
+        0.013763784946236559,
+        0.09462356989247311,
+        0.8
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:7",
+      "next_action": 2,
+      "next_state": [
+        0.1105069076776304,
+        0.21655824094606757,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.15044146116405113,
+        0.2394948040983986,
+        -0.8
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:7",
+      "next_action": 0,
+      "next_state": [
+        0.13547998830790867,
+        0.15043538577347385,
+        0.8
+      ],
+      "reward": 0.01201076806727461,
+      "state": [
+        0.1105069076776304,
+        0.21655824094606757,
+        0.0
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:7",
+      "next_action": 1,
+      "next_state": [
+        0.0017644205794078475,
+        0.1464105701114104,
+        -0.8
+      ],
+      "reward": 0.011768332719107134,
+      "state": [
+        0.13547998830790867,
+        0.15043538577347385,
+        0.8
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:7",
+      "next_action": 2,
+      "next_state": [
+        0.060723666128407974,
+        0.1249668254413489,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.0017644205794078475,
+        0.1464105701114104,
+        -0.8
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:7",
+      "next_action": 0,
+      "next_state": [
+        0.1545253863134658,
+        0.27637942604856514,
+        0.8
+      ],
+      "reward": 0.004358572428271519,
+      "state": [
+        0.060723666128407974,
+        0.1249668254413489,
+        0.0
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:7",
+      "next_action": 1,
+      "next_state": [
+        -0.14857462815914413,
+        0.22930307060626812,
+        -0.8
+      ],
+      "reward": 0.0012173982608695653,
+      "state": [
+        0.1545253863134658,
+        0.27637942604856514,
+        0.8
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:7",
+      "next_action": 2,
+      "next_state": [
+        -0.12384681816156026,
+        0.18708810166162673,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.14857462815914413,
+        0.22930307060626812,
+        -0.8
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:7",
+      "next_action": 0,
+      "next_state": [
+        -0.3341313421229931,
+        0.5007534254940454,
+        0.8
+      ],
+      "reward": -0.024448409390814493,
+      "state": [
+        -0.12384681816156026,
+        0.18708810166162673,
+        0.0
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:7",
+      "next_action": 1,
+      "next_state": [
+        0.01180039959699373,
+        0.2550601843525494,
+        -0.8
+      ],
+      "reward": -0.009895947351842058,
+      "state": [
+        -0.3341313421229931,
+        0.5007534254940454,
+        0.8
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:7",
+      "next_action": 2,
+      "next_state": [
+        0.04675914550288805,
+        0.21179105161822684,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.01180039959699373,
+        0.2550601843525494,
+        -0.8
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:7",
+      "next_action": 0,
+      "next_state": [
+        0.21942366041248662,
+        0.3203406106778889,
+        0.8
+      ],
+      "reward": 0.005440445230143362,
+      "state": [
+        0.04675914550288805,
+        0.21179105161822684,
+        0.0
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:7",
+      "next_action": 1,
+      "next_state": [
+        0.0819077197462974,
+        0.2093195361117456,
+        -0.8
+      ],
+      "reward": -0.0036990904937241483,
+      "state": [
+        0.21942366041248662,
+        0.3203406106778889,
+        0.8
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:8",
+      "next_action": 2,
+      "next_state": [
+        0.06146624048087066,
+        0.17807114285648945,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.0819077197462974,
+        0.2093195361117456,
+        -0.8
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:8",
+      "next_action": 0,
+      "next_state": [
+        -0.08591364034210919,
+        0.2112039593915153,
+        0.8
+      ],
+      "reward": -0.004209174446306252,
+      "state": [
+        0.06146624048087066,
+        0.17807114285648945,
+        0.0
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:8",
+      "next_action": 1,
+      "next_state": [
+        -0.0626192928102497,
+        0.17968989600345048,
+        -0.8
+      ],
+      "reward": 0.008443538628304194,
+      "state": [
+        -0.08591364034210919,
+        0.2112039593915153,
+        0.8
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:8",
+      "next_action": 2,
+      "next_state": [
+        0.19272754545454546,
+        0.2536364545454545,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.0626192928102497,
+        0.17968989600345048,
+        -0.8
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:8",
+      "next_action": 0,
+      "next_state": [
+        -0.10023995120447216,
+        0.11620668545533526,
+        0.8
+      ],
+      "reward": -0.004110345958517322,
+      "state": [
+        0.19272754545454546,
+        0.2536364545454545,
+        0.0
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:8",
+      "next_action": 1,
+      "next_state": [
+        0.08752941707273056,
+        0.15971819166215484,
+        -0.8
+      ],
+      "reward": -0.0021620286982442422,
+      "state": [
+        -0.10023995120447216,
+        0.11620668545533526,
+        0.8
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:8",
+      "next_action": 2,
+      "next_state": [
+        -0.09704393838580341,
+        0.17611636107362422,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.08752941707273056,
+        0.15971819166215484,
+        -0.8
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:8",
+      "next_action": 0,
+      "next_state": [
+        0.08383674389254485,
+        0.14513657261335977,
+        0.8
+      ],
+      "reward": 0.011577149187706645,
+      "state": [
+        -0.09704393838580341,
+        0.17611636107362422,
+        0.0
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:8",
+      "next_action": 1,
+      "next_state": [
+        -0.06620128883701279,
+        0.13150841055205234,
+        -0.8
+      ],
+      "reward": 0.005064473396527146,
+      "state": [
+        0.08383674389254485,
+        0.14513657261335977,
+        0.8
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:8",
+      "next_action": 2,
+      "next_state": [
+        0.08393501577793279,
+        0.14801434617289677,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.06620128883701279,
+        0.13150841055205234,
+        -0.8
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:8",
+      "next_action": 0,
+      "next_state": [
+        0.21825050182326214,
+        0.3008800179946117,
+        0.8
+      ],
+      "reward": 0.01420659765667419,
+      "state": [
+        0.08393501577793279,
+        0.14801434617289677,
+        0.0
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:8",
+      "next_action": 1,
+      "next_state": [
+        -0.021052456140350877,
+        0.1649127192982456,
+        -0.8
+      ],
+      "reward": -0.0007297178499530066,
+      "state": [
+        0.21825050182326214,
+        0.3008800179946117,
+        0.8
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:8",
+      "next_action": 2,
+      "next_state": [
+        0.10233516833140613,
+        0.12245272242713684,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.021052456140350877,
+        0.1649127192982456,
+        -0.8
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:8",
+      "next_action": 0,
+      "next_state": [
+        0.2039421646257626,
+        0.24850052052700566,
+        0.8
+      ],
+      "reward": 0.02439655064935065,
+      "state": [
+        0.10233516833140613,
+        0.12245272242713684,
+        0.0
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:8",
+      "next_action": 1,
+      "next_state": [
+        -0.23712762132236415,
+        0.27184950420309106,
+        -0.8
+      ],
+      "reward": 0.024729075822487814,
+      "state": [
+        0.2039421646257626,
+        0.24850052052700566,
+        0.8
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:8",
+      "next_action": 2,
+      "next_state": [
+        -0.0736567578222399,
+        0.2209707933973866,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.23712762132236415,
+        0.27184950420309106,
+        -0.8
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:8",
+      "next_action": 0,
+      "next_state": [
+        0.2001194731890875,
+        0.2770892841871205,
+        0.8
+      ],
+      "reward": 0.03256372851251694,
+      "state": [
+        -0.0736567578222399,
+        0.2209707933973866,
+        0.0
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:8",
+      "next_action": 1,
+      "next_state": [
+        0.1541703493050636,
+        0.2038757423051999,
+        -0.8
+      ],
+      "reward": -0.00925142638848226,
+      "state": [
+        0.2001194731890875,
+        0.2770892841871205,
+        0.8
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:8",
+      "next_action": 2,
+      "next_state": [
+        -0.12315051034218548,
+        0.1462934150970066,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.1541703493050636,
+        0.2038757423051999,
+        -0.8
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:8",
+      "next_action": 0,
+      "next_state": [
+        0.0314567045168037,
+        0.14486754607117022,
+        0.8
+      ],
+      "reward": 0.010846861924686193,
+      "state": [
+        -0.12315051034218548,
+        0.1462934150970066,
+        0.0
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:9",
+      "next_action": 1,
+      "next_state": [
+        0.14736310830894023,
+        0.23097946658680796,
+        -0.8
+      ],
+      "reward": -0.00997643175441492,
+      "state": [
+        0.0314567045168037,
+        0.14486754607117022,
+        0.8
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:9",
+      "next_action": 2,
+      "next_state": [
+        -0.09177268151805446,
+        0.17867270799982232,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.14736310830894023,
+        0.23097946658680796,
+        -0.8
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:9",
+      "next_action": 0,
+      "next_state": [
+        -0.07632334963189741,
+        0.20599114002447502,
+        0.8
+      ],
+      "reward": -0.007481980327868854,
+      "state": [
+        -0.09177268151805446,
+        0.17867270799982232,
+        0.0
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:9",
+      "next_action": 1,
+      "next_state": [
+        -0.004128725917523525,
+        0.0982573685223568,
+        -0.8
+      ],
+      "reward": -0.0017262322349691074,
+      "state": [
+        -0.07632334963189741,
+        0.20599114002447502,
+        0.8
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:9",
+      "next_action": 2,
+      "next_state": [
+        -0.03224198108665659,
+        0.1455022333457526,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.004128725917523525,
+        0.0982573685223568,
+        -0.8
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:9",
+      "next_action": 0,
+      "next_state": [
+        -0.011121043436765723,
+        0.17194199876917024,
+        0.8
+      ],
+      "reward": -0.025613588786597,
+      "state": [
+        -0.03224198108665659,
+        0.1455022333457526,
+        0.0
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:9",
+      "next_action": 1,
+      "next_state": [
+        -0.02234269943260206,
+        0.18991139838674748,
+        -0.8
+      ],
+      "reward": 0.0037216820550230894,
+      "state": [
+        -0.011121043436765723,
+        0.17194199876917024,
+        0.8
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:9",
+      "next_action": 2,
+      "next_state": [
+        -0.04644770262432991,
+        0.10063633062727799,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.02234269943260206,
+        0.18991139838674748,
+        -0.8
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:9",
+      "next_action": 0,
+      "next_state": [
+        -0.2482639821596523,
+        0.2864586012098594,
+        0.8
+      ],
+      "reward": -0.02376678168538903,
+      "state": [
+        -0.04644770262432991,
+        0.10063633062727799,
+        0.0
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:9",
+      "next_action": 1,
+      "next_state": [
+        0.25139190836932773,
+        0.29089585987329486,
+        -0.8
+      ],
+      "reward": -0.013903108887417087,
+      "state": [
+        -0.2482639821596523,
+        0.2864586012098594,
+        0.8
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:9",
+      "next_action": 2,
+      "next_state": [
+        -0.10703063186617877,
+        0.15053976941419717,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.25139190836932773,
+        0.29089585987329486,
+        -0.8
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:9",
+      "next_action": 0,
+      "next_state": [
+        0.1321699182417084,
+        0.17190721886822358,
+        0.8
+      ],
+      "reward": 0.02493203579326175,
+      "state": [
+        -0.10703063186617877,
+        0.15053976941419717,
+        0.0
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:9",
+      "next_action": 1,
+      "next_state": [
+        0.09690581517260978,
+        0.2541650820653271,
+        -0.8
+      ],
+      "reward": -0.010962830504196176,
+      "state": [
+        0.1321699182417084,
+        0.17190721886822358,
+        0.8
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:9",
+      "next_action": 2,
+      "next_state": [
+        0.008389765311822953,
+        0.08976510293032977,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.09690581517260978,
+        0.2541650820653271,
+        -0.8
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:9",
+      "next_action": 0,
+      "next_state": [
+        -0.1274416901343596,
+        0.20038627149458216,
+        0.8
+      ],
+      "reward": -0.010793984650612288,
+      "state": [
+        0.008389765311822953,
+        0.08976510293032977,
+        0.0
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:9",
+      "next_action": 1,
+      "next_state": [
+        0.13210559733903354,
+        0.1900617882883868,
+        -0.8
+      ],
+      "reward": -0.008477261995753717,
+      "state": [
+        -0.1274416901343596,
+        0.20038627149458216,
+        0.8
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:9",
+      "next_action": 2,
+      "next_state": [
+        -0.09898498531150898,
+        0.10989053023983332,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.13210559733903354,
+        0.1900617882883868,
+        -0.8
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:9",
+      "next_action": 0,
+      "next_state": [
+        -0.04057849318980055,
+        0.0684762865121626,
+        0.8
+      ],
+      "reward": -0.0018911531093040168,
+      "state": [
+        -0.09898498531150898,
+        0.10989053023983332,
+        0.0
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:9",
+      "next_action": 1,
+      "next_state": [
+        0.02627383721118463,
+        0.14069023037020478,
+        -0.8
+      ],
+      "reward": -0.004127425572148809,
+      "state": [
+        -0.04057849318980055,
+        0.0684762865121626,
+        0.8
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:9",
+      "next_action": 2,
+      "next_state": [
+        -0.11873717894736842,
+        0.16421027368421054,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.02627383721118463,
+        0.14069023037020478,
+        -0.8
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:10",
+      "next_action": 0,
+      "next_state": [
+        -0.09033552378849578,
+        0.17300145467876102,
+        0.8
+      ],
+      "reward": -0.007626841903079664,
+      "state": [
+        -0.11873717894736842,
+        0.16421027368421054,
+        0.0
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:10",
+      "next_action": 1,
+      "next_state": [
+        -0.1158306276491473,
+        0.22050621483038485,
+        -0.8
+      ],
+      "reward": 0.006630354381066,
+      "state": [
+        -0.09033552378849578,
+        0.17300145467876102,
+        0.8
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:10",
+      "next_action": 2,
+      "next_state": [
+        0.32439916450343337,
+        0.3590943676026163,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.1158306276491473,
+        0.22050621483038485,
+        -0.8
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:10",
+      "next_action": 0,
+      "next_state": [
+        -0.05883375208857576,
+        0.17229811298626374,
+        0.8
+      ],
+      "reward": -0.005440746072761036,
+      "state": [
+        0.32439916450343337,
+        0.3590943676026163,
+        0.0
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:10",
+      "next_action": 1,
+      "next_state": [
+        0.06041576056200886,
+        0.14805965320097822,
+        -0.8
+      ],
+      "reward": -0.00046184646315392685,
+      "state": [
+        -0.05883375208857576,
+        0.17229811298626374,
+        0.8
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:10",
+      "next_action": 2,
+      "next_state": [
+        -0.17170996405737815,
+        0.22186331368465925,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.06041576056200886,
+        0.14805965320097822,
+        -0.8
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:10",
+      "next_action": 0,
+      "next_state": [
+        0.011202774808662747,
+        0.12323336674221504,
+        0.8
+      ],
+      "reward": 0.003405535275760199,
+      "state": [
+        -0.17170996405737815,
+        0.22186331368465925,
+        0.0
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:10",
+      "next_action": 1,
+      "next_state": [
+        -0.17449448433901407,
+        0.220505335176572,
+        -0.8
+      ],
+      "reward": 0.019790500483610238,
+      "state": [
+        0.011202774808662747,
+        0.12323336674221504,
+        0.8
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:10",
+      "next_action": 2,
+      "next_state": [
+        0.02674300231770369,
+        0.2576215903013015,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.17449448433901407,
+        0.220505335176572,
+        -0.8
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:10",
+      "next_action": 0,
+      "next_state": [
+        -0.12953403377641534,
+        0.21886769307007875,
+        0.8
+      ],
+      "reward": -0.014553662495901606,
+      "state": [
+        0.02674300231770369,
+        0.2576215903013015,
+        0.0
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:10",
+      "next_action": 1,
+      "next_state": [
+        0.024308634194652023,
+        0.2872058161519762,
+        -0.8
+      ],
+      "reward": -0.00695438874385716,
+      "state": [
+        -0.12953403377641534,
+        0.21886769307007875,
+        0.8
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:10",
+      "next_action": 2,
+      "next_state": [
+        -0.27137958234367743,
+        0.29191189855147026,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.024308634194652023,
+        0.2872058161519762,
+        -0.8
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:10",
+      "next_action": 0,
+      "next_state": [
+        -0.2644389766067771,
+        0.34064813733731936,
+        0.8
+      ],
+      "reward": -0.022055378372489127,
+      "state": [
+        -0.27137958234367743,
+        0.29191189855147026,
+        0.0
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:10",
+      "next_action": 1,
+      "next_state": [
+        0.004660980654930842,
+        0.16778551610538325,
+        -0.8
+      ],
+      "reward": -0.010608567479096177,
+      "state": [
+        -0.2644389766067771,
+        0.34064813733731936,
+        0.8
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:10",
+      "next_action": 2,
+      "next_state": [
+        -0.015828584435221893,
+        0.11824990468808372,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.004660980654930842,
+        0.16778551610538325,
+        -0.8
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:10",
+      "next_action": 0,
+      "next_state": [
+        0.12491880651399664,
+        0.15381756746017247,
+        0.8
+      ],
+      "reward": 0.009895611014764218,
+      "state": [
+        -0.015828584435221893,
+        0.11824990468808372,
+        0.0
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:10",
+      "next_action": 1,
+      "next_state": [
+        -0.08899091743119265,
+        0.0963305504587156,
+        -0.8
+      ],
+      "reward": 0.0034721811594495802,
+      "state": [
+        0.12491880651399664,
+        0.15381756746017247,
+        0.8
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:10",
+      "next_action": 2,
+      "next_state": [
+        -0.07156762046910012,
+        0.14034780705819527,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.08899091743119265,
+        0.0963305504587156,
+        -0.8
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:10",
+      "next_action": 0,
+      "next_state": [
+        0.16641726034421522,
+        0.24027664772135984,
+        0.8
+      ],
+      "reward": 0.01397931473506834,
+      "state": [
+        -0.07156762046910012,
+        0.14034780705819527,
+        0.0
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:10",
+      "next_action": 1,
+      "next_state": [
+        -0.11604365231085555,
+        0.13998866936841647,
+        -0.8
+      ],
+      "reward": 0.009646923127587331,
+      "state": [
+        0.16641726034421522,
+        0.24027664772135984,
+        0.8
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:11",
+      "next_action": 2,
+      "next_state": [
+        -0.16353611506333773,
+        0.20652265757363503,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.11604365231085555,
+        0.13998866936841647,
+        -0.8
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:11",
+      "next_action": 0,
+      "next_state": [
+        0.26703020887798257,
+        0.3284283176256864,
+        0.8
+      ],
+      "reward": 0.0002839901067073892,
+      "state": [
+        -0.16353611506333773,
+        0.20652265757363503,
+        0.0
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:11",
+      "next_action": 1,
+      "next_state": [
+        -0.28747054373522457,
+        0.32529494089834515,
+        -0.8
+      ],
+      "reward": 0.019247453631655507,
+      "state": [
+        0.26703020887798257,
+        0.3284283176256864,
+        0.8
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:11",
+      "next_action": 2,
+      "next_state": [
+        0.01392193742883726,
+        0.24860780128496024,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.28747054373522457,
+        0.32529494089834515,
+        -0.8
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:11",
+      "next_action": 0,
+      "next_state": [
+        -0.2259832792865829,
+        0.3749490271584921,
+        0.8
+      ],
+      "reward": -0.034163655424935116,
+      "state": [
+        0.01392193742883726,
+        0.24860780128496024,
+        0.0
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:11",
+      "next_action": 1,
+      "next_state": [
+        -0.1613398225873215,
+        0.23845752698759431,
+        -0.8
+      ],
+      "reward": -0.00503018779357764,
+      "state": [
+        -0.2259832792865829,
+        0.3749490271584921,
+        0.8
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:11",
+      "next_action": 2,
+      "next_state": [
+        -0.04445811817259656,
+        0.17379023771051594,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.1613398225873215,
+        0.23845752698759431,
+        -0.8
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:11",
+      "next_action": 0,
+      "next_state": [
+        -0.05867767104890091,
+        0.18398865686756866,
+        0.8
+      ],
+      "reward": 0.011210677069021386,
+      "state": [
+        -0.04445811817259656,
+        0.17379023771051594,
+        0.0
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:11",
+      "next_action": 1,
+      "next_state": [
+        -0.292065490430622,
+        0.38775907097288675,
+        -0.8
+      ],
+      "reward": 0.01976822749668095,
+      "state": [
+        -0.05867767104890091,
+        0.18398865686756866,
+        0.8
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:11",
+      "next_action": 2,
+      "next_state": [
+        0.15924847038840823,
+        0.48387148309382894,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.292065490430622,
+        0.38775907097288675,
+        -0.8
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:11",
+      "next_action": 0,
+      "next_state": [
+        0.09667359968836589,
+        0.24428254400049512,
+        0.8
+      ],
+      "reward": -0.019612219228664168,
+      "state": [
+        0.15924847038840823,
+        0.48387148309382894,
+        0.0
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:11",
+      "next_action": 1,
+      "next_state": [
+        -0.1778274493312692,
+        0.32008961202765523,
+        -0.8
+      ],
+      "reward": 0.0030710430517155276,
+      "state": [
+        0.09667359968836589,
+        0.24428254400049512,
+        0.8
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:11",
+      "next_action": 2,
+      "next_state": [
+        0.17770799532508927,
+        0.5015777182245577,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.1778274493312692,
+        0.32008961202765523,
+        -0.8
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:11",
+      "next_action": 0,
+      "next_state": [
+        -0.07830156765509103,
+        0.3029049104245809,
+        0.8
+      ],
+      "reward": -0.004449988593346539,
+      "state": [
+        0.17770799532508927,
+        0.5015777182245577,
+        0.0
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:11",
+      "next_action": 1,
+      "next_state": [
+        0.28287550287566166,
+        0.3132917057677696,
+        -0.8
+      ],
+      "reward": -0.04333370584007147,
+      "state": [
+        -0.07830156765509103,
+        0.3029049104245809,
+        0.8
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:11",
+      "next_action": 2,
+      "next_state": [
+        -0.2048852503413687,
+        0.22852640549230907,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.28287550287566166,
+        0.3132917057677696,
+        -0.8
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:11",
+      "next_action": 0,
+      "next_state": [
+        0.006004002801961373,
+        0.2811965375763034,
+        0.8
+      ],
+      "reward": 0.004024746491859483,
+      "state": [
+        -0.2048852503413687,
+        0.22852640549230907,
+        0.0
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:11",
+      "next_action": 1,
+      "next_state": [
+        -0.27280330827984894,
+        0.34256569822401395,
+        -0.8
+      ],
+      "reward": 0.051765257577062865,
+      "state": [
+        0.006004002801961373,
+        0.2811965375763034,
+        0.8
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:11",
+      "next_action": 2,
+      "next_state": [
+        0.03198581904269305,
+        0.22710288701244388,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.27280330827984894,
+        0.34256569822401395,
+        -0.8
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:11",
+      "next_action": 0,
+      "next_state": [
+        0.26901518863788176,
+        0.31543390320251186,
+        0.8
+      ],
+      "reward": 0.027233118402938395,
+      "state": [
+        0.03198581904269305,
+        0.22710288701244388,
+        0.0
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:12",
+      "next_action": 1,
+      "next_state": [
+        -0.0041464703623253826,
+        0.13579319855091532,
+        -0.8
+      ],
+      "reward": 0.006678907231514577,
+      "state": [
+        0.26901518863788176,
+        0.31543390320251186,
+        0.8
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:12",
+      "next_action": 2,
+      "next_state": [
+        -0.09851132044668456,
+        0.184447918349359,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.0041464703623253826,
+        0.13579319855091532,
+        -0.8
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:12",
+      "next_action": 0,
+      "next_state": [
+        0.14210505263157894,
+        0.2905256842105263,
+        0.8
+      ],
+      "reward": 0.015433996110266848,
+      "state": [
+        -0.09851132044668456,
+        0.184447918349359,
+        0.0
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:12",
+      "next_action": 1,
+      "next_state": [
+        0.07719559694141877,
+        0.22324222592069448,
+        -0.8
+      ],
+      "reward": -0.0028757654815934714,
+      "state": [
+        0.14210505263157894,
+        0.2905256842105263,
+        0.8
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:12",
+      "next_action": 2,
+      "next_state": [
+        -0.25901368397265906,
+        0.33464526527078114,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.07719559694141877,
+        0.22324222592069448,
+        -0.8
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:12",
+      "next_action": 0,
+      "next_state": [
+        0.20186889944815525,
+        0.28562182816348636,
+        0.8
+      ],
+      "reward": 0.008023782442792464,
+      "state": [
+        -0.25901368397265906,
+        0.33464526527078114,
+        0.0
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:12",
+      "next_action": 1,
+      "next_state": [
+        0.0742387307854626,
+        0.21317233839036653,
+        -0.8
+      ],
+      "reward": -0.000631562996914788,
+      "state": [
+        0.20186889944815525,
+        0.28562182816348636,
+        0.8
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:12",
+      "next_action": 2,
+      "next_state": [
+        -0.1720184564641046,
+        0.23457048028712427,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.0742387307854626,
+        0.21317233839036653,
+        -0.8
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:12",
+      "next_action": 0,
+      "next_state": [
+        -0.009596332129263972,
+        0.2271036333606607,
+        0.8
+      ],
+      "reward": -0.005237169985271136,
+      "state": [
+        -0.1720184564641046,
+        0.23457048028712427,
+        0.0
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:12",
+      "next_action": 1,
+      "next_state": [
+        -0.021234100833759404,
+        0.15819067505699808,
+        -0.8
+      ],
+      "reward": -0.003275995810330709,
+      "state": [
+        -0.009596332129263972,
+        0.2271036333606607,
+        0.8
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:12",
+      "next_action": 2,
+      "next_state": [
+        0.1704906389336131,
+        0.235739535963151,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.021234100833759404,
+        0.15819067505699808,
+        -0.8
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:12",
+      "next_action": 0,
+      "next_state": [
+        0.14999534809134887,
+        0.21309579420907818,
+        0.8
+      ],
+      "reward": 0.011851688868498437,
+      "state": [
+        0.1704906389336131,
+        0.235739535963151,
+        0.0
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:12",
+      "next_action": 1,
+      "next_state": [
+        -0.26102732743939,
+        0.28328643396545666,
+        -0.8
+      ],
+      "reward": 0.014365111643952967,
+      "state": [
+        0.14999534809134887,
+        0.21309579420907818,
+        0.8
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:12",
+      "next_action": 2,
+      "next_state": [
+        0.004166770833333333,
+        0.09999989583333334,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.26102732743939,
+        0.28328643396545666,
+        -0.8
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:12",
+      "next_action": 0,
+      "next_state": [
+        0.05918378276780776,
+        0.10175516772412352,
+        0.8
+      ],
+      "reward": 0.0065970511557991345,
+      "state": [
+        0.004166770833333333,
+        0.09999989583333334,
+        0.0
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:12",
+      "next_action": 1,
+      "next_state": [
+        -0.1773858884359774,
+        0.20228184227631033,
+        -0.8
+      ],
+      "reward": 0.01728418718262347,
+      "state": [
+        0.05918378276780776,
+        0.10175516772412352,
+        0.8
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:12",
+      "next_action": 2,
+      "next_state": [
+        0.22557937139031586,
+        0.3256008621323411,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.1773858884359774,
+        0.20228184227631033,
+        -0.8
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:12",
+      "next_action": 0,
+      "next_state": [
+        0.07391972699886329,
+        0.15720998988412316,
+        0.8
+      ],
+      "reward": 0.005094310207998131,
+      "state": [
+        0.22557937139031586,
+        0.3256008621323411,
+        0.0
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:12",
+      "next_action": 1,
+      "next_state": [
+        -0.029834671702716205,
+        0.14814763831731395,
+        -0.8
+      ],
+      "reward": -0.0020401984034684084,
+      "state": [
+        0.07391972699886329,
+        0.15720998988412316,
+        0.8
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:12",
+      "next_action": 2,
+      "next_state": [
+        -0.01755100126418541,
+        0.16312213335616216,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.029834671702716205,
+        0.14814763831731395,
+        -0.8
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:13",
+      "next_action": 0,
+      "next_state": [
+        0.2949305623158103,
+        0.34306184653227145,
+        0.8
+      ],
+      "reward": 0.031371615849175395,
+      "state": [
+        -0.01755100126418541,
+        0.16312213335616216,
+        0.0
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:13",
+      "next_action": 1,
+      "next_state": [
+        0.02387802161221726,
+        0.12436573227806721,
+        -0.8
+      ],
+      "reward": -0.0025507291529964105,
+      "state": [
+        0.2949305623158103,
+        0.34306184653227145,
+        0.8
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:13",
+      "next_action": 2,
+      "next_state": [
+        0.09146927636768191,
+        0.12527361055331854,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.02387802161221726,
+        0.12436573227806721,
+        -0.8
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:13",
+      "next_action": 0,
+      "next_state": [
+        0.06251821639587135,
+        0.23248968743314385,
+        0.8
+      ],
+      "reward": 0.011501493596059115,
+      "state": [
+        0.09146927636768191,
+        0.12527361055331854,
+        0.0
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:13",
+      "next_action": 1,
+      "next_state": [
+        -0.05078581942363336,
+        0.18263531773254535,
+        -0.8
+      ],
+      "reward": 0.008053501429890274,
+      "state": [
+        0.06251821639587135,
+        0.23248968743314385,
+        0.8
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:13",
+      "next_action": 2,
+      "next_state": [
+        0.024806509474166596,
+        0.13494741153946627,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.05078581942363336,
+        0.18263531773254535,
+        -0.8
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:13",
+      "next_action": 0,
+      "next_state": [
+        -0.018753825264116578,
+        0.1293065863055293,
+        0.8
+      ],
+      "reward": 0.00031269128687212987,
+      "state": [
+        0.024806509474166596,
+        0.13494741153946627,
+        0.0
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:13",
+      "next_action": 1,
+      "next_state": [
+        -0.023666895822230714,
+        0.20609367099522055,
+        -0.8
+      ],
+      "reward": -0.0011955300515566639,
+      "state": [
+        -0.018753825264116578,
+        0.1293065863055293,
+        0.8
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:13",
+      "next_action": 2,
+      "next_state": [
+        0.0019565728082271677,
+        0.07629098349552002,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.023666895822230714,
+        0.20609367099522055,
+        -0.8
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:13",
+      "next_action": 0,
+      "next_state": [
+        0.059856047106032886,
+        0.11088263719428369,
+        0.8
+      ],
+      "reward": 0.001633991745863647,
+      "state": [
+        0.0019565728082271677,
+        0.07629098349552002,
+        0.0
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:13",
+      "next_action": 1,
+      "next_state": [
+        0.05963861157790123,
+        0.12793401431256265,
+        -0.8
+      ],
+      "reward": -0.016874951699423088,
+      "state": [
+        0.059856047106032886,
+        0.11088263719428369,
+        0.8
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:13",
+      "next_action": 2,
+      "next_state": [
+        0.13000669027811212,
+        0.16442041712627456,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.05963861157790123,
+        0.12793401431256265,
+        -0.8
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:13",
+      "next_action": 0,
+      "next_state": [
+        0.026535823347303544,
+        0.1431010275711058,
+        0.8
+      ],
+      "reward": -0.0016833669785470701,
+      "state": [
+        0.13000669027811212,
+        0.16442041712627456,
+        0.0
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:13",
+      "next_action": 1,
+      "next_state": [
+        -0.03949576977603046,
+        0.12318958522435905,
+        -0.8
+      ],
+      "reward": -0.0017073345678449555,
+      "state": [
+        0.026535823347303544,
+        0.1431010275711058,
+        0.8
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:13",
+      "next_action": 2,
+      "next_state": [
+        -0.001887661663362598,
+        0.23694921174360425,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.03949576977603046,
+        0.12318958522435905,
+        -0.8
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:13",
+      "next_action": 0,
+      "next_state": [
+        0.13966755344418053,
+        0.19762489311163894,
+        0.8
+      ],
+      "reward": 0.005718379525318496,
+      "state": [
+        -0.001887661663362598,
+        0.23694921174360425,
+        0.0
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:13",
+      "next_action": 1,
+      "next_state": [
+        -0.03287058509943881,
+        0.1098795987073742,
+        -0.8
+      ],
+      "reward": 0.0036228185492614457,
+      "state": [
+        0.13966755344418053,
+        0.19762489311163894,
+        0.8
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:13",
+      "next_action": 2,
+      "next_state": [
+        0.01896245359853557,
+        0.1289467134830121,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.03287058509943881,
+        0.1098795987073742,
+        -0.8
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:13",
+      "next_action": 0,
+      "next_state": [
+        -0.07641490566037736,
+        0.10660415094339623,
+        0.8
+      ],
+      "reward": -0.00403392455065628,
+      "state": [
+        0.01896245359853557,
+        0.1289467134830121,
+        0.0
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:13",
+      "next_action": 1,
+      "next_state": [
+        0.26599304286388636,
+        0.2774338857606434,
+        -0.8
+      ],
+      "reward": -0.019737145756494993,
+      "state": [
+        -0.07641490566037736,
+        0.10660415094339623,
+        0.8
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:14",
+      "next_action": 2,
+      "next_state": [
+        0.08375480747805232,
+        0.16751035126534097,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.26599304286388636,
+        0.2774338857606434,
+        -0.8
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:14",
+      "next_action": 0,
+      "next_state": [
+        -0.06653326589014523,
+        0.09296436298792961,
+        0.8
+      ],
+      "reward": -0.004562103033262195,
+      "state": [
+        0.08375480747805232,
+        0.16751035126534097,
+        0.0
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:14",
+      "next_action": 1,
+      "next_state": [
+        0.11123359175614628,
+        0.1654718713501735,
+        -0.8
+      ],
+      "reward": -0.008140123081752878,
+      "state": [
+        -0.06653326589014523,
+        0.09296436298792961,
+        0.8
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:14",
+      "next_action": 2,
+      "next_state": [
+        0.06339476658929119,
+        0.1738819991646803,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.11123359175614628,
+        0.1654718713501735,
+        -0.8
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:14",
+      "next_action": 0,
+      "next_state": [
+        0.027394392705791384,
+        0.11962423304494141,
+        0.8
+      ],
+      "reward": -0.009831281242855977,
+      "state": [
+        0.06339476658929119,
+        0.1738819991646803,
+        0.0
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:14",
+      "next_action": 1,
+      "next_state": [
+        0.06622480088293203,
+        0.1614810806092421,
+        -0.8
+      ],
+      "reward": -0.00917811507837383,
+      "state": [
+        0.027394392705791384,
+        0.11962423304494141,
+        0.8
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:14",
+      "next_action": 2,
+      "next_state": [
+        -0.12823974883782852,
+        0.20918554458896438,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.06622480088293203,
+        0.1614810806092421,
+        -0.8
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:14",
+      "next_action": 0,
+      "next_state": [
+        -0.022954732422927834,
+        0.14691019568780844,
+        0.8
+      ],
+      "reward": 0.0004844886596232849,
+      "state": [
+        -0.12823974883782852,
+        0.20918554458896438,
+        0.0
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:14",
+      "next_action": 1,
+      "next_state": [
+        0.004588051715260606,
+        0.16334761711161222,
+        -0.8
+      ],
+      "reward": -0.003450417719476616,
+      "state": [
+        -0.022954732422927834,
+        0.14691019568780844,
+        0.8
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:14",
+      "next_action": 2,
+      "next_state": [
+        0.10060417415782602,
+        0.16828206212848223,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.004588051715260606,
+        0.16334761711161222,
+        -0.8
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:14",
+      "next_action": 0,
+      "next_state": [
+        0.11191317386516678,
+        0.13898853414290974,
+        0.8
+      ],
+      "reward": 0.011189996168236217,
+      "state": [
+        0.10060417415782602,
+        0.16828206212848223,
+        0.0
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:14",
+      "next_action": 1,
+      "next_state": [
+        0.04300259694492214,
+        0.09496478870368781,
+        -0.8
+      ],
+      "reward": -0.0012283969972474384,
+      "state": [
+        0.11191317386516678,
+        0.13898853414290974,
+        0.8
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:14",
+      "next_action": 2,
+      "next_state": [
+        -0.20158799213640183,
+        0.22923913808545948,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.04300259694492214,
+        0.09496478870368781,
+        -0.8
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:14",
+      "next_action": 0,
+      "next_state": [
+        -0.12948810845337597,
+        0.18458949567994762,
+        0.8
+      ],
+      "reward": -0.017659863764403528,
+      "state": [
+        -0.20158799213640183,
+        0.22923913808545948,
+        0.0
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:14",
+      "next_action": 1,
+      "next_state": [
+        -0.08991407369060271,
+        0.16407091668717788,
+        -0.8
+      ],
+      "reward": 0.0034426422336441506,
+      "state": [
+        -0.12948810845337597,
+        0.18458949567994762,
+        0.8
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:14",
+      "next_action": 2,
+      "next_state": [
+        0.0459488001308027,
+        0.19035990426068927,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.08991407369060271,
+        0.16407091668717788,
+        -0.8
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:14",
+      "next_action": 0,
+      "next_state": [
+        -0.08977826615542879,
+        0.13186224632937435,
+        0.8
+      ],
+      "reward": -0.009062343190395124,
+      "state": [
+        0.0459488001308027,
+        0.19035990426068927,
+        0.0
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:14",
+      "next_action": 1,
+      "next_state": [
+        0.06380325561749822,
+        0.17712598462763576,
+        -0.8
+      ],
+      "reward": 0.0013893063868141327,
+      "state": [
+        -0.08977826615542879,
+        0.13186224632937435,
+        0.8
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:14",
+      "next_action": 2,
+      "next_state": [
+        0.007619238095238096,
+        0.10857142857142857,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.06380325561749822,
+        0.17712598462763576,
+        -0.8
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:14",
+      "next_action": 0,
+      "next_state": [
+        0.04234375739221413,
+        0.13376950692832232,
+        0.8
+      ],
+      "reward": -0.00595770069361057,
+      "state": [
+        0.007619238095238096,
+        0.10857142857142857,
+        0.0
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:15",
+      "next_action": 1,
+      "next_state": [
+        0.18958333333333333,
+        0.3156248958333333,
+        -0.8
+      ],
+      "reward": 0.049262275995443715,
+      "state": [
+        0.04234375739221413,
+        0.13376950692832232,
+        0.8
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:15",
+      "next_action": 2,
+      "next_state": [
+        -0.2848067791741955,
+        0.3718878150610817,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.18958333333333333,
+        0.3156248958333333,
+        -0.8
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:15",
+      "next_action": 0,
+      "next_state": [
+        -0.026598574882403976,
+        0.23513129556615162,
+        0.8
+      ],
+      "reward": -0.009595435849511003,
+      "state": [
+        -0.2848067791741955,
+        0.3718878150610817,
+        0.0
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:15",
+      "next_action": 1,
+      "next_state": [
+        -0.03511780318061293,
+        0.17878045994699948,
+        -0.8
+      ],
+      "reward": 5.3415849230122547e-05,
+      "state": [
+        -0.026598574882403976,
+        0.23513129556615162,
+        0.8
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:15",
+      "next_action": 2,
+      "next_state": [
+        0.10403429206054009,
+        0.21868344645488683,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.03511780318061293,
+        0.17878045994699948,
+        -0.8
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:15",
+      "next_action": 0,
+      "next_state": [
+        -0.1060919151079385,
+        0.21848761192713062,
+        0.8
+      ],
+      "reward": -0.008721059046018071,
+      "state": [
+        0.10403429206054009,
+        0.21868344645488683,
+        0.0
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:15",
+      "next_action": 1,
+      "next_state": [
+        -0.08085127659574468,
+        0.1478723404255319,
+        -0.8
+      ],
+      "reward": 0.007268830914771613,
+      "state": [
+        -0.1060919151079385,
+        0.21848761192713062,
+        0.8
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:15",
+      "next_action": 2,
+      "next_state": [
+        -0.06961572015800406,
+        0.17136113833047645,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.08085127659574468,
+        0.1478723404255319,
+        -0.8
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:15",
+      "next_action": 0,
+      "next_state": [
+        -0.022580537634408603,
+        0.12688182795698924,
+        0.8
+      ],
+      "reward": 0.00020396893222639206,
+      "state": [
+        -0.06961572015800406,
+        0.17136113833047645,
+        0.0
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:15",
+      "next_action": 1,
+      "next_state": [
+        0.009642772749538783,
+        0.15643404786383697,
+        -0.8
+      ],
+      "reward": -0.006231593863222397,
+      "state": [
+        -0.022580537634408603,
+        0.12688182795698924,
+        0.8
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:15",
+      "next_action": 2,
+      "next_state": [
+        -0.10376561498398754,
+        0.11874208005748567,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.009642772749538783,
+        0.15643404786383697,
+        -0.8
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:15",
+      "next_action": 0,
+      "next_state": [
+        -0.2566873354541918,
+        0.3569885638806238,
+        0.8
+      ],
+      "reward": -0.019165590341247644,
+      "state": [
+        -0.10376561498398754,
+        0.11874208005748567,
+        0.0
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:15",
+      "next_action": 1,
+      "next_state": [
+        0.057777444444444444,
+        0.18555533333333332,
+        -0.8
+      ],
+      "reward": -0.002393987230196468,
+      "state": [
+        -0.2566873354541918,
+        0.3569885638806238,
+        0.8
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:15",
+      "next_action": 2,
+      "next_state": [
+        0.16127265030060234,
+        0.2965685712368067,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.057777444444444444,
+        0.18555533333333332,
+        -0.8
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:15",
+      "next_action": 0,
+      "next_state": [
+        -0.11211051997534045,
+        0.1787408721710987,
+        0.8
+      ],
+      "reward": -0.0037233831483825036,
+      "state": [
+        0.16127265030060234,
+        0.2965685712368067,
+        0.0
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:15",
+      "next_action": 1,
+      "next_state": [
+        0.042480244584526566,
+        0.14018690993258667,
+        -0.8
+      ],
+      "reward": -0.009956059667473734,
+      "state": [
+        -0.11211051997534045,
+        0.1787408721710987,
+        0.8
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:15",
+      "next_action": 2,
+      "next_state": [
+        -0.04649218138728002,
+        0.11305991243723491,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.042480244584526566,
+        0.14018690993258667,
+        -0.8
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:15",
+      "next_action": 0,
+      "next_state": [
+        0.0612850809518711,
+        0.09615416416054696,
+        0.8
+      ],
+      "reward": 0.008262454628315966,
+      "state": [
+        -0.04649218138728002,
+        0.11305991243723491,
+        0.0
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:15",
+      "next_action": 1,
+      "next_state": [
+        0.05841211875209809,
+        0.15854844606607554,
+        -0.8
+      ],
+      "reward": -0.010965923018631349,
+      "state": [
+        0.0612850809518711,
+        0.09615416416054696,
+        0.8
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:15",
+      "next_action": 2,
+      "next_state": [
+        0.06994455801332485,
+        0.1285743660916029,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.05841211875209809,
+        0.15854844606607554,
+        -0.8
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:16",
+      "next_action": 0,
+      "next_state": [
+        0.0962810397543537,
+        0.16519682102354963,
+        0.8
+      ],
+      "reward": 0.013655166209291804,
+      "state": [
+        0.06994455801332485,
+        0.1285743660916029,
+        0.0
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:16",
+      "next_action": 1,
+      "next_state": [
+        0.07323475120385232,
+        0.20967134831460674,
+        -0.8
+      ],
+      "reward": -0.007144115448380383,
+      "state": [
+        0.0962810397543537,
+        0.16519682102354963,
+        0.8
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:16",
+      "next_action": 2,
+      "next_state": [
+        0.09151206573789088,
+        0.12268714556140094,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.07323475120385232,
+        0.20967134831460674,
+        -0.8
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:16",
+      "next_action": 0,
+      "next_state": [
+        0.02610471939969316,
+        0.1586347421412599,
+        0.8
+      ],
+      "reward": -0.004306304014076811,
+      "state": [
+        0.09151206573789088,
+        0.12268714556140094,
+        0.0
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:16",
+      "next_action": 1,
+      "next_state": [
+        -0.0565540312024045,
+        0.12219743856384888,
+        -0.8
+      ],
+      "reward": 0.01041571789289287,
+      "state": [
+        0.02610471939969316,
+        0.1586347421412599,
+        0.8
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:16",
+      "next_action": 2,
+      "next_state": [
+        0.012295389596217,
+        0.12397530991752684,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.0565540312024045,
+        0.12219743856384888,
+        -0.8
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:16",
+      "next_action": 0,
+      "next_state": [
+        0.013293485905578424,
+        0.08385315386181456,
+        0.8
+      ],
+      "reward": 0.0012373065735027983,
+      "state": [
+        0.012295389596217,
+        0.12397530991752684,
+        0.0
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:16",
+      "next_action": 1,
+      "next_state": [
+        0.06531268630090185,
+        0.44290193780797915,
+        -0.8
+      ],
+      "reward": -0.006600645543313839,
+      "state": [
+        0.013293485905578424,
+        0.08385315386181456,
+        0.8
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:16",
+      "next_action": 2,
+      "next_state": [
+        -0.022166347607052897,
+        0.0916880604534005,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.06531268630090185,
+        0.44290193780797915,
+        -0.8
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:16",
+      "next_action": 0,
+      "next_state": [
+        -0.008078671220319265,
+        0.08887073587772377,
+        0.8
+      ],
+      "reward": -0.0011270281806223183,
+      "state": [
+        -0.022166347607052897,
+        0.0916880604534005,
+        0.0
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:16",
+      "next_action": 1,
+      "next_state": [
+        0.11675147208121828,
+        0.15532984771573605,
+        -0.8
+      ],
+      "reward": -0.00654085292620067,
+      "state": [
+        -0.008078671220319265,
+        0.08887073587772377,
+        0.8
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:16",
+      "next_action": 2,
+      "next_state": [
+        0.030447884202251946,
+        0.08829747374705647,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.11675147208121828,
+        0.15532984771573605,
+        -0.8
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:16",
+      "next_action": 0,
+      "next_state": [
+        -0.13679258006297335,
+        0.20468182785121436,
+        0.8
+      ],
+      "reward": -0.012461163370208169,
+      "state": [
+        0.030447884202251946,
+        0.08829747374705647,
+        0.0
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:16",
+      "next_action": 1,
+      "next_state": [
+        0.014385429510891903,
+        0.1777643855322647,
+        -0.8
+      ],
+      "reward": -0.001786258515975283,
+      "state": [
+        -0.13679258006297335,
+        0.20468182785121436,
+        0.8
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:16",
+      "next_action": 2,
+      "next_state": [
+        -0.069515538744633,
+        0.1410759558372521,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.014385429510891903,
+        0.1777643855322647,
+        -0.8
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:16",
+      "next_action": 0,
+      "next_state": [
+        0.11404935554326663,
+        0.17418352019233344,
+        0.8
+      ],
+      "reward": 0.0029766028760202065,
+      "state": [
+        -0.069515538744633,
+        0.1410759558372521,
+        0.0
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:16",
+      "next_action": 1,
+      "next_state": [
+        -0.13351282963632283,
+        0.13972251687882892,
+        -0.8
+      ],
+      "reward": 0.017406055821443698,
+      "state": [
+        0.11404935554326663,
+        0.17418352019233344,
+        0.8
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:16",
+      "next_action": 2,
+      "next_state": [
+        -0.09375020833333333,
+        0.16041677083333333,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.13351282963632283,
+        0.13972251687882892,
+        -0.8
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:16",
+      "next_action": 0,
+      "next_state": [
+        0.10216999995428692,
+        0.1759003544154128,
+        0.8
+      ],
+      "reward": 0.006413930742669416,
+      "state": [
+        -0.09375020833333333,
+        0.16041677083333333,
+        0.0
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:16",
+      "next_action": 1,
+      "next_state": [
+        -0.07272696103896104,
+        0.1600001038961039,
+        -0.8
+      ],
+      "reward": 0.0022028233551111107,
+      "state": [
+        0.10216999995428692,
+        0.1759003544154128,
+        0.8
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:17",
+      "next_action": 2,
+      "next_state": [
+        0.0166766725729274,
+        0.10840118598288126,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.07272696103896104,
+        0.1600001038961039,
+        -0.8
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:17",
+      "next_action": 0,
+      "next_state": [
+        0.05273899245553794,
+        0.21633859794043275,
+        0.8
+      ],
+      "reward": -0.022876554057784687,
+      "state": [
+        0.0166766725729274,
+        0.10840118598288126,
+        0.0
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:17",
+      "next_action": 1,
+      "next_state": [
+        -0.10322569892473119,
+        0.16666698924731183,
+        -0.8
+      ],
+      "reward": 0.010848830585678147,
+      "state": [
+        0.05273899245553794,
+        0.21633859794043275,
+        0.8
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:17",
+      "next_action": 2,
+      "next_state": [
+        0.07427276481651744,
+        0.16361732694042352,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.10322569892473119,
+        0.16666698924731183,
+        -0.8
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:17",
+      "next_action": 0,
+      "next_state": [
+        0.045759390808136735,
+        0.0979042237107138,
+        0.8
+      ],
+      "reward": 0.006523868230531819,
+      "state": [
+        0.07427276481651744,
+        0.16361732694042352,
+        0.0
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:17",
+      "next_action": 1,
+      "next_state": [
+        0.12282888346402195,
+        0.1556537451153379,
+        -0.8
+      ],
+      "reward": -0.010969457411664038,
+      "state": [
+        0.045759390808136735,
+        0.0979042237107138,
+        0.8
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:17",
+      "next_action": 2,
+      "next_state": [
+        0.041889308658274345,
+        0.11938412649249401,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.12282888346402195,
+        0.1556537451153379,
+        -0.8
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:17",
+      "next_action": 0,
+      "next_state": [
+        -0.04193322195128653,
+        0.09854313972683866,
+        0.8
+      ],
+      "reward": -0.007908612029498508,
+      "state": [
+        0.041889308658274345,
+        0.11938412649249401,
+        0.0
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:17",
+      "next_action": 1,
+      "next_state": [
+        0.09830877586276482,
+        0.13636374495483605,
+        -0.8
+      ],
+      "reward": -0.005347855659497962,
+      "state": [
+        -0.04193322195128653,
+        0.09854313972683866,
+        0.8
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:17",
+      "next_action": 2,
+      "next_state": [
+        0.02507889315816802,
+        0.09195371239144344,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.09830877586276482,
+        0.13636374495483605,
+        -0.8
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:17",
+      "next_action": 0,
+      "next_state": [
+        0.01969136738918784,
+        0.08705524068929922,
+        0.8
+      ],
+      "reward": 0.005770506437971515,
+      "state": [
+        0.02507889315816802,
+        0.09195371239144344,
+        0.0
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:17",
+      "next_action": 1,
+      "next_state": [
+        0.023772919896640828,
+        0.09509033591731267,
+        -0.8
+      ],
+      "reward": -0.003282441042614812,
+      "state": [
+        0.01969136738918784,
+        0.08705524068929922,
+        0.8
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:17",
+      "next_action": 2,
+      "next_state": [
+        0.02572810591186798,
+        0.05968858824099183,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.023772919896640828,
+        0.09509033591731267,
+        -0.8
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:17",
+      "next_action": 0,
+      "next_state": [
+        -0.0554358872626676,
+        0.08520705943098,
+        0.8
+      ],
+      "reward": -0.004916485414011198,
+      "state": [
+        0.02572810591186798,
+        0.05968858824099183,
+        0.0
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:17",
+      "next_action": 1,
+      "next_state": [
+        0.1437521320849382,
+        0.1714753072335487,
+        -0.8
+      ],
+      "reward": -0.016656285252721628,
+      "state": [
+        -0.0554358872626676,
+        0.08520705943098,
+        0.8
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:17",
+      "next_action": 2,
+      "next_state": [
+        -0.014152749982869996,
+        0.08087373798774238,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.1437521320849382,
+        0.1714753072335487,
+        -0.8
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:17",
+      "next_action": 0,
+      "next_state": [
+        0.1144888585964192,
+        0.15501510096297166,
+        0.8
+      ],
+      "reward": 0.00810377008001387,
+      "state": [
+        -0.014152749982869996,
+        0.08087373798774238,
+        0.0
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:17",
+      "next_action": 1,
+      "next_state": [
+        0.03113750564759955,
+        0.0662920865064702,
+        -0.8
+      ],
+      "reward": -0.0011205529335760207,
+      "state": [
+        0.1144888585964192,
+        0.15501510096297166,
+        0.8
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:17",
+      "next_action": 2,
+      "next_state": [
+        -0.0040001,
+        0.0720001,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.03113750564759955,
+        0.0662920865064702,
+        -0.8
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:17",
+      "next_action": 0,
+      "next_state": [
+        -0.04006831533470269,
+        0.18731873810840954,
+        0.8
+      ],
+      "reward": -0.004641688717904049,
+      "state": [
+        -0.0040001,
+        0.0720001,
+        0.0
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:18",
+      "next_action": 1,
+      "next_state": [
+        -0.06044710738571212,
+        0.0997385633741978,
+        -0.8
+      ],
+      "reward": 0.005395281102283013,
+      "state": [
+        -0.04006831533470269,
+        0.18731873810840954,
+        0.8
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:18",
+      "next_action": 2,
+      "next_state": [
+        -0.09262127226463104,
+        0.19541964376590332,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.06044710738571212,
+        0.0997385633741978,
+        -0.8
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:18",
+      "next_action": 0,
+      "next_state": [
+        -0.015492873373269985,
+        0.1600912001652551,
+        0.8
+      ],
+      "reward": -0.00590645594848802,
+      "state": [
+        -0.09262127226463104,
+        0.19541964376590332,
+        0.0
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:18",
+      "next_action": 1,
+      "next_state": [
+        -0.12659442197931586,
+        0.1534475924076223,
+        -0.8
+      ],
+      "reward": -0.052770614502340225,
+      "state": [
+        -0.015492873373269985,
+        0.1600912001652551,
+        0.8
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:18",
+      "next_action": 2,
+      "next_state": [
+        0.14684371979298416,
+        0.15851375749268196,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.12659442197931586,
+        0.1534475924076223,
+        -0.8
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:18",
+      "next_action": 0,
+      "next_state": [
+        0.001919282043971935,
+        0.08350158204239212,
+        0.8
+      ],
+      "reward": -0.0013967184587586146,
+      "state": [
+        0.14684371979298416,
+        0.15851375749268196,
+        0.0
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:18",
+      "next_action": 1,
+      "next_state": [
+        0.15707297549763527,
+        0.1666505060185612,
+        -0.8
+      ],
+      "reward": -0.014925354708044859,
+      "state": [
+        0.001919282043971935,
+        0.08350158204239212,
+        0.8
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:18",
+      "next_action": 2,
+      "next_state": [
+        -0.14804337157821673,
+        0.1951909421445278,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.15707297549763527,
+        0.1666505060185612,
+        -0.8
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:18",
+      "next_action": 0,
+      "next_state": [
+        0.09350281640116051,
+        0.1020894018145101,
+        0.8
+      ],
+      "reward": 0.009630612269411977,
+      "state": [
+        -0.14804337157821673,
+        0.1951909421445278,
+        0.0
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:18",
+      "next_action": 1,
+      "next_state": [
+        0.027467417551289685,
+        0.06819482727420294,
+        -0.8
+      ],
+      "reward": -0.0014049872331507022,
+      "state": [
+        0.09350281640116051,
+        0.1020894018145101,
+        0.8
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:18",
+      "next_action": 2,
+      "next_state": [
+        0.11386148811126813,
+        0.1383270952760072,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.027467417551289685,
+        0.06819482727420294,
+        -0.8
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:18",
+      "next_action": 0,
+      "next_state": [
+        0.07905561976531678,
+        0.1125371125149864,
+        0.8
+      ],
+      "reward": 0.006224488091984887,
+      "state": [
+        0.11386148811126813,
+        0.1383270952760072,
+        0.0
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:18",
+      "next_action": 1,
+      "next_state": [
+        0.053589114286544,
+        0.08592811366733492,
+        -0.8
+      ],
+      "reward": -0.004048094401178526,
+      "state": [
+        0.07905561976531678,
+        0.1125371125149864,
+        0.8
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:18",
+      "next_action": 2,
+      "next_state": [
+        -0.0653112875109124,
+        0.10486615863182926,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.053589114286544,
+        0.08592811366733492,
+        -0.8
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:18",
+      "next_action": 0,
+      "next_state": [
+        -0.054367583515506364,
+        0.0995210127033085,
+        0.8
+      ],
+      "reward": -0.0009185185185185186,
+      "state": [
+        -0.0653112875109124,
+        0.10486615863182926,
+        0.0
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:18",
+      "next_action": 1,
+      "next_state": [
+        0.03711272997877835,
+        0.061236129720134806,
+        -0.8
+      ],
+      "reward": -0.002653052904660428,
+      "state": [
+        -0.054367583515506364,
+        0.0995210127033085,
+        0.8
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:18",
+      "next_action": 2,
+      "next_state": [
+        0.12391381657031456,
+        0.1350100807750146,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.03711272997877835,
+        0.061236129720134806,
+        -0.8
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:18",
+      "next_action": 0,
+      "next_state": [
+        -0.022803977637616827,
+        0.09304059362511886,
+        0.8
+      ],
+      "reward": -0.0011307708970376992,
+      "state": [
+        0.12391381657031456,
+        0.1350100807750146,
+        0.0
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:18",
+      "next_action": 1,
+      "next_state": [
+        0.010999358588439204,
+        0.09440944261062223,
+        -0.8
+      ],
+      "reward": 0.00037020299424583077,
+      "state": [
+        -0.022803977637616827,
+        0.09304059362511886,
+        0.8
+      ],
+      "step": 18,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:18",
+      "next_action": 2,
+      "next_state": [
+        -0.013732582246656168,
+        0.05309905557724831,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.010999358588439204,
+        0.09440944261062223,
+        -0.8
+      ],
+      "step": 19,
+      "terminated": true,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:19",
+      "next_action": 0,
+      "next_state": [
+        0.05424326710241612,
+        0.12227645827736852,
+        0.8
+      ],
+      "reward": 0.0016535313154834744,
+      "state": [
+        -0.013732582246656168,
+        0.05309905557724831,
+        0.0
+      ],
+      "step": 0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:19",
+      "next_action": 1,
+      "next_state": [
+        -0.03215129494624936,
+        0.11482638145483758,
+        -0.8
+      ],
+      "reward": 0.005417988238679698,
+      "state": [
+        0.05424326710241612,
+        0.12227645827736852,
+        0.8
+      ],
+      "step": 1,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:19",
+      "next_action": 2,
+      "next_state": [
+        0.02394345792221965,
+        0.07275080846305584,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.03215129494624936,
+        0.11482638145483758,
+        -0.8
+      ],
+      "step": 2,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:19",
+      "next_action": 0,
+      "next_state": [
+        -0.04973758865248227,
+        0.09855392834116239,
+        0.8
+      ],
+      "reward": -0.0064266349292904906,
+      "state": [
+        0.02394345792221965,
+        0.07275080846305584,
+        0.0
+      ],
+      "step": 3,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:19",
+      "next_action": 1,
+      "next_state": [
+        0.016761430456852876,
+        0.11174196956645842,
+        -0.8
+      ],
+      "reward": 0.0026064537943761346,
+      "state": [
+        -0.04973758865248227,
+        0.09855392834116239,
+        0.8
+      ],
+      "step": 4,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:19",
+      "next_action": 2,
+      "next_state": [
+        -0.043757749045424114,
+        0.1526858708617123,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.016761430456852876,
+        0.11174196956645842,
+        -0.8
+      ],
+      "step": 5,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:19",
+      "next_action": 0,
+      "next_state": [
+        0.018757924814539726,
+        0.10785977936991804,
+        0.8
+      ],
+      "reward": -0.0012977145895321754,
+      "state": [
+        -0.043757749045424114,
+        0.1526858708617123,
+        0.0
+      ],
+      "step": 6,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:19",
+      "next_action": 1,
+      "next_state": [
+        0.01890330759253381,
+        0.09451795573200504,
+        -0.8
+      ],
+      "reward": 0.005341172065156338,
+      "state": [
+        0.018757924814539726,
+        0.10785977936991804,
+        0.8
+      ],
+      "step": 7,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:19",
+      "next_action": 2,
+      "next_state": [
+        0.041642436432237875,
+        0.08801826280453293,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.01890330759253381,
+        0.09451795573200504,
+        -0.8
+      ],
+      "step": 8,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:19",
+      "next_action": 0,
+      "next_state": [
+        0.05558733800251873,
+        0.11117392228353046,
+        0.8
+      ],
+      "reward": 0.004350273416593279,
+      "state": [
+        0.041642436432237875,
+        0.08801826280453293,
+        0.0
+      ],
+      "step": 9,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:19",
+      "next_action": 1,
+      "next_state": [
+        0.002786072501004805,
+        0.10956360565172532,
+        -0.8
+      ],
+      "reward": -0.00829554930678677,
+      "state": [
+        0.05558733800251873,
+        0.11117392228353046,
+        0.8
+      ],
+      "step": 10,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:19",
+      "next_action": 2,
+      "next_state": [
+        -0.018536144234733192,
+        0.07321603200711711,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.002786072501004805,
+        0.10956360565172532,
+        -0.8
+      ],
+      "step": 11,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:19",
+      "next_action": 0,
+      "next_state": [
+        0.04915134843454793,
+        0.1567283658216013,
+        0.8
+      ],
+      "reward": 0.004502536812512632,
+      "state": [
+        -0.018536144234733192,
+        0.07321603200711711,
+        0.0
+      ],
+      "step": 12,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:19",
+      "next_action": 1,
+      "next_state": [
+        -0.16130564102564102,
+        0.18927729603729604,
+        -0.8
+      ],
+      "reward": 0.02016717588623869,
+      "state": [
+        0.04915134843454793,
+        0.1567283658216013,
+        0.8
+      ],
+      "step": 13,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:19",
+      "next_action": 2,
+      "next_state": [
+        -0.14430447385612075,
+        0.24751567514827671,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        -0.16130564102564102,
+        0.18927729603729604,
+        -0.8
+      ],
+      "step": 14,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:19",
+      "next_action": 0,
+      "next_state": [
+        0.2717973644072603,
+        0.31076492331680616,
+        0.8
+      ],
+      "reward": 0.01751917050089704,
+      "state": [
+        -0.14430447385612075,
+        0.24751567514827671,
+        0.0
+      ],
+      "step": 15,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 0,
+      "episode_id": "public-aapl:19",
+      "next_action": 1,
+      "next_state": [
+        0.04092595961443662,
+        0.14417291146548392,
+        -0.8
+      ],
+      "reward": -0.019843967772307135,
+      "state": [
+        0.2717973644072603,
+        0.31076492331680616,
+        0.8
+      ],
+      "step": 16,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 1,
+      "episode_id": "public-aapl:19",
+      "next_action": 2,
+      "next_state": [
+        0.27959108949900424,
+        0.40743133245383983,
+        0.0
+      ],
+      "reward": -0.0004,
+      "state": [
+        0.04092595961443662,
+        0.14417291146548392,
+        -0.8
+      ],
+      "step": 17,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": 2,
+      "episode_id": "public-aapl:19",
+      "next_action": 0,
+      "next_state": [
+        0.15018434788174645,
+        0.1967332671988998,
+        0.8
+      ],
+      "reward": 0.02679873384267873,
+      "state": [
+        0.27959108949900424,
+        0.40743133245383983,
+        0.0
+      ],
+      "step": 18,
+      "terminated": true,
+      "truncated": false
+    }
+  ]
+}

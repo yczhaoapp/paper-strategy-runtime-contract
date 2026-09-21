@@ -1,0 +1,49 @@
+{
+  "$id": "urn:psrc:schema/runtime-log-record.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "fields": {
+      "additionalProperties": true,
+      "title": "Fields",
+      "type": "object"
+    },
+    "level": {
+      "enum": [
+        "debug",
+        "error",
+        "info",
+        "warning"
+      ],
+      "title": "Level",
+      "type": "string"
+    },
+    "message": {
+      "title": "Message",
+      "type": "string"
+    },
+    "sequence": {
+      "minimum": 0,
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "stage": {
+      "title": "Stage",
+      "type": "string"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "title": "Timestamp",
+      "type": "string"
+    }
+  },
+  "required": [
+    "level",
+    "message",
+    "sequence",
+    "stage",
+    "timestamp"
+  ],
+  "title": "RuntimeLogRecord",
+  "type": "object"
+}

@@ -1,0 +1,54 @@
+contract_version: 1.1.0
+strategy_id: rule.sma_cross
+strategy_version: 1.0.0
+kind: rule
+entrypoint: strategy.py:Strategy
+required_profiles:
+- core.bar.v1
+- execution.basic.v1
+lifecycle:
+  training: not_required
+  inference: required
+  backtest: required
+  state_checkpointing: false
+data_requirements:
+- stream_id: bars
+  kind: bar
+  timeframe:
+    mode: bar
+    interval: PT1M
+    timezone: UTC
+    calendar: 24/7
+    alignment: epoch
+  symbols:
+  - SYNTH.TEST
+  required_fields:
+  - close
+  - high
+  - low
+  - open
+  - volume
+  optional_fields: []
+  lookback: 5
+  depth: null
+  max_staleness_ns: null
+action_requirements:
+  allowed:
+  - no_op
+  - target_position
+  max_abs_position: '1'
+  max_order_quantity: null
+resources:
+  sandbox: development
+  network: deny
+  filesystem: artifact_store_only
+  allowed_imports:
+  - math
+  - numpy
+  - statistics
+  timeout_seconds: 60
+  memory_mb: 512
+  process_limit: 32
+deterministic: true
+seed: 0
+extensions: {}

@@ -1,0 +1,27 @@
+contract_version: 1.0.0
+engine_id: nautilus-trader
+engine_version: 1.231.0
+adapter_version: 0.1.0
+support_level: ADAPTER_AVAILABLE
+profiles: [core.bar.v1, execution.basic.v1]
+data_kinds: [bar]
+action_kinds: [no_op, prediction, target_position]
+execution:
+  partial_fills: true
+  cancel: true
+  replace: native
+  same_timestamp_ordering: native_event_loop_then_strategy_commands
+  queue_model: null
+  fill_model: nautilus.bar-execution.fixed-ohlc.v1
+  fee_model: nautilus.maker-taker.v1
+  slippage_model: nautilus.none.v1
+  latency_model: psrc.adapter.one-event-command-delay+nautilus.message-queue.v1
+sandbox_modes: [development]
+extensions:
+  org.nautilustrader:
+    bar_execution: true
+    bar_adaptive_high_low_ordering: false
+    use_message_queue: true
+    adapter_command_delay_events: 1
+    canonical_symbol_mapping: single-symbol -> SYNTH-TEST.SIM
+    evidence: tests/adapters/test_nautilus_adapter.py

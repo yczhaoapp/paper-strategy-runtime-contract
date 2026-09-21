@@ -1,0 +1,93 @@
+{
+  "algorithm_fidelity": "A1_method_equivalent",
+  "assumptions": [
+    "Three target allocations are the portfolio arms and each has observed contextual rewards in the training request."
+  ],
+  "claim_links": [
+    {
+      "claim_id": "bandit.mean_variance",
+      "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
+      "symbol": "RiskAverseContextualBanditStrategy",
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_risk_averse_bandit_reproduces_mean_variance_thompson_objective"
+    },
+    {
+      "claim_id": "bandit.portfolio_context",
+      "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
+      "symbol": "RiskAverseContextualBanditStrategy",
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_risk_averse_bandit_reproduces_mean_variance_thompson_objective"
+    }
+  ],
+  "claims": [
+    {
+      "anchor": "mean-variance of arm",
+      "claim_id": "bandit.mean_variance",
+      "interpretation": "Each arm is scored by contextual expected reward minus risk tolerance times reward variance.",
+      "locator": "Definition 1, PDF p.4",
+      "page": 4
+    },
+    {
+      "anchor": "portfolio selection problem",
+      "claim_id": "bandit.portfolio_context",
+      "interpretation": "Portfolio choices are contextual arms whose linear rewards depend on observed market conditions.",
+      "locator": "Section 5.1, PDF p.14",
+      "page": 14
+    }
+  ],
+  "data_fidelity": "D0_synthetic",
+  "data_mode": "synthetic_fixture",
+  "deviations": [
+    "Uses a fixed offline Gaussian posterior during inference rather than online normal-gamma posterior updates after every deployed reward observation."
+  ],
+  "empirical_results_reproduced": false,
+  "experimental_fidelity": "E0_runtime_only",
+  "fidelity": "method_reproduction",
+  "implementation": [
+    {
+      "path": "src/psrc/strategies/reinforcement_learning.py",
+      "sha256": "854f91e3b116a7cdc7aa4897f033c81654d5df3b29301efec016dc9468b63271",
+      "symbols": [
+        "RiskAverseContextualBanditStrategy",
+        "mean_variance_score"
+      ]
+    },
+    {
+      "path": "strategies/reinforcement_learning.risk_averse_contextual_bandit/strategy.py",
+      "sha256": "431bde15769f694b3a1c00860a4d8770f01d9321251bdc60282fc86ce05b6e42",
+      "symbols": [
+        "RiskAverseContextualBanditStrategy",
+        "class Strategy"
+      ]
+    }
+  ],
+  "mapping_review": "The unrelated optimal-execution binding was removed. The replacement implements disjoint contextual posteriors, Thompson draws and the paper’s mean-variance portfolio objective.",
+  "original_paper_dataset": false,
+  "runtime_expectation": {
+    "artifact_algorithm": "mean-variance-thompson-disjoint-v1",
+    "artifact_id": "sha256-c8964b531e992c46792ef276b5bfa2336233e36e15eeea1203bdd878d668637d",
+    "data_kinds": [
+      "bar"
+    ],
+    "decision_sha256": "2a6cc950890cde9ebc295acb09ce8602076892428d922bfa4d8d5336a04bfd29",
+    "expected_decisions": 10,
+    "expected_fills": 8,
+    "expected_orders": 10,
+    "observed_action_kinds": [
+      "target_weight"
+    ],
+    "observed_reason_codes": [
+      "policy.mean_variance_thompson"
+    ],
+    "source_data_sha256": "e989804ddac4ac04a762e1cd027844e135664b27dda3d30f23c5fc61fbf9519a",
+    "timeframes": [
+      "P1D"
+    ]
+  },
+  "runtime_fidelity": "R1_unified_contract",
+  "source_id": "lin2022",
+  "strategy_id": "reinforcement_learning.risk_averse_contextual_bandit",
+  "strategy_kind": "reinforcement_learning",
+  "verification_tests": [
+    "tests/papers/test_reproduction_oracles.py::test_risk_averse_bandit_reproduces_mean_variance_thompson_objective"
+  ],
+  "version": "1.1"
+}

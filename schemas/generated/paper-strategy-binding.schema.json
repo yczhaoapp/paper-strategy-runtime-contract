@@ -1,0 +1,405 @@
+{
+  "$defs": {
+    "ActionKind": {
+      "enum": [
+        "cancel_order",
+        "no_op",
+        "prediction",
+        "replace_order",
+        "submit_order",
+        "target_position",
+        "target_weight"
+      ],
+      "title": "ActionKind",
+      "type": "string"
+    },
+    "ClaimImplementationLink": {
+      "additionalProperties": false,
+      "description": "Auditable edge from one paper claim to code and an executed test.",
+      "properties": {
+        "claim_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "implementation_path": {
+          "minLength": 1,
+          "title": "Implementation Path",
+          "type": "string"
+        },
+        "symbol": {
+          "minLength": 1,
+          "title": "Symbol",
+          "type": "string"
+        },
+        "verification_test": {
+          "minLength": 5,
+          "title": "Verification Test",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "implementation_path",
+        "symbol",
+        "verification_test"
+      ],
+      "title": "ClaimImplementationLink",
+      "type": "object"
+    },
+    "DataKind": {
+      "enum": [
+        "bar",
+        "book_snapshot_l2",
+        "quote_l1",
+        "trade"
+      ],
+      "title": "DataKind",
+      "type": "string"
+    },
+    "EvidenceClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "anchor": {
+          "maxLength": 100,
+          "minLength": 3,
+          "title": "Anchor",
+          "type": "string"
+        },
+        "claim_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "interpretation": {
+          "title": "Interpretation",
+          "type": "string"
+        },
+        "locator": {
+          "title": "Locator",
+          "type": "string"
+        },
+        "page": {
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "anchor",
+        "claim_id",
+        "interpretation",
+        "locator",
+        "page"
+      ],
+      "title": "EvidenceClaim",
+      "type": "object"
+    },
+    "ImplementationFile": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "symbols": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Symbols",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "symbols"
+      ],
+      "title": "ImplementationFile",
+      "type": "object"
+    },
+    "RuntimeBehaviorExpectation": {
+      "additionalProperties": false,
+      "description": "Deterministic behavioral signature required from a fresh unified run.",
+      "properties": {
+        "artifact_algorithm": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Artifact Algorithm"
+        },
+        "artifact_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Artifact Id"
+        },
+        "data_kinds": {
+          "items": {
+            "$ref": "#/$defs/DataKind"
+          },
+          "minItems": 1,
+          "title": "Data Kinds",
+          "type": "array"
+        },
+        "decision_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Decision Sha256",
+          "type": "string"
+        },
+        "expected_decisions": {
+          "exclusiveMinimum": 0,
+          "title": "Expected Decisions",
+          "type": "integer"
+        },
+        "expected_fills": {
+          "exclusiveMinimum": 0,
+          "title": "Expected Fills",
+          "type": "integer"
+        },
+        "expected_orders": {
+          "minimum": 0,
+          "title": "Expected Orders",
+          "type": "integer"
+        },
+        "observed_action_kinds": {
+          "items": {
+            "$ref": "#/$defs/ActionKind"
+          },
+          "minItems": 1,
+          "title": "Observed Action Kinds",
+          "type": "array"
+        },
+        "observed_reason_codes": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Observed Reason Codes",
+          "type": "array"
+        },
+        "source_data_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Source Data Sha256",
+          "type": "string"
+        },
+        "timeframes": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Timeframes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "data_kinds",
+        "decision_sha256",
+        "expected_decisions",
+        "expected_fills",
+        "expected_orders",
+        "observed_action_kinds",
+        "observed_reason_codes",
+        "source_data_sha256",
+        "timeframes"
+      ],
+      "title": "RuntimeBehaviorExpectation",
+      "type": "object"
+    },
+    "StrategyKind": {
+      "enum": [
+        "reinforcement_learning",
+        "rule",
+        "supervised"
+      ],
+      "title": "StrategyKind",
+      "type": "string"
+    }
+  },
+  "$id": "urn:psrc:schema/paper-strategy-binding.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Review record binding a contract example to grounded paper claims and code.",
+  "properties": {
+    "algorithm_fidelity": {
+      "enum": [
+        "A1_method_equivalent",
+        "A2_algorithm_exact"
+      ],
+      "title": "Algorithm Fidelity",
+      "type": "string"
+    },
+    "assumptions": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Assumptions",
+      "type": "array"
+    },
+    "claim_links": {
+      "items": {
+        "$ref": "#/$defs/ClaimImplementationLink"
+      },
+      "minItems": 2,
+      "title": "Claim Links",
+      "type": "array"
+    },
+    "claims": {
+      "items": {
+        "$ref": "#/$defs/EvidenceClaim"
+      },
+      "minItems": 2,
+      "title": "Claims",
+      "type": "array"
+    },
+    "data_fidelity": {
+      "enum": [
+        "D0_synthetic",
+        "D1_public_proxy",
+        "D2_equivalent_market",
+        "D3_original"
+      ],
+      "title": "Data Fidelity",
+      "type": "string"
+    },
+    "data_mode": {
+      "enum": [
+        "public_historical",
+        "synthetic_fixture"
+      ],
+      "title": "Data Mode",
+      "type": "string"
+    },
+    "deviations": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Deviations",
+      "type": "array"
+    },
+    "empirical_results_reproduced": {
+      "const": false,
+      "default": false,
+      "title": "Empirical Results Reproduced",
+      "type": "boolean"
+    },
+    "experimental_fidelity": {
+      "enum": [
+        "E0_runtime_only",
+        "E1_directional_result",
+        "E2_main_results"
+      ],
+      "title": "Experimental Fidelity",
+      "type": "string"
+    },
+    "fidelity": {
+      "enum": [
+        "algorithm_reproduction",
+        "formula_reproduction",
+        "method_reproduction"
+      ],
+      "title": "Fidelity",
+      "type": "string"
+    },
+    "implementation": {
+      "items": {
+        "$ref": "#/$defs/ImplementationFile"
+      },
+      "minItems": 2,
+      "title": "Implementation",
+      "type": "array"
+    },
+    "mapping_review": {
+      "minLength": 20,
+      "title": "Mapping Review",
+      "type": "string"
+    },
+    "original_paper_dataset": {
+      "const": false,
+      "default": false,
+      "title": "Original Paper Dataset",
+      "type": "boolean"
+    },
+    "runtime_expectation": {
+      "$ref": "#/$defs/RuntimeBehaviorExpectation"
+    },
+    "runtime_fidelity": {
+      "enum": [
+        "R1_unified_contract",
+        "R2_independent_strict"
+      ],
+      "title": "Runtime Fidelity",
+      "type": "string"
+    },
+    "source_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "strategy_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Strategy Id",
+      "type": "string"
+    },
+    "strategy_kind": {
+      "$ref": "#/$defs/StrategyKind"
+    },
+    "verification_tests": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Verification Tests",
+      "type": "array"
+    },
+    "version": {
+      "const": "1.1",
+      "default": "1.1",
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "algorithm_fidelity",
+    "assumptions",
+    "claim_links",
+    "claims",
+    "data_fidelity",
+    "data_mode",
+    "deviations",
+    "experimental_fidelity",
+    "fidelity",
+    "implementation",
+    "mapping_review",
+    "runtime_expectation",
+    "runtime_fidelity",
+    "source_id",
+    "strategy_id",
+    "strategy_kind",
+    "verification_tests"
+  ],
+  "title": "PaperStrategyBinding",
+  "type": "object"
+}

@@ -1,0 +1,177 @@
+{
+  "$defs": {
+    "DataKind": {
+      "enum": [
+        "bar",
+        "book_snapshot_l2",
+        "quote_l1",
+        "trade"
+      ],
+      "title": "DataKind",
+      "type": "string"
+    },
+    "DatasetStream": {
+      "additionalProperties": false,
+      "properties": {
+        "data_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Data Sha256",
+          "type": "string"
+        },
+        "fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Fields",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "kind": {
+          "$ref": "#/$defs/DataKind"
+        },
+        "record_count": {
+          "minimum": 0,
+          "title": "Record Count",
+          "type": "integer"
+        },
+        "schema_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Schema Sha256",
+          "type": "string"
+        },
+        "stream_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Stream Id",
+          "type": "string"
+        },
+        "symbols": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Symbols",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "timeframe": {
+          "$ref": "#/$defs/Timeframe"
+        }
+      },
+      "required": [
+        "data_sha256",
+        "fields",
+        "kind",
+        "record_count",
+        "schema_sha256",
+        "stream_id",
+        "symbols",
+        "timeframe"
+      ],
+      "title": "DatasetStream",
+      "type": "object"
+    },
+    "Timeframe": {
+      "additionalProperties": false,
+      "properties": {
+        "alignment": {
+          "default": "epoch",
+          "title": "Alignment",
+          "type": "string"
+        },
+        "calendar": {
+          "default": "24/7",
+          "title": "Calendar",
+          "type": "string"
+        },
+        "interval": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "ISO-8601 duration, e.g. PT1M or P1D",
+          "title": "Interval"
+        },
+        "mode": {
+          "$ref": "#/$defs/TimeframeMode"
+        },
+        "timezone": {
+          "default": "UTC",
+          "title": "Timezone",
+          "type": "string"
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "title": "Timeframe",
+      "type": "object"
+    },
+    "TimeframeMode": {
+      "enum": [
+        "bar",
+        "event"
+      ],
+      "title": "TimeframeMode",
+      "type": "string"
+    }
+  },
+  "$id": "urn:psrc:schema/dataset-manifest.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "default": "1.1.0",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "dataset_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "dataset_version": {
+      "title": "Dataset Version",
+      "type": "string"
+    },
+    "extensions": {
+      "patternProperties": {
+        "^(?:[a-z](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z](?:[a-z0-9-]*[a-z0-9])?$": {
+          "additionalProperties": true,
+          "type": "object"
+        }
+      },
+      "title": "Extensions",
+      "type": "object"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "public_or_synthetic": {
+      "title": "Public Or Synthetic",
+      "type": "boolean"
+    },
+    "streams": {
+      "items": {
+        "$ref": "#/$defs/DatasetStream"
+      },
+      "title": "Streams",
+      "type": "array"
+    }
+  },
+  "required": [
+    "dataset_id",
+    "dataset_version",
+    "generated_at",
+    "public_or_synthetic",
+    "streams"
+  ],
+  "title": "DatasetManifest",
+  "type": "object"
+}

@@ -1,0 +1,34 @@
+{
+  "contract_version": "1.1.0",
+  "dataset_id": "synthetic.minute-bars",
+  "dataset_version": "1.0.0",
+  "extensions": {},
+  "generated_at": "2026-01-01T00:00:00Z",
+  "public_or_synthetic": true,
+  "streams": [
+    {
+      "data_sha256": "6993433f37d1cd97bff46b9b1c19bb48c3a62fd0912b9489fca49b07a87bc2a8",
+      "fields": [
+        "close",
+        "high",
+        "low",
+        "open",
+        "volume"
+      ],
+      "kind": "bar",
+      "record_count": 10,
+      "schema_sha256": "1ff8052af24ebb28585aab12dafdb9943464bb90678db0d67c6cd9e7e56ab117",
+      "stream_id": "bars",
+      "symbols": [
+        "SYNTH.TEST"
+      ],
+      "timeframe": {
+        "alignment": "epoch",
+        "calendar": "24/7",
+        "interval": "PT1M",
+        "mode": "bar",
+        "timezone": "UTC"
+      }
+    }
+  ]
+}

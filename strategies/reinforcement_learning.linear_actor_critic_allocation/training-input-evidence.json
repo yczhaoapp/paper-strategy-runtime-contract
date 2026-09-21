@@ -1,0 +1,8 @@
+{
+  "contract_version": "1.1.0",
+  "dataset_id": "public.plotly.aapl-2015-2017.train",
+  "input_width": 3,
+  "kind": "reinforcement_learning",
+  "record_count": 399,
+  "request_sha256": "773d9f5a008dae06fc09ec1db8cbb4abb755c40dc9ae43a5453fb2be504e4483"
+}

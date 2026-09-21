@@ -1,0 +1,402 @@
+[
+  {
+    "available_time": "2026-01-02T09:30:00Z",
+    "event_id": "book:1",
+    "event_time": "2026-01-02T09:30:00Z",
+    "instrument_id": "SYNTH.L2",
+    "payload": {
+      "asks": [
+        {
+          "price": "200.05",
+          "size": "1"
+        },
+        {
+          "price": "200.15",
+          "size": "2"
+        },
+        {
+          "price": "200.25",
+          "size": "3"
+        }
+      ],
+      "bids": [
+        {
+          "price": "199.95",
+          "size": "3"
+        },
+        {
+          "price": "199.85",
+          "size": "4"
+        },
+        {
+          "price": "199.75",
+          "size": "5"
+        }
+      ],
+      "kind": "book_snapshot_l2"
+    },
+    "receive_time": "2026-01-02T09:30:00Z",
+    "sequence": 0,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:30:00.100000Z",
+    "event_id": "book:2",
+    "event_time": "2026-01-02T09:30:00.100000Z",
+    "instrument_id": "SYNTH.L2",
+    "payload": {
+      "asks": [
+        {
+          "price": "200.15",
+          "size": "3"
+        },
+        {
+          "price": "200.25",
+          "size": "4"
+        },
+        {
+          "price": "200.35",
+          "size": "5"
+        }
+      ],
+      "bids": [
+        {
+          "price": "200.05",
+          "size": "1"
+        },
+        {
+          "price": "199.95",
+          "size": "2"
+        },
+        {
+          "price": "199.85",
+          "size": "3"
+        }
+      ],
+      "kind": "book_snapshot_l2"
+    },
+    "receive_time": "2026-01-02T09:30:00.100000Z",
+    "sequence": 1,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:30:00.200000Z",
+    "event_id": "book:3",
+    "event_time": "2026-01-02T09:30:00.200000Z",
+    "instrument_id": "SYNTH.L2",
+    "payload": {
+      "asks": [
+        {
+          "price": "200.25",
+          "size": "1"
+        },
+        {
+          "price": "200.35",
+          "size": "2"
+        },
+        {
+          "price": "200.45",
+          "size": "3"
+        }
+      ],
+      "bids": [
+        {
+          "price": "200.15",
+          "size": "3"
+        },
+        {
+          "price": "200.05",
+          "size": "4"
+        },
+        {
+          "price": "199.95",
+          "size": "5"
+        }
+      ],
+      "kind": "book_snapshot_l2"
+    },
+    "receive_time": "2026-01-02T09:30:00.200000Z",
+    "sequence": 2,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:30:00.300000Z",
+    "event_id": "book:4",
+    "event_time": "2026-01-02T09:30:00.300000Z",
+    "instrument_id": "SYNTH.L2",
+    "payload": {
+      "asks": [
+        {
+          "price": "200.35",
+          "size": "3"
+        },
+        {
+          "price": "200.45",
+          "size": "4"
+        },
+        {
+          "price": "200.55",
+          "size": "5"
+        }
+      ],
+      "bids": [
+        {
+          "price": "200.25",
+          "size": "1"
+        },
+        {
+          "price": "200.15",
+          "size": "2"
+        },
+        {
+          "price": "200.05",
+          "size": "3"
+        }
+      ],
+      "kind": "book_snapshot_l2"
+    },
+    "receive_time": "2026-01-02T09:30:00.300000Z",
+    "sequence": 3,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:30:00.400000Z",
+    "event_id": "book:5",
+    "event_time": "2026-01-02T09:30:00.400000Z",
+    "instrument_id": "SYNTH.L2",
+    "payload": {
+      "asks": [
+        {
+          "price": "200.45",
+          "size": "1"
+        },
+        {
+          "price": "200.55",
+          "size": "2"
+        },
+        {
+          "price": "200.65",
+          "size": "3"
+        }
+      ],
+      "bids": [
+        {
+          "price": "200.35",
+          "size": "3"
+        },
+        {
+          "price": "200.25",
+          "size": "4"
+        },
+        {
+          "price": "200.15",
+          "size": "5"
+        }
+      ],
+      "kind": "book_snapshot_l2"
+    },
+    "receive_time": "2026-01-02T09:30:00.400000Z",
+    "sequence": 4,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:30:00.500000Z",
+    "event_id": "book:6",
+    "event_time": "2026-01-02T09:30:00.500000Z",
+    "instrument_id": "SYNTH.L2",
+    "payload": {
+      "asks": [
+        {
+          "price": "200.55",
+          "size": "3"
+        },
+        {
+          "price": "200.65",
+          "size": "4"
+        },
+        {
+          "price": "200.75",
+          "size": "5"
+        }
+      ],
+      "bids": [
+        {
+          "price": "200.45",
+          "size": "1"
+        },
+        {
+          "price": "200.35",
+          "size": "2"
+        },
+        {
+          "price": "200.25",
+          "size": "3"
+        }
+      ],
+      "kind": "book_snapshot_l2"
+    },
+    "receive_time": "2026-01-02T09:30:00.500000Z",
+    "sequence": 5,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:30:00.600000Z",
+    "event_id": "book:7",
+    "event_time": "2026-01-02T09:30:00.600000Z",
+    "instrument_id": "SYNTH.L2",
+    "payload": {
+      "asks": [
+        {
+          "price": "200.65",
+          "size": "1"
+        },
+        {
+          "price": "200.75",
+          "size": "2"
+        },
+        {
+          "price": "200.85",
+          "size": "3"
+        }
+      ],
+      "bids": [
+        {
+          "price": "200.55",
+          "size": "3"
+        },
+        {
+          "price": "200.45",
+          "size": "4"
+        },
+        {
+          "price": "200.35",
+          "size": "5"
+        }
+      ],
+      "kind": "book_snapshot_l2"
+    },
+    "receive_time": "2026-01-02T09:30:00.600000Z",
+    "sequence": 6,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:30:00.700000Z",
+    "event_id": "book:8",
+    "event_time": "2026-01-02T09:30:00.700000Z",
+    "instrument_id": "SYNTH.L2",
+    "payload": {
+      "asks": [
+        {
+          "price": "200.75",
+          "size": "3"
+        },
+        {
+          "price": "200.85",
+          "size": "4"
+        },
+        {
+          "price": "200.95",
+          "size": "5"
+        }
+      ],
+      "bids": [
+        {
+          "price": "200.65",
+          "size": "1"
+        },
+        {
+          "price": "200.55",
+          "size": "2"
+        },
+        {
+          "price": "200.45",
+          "size": "3"
+        }
+      ],
+      "kind": "book_snapshot_l2"
+    },
+    "receive_time": "2026-01-02T09:30:00.700000Z",
+    "sequence": 7,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:30:00.800000Z",
+    "event_id": "book:9",
+    "event_time": "2026-01-02T09:30:00.800000Z",
+    "instrument_id": "SYNTH.L2",
+    "payload": {
+      "asks": [
+        {
+          "price": "200.85",
+          "size": "1"
+        },
+        {
+          "price": "200.95",
+          "size": "2"
+        },
+        {
+          "price": "201.05",
+          "size": "3"
+        }
+      ],
+      "bids": [
+        {
+          "price": "200.75",
+          "size": "3"
+        },
+        {
+          "price": "200.65",
+          "size": "4"
+        },
+        {
+          "price": "200.55",
+          "size": "5"
+        }
+      ],
+      "kind": "book_snapshot_l2"
+    },
+    "receive_time": "2026-01-02T09:30:00.800000Z",
+    "sequence": 8,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T09:30:00.900000Z",
+    "event_id": "book:10",
+    "event_time": "2026-01-02T09:30:00.900000Z",
+    "instrument_id": "SYNTH.L2",
+    "payload": {
+      "asks": [
+        {
+          "price": "200.95",
+          "size": "3"
+        },
+        {
+          "price": "201.05",
+          "size": "4"
+        },
+        {
+          "price": "201.15",
+          "size": "5"
+        }
+      ],
+      "bids": [
+        {
+          "price": "200.85",
+          "size": "1"
+        },
+        {
+          "price": "200.75",
+          "size": "2"
+        },
+        {
+          "price": "200.65",
+          "size": "3"
+        }
+      ],
+      "kind": "book_snapshot_l2"
+    },
+    "receive_time": "2026-01-02T09:30:00.900000Z",
+    "sequence": 9,
+    "source": "synthetic.v1"
+  }
+]

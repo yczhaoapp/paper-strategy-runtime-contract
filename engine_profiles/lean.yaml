@@ -1,0 +1,24 @@
+contract_version: 1.0.0
+engine_id: lean
+engine_version: profile-2026.09
+adapter_version: 0.0.0
+support_level: PROFILED
+profiles: [core.bar.v1, event.trade.v1, event.l1.v1, execution.basic.v1, execution.advanced.v1, portfolio.batch.v1]
+data_kinds: [bar, trade, quote_l1]
+action_kinds: [no_op, prediction, target_position, target_weight, submit_order, cancel_order, replace_order]
+execution:
+  partial_fills: true
+  cancel: true
+  replace: native
+  same_timestamp_ordering: requires-adapter-verification
+  queue_model: brokerage-model-dependent
+  fill_model: security-type-and-resolution-dependent
+  fee_model: brokerage-model-dependent
+  slippage_model: security-slippage-model-dependent
+  latency_model: local-engine-time-slice
+sandbox_modes: []
+extensions:
+  org.quantconnect.lean:
+    adapter_status: design-only
+    required_mapping: Slice/TradeBar/QuoteBar -> MarketEvent; Portfolio -> AccountSnapshot; OrderTicket -> OrderEventRecord
+    risk: fill and data-normalization models must be pinned per run

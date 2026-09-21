@@ -1,0 +1,94 @@
+{
+  "version": "1.1",
+  "strategy_id": "rule.sma_cross",
+  "strategy_kind": "rule",
+  "source_id": "ma2015",
+  "fidelity": "formula_reproduction",
+  "claims": [
+    {
+      "claim_id": "sma.mean",
+      "page": 3,
+      "anchor": "averaging window",
+      "locator": "Section 2.1, equation (1), PDF p.3",
+      "interpretation": "A moving average is the arithmetic mean of the current and prior n-1 closes."
+    },
+    {
+      "claim_id": "sma.position",
+      "page": 3,
+      "anchor": "position states",
+      "locator": "Section 2.1, equations (2)-(4), PDF p.3",
+      "interpretation": "Trading state is determined by the relation between short and long moving averages."
+    }
+  ],
+  "implementation": [
+    {
+      "path": "src/psrc/examples/sma_cross.py",
+      "sha256": "cff70c2ecc6e8a99c6a2e2864bc0218c80112e23443095a0863c7785b4bf99a3",
+      "symbols": [
+        "SmaCrossStrategy"
+      ]
+    },
+    {
+      "path": "strategies/rule.sma_cross/strategy.py",
+      "sha256": "87263b5ec65eaf7741f56626e20875b1e54f9d05e42a4efaacd8ace3c4bf86fb",
+      "symbols": [
+        "SmaCrossStrategy",
+        "class Strategy"
+      ]
+    }
+  ],
+  "verification_tests": [
+    "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.sma_cross]"
+  ],
+  "claim_links": [
+    {
+      "claim_id": "sma.mean",
+      "implementation_path": "src/psrc/examples/sma_cross.py",
+      "symbol": "SmaCrossStrategy",
+      "verification_test": "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.sma_cross]"
+    },
+    {
+      "claim_id": "sma.position",
+      "implementation_path": "src/psrc/examples/sma_cross.py",
+      "symbol": "SmaCrossStrategy",
+      "verification_test": "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.sma_cross]"
+    }
+  ],
+  "runtime_expectation": {
+    "source_data_sha256": "6993433f37d1cd97bff46b9b1c19bb48c3a62fd0912b9489fca49b07a87bc2a8",
+    "decision_sha256": "523e8612653c0ad39b1c818ce3ce40d3d7e4a8e6ddbc3b8595021ac1deea62eb",
+    "data_kinds": [
+      "bar"
+    ],
+    "timeframes": [
+      "PT1M"
+    ],
+    "observed_action_kinds": [
+      "no_op",
+      "target_position"
+    ],
+    "observed_reason_codes": [
+      "signal.sma_cross",
+      "warmup.incomplete"
+    ],
+    "expected_decisions": 10,
+    "expected_orders": 6,
+    "expected_fills": 2,
+    "artifact_algorithm": null,
+    "artifact_id": null
+  },
+  "data_mode": "synthetic_fixture",
+  "original_paper_dataset": false,
+  "empirical_results_reproduced": false,
+  "assumptions": [
+    "Completed bars are causal and short/long windows are fixed before the run."
+  ],
+  "deviations": [
+    "Uses a zero-band crossover and minute fixtures rather than the paper daily Chinese indexes and significance tests."
+  ],
+  "mapping_review": "Manual claim-to-code review completed; hashes bind the reviewed paper, implementation module, and executable package wrapper.",
+  "algorithm_fidelity": "A2_algorithm_exact",
+  "data_fidelity": "D0_synthetic",
+  "experimental_fidelity": "E0_runtime_only",
+  "runtime_fidelity": "R1_unified_contract"
+}

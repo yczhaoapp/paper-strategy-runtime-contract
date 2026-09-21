@@ -1,0 +1,425 @@
+{
+  "$defs": {
+    "ActionKind": {
+      "enum": [
+        "cancel_order",
+        "no_op",
+        "prediction",
+        "replace_order",
+        "submit_order",
+        "target_position",
+        "target_weight"
+      ],
+      "title": "ActionKind",
+      "type": "string"
+    },
+    "ActionRequirements": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed": {
+          "items": {
+            "$ref": "#/$defs/ActionKind"
+          },
+          "title": "Allowed",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "max_abs_position": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Abs Position"
+        },
+        "max_order_quantity": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Order Quantity"
+        }
+      },
+      "required": [
+        "allowed"
+      ],
+      "title": "ActionRequirements",
+      "type": "object"
+    },
+    "DataKind": {
+      "enum": [
+        "bar",
+        "book_snapshot_l2",
+        "quote_l1",
+        "trade"
+      ],
+      "title": "DataKind",
+      "type": "string"
+    },
+    "DataRequirement": {
+      "additionalProperties": false,
+      "properties": {
+        "depth": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Depth"
+        },
+        "kind": {
+          "$ref": "#/$defs/DataKind"
+        },
+        "lookback": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Lookback",
+          "type": "integer"
+        },
+        "max_staleness_ns": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Staleness Ns"
+        },
+        "optional_fields": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Optional Fields",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "required_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Fields",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "stream_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Stream Id",
+          "type": "string"
+        },
+        "symbols": {
+          "default": [],
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Symbols",
+          "type": "array"
+        },
+        "timeframe": {
+          "$ref": "#/$defs/Timeframe"
+        }
+      },
+      "required": [
+        "kind",
+        "required_fields",
+        "stream_id",
+        "timeframe"
+      ],
+      "title": "DataRequirement",
+      "type": "object"
+    },
+    "LifecycleRequirements": {
+      "additionalProperties": false,
+      "properties": {
+        "backtest": {
+          "const": "required",
+          "default": "required",
+          "title": "Backtest",
+          "type": "string"
+        },
+        "inference": {
+          "const": "required",
+          "default": "required",
+          "title": "Inference",
+          "type": "string"
+        },
+        "state_checkpointing": {
+          "default": false,
+          "title": "State Checkpointing",
+          "type": "boolean"
+        },
+        "training": {
+          "$ref": "#/$defs/TrainingMode"
+        }
+      },
+      "required": [
+        "training"
+      ],
+      "title": "LifecycleRequirements",
+      "type": "object"
+    },
+    "ResourcePolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_imports": {
+          "default": [
+            "math",
+            "numpy",
+            "statistics"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Imports",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "filesystem": {
+          "default": "artifact_store_only",
+          "enum": [
+            "artifact_store_only",
+            "read_only_data",
+            "unrestricted"
+          ],
+          "title": "Filesystem",
+          "type": "string"
+        },
+        "memory_mb": {
+          "default": 512,
+          "maximum": 16384,
+          "minimum": 64,
+          "title": "Memory Mb",
+          "type": "integer"
+        },
+        "network": {
+          "default": "deny",
+          "enum": [
+            "allow",
+            "deny"
+          ],
+          "title": "Network",
+          "type": "string"
+        },
+        "process_limit": {
+          "default": 32,
+          "maximum": 1024,
+          "minimum": 1,
+          "title": "Process Limit",
+          "type": "integer"
+        },
+        "sandbox": {
+          "$ref": "#/$defs/SandboxMode",
+          "default": "strict_container"
+        },
+        "timeout_seconds": {
+          "default": 60,
+          "maximum": 3600,
+          "minimum": 1,
+          "title": "Timeout Seconds",
+          "type": "integer"
+        }
+      },
+      "title": "ResourcePolicy",
+      "type": "object"
+    },
+    "SandboxMode": {
+      "enum": [
+        "development",
+        "strict_container"
+      ],
+      "title": "SandboxMode",
+      "type": "string"
+    },
+    "StrategyKind": {
+      "enum": [
+        "reinforcement_learning",
+        "rule",
+        "supervised"
+      ],
+      "title": "StrategyKind",
+      "type": "string"
+    },
+    "Timeframe": {
+      "additionalProperties": false,
+      "properties": {
+        "alignment": {
+          "default": "epoch",
+          "title": "Alignment",
+          "type": "string"
+        },
+        "calendar": {
+          "default": "24/7",
+          "title": "Calendar",
+          "type": "string"
+        },
+        "interval": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "ISO-8601 duration, e.g. PT1M or P1D",
+          "title": "Interval"
+        },
+        "mode": {
+          "$ref": "#/$defs/TimeframeMode"
+        },
+        "timezone": {
+          "default": "UTC",
+          "title": "Timezone",
+          "type": "string"
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "title": "Timeframe",
+      "type": "object"
+    },
+    "TimeframeMode": {
+      "enum": [
+        "bar",
+        "event"
+      ],
+      "title": "TimeframeMode",
+      "type": "string"
+    },
+    "TrainingMode": {
+      "enum": [
+        "not_required",
+        "required"
+      ],
+      "title": "TrainingMode",
+      "type": "string"
+    }
+  },
+  "$id": "urn:psrc:schema/strategy-manifest.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action_requirements": {
+      "$ref": "#/$defs/ActionRequirements"
+    },
+    "contract_version": {
+      "default": "1.1.0",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "data_requirements": {
+      "items": {
+        "$ref": "#/$defs/DataRequirement"
+      },
+      "title": "Data Requirements",
+      "type": "array"
+    },
+    "deterministic": {
+      "default": true,
+      "title": "Deterministic",
+      "type": "boolean"
+    },
+    "entrypoint": {
+      "title": "Entrypoint",
+      "type": "string"
+    },
+    "extensions": {
+      "patternProperties": {
+        "^(?:[a-z](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z](?:[a-z0-9-]*[a-z0-9])?$": {
+          "additionalProperties": true,
+          "type": "object"
+        }
+      },
+      "title": "Extensions",
+      "type": "object"
+    },
+    "kind": {
+      "$ref": "#/$defs/StrategyKind"
+    },
+    "lifecycle": {
+      "$ref": "#/$defs/LifecycleRequirements"
+    },
+    "required_profiles": {
+      "items": {
+        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+        "type": "string"
+      },
+      "title": "Required Profiles",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "resources": {
+      "$ref": "#/$defs/ResourcePolicy",
+      "default": {
+        "allowed_imports": [
+          "math",
+          "numpy",
+          "statistics"
+        ],
+        "filesystem": "artifact_store_only",
+        "memory_mb": 512,
+        "network": "deny",
+        "process_limit": 32,
+        "sandbox": "strict_container",
+        "timeout_seconds": 60
+      }
+    },
+    "seed": {
+      "default": 0,
+      "title": "Seed",
+      "type": "integer"
+    },
+    "strategy_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Strategy Id",
+      "type": "string"
+    },
+    "strategy_version": {
+      "title": "Strategy Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "action_requirements",
+    "data_requirements",
+    "entrypoint",
+    "kind",
+    "lifecycle",
+    "required_profiles",
+    "strategy_id",
+    "strategy_version"
+  ],
+  "title": "StrategyManifest",
+  "type": "object"
+}

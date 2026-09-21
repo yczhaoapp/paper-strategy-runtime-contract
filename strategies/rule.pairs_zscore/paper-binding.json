@@ -1,0 +1,96 @@
+{
+  "algorithm_fidelity": "A2_algorithm_exact",
+  "assumptions": [
+    "Fixed-hash public AAPL and MSFT daily closes are timestamp-aligned and become available on the following UTC day before the rolling spread is updated."
+  ],
+  "claim_links": [
+    {
+      "claim_id": "pairs.zscore",
+      "implementation_path": "src/psrc/strategies/rule.py",
+      "symbol": "PairsZScoreStrategy",
+      "verification_test": "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.pairs_zscore]"
+    },
+    {
+      "claim_id": "pairs.signal",
+      "implementation_path": "src/psrc/strategies/rule.py",
+      "symbol": "PairsZScoreStrategy",
+      "verification_test": "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.pairs_zscore]"
+    }
+  ],
+  "claims": [
+    {
+      "anchor": "derivation of a z-score",
+      "claim_id": "pairs.zscore",
+      "interpretation": "The spread is standardized by subtracting its mean and dividing by standard deviation.",
+      "locator": "Equation (3), PDF p.27",
+      "page": 27
+    },
+    {
+      "anchor": "potential overpricing",
+      "claim_id": "pairs.signal",
+      "interpretation": "Positive threshold means short the rich leg and buy the cheap leg; negative threshold reverses it.",
+      "locator": "Signal discussion, PDF p.27",
+      "page": 27
+    }
+  ],
+  "data_fidelity": "D1_public_proxy",
+  "data_mode": "public_historical",
+  "deviations": [
+    "Uses public AAPL/MSFT proxy prices, a fixed unit hedge and a short rolling window rather than the paper pair, calibration and five-year sample; flat OHLC fields and unit volume are deterministic adapters for close-only source rows."
+  ],
+  "empirical_results_reproduced": false,
+  "experimental_fidelity": "E0_runtime_only",
+  "fidelity": "formula_reproduction",
+  "implementation": [
+    {
+      "path": "src/psrc/strategies/rule.py",
+      "sha256": "6cc6d335e5c9e7db298267b849291d06e061a7446693435cc7b4378d222adc9c",
+      "symbols": [
+        "PairsZScoreStrategy"
+      ]
+    },
+    {
+      "path": "strategies/rule.pairs_zscore/strategy.py",
+      "sha256": "c89fae5514788f1f2ba66a4a9672b11ba53a52b27ab3b75271ed8274888f5dc8",
+      "symbols": [
+        "PairsZScoreStrategy",
+        "class Strategy"
+      ]
+    }
+  ],
+  "mapping_review": "Manual claim-to-code review completed; hashes bind the reviewed paper, implementation module, and executable package wrapper.",
+  "original_paper_dataset": false,
+  "runtime_expectation": {
+    "artifact_algorithm": null,
+    "artifact_id": null,
+    "data_kinds": [
+      "bar"
+    ],
+    "decision_sha256": "4a852c64d2ca22da11ba70b831e9cd239a6466d170c079fe498c6209769836fd",
+    "expected_decisions": 1012,
+    "expected_fills": 388,
+    "expected_orders": 1000,
+    "observed_action_kinds": [
+      "no_op",
+      "target_position"
+    ],
+    "observed_reason_codes": [
+      "pair.awaiting_peer",
+      "pair.not_synchronized",
+      "signal.pairs_zscore",
+      "warmup.spread"
+    ],
+    "source_data_sha256": "4f65db76b8b3fdde3cae3dcf38fa004eb91a0529b4ee93afe5a12a01ddd628ac",
+    "timeframes": [
+      "P1D"
+    ]
+  },
+  "runtime_fidelity": "R1_unified_contract",
+  "source_id": "khizbullin2023",
+  "strategy_id": "rule.pairs_zscore",
+  "strategy_kind": "rule",
+  "verification_tests": [
+    "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.pairs_zscore]"
+  ],
+  "version": "1.1"
+}

@@ -1,0 +1,92 @@
+{
+  "version": "1.1",
+  "strategy_id": "reinforcement_learning.tabular_q_inventory",
+  "strategy_kind": "reinforcement_learning",
+  "source_id": "spooner2018",
+  "fidelity": "method_reproduction",
+  "claims": [
+    {
+      "claim_id": "q.inventory",
+      "page": 1,
+      "anchor": "inventory risk",
+      "locator": "Abstract, PDF p.1",
+      "interpretation": "The market-making control problem explicitly includes inventory risk."
+    },
+    {
+      "claim_id": "q.algorithm",
+      "page": 4,
+      "anchor": "Q-learning (QL), SARSA",
+      "locator": "Section 4.4, PDF p.4",
+      "interpretation": "The paper evaluates tabular temporal-difference algorithms including Q-learning and SARSA."
+    }
+  ],
+  "implementation": [
+    {
+      "path": "src/psrc/strategies/reinforcement_learning.py",
+      "sha256": "854f91e3b116a7cdc7aa4897f033c81654d5df3b29301efec016dc9468b63271",
+      "symbols": [
+        "TabularQInventoryStrategy"
+      ]
+    },
+    {
+      "path": "strategies/reinforcement_learning.tabular_q_inventory/strategy.py",
+      "sha256": "c642ee2d170024843158f0fca9fa1e3e35e754503fa54374cca3f8d6caec61c6",
+      "symbols": [
+        "TabularQInventoryStrategy",
+        "class Strategy"
+      ]
+    }
+  ],
+  "verification_tests": [
+    "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.tabular_q_inventory]"
+  ],
+  "claim_links": [
+    {
+      "claim_id": "q.inventory",
+      "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
+      "symbol": "TabularQInventoryStrategy",
+      "verification_test": "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.tabular_q_inventory]"
+    },
+    {
+      "claim_id": "q.algorithm",
+      "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
+      "symbol": "TabularQInventoryStrategy",
+      "verification_test": "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.tabular_q_inventory]"
+    }
+  ],
+  "runtime_expectation": {
+    "source_data_sha256": "e989804ddac4ac04a762e1cd027844e135664b27dda3d30f23c5fc61fbf9519a",
+    "decision_sha256": "cfed02ca3c2687f602b5b2c56cbf72da7ef7e7bc2eed483a85447d6cd5b1f7f2",
+    "data_kinds": [
+      "bar"
+    ],
+    "timeframes": [
+      "P1D"
+    ],
+    "observed_action_kinds": [
+      "target_position"
+    ],
+    "observed_reason_codes": [
+      "policy.tabular_q_inventory"
+    ],
+    "expected_decisions": 10,
+    "expected_orders": 10,
+    "expected_fills": 8,
+    "artifact_algorithm": "tabular-q-learning-v1",
+    "artifact_id": "sha256-0739781a1f5592a06654cb1eb650e72057b7ad87cda5482296757f366ca3560d"
+  },
+  "data_mode": "synthetic_fixture",
+  "original_paper_dataset": false,
+  "empirical_results_reproduced": false,
+  "assumptions": [
+    "State and action spaces are finite and deterministic training transitions expose all three actions."
+  ],
+  "deviations": [
+    "Uses daily bar momentum/range/inventory state and target positions instead of order-book quote actions and tile coding."
+  ],
+  "mapping_review": "Manual claim-to-code review completed; hashes bind the reviewed paper, implementation module, and executable package wrapper.",
+  "algorithm_fidelity": "A1_method_equivalent",
+  "data_fidelity": "D0_synthetic",
+  "experimental_fidelity": "E0_runtime_only",
+  "runtime_fidelity": "R1_unified_contract"
+}

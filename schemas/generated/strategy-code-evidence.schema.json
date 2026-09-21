@@ -1,0 +1,84 @@
+{
+  "$defs": {
+    "SourceFileEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "maxLength": 512,
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "SourceFileEvidence",
+      "type": "object"
+    }
+  },
+  "$id": "urn:psrc:schema/strategy-code-evidence.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Content-addressed strategy package and trusted runtime implementation.",
+  "properties": {
+    "entrypoint": {
+      "title": "Entrypoint",
+      "type": "string"
+    },
+    "package_files": {
+      "items": {
+        "$ref": "#/$defs/SourceFileEvidence"
+      },
+      "title": "Package Files",
+      "type": "array"
+    },
+    "package_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Package Sha256",
+      "type": "string"
+    },
+    "runtime_distribution": {
+      "const": "paper-strategy-runtime-contract",
+      "default": "paper-strategy-runtime-contract",
+      "title": "Runtime Distribution",
+      "type": "string"
+    },
+    "runtime_file_count": {
+      "minimum": 1,
+      "title": "Runtime File Count",
+      "type": "integer"
+    },
+    "runtime_source_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Runtime Source Sha256",
+      "type": "string"
+    },
+    "runtime_version": {
+      "default": "1.1.0",
+      "title": "Runtime Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "entrypoint",
+    "package_files",
+    "package_sha256",
+    "runtime_file_count",
+    "runtime_source_sha256"
+  ],
+  "title": "StrategyCodeEvidence",
+  "type": "object"
+}

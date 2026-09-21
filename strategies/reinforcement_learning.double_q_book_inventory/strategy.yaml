@@ -1,0 +1,54 @@
+contract_version: 1.1.0
+strategy_id: reinforcement_learning.double_q_book_inventory
+strategy_version: 1.0.0
+kind: reinforcement_learning
+entrypoint: strategy.py:Strategy
+required_profiles:
+- event.l2.v1
+- execution.basic.v1
+- training.rl.v1
+lifecycle:
+  training: required
+  inference: required
+  backtest: required
+  state_checkpointing: true
+data_requirements:
+- stream_id: book
+  kind: book_snapshot_l2
+  timeframe:
+    mode: event
+    interval: null
+    timezone: UTC
+    calendar: 24/7
+    alignment: epoch
+  symbols:
+  - SYNTH.L2
+  required_fields:
+  - asks.price
+  - asks.size
+  - bids.price
+  - bids.size
+  optional_fields: []
+  lookback: 1
+  depth: 3
+  max_staleness_ns: null
+action_requirements:
+  allowed:
+  - no_op
+  - target_position
+  max_abs_position: '1'
+  max_order_quantity: '10'
+resources:
+  sandbox: development
+  network: deny
+  filesystem: artifact_store_only
+  allowed_imports:
+  - math
+  - numpy
+  - statistics
+  timeout_seconds: 60
+  memory_mb: 512
+  process_limit: 32
+deterministic: true
+seed: 7
+extensions: {}
