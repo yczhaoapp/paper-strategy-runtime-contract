@@ -22,11 +22,11 @@ from psrc.contract.models import (
 )
 
 
-def _major(version: str) -> int:
+def _major(version: str) -> int | None:
     try:
         return int(version.split(".", maxsplit=1)[0])
-    except (TypeError, ValueError) as exc:
-        raise ValueError(f"invalid semantic version: {version!r}") from exc
+    except (AttributeError, TypeError, ValueError):
+        return None
 
 
 def _fail(

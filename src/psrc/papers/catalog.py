@@ -254,6 +254,16 @@ def verify_strategy_bindings(
         if binding.algorithm_fidelity == "A2_algorithm_exact"
     )
     exact_count = sum(binding.algorithm_fidelity == "A2_algorithm_exact" for binding in bindings)
+    oracle_prefix = "tests/papers/test_reproduction_oracles.py::"
+    a2_without_independent_oracles = sorted(
+        binding.strategy_id
+        for binding in bindings
+        if binding.algorithm_fidelity == "A2_algorithm_exact"
+        and any(
+            not link.verification_test.startswith(oracle_prefix)
+            for link in binding.claim_links
+        )
+    )
     data_fidelities = Counter(binding.data_fidelity for binding in bindings)
     experimental_fidelities = Counter(binding.experimental_fidelity for binding in bindings)
     declared_runtime_fidelities = Counter(binding.runtime_fidelity for binding in bindings)
@@ -277,6 +287,7 @@ def verify_strategy_bindings(
         and fidelities["formula_reproduction"] >= 6
         and reproduction_count == 18
         and exact_count >= 9
+        and not a2_without_independent_oracles
         and data_fidelities["D1_public_proxy"] >= 6
         and all(public_by_kind[kind.value] >= 2 for kind in StrategyKind)
         and experimental_fidelities == Counter({"E0_runtime_only": 18})
@@ -295,6 +306,7 @@ def verify_strategy_bindings(
         "reproduction_by_kind": dict(reproduction_by_kind),
         "algorithm_exact_count": exact_count,
         "algorithm_exact_by_kind": dict(exact_by_kind),
+        "algorithm_exact_without_independent_oracle": a2_without_independent_oracles,
         "data_fidelity_counts": dict(data_fidelities),
         "public_data_by_kind": dict(public_by_kind),
         "experimental_fidelity_counts": dict(experimental_fidelities),

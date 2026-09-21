@@ -1,7 +1,7 @@
-contract_version: 1.0.0
+contract_version: 1.1.0
 engine_id: reference
-engine_version: 0.2.0
-adapter_version: 0.2.0
+engine_version: 0.3.0
+adapter_version: 0.3.0
 support_level: CONFORMANCE_VERIFIED
 profiles: [core.bar.v1, event.trade.v1, event.l1.v1, event.l2.v1, execution.basic.v1, execution.advanced.v1, portfolio.batch.v1, training.supervised.v1, training.rl.v1]
 data_kinds: [bar, trade, quote_l1, book_snapshot_l2]
@@ -18,5 +18,7 @@ execution:
   latency_model: next-event.v1
 sandbox_modes: [development]
 extensions:
-  org.psrc:
+  org.psrc.reference:
     evidence: tests/integration
+    supported_time_in_force: [day]
+    day_session: {calendar: 24/7, timezone: UTC, expiry: next_utc_date_before_matching}

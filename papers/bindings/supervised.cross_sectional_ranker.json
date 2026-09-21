@@ -55,8 +55,8 @@
     }
   ],
   "runtime_expectation": {
-    "source_data_sha256": "de41149497f346149e804e6eddedd214ea2486f0fede953e499036f4d95985b8",
-    "decision_sha256": "1e7d609f6765bc6dbf47e75267dad4b76d8a833dd11298f6923ed2aa0e752eae",
+    "source_data_sha256": "641ee9d4785784a046b37bf6b0ab84de0b1a743ced84d0e5fa2a45c459ddc569",
+    "decision_sha256": "e41686b425a8a36c81c82de7d041f3b5b4f670ddad2c47f4bbd4f6cb7c0f7940",
     "data_kinds": [
       "bar"
     ],

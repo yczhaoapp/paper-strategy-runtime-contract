@@ -7,7 +7,7 @@
   "public_or_synthetic": true,
   "streams": [
     {
-      "data_sha256": "e989804ddac4ac04a762e1cd027844e135664b27dda3d30f23c5fc61fbf9519a",
+      "data_sha256": "be7aee95ff610f58ed3821fae4a7b5048671cd959b94101db284d98a859f8471",
       "fields": [
         "close",
         "high",

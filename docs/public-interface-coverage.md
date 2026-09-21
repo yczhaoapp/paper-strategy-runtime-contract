@@ -19,15 +19,15 @@
 | 模型产物 | `ArtifactManifest`、内容寻址文件、训练输入证据 | 保存后重新按大小和 SHA-256 校验加载 | 不把内存对象当作可交付模型 |
 | 日志与报告 | `RuntimeLogRecord`、`RunReport`、`FailureReport`、`RunBundle` | 成功和失败均输出机器可读文件 | 日志不能替代结构化订单、成交和错误对象 |
 | tick / 事件 | `Timeframe(mode="event", interval=null)` | Trade、L1 quote、L2 snapshot 在 Reference 可运行 | “tick”在 v1 表示逐事件，不虚构固定 tick 周期 |
-| 分钟线 / 日线 | `Timeframe(mode="bar", interval="PT1M" | "P1D")` | 18 个目录包同时覆盖 PT1M 与 P1D | bar 的时区、calendar 和 alignment 必须显式声明 |
+| 分钟线 / 日线 | `Timeframe(mode="bar", interval="PT1M" | "P1D")` | 18 个目录包同时覆盖 PT1M 与 P1D；实际时间错位反例失败 | UTC/epoch 逐 bar 校验；允许周期整数倍的缺口 |
 | OHLCV | `BarPayload` | Reference 与 Backtrader 路径 | 字段为 open/high/low/close/volume，价格和 OHLC 关系受校验 |
 | 成交 | `TradePayload` | tick 订单生命周期集成测试 | price、size、aggressor_side、trade_id；不声明逐笔委托 MBO |
 | Level 1 | `QuoteL1Payload` | L1 规则、监督和深度论文案例 | bid/ask price 与 size；拒绝倒挂报价 |
 | Level 2 | `BookSnapshotL2Payload` | L2 规则、监督和 RL 策略 | 仅快照 bids/asks；不声明增量簿或 MBO |
 | 账户 | `AccountSnapshot` | 每事件保存 cash、equity、positions、open_orders | Reference 是单币种基础账户模型 |
-| 订单输出 | 七种规范 `Action` | 目标仓位、权重、预测、提交、撤单、改单和 no-op 均有执行/失败测试 | Reference 直接订单只实现 market/limit 和 day，有能力协商与拒单 |
+| 订单输出 | 七种规范 `Action` | 目标仓位、权重、预测、提交、撤单、改单和 no-op 均有执行/失败测试 | Reference 直接订单只实现 market/limit 和 UTC/24×7 day；累计仓位在接单、改单和成交前校验 |
 | 订单状态 | `OpenOrder.status`、`OrderEventRecord.status` | trade tick 测试验证 accepted → replaced → filled | Reference 不支持 partial fill；Schema 保留 `partially_filled` 供具备能力的 Adapter 使用 |
-| 结构化失败 | `ContractError` / `FailureReport` | 8 个题目场景动态生成并核对错误码 | 失败不能改写为 no-op 或成功报告 |
+| 结构化失败 | `ContractError` / `FailureReport` | 题目场景与无效 SemVer、实际时间错位等边界动态核对 | 失败不能改写为 no-op 或成功报告；失败目录不保留旧成功 Bundle |
 | 兼容记录 | `CompatibilityRecord`、`RunInputEvidence` | 映射 + 重采样端到端及关闭后的失败测试 | 默认关闭；有损转换还需 `allow_lossy=true` |
 
 ## 失败和兼容性的硬约束

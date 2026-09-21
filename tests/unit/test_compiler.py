@@ -37,6 +37,25 @@ def test_exact_contract_compiles(
     assert len(plan.strategy_manifest_sha256) == 64
 
 
+def test_malformed_contract_version_is_structured(
+    strategy: StrategyManifest,
+    dataset: DatasetManifest,
+    engine: EngineCapabilities,
+    policy: RunPolicy,
+) -> None:
+    malformed = strategy.model_copy(update={"contract_version": "invalid"})
+    with pytest.raises(ContractViolation) as raised:
+        compile_run(
+            run_id="run.invalid-version",
+            strategy=malformed,
+            dataset=dataset,
+            engine=engine,
+            policy=policy,
+        )
+    assert raised.value.error.code == ErrorCode.CONTRACT_VERSION_UNSUPPORTED
+    assert raised.value.error.details["declared"] == {"strategy": "invalid"}
+
+
 def test_missing_field_is_structured(
     strategy: StrategyManifest,
     dataset: DatasetManifest,

@@ -18,7 +18,7 @@ psrc run --strategy-dir <package> \
 
 规范行情联合类型包含 `BarPayload`、`TradePayload`、`QuoteL1Payload` 和 `BookSnapshotL2Payload`。它们分别表达 OHLCV、逐笔成交、Level-1 买卖报价和 Level-2 多档快照。当前公共 v1 不声明 L2 增量簿、逐笔委托或任意 custom payload。
 
-逐事件 tick 数据声明为 `Timeframe(mode="event", interval=null)`；分钟线和日线分别使用 `Timeframe(mode="bar", interval="PT1M")` 与 `P1D`。策略在 `DataRequirement` 中同时声明 stream、kind、粒度、标的、必需/可选字段、lookback、深度和最大陈旧时间。数据集用对应 `DatasetStream` 声明实际供给，编译器在代码导入前比较二者。
+逐事件 tick 数据声明为 `Timeframe(mode="event", interval=null)`；分钟线和日线分别使用 `Timeframe(mode="bar", interval="PT1M")` 与 `P1D`。策略在 `DataRequirement` 中同时声明 stream、kind、粒度、标的、必需/可选字段、lookback、深度和最大陈旧时间。数据集用对应 `DatasetStream` 声明实际供给，编译器在代码导入前比较二者。包加载和 orchestrator 还会核对实际 bar 的 `event_time`：当前 UTC/epoch 网格要求时间戳为声明周期的绝对整数倍，允许跨过任意数量的合法周期。
 
 ## 账户、动作与输出
 
@@ -57,6 +57,8 @@ class RuntimeStrategy(Protocol):
 ```
 
 `on_event` 是统一推理回调。它只能读取当前已可用的规范行情事件和调用时账户快照，并返回声明动作空间内的规范动作。非法动作以 `ACTION_INVALID` 或 `ORDER_REJECTED` 失败；异常不得被改写成 no-op 成功。
+
+Reference 的直接订单仅支持 market/limit + `day`。`day` 使用运行时 `available_time` 的 UTC 日期作为 24×7 会话：订单在下一 UTC 日期的第一条事件参与撮合前过期。不属于 UTC/24×7 的数据流若声明直接下单能力，将以 `ENGINE_CAPABILITY_UNSUPPORTED` 失败，不能把未知交易所会话猜成 UTC 日。直接订单的接单、改单和成交都核对累计仓位上限。
 
 ## 训练与模型入口
 
@@ -98,3 +100,5 @@ class BacktestAdapter(Protocol):
 ## 失败出口
 
 所有阶段失败均以 `ContractError` 表示，并可写成 `FailureReport`。失败报告包含原始策略、数据集、引擎能力、运行策略及实际输入上下文；任何 fallback 成功都不能覆盖原始失败。运行生命周期进入 `FAILED` 后不可再次转换。
+
+一个 `--output` 目录只表示最近一次运行尝试。新运行会清理该目录中列入公开清单的 PSRC 自有报告、Bundle、事件、成交和 artifact store，再写入本次结果；未知用户文件不会删除。失败发布还会再次清理成功专属文件，因此 `report.json=failed` 时同一目录不得保留旧 `bundle.json`、fills、orders 或模型产物。

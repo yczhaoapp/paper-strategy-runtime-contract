@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "paper-strategy-runtime-contract"
-version = "2.6.0"
+version = "2.6.1"
 description = "A versioned, auditable runtime contract between paper-derived trading strategies and backtest engines."
 readme = "README.md"
 requires-python = ">=3.12"

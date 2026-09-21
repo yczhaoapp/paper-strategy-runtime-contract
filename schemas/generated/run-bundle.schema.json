@@ -719,6 +719,7 @@
       "properties": {
         "contract_version": {
           "default": "1.1.0",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
           "title": "Contract Version",
           "type": "string"
         },
@@ -914,6 +915,7 @@
         },
         "contract_version": {
           "default": "1.1.0",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
           "title": "Contract Version",
           "type": "string"
         },
@@ -999,6 +1001,7 @@
         },
         "contract_version": {
           "default": "1.1.0",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
           "title": "Contract Version",
           "type": "string"
         },
@@ -2849,6 +2852,7 @@
         },
         "contract_version": {
           "default": "1.1.0",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
           "title": "Contract Version",
           "type": "string"
         },

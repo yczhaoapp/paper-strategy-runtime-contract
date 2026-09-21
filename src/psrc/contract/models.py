@@ -13,6 +13,7 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 from psrc.constants import CONTRACT_VERSION
 
 Identifier = Annotated[str, Field(pattern=r"^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$")]
+ContractVersion = Annotated[str, Field(pattern=r"^[0-9]+\.[0-9]+\.[0-9]+$")]
 ExtensionNamespace = Annotated[
     str,
     Field(
@@ -153,7 +154,7 @@ class ResourcePolicy(ContractModel):
 
 
 class StrategyManifest(ContractModel):
-    contract_version: str = CONTRACT_VERSION
+    contract_version: ContractVersion = CONTRACT_VERSION
     strategy_id: Identifier
     strategy_version: str
     kind: StrategyKind
@@ -220,7 +221,7 @@ class DatasetStream(ContractModel):
 
 
 class DatasetManifest(ContractModel):
-    contract_version: str = CONTRACT_VERSION
+    contract_version: ContractVersion = CONTRACT_VERSION
     dataset_id: Identifier
     dataset_version: str
     generated_at: datetime
@@ -242,7 +243,7 @@ class ExecutionSemantics(ContractModel):
 
 
 class EngineCapabilities(ContractModel):
-    contract_version: str = CONTRACT_VERSION
+    contract_version: ContractVersion = CONTRACT_VERSION
     engine_id: Identifier
     engine_version: str
     adapter_version: str
@@ -279,7 +280,7 @@ class CompatibilityRecord(ContractModel):
 
 
 class ExecutionPlan(ContractModel):
-    contract_version: str = CONTRACT_VERSION
+    contract_version: ContractVersion = CONTRACT_VERSION
     run_id: Identifier
     strategy_id: Identifier
     dataset_id: Identifier

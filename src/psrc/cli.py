@@ -74,6 +74,7 @@ from psrc.runtime.report import (
     RunReport,
     RuntimeLogRecord,
     UnifiedRunReport,
+    clear_run_output,
     event_stream_sha256,
     write_failure_bundle,
     write_input_evidence,
@@ -195,6 +196,7 @@ def _author_run(
     require_strict: bool,
     engine_id: EngineId,
 ) -> int:
+    clear_run_output(output)
     try:
         spec = PaperStrategySpec.model_validate(_load_yaml(spec_path))
     except ValidationError as exc:
@@ -242,6 +244,7 @@ def _acceptance_verify(
 def _demo_sma(output: Path) -> int:
     from psrc.examples.sma_cross import SmaCrossStrategy
 
+    clear_run_output(output)
     events = minute_bars()
     strategy = SmaCrossStrategy()
     dataset = minute_bar_manifest(events)
@@ -387,6 +390,7 @@ def _run_package(
     external_strategy_admission: ExternalStrategyAdmission | None = None,
     external_paper_document: PaperDocument | None = None,
 ) -> RunReport:
+    clear_run_output(output)
     sandbox = _selected_sandbox(require_strict=require_strict)
     resolved = resolve_adapter(
         engine_id,

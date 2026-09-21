@@ -43,7 +43,9 @@ Python 类型是参考 SDK。生成的 JSON Schema 与生命周期消息语义�
 
 原型中的 `MarketEvent` payload 覆盖 OHLCV bar、trade、L1 quote 和 L2 snapshot。公开枚举为 L2 delta、MBO、公司行动、标的状态及 custom event 预留可兼容的 minor 扩展。价格、数量、现金和仓位使用 Decimal 语义，不使用二进制浮点。时间必须含时区；事件可用时间不得早于市场事件时间，接收时间不得早于可用时间。
 
-分钟和日线 bar 使用 `PT1M`、`P1D` 等 ISO-8601 duration，并同时声明时区、日历和对齐方式。tick 类数据使用 `mode=event`，不得声明 bar interval。
+分钟和日线 bar 使用 `PT1M`、`P1D` 等 ISO-8601 duration，并同时声明时区、日历和对齐方式。tick 类数据使用 `mode=event`，不得声明 bar interval。当前可执行核心支持 `timezone=UTC`、`alignment=epoch` 的 `PT<n>S`、`PT<n>M`、`PT<n>H` 与 `P1D`：每个 bar 的 `event_time` 必须落在自 Unix epoch 起的周期整数倍边界。验证允许缺 bar、周末和休市形成的任意整数倍间隔，不要求相邻记录连续；运行时不得用数据哈希正确替代时间语义校验。
+
+`ActionRequirements.max_abs_position` 是成交后总持仓约束，不是 `TargetPosition` 专属字段。适配器在接受或替换直接订单时必须计入现有持仓和待成交订单，并在实际成交前再次验证。单笔数量另由 `max_order_quantity` 约束。
 
 所有对象拒绝未知核心字段。JSON 是线传输/存储格式，YAML 可用于人工编写声明。`schemas/generated/` 中具有稳定 `$id` 的 Schema 是 Contract `1.1.0` 的规范机器表示；历史 `v1.0.0` Release 保持不可变。每份 Schema 明确声明 JSON Schema Draft 2020-12，所有内部 `$ref` 均指向本文档的 `#/$defs`，因此标准验证器无需网络或外部 registry 即可验证实例。
 

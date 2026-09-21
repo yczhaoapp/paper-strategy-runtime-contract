@@ -109,6 +109,26 @@ def test_cli_builds_complete_reproduction_bundle(tmp_path: Path, capsys: object)
             "tests.integration.test_public_interface_coverage",
             "test_catalog_declares_all_strategy_shapes_and_required_time_granularities",
         ),
+        (
+            "tests.negative.test_reference_engine_failures",
+            "test_direct_orders_cannot_accumulate_beyond_position_limit",
+        ),
+        (
+            "tests.negative.test_reference_engine_failures",
+            "test_day_order_expires_before_a_later_utc_session_can_fill",
+        ),
+        (
+            "tests.negative.test_runtime_contract_enforcement",
+            "test_actual_bar_timestamps_must_match_declared_epoch_grid",
+        ),
+        (
+            "tests.e2e.test_cli",
+            "test_invalid_contract_version_uses_structured_persisted_failure",
+        ),
+        (
+            "tests.e2e.test_cli",
+            "test_reused_output_contains_only_the_latest_failed_run",
+        ),
         *(
             (
                 "tests.integration.test_strategy_packages",
@@ -250,3 +270,84 @@ def test_selected_engine_capability_failure_never_substitutes_reference(
     assert failure.error.code == "ENGINE_CAPABILITY_UNSUPPORTED"
     assert failure.engine_capabilities is not None
     assert failure.engine_capabilities.engine_id == "backtrader"
+
+
+def test_invalid_contract_version_uses_structured_persisted_failure(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    packages = tmp_path / "packages"
+    output = tmp_path / "invalid-version"
+    assert main(["package", "export", "--output", str(packages)]) == 0
+    capsys.readouterr()
+    manifest = packages / "rule.sma_cross/strategy.yaml"
+    manifest.write_text(
+        manifest.read_text(encoding="utf-8").replace(
+            "contract_version: 1.1.0", "contract_version: invalid", 1
+        ),
+        encoding="utf-8",
+    )
+
+    assert (
+        main(
+            [
+                "run",
+                "--strategy-dir",
+                str(packages / "rule.sma_cross"),
+                "--output",
+                str(output),
+            ]
+        )
+        == 3
+    )
+    captured = capsys.readouterr()
+    assert captured.err == ""
+    assert json.loads(captured.out)["code"] == "MANIFEST_INVALID"
+    failure = FailureReport.model_validate_json((output / "report.json").read_text())
+    assert failure.error.code == "MANIFEST_INVALID"
+
+
+def test_reused_output_contains_only_the_latest_failed_run(tmp_path: Path) -> None:
+    packages = tmp_path / "packages"
+    output = tmp_path / "reused-output"
+    assert main(["package", "export", "--output", str(packages)]) == 0
+    assert (
+        main(
+            [
+                "run",
+                "--strategy-dir",
+                str(packages / "rule.sma_cross"),
+                "--output",
+                str(output),
+            ]
+        )
+        == 0
+    )
+    assert (output / "bundle.json").is_file()
+
+    assert (
+        main(
+            [
+                "run",
+                "--strategy-dir",
+                str(packages / "rule.l1_microprice"),
+                "--output",
+                str(output),
+                "--engine",
+                "backtrader",
+            ]
+        )
+        == 3
+    )
+    failure = FailureReport.model_validate_json((output / "report.json").read_text())
+    assert failure.error.code == "ENGINE_CAPABILITY_UNSUPPORTED"
+    for stale in (
+        "bundle.json",
+        "execution-plan.json",
+        "decisions.json",
+        "orders.json",
+        "fills.json",
+        "account-snapshots.json",
+        "artifacts.json",
+        "logs.json",
+    ):
+        assert not (output / stale).exists()

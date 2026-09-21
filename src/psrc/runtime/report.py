@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 from datetime import datetime
 from decimal import Decimal
 from html import escape
@@ -286,6 +287,48 @@ def _write_json(path: Path, payload: object) -> None:
         handle.write("\n")
 
 
+_RUN_OUTPUT_FILES = frozenset(
+    {
+        "account-snapshots.json",
+        "artifacts.json",
+        "bundle.json",
+        "dataset-manifest.json",
+        "decisions.json",
+        "effective-events.json",
+        "engine-capabilities.json",
+        "error.json",
+        "execution-plan.json",
+        "external-strategy-admission.json",
+        "fills.json",
+        "input-evidence.json",
+        "logs.json",
+        "orders.json",
+        "paper-document.json",
+        "report.html",
+        "report.json",
+        "run-policy.json",
+        "source-events.json",
+        "strategy-code-evidence.json",
+        "strategy-manifest.json",
+        "training-input-evidence.json",
+        "training-request.json",
+    }
+)
+
+
+def clear_run_output(output: Path) -> None:
+    """Remove only PSRC-owned files before publishing one coherent run result."""
+    for name in _RUN_OUTPUT_FILES:
+        path = output / name
+        if path.is_file() or path.is_symlink():
+            path.unlink()
+    artifact_store = output / "artifact-store"
+    if artifact_store.is_symlink() or artifact_store.is_file():
+        artifact_store.unlink()
+    elif artifact_store.is_dir():
+        shutil.rmtree(artifact_store)
+
+
 def write_run_bundle(report: RunReport, output: Path) -> None:
     output.mkdir(parents=True, exist_ok=True)
     _write_json(output / "report.json", report.model_dump(mode="json"))
@@ -312,6 +355,7 @@ def write_run_bundle(report: RunReport, output: Path) -> None:
 
 
 def write_failure_bundle(report: FailureReport, output: Path) -> None:
+    clear_run_output(output)
     output.mkdir(parents=True, exist_ok=True)
     _write_json(output / "report.json", report.model_dump(mode="json"))
     _write_json(output / "error.json", report.error.model_dump(mode="json"))

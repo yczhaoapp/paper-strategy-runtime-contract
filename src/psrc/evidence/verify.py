@@ -600,6 +600,29 @@ def verify_acceptance(
             "required_unseen_paper_strategy_shapes": 3,
         },
     )
+    required_boundary_tests = {
+        "tests.negative.test_reference_engine_failures::"
+        "test_direct_orders_cannot_accumulate_beyond_position_limit",
+        "tests.negative.test_reference_engine_failures::"
+        "test_day_order_expires_before_a_later_utc_session_can_fill",
+        "tests.negative.test_runtime_contract_enforcement::"
+        "test_actual_bar_timestamps_must_match_declared_epoch_grid",
+        "tests.e2e.test_cli::test_invalid_contract_version_uses_structured_persisted_failure",
+        "tests.e2e.test_cli::test_reused_output_contains_only_the_latest_failed_run",
+    }
+    missing_boundary_tests = sorted(required_boundary_tests - executed_tests)
+    check(
+        "runtime_boundary_contract_enforcement",
+        not missing_boundary_tests,
+        {
+            "required_tests": len(required_boundary_tests),
+            "missing_tests": missing_boundary_tests,
+            "scope": (
+                "cumulative position, day expiry, actual bar grid, invalid version, "
+                "coherent reused output"
+            ),
+        },
+    )
 
     coverage_path = evidence_root / "coverage.json"
     coverage = _json(coverage_path).get("totals", {}) if coverage_path.is_file() else {}

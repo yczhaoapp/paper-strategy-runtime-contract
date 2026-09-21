@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import timedelta
 from decimal import Decimal
 
 import pytest
@@ -193,3 +194,48 @@ def test_ambiguous_multi_stream_input_fails_closed() -> None:
             events=events,
         )
     assert caught.value.error.code == ErrorCode.DATA_STREAM_MISSING
+
+
+def test_actual_bar_timestamps_must_match_declared_epoch_grid() -> None:
+    strategy = SmaCrossStrategy()
+    events = tuple(
+        event.model_copy(
+            update={
+                "event_time": event.event_time + timedelta(seconds=30),
+                "available_time": event.available_time + timedelta(seconds=30),
+                "receive_time": event.receive_time + timedelta(seconds=30),
+            }
+        )
+        for event in minute_bars()
+    )
+    dataset = minute_bar_manifest(events)
+    with pytest.raises(ContractViolation) as caught:
+        validate_dataset_events(
+            run_id="test.bar-alignment",
+            strategy=strategy.manifest,
+            dataset=dataset,
+            events=events,
+        )
+    assert caught.value.error.code == ErrorCode.DATA_TIMEFRAME_MISMATCH
+    assert caught.value.error.details["alignment"] == "epoch"
+    assert caught.value.error.details["gaps_allowed"] is True
+
+
+def test_aligned_missing_bars_are_allowed() -> None:
+    strategy = SmaCrossStrategy()
+    events = tuple(
+        event.model_copy(
+            update={
+                "event_time": event.event_time + timedelta(minutes=index),
+                "available_time": event.available_time + timedelta(minutes=index),
+                "receive_time": event.receive_time + timedelta(minutes=index),
+            }
+        )
+        for index, event in enumerate(minute_bars())
+    )
+    validate_dataset_events(
+        run_id="test.bar-gaps",
+        strategy=strategy.manifest,
+        dataset=minute_bar_manifest(events),
+        events=events,
+    )

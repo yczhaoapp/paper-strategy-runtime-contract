@@ -2,7 +2,7 @@
   "error": null,
   "python": "3.12.14 (main, Aug 31 2026, 23:47:53) [GCC 14.2.0]",
   "scope": "strict_container",
-  "software_version": "2.6.0",
+  "software_version": "2.6.1",
   "status": "passed",
   "steps": [
     {
@@ -51,5 +51,5 @@
     }
   ],
   "strict_requested": true,
-  "verification_input_sha256": "cfedf3f9296ef6f0cb666fc68b8cf7d8940bdca00a8f0ec7cdbf3d2f79d92b22"
+  "verification_input_sha256": "64d23f5f4c1972ec7760c87336951095af20e56b98279691d37c6650d93ed01e"
 }

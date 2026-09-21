@@ -1,11 +1,16 @@
 from __future__ import annotations
 
 import json
+from datetime import UTC, datetime, timedelta
 from decimal import Decimal
 from pathlib import Path
 
 import numpy as np
 
+from psrc.domain.account import AccountSnapshot
+from psrc.domain.actions import Action, NoOp, SubmitOrder, TargetPosition
+from psrc.domain.market import BarPayload, MarketEvent
+from psrc.examples.sma_cross import SmaCrossStrategy
 from psrc.runtime.artifacts import ArtifactStore
 from psrc.strategies.catalog import reinforcement_learning_examples
 from psrc.strategies.common import canonicalize_numeric, stable_float
@@ -14,7 +19,13 @@ from psrc.strategies.reinforcement_learning import (
     linear_actor_critic_update,
     mean_variance_score,
 )
-from psrc.strategies.rule import avellaneda_stoikov_quotes, weighted_microprice
+from psrc.strategies.rule import (
+    DonchianBreakoutStrategy,
+    PairsZScoreStrategy,
+    TwapExecutionStrategy,
+    avellaneda_stoikov_quotes,
+    weighted_microprice,
+)
 from psrc.strategies.supervised import (
     erlang_race_probability,
     fit_binary_logistic,
@@ -39,6 +50,38 @@ def _rl_policy(strategy_id: str, tmp_path: Path) -> dict[str, object]:
     value = json.loads(payload)
     assert isinstance(value, dict)
     return value
+
+
+def _account(timestamp: datetime) -> AccountSnapshot:
+    return AccountSnapshot(
+        timestamp=timestamp,
+        cash=Decimal("100000"),
+        equity=Decimal("100000"),
+        positions=(),
+    )
+
+
+def _bar(symbol: str, close: str, sequence: int, *, minute: int | None = None) -> MarketEvent:
+    timestamp = datetime(2026, 1, 2, tzinfo=UTC) + timedelta(
+        minutes=sequence if minute is None else minute
+    )
+    value = Decimal(close)
+    return MarketEvent(
+        event_id=f"oracle:{symbol}:{sequence}",
+        instrument_id=symbol,
+        event_time=timestamp,
+        available_time=timestamp,
+        receive_time=timestamp,
+        sequence=sequence,
+        source="independent-oracle.v1",
+        payload=BarPayload(
+            open=value,
+            high=value + Decimal("0.5"),
+            low=value - Decimal("0.5"),
+            close=value,
+            volume=Decimal("100"),
+        ),
+    )
 
 
 def test_learned_numbers_have_cross_platform_canonical_precision() -> None:
@@ -69,7 +112,93 @@ def test_avellaneda_stoikov_quotes_reproduce_equations_29_30() -> None:
     assert abs((ask - bid) - expected_spread) < Decimal("1e-14")
 
 
+def test_sma_cross_reproduces_arithmetic_windows_and_position_rule() -> None:
+    strategy = SmaCrossStrategy(short_window=2, long_window=3)
+    strategy.on_start()
+    actions = []
+    for index, close in enumerate(("1", "3", "5")):
+        event = _bar("SYNTH.TEST", close, index)
+        actions.append(strategy.on_event(event, _account(event.available_time)))
+    assert all(isinstance(item[0], NoOp) for item in actions[:2])
+    signal = actions[2][0]
+    assert isinstance(signal, TargetPosition)
+    # short=(3+5)/2=4; long=(1+3+5)/3=3, hence the long target.
+    assert signal.quantity == Decimal("1")
+    equality_event = _bar("SYNTH.TEST", "1", 3)
+    equality = strategy.on_event(equality_event, _account(equality_event.available_time))[0]
+    assert isinstance(equality, TargetPosition)
+    # short=(5+1)/2=3; long=(3+5+1)/3=3, and equality is the non-long state.
+    assert equality.quantity == Decimal("-1")
+
+
+def test_donchian_reproduces_prior_window_extrema_and_breakout_sides() -> None:
+    upper = DonchianBreakoutStrategy(lookback=3)
+    upper.on_start()
+    for index, close in enumerate(("10", "11", "12")):
+        event = _bar("PUBLIC.AAPL", close, index)
+        assert isinstance(upper.on_event(event, _account(event.available_time))[0], NoOp)
+    event = _bar("PUBLIC.AAPL", "13", 3)
+    breakout = upper.on_event(event, _account(event.available_time))[0]
+    assert isinstance(breakout, TargetPosition)
+    assert breakout.quantity == Decimal("2")
+
+    lower = DonchianBreakoutStrategy(lookback=3)
+    lower.on_start()
+    for index, close in enumerate(("10", "9", "8")):
+        event = _bar("PUBLIC.AAPL", close, index)
+        lower.on_event(event, _account(event.available_time))
+    event = _bar("PUBLIC.AAPL", "7", 3)
+    breakdown = lower.on_event(event, _account(event.available_time))[0]
+    assert isinstance(breakdown, TargetPosition)
+    assert breakdown.quantity == Decimal("-2")
+
+
+def test_pairs_reproduces_population_zscore_and_leg_directions() -> None:
+    strategy = PairsZScoreStrategy(lookback=2, threshold=Decimal("1"))
+    strategy.on_start()
+    sequence = 0
+    last_actions: tuple[Action, ...] = ()
+    for left, right in (("10", "10"), ("12", "10"), ("13", "10")):
+        timestamp_minute = sequence // 2
+        for symbol, close in (("PUBLIC.AAPL", left), ("PUBLIC.MSFT", right)):
+            event = _bar(symbol, close, sequence, minute=timestamp_minute)
+            last_actions = strategy.on_event(event, _account(event.available_time))
+            sequence += 1
+    # Prior spreads are 0 and 2: mean=1, population sd=1; current spread=3 gives z=2.
+    assert tuple(
+        (action.instrument_id, action.quantity)
+        for action in last_actions
+        if isinstance(action, TargetPosition)
+    ) == (("PUBLIC.AAPL", Decimal("-1")), ("PUBLIC.MSFT", Decimal("1")))
+
+
+def test_twap_reproduces_fixed_equal_slice_schedule() -> None:
+    strategy = TwapExecutionStrategy(total_quantity=Decimal("8"), slices=4)
+    strategy.on_start()
+    actions = []
+    for sequence in range(5):
+        event = _bar("SYNTH.TWAP", "25", sequence)
+        actions.append(strategy.on_event(event, _account(event.available_time))[0])
+    orders = [action for action in actions if isinstance(action, SubmitOrder)]
+    assert [order.client_order_id for order in orders] == [
+        "twap:1",
+        "twap:2",
+        "twap:3",
+        "twap:4",
+    ]
+    assert [order.quantity for order in orders] == [Decimal("2")] * 4
+    assert isinstance(actions[-1], NoOp)
+
+
 def test_queue_imbalance_logistic_matches_maximum_likelihood_direction() -> None:
+    first_weights, first_intercept = fit_binary_logistic(
+        np.asarray([[-1.0], [1.0]]),
+        np.asarray([-1.0, 1.0]),
+        learning_rate=0.1,
+        epochs=1,
+    )
+    assert np.allclose(first_weights, [0.05])
+    assert first_intercept == 0.0
     x = np.asarray([[-1.0], [-0.5], [-0.2], [0.2], [0.5], [1.0]])
     y = np.asarray([-1.0, -1.0, -1.0, 1.0, 1.0, 1.0])
     weights, intercept = fit_binary_logistic(x, y, learning_rate=0.1, epochs=1000)
@@ -95,6 +224,12 @@ def test_directional_logistic_reproduces_paper_gradient_descent() -> None:
         ]
     )
     y = np.asarray([-1.0, -1.0, 1.0, 1.0])
+    one_step_weights, one_step_intercept = fit_binary_logistic(
+        x, y, learning_rate=0.01, epochs=1
+    )
+    expected_gradient = x.T @ np.asarray([0.5, 0.5, -0.5, -0.5]) / len(x)
+    assert np.allclose(one_step_weights, -0.01 * expected_gradient)
+    assert one_step_intercept == 0.0
     weights, intercept = fit_binary_logistic(x, y, learning_rate=0.01, epochs=1000)
     probabilities = 1 / (1 + np.exp(-(x @ weights + intercept)))
     assert probabilities[:2].max() < 0.5

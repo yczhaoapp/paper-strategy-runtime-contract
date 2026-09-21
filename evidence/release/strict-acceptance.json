@@ -6,7 +6,7 @@
         "errors": 0,
         "failures": 0,
         "skipped": 0,
-        "tests": 186
+        "tests": 197
       },
       "passed": true
     },
@@ -23,7 +23,7 @@
     "code_coverage": {
       "detail": {
         "minimum": 90,
-        "percent_covered": 92.79
+        "percent_covered": 92.94
       },
       "passed": true
     },
@@ -67,6 +67,7 @@
           "supervised": 3
         },
         "algorithm_exact_count": 10,
+        "algorithm_exact_without_independent_oracle": [],
         "bindings": [
           {
             "claim_count": 2,
@@ -154,14 +155,14 @@
             "runtime_behavior": {
               "bundle": "runs/all/reinforcement_learning.risk_averse_contextual_bandit/bundle.json",
               "data_fidelity_observed": "D0_synthetic",
-              "decision_sha256": "2a6cc950890cde9ebc295acb09ce8602076892428d922bfa4d8d5336a04bfd29",
+              "decision_sha256": "6ed11ca6a453fd82d9990ccc7d5b3a105fc3b4674db71540ac420cb8d8d28d1e",
               "metrics": {
                 "decisions": 10,
                 "fills": 8,
                 "orders": 10
               },
               "runtime_fidelity_observed": "R2_independent_strict",
-              "source_data_sha256": "e989804ddac4ac04a762e1cd027844e135664b27dda3d30f23c5fc61fbf9519a",
+              "source_data_sha256": "be7aee95ff610f58ed3821fae4a7b5048671cd959b94101db284d98a859f8471",
               "tests_executed": [
                 "tests/papers/test_reproduction_oracles.py::test_risk_averse_bandit_reproduces_mean_variance_thompson_objective"
               ]
@@ -206,14 +207,14 @@
             "runtime_behavior": {
               "bundle": "runs/all/reinforcement_learning.tabular_q_inventory/bundle.json",
               "data_fidelity_observed": "D0_synthetic",
-              "decision_sha256": "cfed02ca3c2687f602b5b2c56cbf72da7ef7e7bc2eed483a85447d6cd5b1f7f2",
+              "decision_sha256": "18033dede98c61b7b01040e3330ca53f8ed3094f4980de0de5093c1edeba5478",
               "metrics": {
                 "decisions": 10,
                 "fills": 8,
                 "orders": 10
               },
               "runtime_fidelity_observed": "R2_independent_strict",
-              "source_data_sha256": "e989804ddac4ac04a762e1cd027844e135664b27dda3d30f23c5fc61fbf9519a",
+              "source_data_sha256": "be7aee95ff610f58ed3821fae4a7b5048671cd959b94101db284d98a859f8471",
               "tests_executed": [
                 "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.tabular_q_inventory]"
               ]
@@ -241,7 +242,7 @@
               "runtime_fidelity_observed": "R2_independent_strict",
               "source_data_sha256": "05efc4bf60c94b87171c2bbc53908bd65f93fa336f5596964f25ec9dc55cbd82",
               "tests_executed": [
-                "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.donchian_breakout]"
+                "tests/papers/test_reproduction_oracles.py::test_donchian_reproduces_prior_window_extrema_and_breakout_sides"
               ]
             },
             "runtime_verified": true,
@@ -319,7 +320,7 @@
               "runtime_fidelity_observed": "R2_independent_strict",
               "source_data_sha256": "4f65db76b8b3fdde3cae3dcf38fa004eb91a0529b4ee93afe5a12a01ddd628ac",
               "tests_executed": [
-                "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.pairs_zscore]"
+                "tests/papers/test_reproduction_oracles.py::test_pairs_reproduces_population_zscore_and_leg_directions"
               ]
             },
             "runtime_verified": true,
@@ -345,7 +346,7 @@
               "runtime_fidelity_observed": "R2_independent_strict",
               "source_data_sha256": "6993433f37d1cd97bff46b9b1c19bb48c3a62fd0912b9489fca49b07a87bc2a8",
               "tests_executed": [
-                "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.sma_cross]"
+                "tests/papers/test_reproduction_oracles.py::test_sma_cross_reproduces_arithmetic_windows_and_position_rule"
               ]
             },
             "runtime_verified": true,
@@ -371,7 +372,7 @@
               "runtime_fidelity_observed": "R2_independent_strict",
               "source_data_sha256": "83b9884f4b54b381744efb554df89690a61f8f7d2b274a0c0f156b140e795489",
               "tests_executed": [
-                "tests/integration/test_rule_strategy_matrix.py::test_every_rule_strategy_compiles_and_backtests[rule.twap_execution]"
+                "tests/papers/test_reproduction_oracles.py::test_twap_reproduces_fixed_equal_slice_schedule"
               ]
             },
             "runtime_verified": true,
@@ -388,14 +389,14 @@
             "runtime_behavior": {
               "bundle": "runs/all/supervised.cross_sectional_ranker/bundle.json",
               "data_fidelity_observed": "D0_synthetic",
-              "decision_sha256": "1e7d609f6765bc6dbf47e75267dad4b76d8a833dd11298f6923ed2aa0e752eae",
+              "decision_sha256": "e41686b425a8a36c81c82de7d041f3b5b4f670ddad2c47f4bbd4f6cb7c0f7940",
               "metrics": {
                 "decisions": 18,
                 "fills": 12,
                 "orders": 18
               },
               "runtime_fidelity_observed": "R2_independent_strict",
-              "source_data_sha256": "de41149497f346149e804e6eddedd214ea2486f0fede953e499036f4d95985b8",
+              "source_data_sha256": "641ee9d4785784a046b37bf6b0ab84de0b1a743ced84d0e5fa2a45c459ddc569",
               "tests_executed": [
                 "tests/papers/test_reproduction_oracles.py::test_cross_sectional_ranker_reproduces_pooled_ols_and_sort"
               ]
@@ -687,6 +688,14 @@
       },
       "passed": true
     },
+    "runtime_boundary_contract_enforcement": {
+      "detail": {
+        "missing_tests": [],
+        "required_tests": 5,
+        "scope": "cumulative position, day expiry, actual bar grid, invalid version, coherent reused output"
+      },
+      "passed": true
+    },
     "strategy_packages_6x3": {
       "detail": {
         "counts": {
@@ -779,9 +788,9 @@
     }
   },
   "contract_version": "1.1.0",
-  "passed_checks": 18,
+  "passed_checks": 19,
   "status": "passed",
-  "total_checks": 18,
+  "total_checks": 19,
   "verification_scope": "strict_container_verification",
   "verifier_policy": "generated evidence only; matrix narrative is not a result"
 }

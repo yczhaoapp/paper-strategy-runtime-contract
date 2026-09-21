@@ -1,8 +1,17 @@
 from __future__ import annotations
 
+from datetime import UTC, datetime
+
 from psrc.contract.errors import ContractError, ContractViolation, ErrorCode, ErrorStage
 from psrc.contract.hashing import sha256_model
-from psrc.contract.models import DataKind, DatasetManifest, ExecutionPlan, StrategyManifest
+from psrc.contract.models import (
+    DataKind,
+    DatasetManifest,
+    DatasetStream,
+    ExecutionPlan,
+    StrategyManifest,
+    TimeframeMode,
+)
 from psrc.domain.actions import Action, ActionEnvelope, SubmitOrder, TargetPosition
 from psrc.domain.market import BookSnapshotL2Payload, MarketEvent
 from psrc.runtime.strategy import RuntimeStrategy
@@ -40,6 +49,82 @@ _PAYLOAD_FIELDS: dict[DataKind, frozenset[str]] = {
     DataKind.QUOTE_L1: frozenset({"bid_price", "bid_size", "ask_price", "ask_size"}),
     DataKind.BOOK_SNAPSHOT_L2: frozenset({"bids.price", "bids.size", "asks.price", "asks.size"}),
 }
+
+
+def _duration_seconds(value: str | None) -> int | None:
+    if value == "P1D":
+        return 86400
+    units = {"S": 1, "M": 60, "H": 3600}
+    if value and value.startswith("PT") and value[-1] in units:
+        try:
+            quantity = int(value[2:-1])
+        except ValueError:
+            return None
+        return quantity * units[value[-1]] if quantity > 0 else None
+    return None
+
+
+def _validate_bar_timeframe(
+    *,
+    run_id: str,
+    strategy_id: str,
+    stream: DatasetStream,
+    events: tuple[MarketEvent, ...],
+) -> None:
+    """Validate real bar close timestamps against the declared absolute grid.
+
+    Gaps are valid: a market holiday or missing bar still lands on a later integer
+    multiple of the interval. Only the currently specified UTC/epoch grid is
+    executable; another declaration must not be accepted with guessed semantics.
+    """
+    timeframe = stream.timeframe
+    if timeframe.mode != TimeframeMode.BAR:
+        return
+    seconds = _duration_seconds(timeframe.interval)
+    if timeframe.timezone != "UTC" or timeframe.alignment != "epoch" or seconds is None:
+        raise _input_error(
+            run_id=run_id,
+            strategy_id=strategy_id,
+            code=ErrorCode.DATA_TIMEFRAME_MISMATCH,
+            message="Bar timeframe uses an unsupported timestamp grid",
+            details={
+                "stream_id": stream.stream_id,
+                "timeframe": timeframe.model_dump(mode="json"),
+                "supported_timezone": "UTC",
+                "supported_alignment": "epoch",
+                "fallback_used": False,
+            },
+        )
+    epoch = datetime(1970, 1, 1, tzinfo=UTC)
+    invalid: list[dict[str, object]] = []
+    for event in events:
+        timestamp = event.event_time.astimezone(UTC)
+        elapsed = timestamp - epoch
+        whole_seconds = elapsed.days * 86400 + elapsed.seconds
+        if elapsed.microseconds or whole_seconds % seconds:
+            invalid.append(
+                {
+                    "event_id": event.event_id,
+                    "event_time": event.event_time.isoformat(),
+                }
+            )
+            if len(invalid) == 5:
+                break
+    if invalid:
+        raise _input_error(
+            run_id=run_id,
+            strategy_id=strategy_id,
+            code=ErrorCode.DATA_TIMEFRAME_MISMATCH,
+            message="Actual bar event_time is not aligned to the declared timeframe",
+            details={
+                "stream_id": stream.stream_id,
+                "interval": timeframe.interval,
+                "timezone": timeframe.timezone,
+                "alignment": timeframe.alignment,
+                "first_invalid_events": invalid,
+                "gaps_allowed": True,
+            },
+        )
 
 
 def _input_error(
@@ -121,6 +206,12 @@ def validate_dataset_events(
                 "actual": sorted(actual_symbols),
             },
         )
+    _validate_bar_timeframe(
+        run_id=run_id,
+        strategy_id=strategy.strategy_id,
+        stream=stream,
+        events=events,
+    )
     available_fields = _PAYLOAD_FIELDS.get(stream.kind)
     if available_fields is None or not stream.fields <= available_fields:
         raise _input_error(
@@ -205,6 +296,12 @@ def validate_plan_events(plan: ExecutionPlan, events: tuple[MarketEvent, ...]) -
             message="Runtime symbols differ from the compiled dataset stream",
             details={"declared": sorted(stream.symbols), "actual": sorted(actual_symbols)},
         )
+    _validate_bar_timeframe(
+        run_id=plan.run_id,
+        strategy_id=plan.strategy_id,
+        stream=stream,
+        events=events,
+    )
     actual_hash = sha256_model({"events": [event.model_dump(mode="json") for event in events]})
     if actual_hash != stream.data_sha256:
         raise _input_error(

@@ -77,7 +77,7 @@ def minute_bar_manifest(events: tuple[MarketEvent, ...]) -> DatasetManifest:
 
 def daily_bars() -> tuple[MarketEvent, ...]:
     closes = ("100", "101", "100", "102", "101", "106", "108", "104", "98", "94")
-    start = datetime(2026, 1, 2, 16, 0, tzinfo=UTC)
+    start = datetime(2026, 1, 2, 0, 0, tzinfo=UTC)
     return _bar_series(
         symbol="SYNTH.DAILY",
         closes=closes,
@@ -90,7 +90,7 @@ def daily_bars() -> tuple[MarketEvent, ...]:
 def pair_daily_bars() -> tuple[MarketEvent, ...]:
     left = ("100", "101", "102", "101", "100", "101", "108", "105", "99", "96")
     right = ("50", "50.5", "51", "50.5", "50", "50.5", "50", "51", "52", "53")
-    start = datetime(2026, 1, 2, 16, 0, tzinfo=UTC)
+    start = datetime(2026, 1, 2, 0, 0, tzinfo=UTC)
     events: list[MarketEvent] = []
     previous = {"SYNTH.PAIR-A": Decimal(left[0]), "SYNTH.PAIR-B": Decimal(right[0])}
     sequence = 0
@@ -131,7 +131,7 @@ def cross_sectional_daily_bars() -> tuple[MarketEvent, ...]:
         "SYNTH.XS-B": ("80", "79", "81", "80", "78", "77"),
         "SYNTH.XS-C": ("60", "61", "60", "62", "63", "62"),
     }
-    start = datetime(2026, 1, 2, 16, 0, tzinfo=UTC)
+    start = datetime(2026, 1, 2, 0, 0, tzinfo=UTC)
     previous = {symbol: Decimal(values[0]) for symbol, values in series.items()}
     events: list[MarketEvent] = []
     sequence = 0

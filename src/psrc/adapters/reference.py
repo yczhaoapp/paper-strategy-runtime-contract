@@ -49,8 +49,8 @@ def capabilities(*, strict_container: bool = False) -> EngineCapabilities:
         sandbox_modes.add(SandboxMode.STRICT_CONTAINER)
     return EngineCapabilities(
         engine_id="reference",
-        engine_version="0.2.0",
-        adapter_version="0.2.0",
+        engine_version="0.3.0",
+        adapter_version="0.3.0",
         support_level=SupportLevel.CONFORMANCE_VERIFIED,
         profiles=frozenset(
             {
@@ -96,7 +96,16 @@ def capabilities(*, strict_container: bool = False) -> EngineCapabilities:
             latency_model="next-event.v1",
         ),
         sandbox_modes=frozenset(sandbox_modes),
-        extensions={"org.psrc.reference": {"supported_time_in_force": ["day"]}},
+        extensions={
+            "org.psrc.reference": {
+                "supported_time_in_force": ["day"],
+                "day_session": {
+                    "calendar": "24/7",
+                    "timezone": "UTC",
+                    "expires_before_first_event_on_next_utc_date": True,
+                },
+            }
+        },
     )
 
 
@@ -110,6 +119,7 @@ class _PendingOrder:
     quantity: Decimal | None = None
     target_quantity: Decimal | None = None
     limit_price: Decimal | None = None
+    time_in_force: Literal["day"] | None = None
     status: Literal["accepted", "replaced", "partially_filled"] = "accepted"
 
 
@@ -141,6 +151,7 @@ class ReferenceEngine:
     ) -> RunReport:
         started_at = datetime.now(UTC)
         validate_events(plan, events)
+        self._validate_direct_order_session(plan, strategy)
         universe = frozenset(event.instrument_id for event in events)
 
         cash = self.initial_cash
@@ -160,6 +171,8 @@ class ReferenceEngine:
         for event_index, event in enumerate(events):
             marks[event.instrument_id] = self._mark(event)
             pending, cash = self._settle_pending(
+                plan=plan,
+                strategy=strategy,
                 event=event,
                 pending=pending,
                 cash=cash,
@@ -201,7 +214,15 @@ class ReferenceEngine:
                     pending = self._cancel(plan, event, action, pending, order_events)
                     continue
                 if isinstance(action, ReplaceOrder):
-                    pending = self._replace(plan, strategy, event, action, pending, order_events)
+                    pending = self._replace(
+                        plan,
+                        strategy,
+                        event,
+                        action,
+                        pending,
+                        quantities,
+                        order_events,
+                    )
                     continue
 
                 instrument_id = action.instrument_id
@@ -283,6 +304,7 @@ class ReferenceEngine:
                         side=action.side,
                         quantity=action.quantity,
                         limit_price=action.limit_price,
+                        time_in_force="day",
                     )
                 else:
                     self._fail_action(
@@ -290,6 +312,13 @@ class ReferenceEngine:
                         "Action variant is not implemented by the reference engine",
                         {"action": action.model_dump(mode="json")},
                     )
+                self._validate_projected_position(
+                    plan=plan,
+                    strategy=strategy,
+                    pending=[*pending, order],
+                    quantities=quantities,
+                    instrument_id=order.instrument_id,
+                )
                 pending.append(order)
                 order_events.append(
                     OrderEventRecord(
@@ -341,6 +370,7 @@ class ReferenceEngine:
                 "Decisions become eligible on the next event for their instrument.",
                 "The reference engine uses full fills only and has no queue-position model.",
                 "Resting limit orders fill only when the next event proves their price condition.",
+                "Direct day orders expire before matching on the first event of a later UTC date.",
                 f"fee_rate={self.fee_rate}; market_slippage_bps={self.slippage_bps}",
             ),
             logs=(
@@ -365,6 +395,8 @@ class ReferenceEngine:
     def _settle_pending(
         self,
         *,
+        plan: ExecutionPlan,
+        strategy: RuntimeStrategy,
         event: MarketEvent,
         pending: list[_PendingOrder],
         cash: Decimal,
@@ -376,6 +408,18 @@ class ReferenceEngine:
     ) -> tuple[list[_PendingOrder], Decimal]:
         remaining: list[_PendingOrder] = []
         for order in pending:
+            if self._day_order_expired(order, event.available_time):
+                order_events.append(
+                    OrderEventRecord(
+                        sequence=len(order_events),
+                        client_order_id=order.client_order_id,
+                        instrument_id=order.instrument_id,
+                        event_time=event.available_time,
+                        status="expired",
+                        details={"reason": "day_session_end"},
+                    )
+                )
+                continue
             if order.instrument_id != event.instrument_id:
                 remaining.append(order)
                 continue
@@ -400,8 +444,23 @@ class ReferenceEngine:
                 self._apply_slippage(raw_price, side) if order.order_type != "limit" else raw_price
             )
             fee = quantity * price * self.fee_rate
-            cash += (-quantity * price if side == "buy" else quantity * price) - fee
             delta = quantity if side == "buy" else -quantity
+            maximum = strategy.manifest.action_requirements.max_abs_position
+            resulting = quantities.get(order.instrument_id, Decimal("0")) + delta
+            if maximum is not None and abs(resulting) > maximum:
+                self._fail_action(
+                    plan,
+                    "Order fill would exceed the manifest position limit",
+                    {
+                        "client_order_id": order.client_order_id,
+                        "current": str(quantities.get(order.instrument_id, Decimal("0"))),
+                        "delta": str(delta),
+                        "resulting": str(resulting),
+                        "maximum": str(maximum),
+                    },
+                    code=ErrorCode.ORDER_REJECTED,
+                )
+            cash += (-quantity * price if side == "buy" else quantity * price) - fee
             self._update_position(
                 instrument_id=order.instrument_id,
                 delta=delta,
@@ -539,6 +598,7 @@ class ReferenceEngine:
         event: MarketEvent,
         action: ReplaceOrder,
         pending: list[_PendingOrder],
+        quantities: dict[str, Decimal],
         order_events: list[OrderEventRecord],
     ) -> list[_PendingOrder]:
         matched = next(
@@ -572,6 +632,17 @@ class ReferenceEngine:
                 },
                 code=ErrorCode.ORDER_REJECTED,
             )
+        updated_pending = [
+            updated if order.client_order_id == action.client_order_id else order
+            for order in pending
+        ]
+        ReferenceEngine._validate_projected_position(
+            plan=plan,
+            strategy=strategy,
+            pending=updated_pending,
+            quantities=quantities,
+            instrument_id=updated.instrument_id,
+        )
         order_events.append(
             OrderEventRecord(
                 sequence=len(order_events),
@@ -582,10 +653,94 @@ class ReferenceEngine:
                 details={"reason_code": action.reason_code},
             )
         )
-        return [
-            updated if order.client_order_id == action.client_order_id else order
-            for order in pending
+        return updated_pending
+
+    @staticmethod
+    def _validate_direct_order_session(
+        plan: ExecutionPlan, strategy: RuntimeStrategy
+    ) -> None:
+        if ActionKind.SUBMIT_ORDER not in strategy.manifest.action_requirements.allowed:
+            return
+        unsupported = [
+            stream.stream_id
+            for stream in plan.dataset_streams
+            if stream.timeframe.timezone != "UTC" or stream.timeframe.calendar != "24/7"
         ]
+        if unsupported:
+            raise ContractViolation(
+                ContractError(
+                    run_id=plan.run_id,
+                    stage=ErrorStage.CAPABILITY_NEGOTIATION,
+                    code=ErrorCode.ENGINE_CAPABILITY_UNSUPPORTED,
+                    message="Reference day orders require the UTC 24/7 session model",
+                    strategy_id=plan.strategy_id,
+                    engine_id=plan.engine_id,
+                    details={
+                        "unsupported_streams": unsupported,
+                        "supported_calendar": "24/7",
+                        "supported_timezone": "UTC",
+                        "fallback_used": False,
+                    },
+                )
+            )
+
+    @staticmethod
+    def _day_order_expired(order: _PendingOrder, current_time: datetime) -> bool:
+        return bool(
+            order.time_in_force == "day"
+            and current_time.astimezone(UTC).date()
+            > order.submitted_at.astimezone(UTC).date()
+        )
+
+    @staticmethod
+    def _validate_projected_position(
+        *,
+        plan: ExecutionPlan,
+        strategy: RuntimeStrategy,
+        pending: list[_PendingOrder],
+        quantities: dict[str, Decimal],
+        instrument_id: str,
+    ) -> None:
+        maximum = strategy.manifest.action_requirements.max_abs_position
+        if maximum is None:
+            return
+        current = quantities.get(instrument_id, Decimal("0"))
+        minimum_projected = current
+        maximum_projected = current
+        for order in pending:
+            if order.instrument_id != instrument_id:
+                continue
+            if order.order_type == "target":
+                assert order.target_quantity is not None
+                minimum_projected = min(minimum_projected, order.target_quantity)
+                maximum_projected = max(maximum_projected, order.target_quantity)
+            else:
+                assert order.side is not None and order.quantity is not None
+                delta = order.quantity if order.side == "buy" else -order.quantity
+                minimum_projected = min(minimum_projected, minimum_projected + delta)
+                maximum_projected = max(maximum_projected, maximum_projected + delta)
+            if minimum_projected < -maximum or maximum_projected > maximum:
+                breached = (
+                    maximum_projected if maximum_projected > maximum else minimum_projected
+                )
+                ReferenceEngine._fail_action(
+                    plan,
+                    "Accepted and pending orders could exceed the manifest position limit",
+                    {
+                        "client_order_id": order.client_order_id,
+                        "instrument_id": instrument_id,
+                        "projected": str(breached),
+                        "projected_minimum": str(minimum_projected),
+                        "projected_maximum": str(maximum_projected),
+                        "maximum": str(maximum),
+                        "pending_order_ids": [
+                            item.client_order_id
+                            for item in pending
+                            if item.instrument_id == instrument_id
+                        ],
+                    },
+                    code=ErrorCode.ORDER_REJECTED,
+                )
 
     @staticmethod
     def _validate_target(

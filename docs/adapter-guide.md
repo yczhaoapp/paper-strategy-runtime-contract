@@ -23,7 +23,7 @@ psrc run --strategy-dir <package> --engine backtrader --output <report-directory
 
 引擎解析是显式的；依赖缺失返回 `ENGINE_DEPENDENCY_MISSING`，能力不足返回 `ENGINE_CAPABILITY_UNSUPPORTED`，两者都不会回退到 Reference。
 
-动作 Schema 表达跨引擎的规范并集，不代表每个引擎实现每一种订单语义。Reference 当前只接受 `day` 有效期；`gtc`、`ioc` 和 `fok` 会以 `ORDER_REJECTED` 明确失败，不能退化为长期挂单。
+动作 Schema 表达跨引擎的规范并集，不代表每个引擎实现每一种订单语义。Reference 当前只接受 UTC/24×7 会话的 `day` 有效期，订单在下一 UTC 日期的第一条事件撮合前过期；`gtc`、`ioc` 和 `fok` 会以 `ORDER_REJECTED` 明确失败，其他日历/时区以能力不支持失败，不能退化为长期挂单。`max_abs_position` 对目标仓位和直接订单都表示成交后的总仓位上限；实现必须在接单、改单和成交前计入待成交敞口。
 
 ## 新增适配器的必要步骤
 
