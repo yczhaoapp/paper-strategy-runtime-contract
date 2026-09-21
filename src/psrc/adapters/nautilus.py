@@ -90,8 +90,22 @@ class NautilusAdapter:
     _instrument_id = InstrumentId.from_str("SYNTH-TEST.SIM")
     _bar_type = BarType.from_str("SYNTH-TEST.SIM-1-MINUTE-LAST-EXTERNAL")
 
-    def __init__(self, *, initial_cash: Decimal = Decimal("100000")) -> None:
+    def __init__(
+        self,
+        *,
+        initial_cash: Decimal = Decimal("100000"),
+        declared_capabilities: EngineCapabilities | None = None,
+    ) -> None:
         self.initial_cash = initial_cash
+        self._capabilities = declared_capabilities or capabilities()
+        if self._capabilities.engine_id != "nautilus-trader":
+            raise ValueError(
+                "NautilusAdapter capabilities must declare engine_id='nautilus-trader'"
+            )
+
+    @property
+    def capabilities(self) -> EngineCapabilities:
+        return self._capabilities
 
     def run(
         self,

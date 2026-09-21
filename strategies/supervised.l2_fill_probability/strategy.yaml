@@ -1,4 +1,4 @@
-contract_version: 1.1.0
+contract_version: 1.2.0
 strategy_id: supervised.l2_fill_probability
 strategy_version: 1.0.0
 kind: supervised

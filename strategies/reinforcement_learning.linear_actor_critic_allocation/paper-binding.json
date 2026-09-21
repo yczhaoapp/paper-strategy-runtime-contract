@@ -1,5 +1,5 @@
 {
-  "algorithm_fidelity": "A2_algorithm_exact",
+  "algorithm_fidelity": "A1_method_equivalent",
   "assumptions": [
     "The third state component is a portfolio weight in both training and inference; public AAPL daily bars supply causal price states, with the first 400 bars reserved for offline training."
   ],
@@ -14,7 +14,7 @@
       "claim_id": "actorcritic.bounded_weight",
       "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
       "symbol": "LinearActorCriticAllocationStrategy",
-      "verification_test": "tests/papers/test_reproduction_oracles.py::test_continuous_actor_critic_reproduces_policy_and_value_updates"
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_continuous_actor_critic_inference_applies_tanh_and_weight_bound"
     }
   ],
   "claims": [
@@ -40,7 +40,7 @@
   ],
   "empirical_results_reproduced": false,
   "experimental_fidelity": "E0_runtime_only",
-  "fidelity": "algorithm_reproduction",
+  "fidelity": "method_reproduction",
   "implementation": [
     {
       "path": "src/psrc/strategies/reinforcement_learning.py",
@@ -58,7 +58,7 @@
       ]
     }
   ],
-  "mapping_review": "The unrelated pair-trading citation was replaced. The actor now follows a continuous-policy score-function update, the critic uses a TD advantage, and inference applies the paper’s tanh weight bound.",
+  "mapping_review": "The implementation preserves the paper’s actor–critic objective and bounded continuous action rule, while the disclosed linear single-asset state and deterministic offline exploration make it an A1 method-equivalent reproduction rather than an exact reproduction of the multi-asset neural experiment.",
   "original_paper_dataset": false,
   "runtime_expectation": {
     "artifact_algorithm": "linear-actor-critic-v1",
@@ -86,7 +86,8 @@
   "strategy_id": "reinforcement_learning.linear_actor_critic_allocation",
   "strategy_kind": "reinforcement_learning",
   "verification_tests": [
-    "tests/papers/test_reproduction_oracles.py::test_continuous_actor_critic_reproduces_policy_and_value_updates"
+    "tests/papers/test_reproduction_oracles.py::test_continuous_actor_critic_reproduces_policy_and_value_updates",
+    "tests/papers/test_reproduction_oracles.py::test_continuous_actor_critic_inference_applies_tanh_and_weight_bound"
   ],
   "version": "1.1"
 }

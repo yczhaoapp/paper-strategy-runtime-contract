@@ -16,5 +16,5 @@
 ## 论文依据
 
 - 来源 ID：`li2023`
-- 忠实度：`algorithm_reproduction`
+- 忠实度：`method_reproduction`
 - 机器证据：`paper-binding.json`；包含页级声明、实现哈希、假设与偏差。

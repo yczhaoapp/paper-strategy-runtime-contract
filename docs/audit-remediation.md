@@ -16,6 +16,9 @@
 | 实际 bar 未核对声明时间网格 | 声明比较不能证明输入时间语义 | 对实际 `event_time` 执行 UTC/epoch 周期边界校验，同时允许缺 bar |
 | 无效版本和复用输出目录形成非统一失败 | 结构化错误与产物一致性缺口 | SemVer Schema + 编译兜底；失败发布清除旧成功 Bundle 与运行产物 |
 | 部分 A2 claim 仅连接运行成功测试 | 不满足项目自定的独立 oracle 标准 | 为 SMA、Donchian、Pairs、TWAP 增加手算/边界 oracle，并在绑定模型中强制 A2 指向独立复现测试 |
+| ExecutionPlan 未绑定实际策略、Adapter 和沙箱 | 可形成归因错误或虚假严格模式的成功报告，属于公开运行契约缺陷 | 计划固定数据要求与最低沙箱；Adapter 暴露能力；orchestrator、RunReport 和 RunBundle 分层核对实际上下文 |
+| lookback 与 max_staleness_ns 只声明未执行 | 文档强于实现，会让不满足数据要求的新策略错误通过 | 编译期检查 lookback 必要条件，转换后按标的执行；陈旧度固定为 available time 减 event time 并结构化失败 |
+| 三个 A2 claim 的 oracle 未覆盖全部语义 | 不影响官方数量门槛，但不满足项目自身逐 claim 证据标准 | 增加 OHLCV 特征顺序、队列不平衡和推理边界 oracle；线性 Actor–Critic 因实质偏差降为 A1 |
 | 普通 `psrc run` 失败只输出 stdout | 不利于机器审计 | 所有普通运行失败写出 `FailureReport`、错误 JSON 和 HTML，尽可能保留已取得的上下文 |
 | 没有固定提交和目标平台证据 | 属于交付闭环缺口 | 本轮建立本地不可变提交；远端仓库建立后由 CI 生成 Linux、Windows、macOS 和严格容器证据 |
 
@@ -26,6 +29,7 @@
 - 不把 E0 提升为论文收益复现。题目要求最小回测，并未要求复现收益表或统计显著性。
 - 不增加“任意论文自动生成代码”、生产实盘、D2/D3 或 E1/E2 范围。
 - 不把 15 个来源、A2 数量和每类 D1 配额描述成官方 S 级要求。它们只作为项目增强结果披露。
+- 不移除已隔离为可选 extra 且如实标注为未动态认证的 Nautilus Adapter；它不参与默认通过数量，保留它不削弱核心证据。
 
 ## 证据口径
 

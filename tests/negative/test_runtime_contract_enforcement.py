@@ -9,13 +9,21 @@ from psrc.adapters.reference import ReferenceEngine, capabilities
 from psrc.contract.compiler import compile_run
 from psrc.contract.errors import ContractViolation, ErrorCode
 from psrc.contract.hashing import sha256_model
-from psrc.contract.models import ActionKind, ActionRequirements, RunPolicy, SandboxMode
+from psrc.contract.models import (
+    ActionKind,
+    ActionRequirements,
+    EngineCapabilities,
+    ExecutionPlan,
+    RunPolicy,
+    SandboxMode,
+)
 from psrc.domain.account import AccountSnapshot
 from psrc.domain.actions import Action, NoOp, ReplaceOrder, SubmitOrder, TargetPosition
 from psrc.domain.market import MarketEvent, QuoteL1Payload
 from psrc.examples.sma_cross import SmaCrossStrategy
 from psrc.examples.synthetic import minute_bar_manifest, minute_bars
 from psrc.runtime.guards import validate_dataset_events
+from psrc.runtime.orchestrator import run_rule
 
 
 def _run(strategy: SmaCrossStrategy) -> None:
@@ -33,6 +41,126 @@ def _run(strategy: SmaCrossStrategy) -> None:
         events=events,
         sandbox_mode=SandboxMode.DEVELOPMENT,
     )
+
+
+def _plan_for(
+    strategy: SmaCrossStrategy, events: tuple[MarketEvent, ...]
+) -> tuple[ExecutionPlan, EngineCapabilities]:
+    declared = capabilities()
+    return (
+        compile_run(
+            run_id="test.execution-context",
+            strategy=strategy.manifest,
+            dataset=minute_bar_manifest(events),
+            engine=declared,
+            policy=RunPolicy(required_sandbox=SandboxMode.DEVELOPMENT),
+        ),
+        declared,
+    )
+
+
+def test_orchestrator_rejects_strategy_identity_mismatch() -> None:
+    events = minute_bars()
+    planned = SmaCrossStrategy()
+    plan, declared = _plan_for(planned, events)
+
+    class DifferentIdentity(SmaCrossStrategy):
+        manifest = SmaCrossStrategy.manifest.model_copy(
+            update={"strategy_id": "rule.other-identity"}
+        )
+
+    with pytest.raises(ContractViolation) as caught:
+        run_rule(
+            plan=plan,
+            strategy=DifferentIdentity(),
+            events=events,
+            engine=ReferenceEngine(declared_capabilities=declared),
+            sandbox_mode=SandboxMode.DEVELOPMENT,
+        )
+    assert caught.value.error.code == ErrorCode.EXECUTION_CONTEXT_MISMATCH
+    assert "strategy_id" in caught.value.error.details["mismatches"]
+
+
+def test_orchestrator_rejects_engine_capability_mismatch() -> None:
+    events = minute_bars()
+    strategy = SmaCrossStrategy()
+    plan, _ = _plan_for(strategy, events)
+    different = capabilities().model_copy(update={"adapter_version": "999.0.0"})
+    with pytest.raises(ContractViolation) as caught:
+        run_rule(
+            plan=plan,
+            strategy=strategy,
+            events=events,
+            engine=ReferenceEngine(declared_capabilities=different),
+            sandbox_mode=SandboxMode.DEVELOPMENT,
+        )
+    assert caught.value.error.code == ErrorCode.EXECUTION_CONTEXT_MISMATCH
+    assert "engine_capabilities_sha256" in caught.value.error.details["mismatches"]
+
+
+def test_orchestrator_rejects_sandbox_downgrade() -> None:
+    events = minute_bars()
+    strategy = SmaCrossStrategy()
+    declared = capabilities(strict_container=True)
+    plan = compile_run(
+        run_id="test.sandbox-context",
+        strategy=strategy.manifest,
+        dataset=minute_bar_manifest(events),
+        engine=declared,
+        policy=RunPolicy(required_sandbox=SandboxMode.STRICT_CONTAINER),
+    )
+    with pytest.raises(ContractViolation) as caught:
+        run_rule(
+            plan=plan,
+            strategy=strategy,
+            events=events,
+            engine=ReferenceEngine(declared_capabilities=declared),
+            sandbox_mode=SandboxMode.DEVELOPMENT,
+        )
+    assert caught.value.error.code == ErrorCode.EXECUTION_CONTEXT_MISMATCH
+    assert caught.value.error.details["mismatches"]["sandbox_mode"] == {
+        "required": "strict_container",
+        "actual": "development",
+    }
+
+
+def test_orchestrator_enforces_actual_event_staleness() -> None:
+    source = minute_bars()
+    events = tuple(
+        event.model_copy(
+            update={
+                "available_time": event.available_time + timedelta(seconds=1),
+                "receive_time": event.receive_time + timedelta(seconds=1),
+            }
+        )
+        for event in source
+    )
+    strategy = SmaCrossStrategy()
+    requirement = strategy.manifest.data_requirements[0].model_copy(
+        update={"max_staleness_ns": 0}
+    )
+    strategy.manifest = strategy.manifest.model_copy(
+        update={"data_requirements": (requirement,)}
+    )
+    dataset = minute_bar_manifest(events)
+    declared = capabilities()
+    plan = compile_run(
+        run_id="test.event-staleness",
+        strategy=strategy.manifest,
+        dataset=dataset,
+        engine=declared,
+        policy=RunPolicy(required_sandbox=SandboxMode.DEVELOPMENT),
+    )
+    with pytest.raises(ContractViolation) as caught:
+        run_rule(
+            plan=plan,
+            strategy=strategy,
+            events=events,
+            engine=ReferenceEngine(declared_capabilities=declared),
+            sandbox_mode=SandboxMode.DEVELOPMENT,
+        )
+    assert caught.value.error.code == ErrorCode.DATA_STALENESS_EXCEEDED
+    assert caught.value.error.details["first_invalid_events"][0]["actual_staleness_ns"] == 10**9
 
 
 def test_reference_rejects_action_not_declared_by_strategy() -> None:

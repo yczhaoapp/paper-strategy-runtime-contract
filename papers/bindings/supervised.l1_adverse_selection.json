@@ -38,6 +38,7 @@
     }
   ],
   "verification_tests": [
+    "tests/papers/test_reproduction_oracles.py::test_l1_adverse_selection_uses_normalized_queue_imbalance",
     "tests/papers/test_reproduction_oracles.py::test_queue_imbalance_logistic_matches_maximum_likelihood_direction"
   ],
   "claim_links": [
@@ -45,7 +46,7 @@
       "claim_id": "adverse.imbalance",
       "implementation_path": "src/psrc/strategies/supervised.py",
       "symbol": "L1AdverseSelectionStrategy",
-      "verification_test": "tests/papers/test_reproduction_oracles.py::test_queue_imbalance_logistic_matches_maximum_likelihood_direction"
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_l1_adverse_selection_uses_normalized_queue_imbalance"
     },
     {
       "claim_id": "adverse.logistic_mle",

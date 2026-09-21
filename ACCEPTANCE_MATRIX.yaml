@@ -1,5 +1,5 @@
 challenge: SX-CH-003
-contract_version: "1.1.0"
+contract_version: "1.2.0"
 policy:
   no_silent_fallback: true
   strict_compatibility_default: true

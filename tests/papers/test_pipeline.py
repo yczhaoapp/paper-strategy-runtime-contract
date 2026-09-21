@@ -72,11 +72,7 @@ def test_all_eighteen_contract_strategies_have_grounded_paper_bindings() -> None
     }
     assert report["experimental_fidelity_counts"] == {"E0_runtime_only": 18}
     assert "method_adaptation" not in report["fidelity_counts"]
-    assert set(report["algorithm_exact_by_kind"]) == {
-        "rule",
-        "supervised",
-        "reinforcement_learning",
-    }
+    assert report["algorithm_exact_by_kind"] == {"rule": 6, "supervised": 3}
     assert len(read_bindings(ROOT / "papers/bindings")) == 18
 
 

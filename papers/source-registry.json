@@ -24,18 +24,6 @@
     },
     {
       "version": "1.0",
-      "source_id": "deeplob2018",
-      "title": "DeepLOB: Deep Convolutional Neural Networks for Limit Order Books",
-      "authors": [
-        "Zihao Zhang",
-        "Stefan Zohren",
-        "Stephen Roberts"
-      ],
-      "source_url": "https://arxiv.org/pdf/1808.03668",
-      "source_sha256": "f50d57a80644ac427433824b540c9bc713ffd2249c2042ba975d986078295913"
-    },
-    {
-      "version": "1.0",
       "source_id": "gould2015",
       "title": "Queue Imbalance as a One-Tick-Ahead Price Predictor in a Limit Order Book",
       "authors": [

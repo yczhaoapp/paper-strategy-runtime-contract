@@ -1,10 +1,10 @@
-# Paper Strategy Runtime Contract 2.6.1
+# Paper Strategy Runtime Contract 2.6.2
 
-Paper Strategy Runtime Contract（PSRC）是面向 [SX-CH-003](https://github.com/SingularityX-Evolution/.github/blob/main/profile/challenge-board/tasks/SX-CH-003-paper-strategy-runtime-contract.md) 的独立维护实现，用统一契约连接论文策略、训练、推理和最小回测。软件版本 2.6.1；稳定运行契约与论文绑定契约均为 1.1。
+Paper Strategy Runtime Contract（PSRC）是面向 [SX-CH-003](https://github.com/SingularityX-Evolution/.github/blob/main/profile/challenge-board/tasks/SX-CH-003-paper-strategy-runtime-contract.md) 的独立维护实现，用统一契约连接论文策略、训练、推理和最小回测。软件版本 2.6.2；稳定运行契约为 1.2，论文绑定契约为 1.1。
 
 **交付范围：18 个逐一论文落地的契约策略（三类各 6 个）+ 4 个 PDF 到代码的深度纵向案例、31 份 JSON Schema、统一训练/保存/重载/推理/回测、结构化失败、可关闭的兼容转换、沙箱和机器验收。** 每个契约策略都带来源 PDF 哈希、页级声明、声明到实现符号和已执行测试的连接、实现文件哈希、确定性运行行为签名、假设与偏差；第四个深度案例直接运行于 Backtrader。
 
-18 个策略全部达到复现门槛：6 个公式复现、4 个算法复现、8 个等价方法复现；其中 10 个达到 A2 算法精确级，规则/监督/RL 分别为 6/3/1 个。算法、数据、实验结果和运行时采用四个独立保真轴。Donchian、Pairs Z-Score、Logistic、Ridge、A2C Pairs 和线性 Actor–Critic 共 6 个策略使用固定哈希的公开 AAPL 或 AAPL/MSFT 历史数据达到 D1，三类各 2 个；其余 12 个保留 D0 确定性夹具。全部维持 E0，不宣称论文收益；严格 Linux 容器的 R2 必须由当前版本动态收据证明。详见 [复现等级政策](docs/reproduction-fidelity-policy.md)。
+18 个策略全部达到复现门槛：6 个公式复现、3 个算法复现、9 个等价方法复现；其中 9 个达到 A2 算法精确级，规则/监督/RL 分别为 6/3/0 个。算法、数据、实验结果和运行时采用四个独立保真轴。Donchian、Pairs Z-Score、Logistic、Ridge、A2C Pairs 和线性 Actor–Critic 共 6 个策略使用固定哈希的公开 AAPL 或 AAPL/MSFT 历史数据达到 D1，三类各 2 个；其余 12 个保留 D0 确定性夹具。全部维持 E0，不宣称论文收益；严格 Linux 容器的 R2 必须由当前版本动态收据证明。详见 [复现等级政策](docs/reproduction-fidelity-policy.md)。
 
 ## 一键复现
 

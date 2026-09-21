@@ -1,3 +1,11 @@
+# 2.6.2 — 2026-09-22
+
+- Runtime Contract 升级到 1.2：`ExecutionPlan` 固定策略数据要求和最低沙箱，Adapter 实例公开稳定能力声明；orchestrator 在生命周期开始前强制核对实际策略、引擎能力和沙箱等级。
+- `RunReport` 与 `RunBundle` 增加上下文防御性验证，计划要求严格容器而实际报告开发模式时不能构造成功证据。
+- 执行 `DataRequirement.lookback` 和 `max_staleness_ns`：编译期拒绝必然不足的记录数，兼容转换后逐标的核对观察数，并以 `available_time - event_time` 执行陈旧度上限。
+- 补齐 OHLCV 特征顺序、L1 队列不平衡公式和 Actor–Critic 推理权重边界的独立 oracle；线性 Actor–Critic 按实际差异由 A2 降为 A1，项目保持 9 个 A2。
+- 移除未被策略绑定或深度案例使用的 DeepLOB 来源登记；发布集固定 16 份原文，其中 15 个来源覆盖 18 个策略。
+
 # 2.6.1 — 2026-09-22
 
 - Reference 对直接订单执行累计仓位约束：接单、改单和成交前都核对当前持仓与待成交订单，不能用多笔合法小单绕过 `max_abs_position`。

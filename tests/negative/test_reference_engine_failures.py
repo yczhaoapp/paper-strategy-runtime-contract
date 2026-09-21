@@ -28,8 +28,12 @@ class IllegalPositionStrategy(SmaCrossStrategy):
 
 
 class RepeatedDirectBuyStrategy(SmaCrossStrategy):
+    _requirement = SmaCrossStrategy.manifest.data_requirements[0].model_copy(
+        update={"lookback": 1}
+    )
     manifest = SmaCrossStrategy.manifest.model_copy(
         update={
+            "data_requirements": (_requirement,),
             "action_requirements": ActionRequirements(
                 allowed=frozenset({ActionKind.NO_OP, ActionKind.SUBMIT_ORDER}),
                 max_abs_position=Decimal("1"),

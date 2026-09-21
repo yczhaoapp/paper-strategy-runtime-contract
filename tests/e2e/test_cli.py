@@ -129,6 +129,26 @@ def test_cli_builds_complete_reproduction_bundle(tmp_path: Path, capsys: object)
             "tests.e2e.test_cli",
             "test_reused_output_contains_only_the_latest_failed_run",
         ),
+        (
+            "tests.unit.test_compiler",
+            "test_insufficient_declared_lookback_fails_before_execution",
+        ),
+        (
+            "tests.negative.test_runtime_contract_enforcement",
+            "test_orchestrator_rejects_strategy_identity_mismatch",
+        ),
+        (
+            "tests.negative.test_runtime_contract_enforcement",
+            "test_orchestrator_rejects_engine_capability_mismatch",
+        ),
+        (
+            "tests.negative.test_runtime_contract_enforcement",
+            "test_orchestrator_rejects_sandbox_downgrade",
+        ),
+        (
+            "tests.negative.test_runtime_contract_enforcement",
+            "test_orchestrator_enforces_actual_event_staleness",
+        ),
         *(
             (
                 "tests.integration.test_strategy_packages",
@@ -282,7 +302,7 @@ def test_invalid_contract_version_uses_structured_persisted_failure(
     manifest = packages / "rule.sma_cross/strategy.yaml"
     manifest.write_text(
         manifest.read_text(encoding="utf-8").replace(
-            "contract_version: 1.1.0", "contract_version: invalid", 1
+            "contract_version: 1.2.0", "contract_version: invalid", 1
         ),
         encoding="utf-8",
     )

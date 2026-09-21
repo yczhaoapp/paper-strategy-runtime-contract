@@ -1,10 +1,10 @@
 {
-  "contract_version": "1.1.0",
+  "contract_version": "1.2.0",
   "host": {
     "acceptance_checks_passed": 19,
     "acceptance_checks_total": 19,
     "acceptance_report": "evidence/release/host-acceptance.json",
-    "coverage_percent": 92.69,
+    "coverage_percent": 92.68,
     "errors": 0,
     "failures": 0,
     "full_receipt": "evidence/release/host-verification.json",
@@ -12,24 +12,24 @@
     "scope": "development_preflight",
     "skipped": 0,
     "status": "passed",
-    "tests": 197
+    "tests": 205
   },
   "published_files": {
-    "evidence/release/host-acceptance.json": "bc400756c49ab48f8d41cf75850e2f6a60bc955de157a7a28eaa0ebda5a34326",
-    "evidence/release/host-verification.json": "f346011d1dd8c3d43b251c2b29a7ed735e8022519d8ddc9517164c305ca2d9ed",
-    "evidence/release/strict-acceptance.json": "1c3ef37b4854763c89ae121fc2567e52652bb9e0478238b69c1ae8ccb87d3993",
-    "evidence/release/strict-verification.json": "d059791369b72dc36f7bfa20de0c02585b1c25dcdc5ef0c671cb3c5b5c7eda8e"
+    "evidence/release/host-acceptance.json": "798fef42ba5ecfcd5f65ac88cc03b8a3917b7ced5cb5fb2e9124ae1405e5360e",
+    "evidence/release/host-verification.json": "1ff4b27595c8975f5b3a5fa2c622b5f0e59cbfd1530b091d371f2528ae74ca90",
+    "evidence/release/strict-acceptance.json": "727f295673c5e268fc5a56fed2f284aa256854c5e2c33cb9a097979e4416da44",
+    "evidence/release/strict-verification.json": "63476bff4731033a40b7ac0a209a0b2ef6e628107d37496135d8ffb047de24fe"
   },
   "remote_ci": {
     "claims": [],
     "status": "pending_repository_creation"
   },
-  "software_version": "2.6.1",
+  "software_version": "2.6.2",
   "strict_container": {
     "acceptance_checks_passed": 19,
     "acceptance_checks_total": 19,
     "acceptance_report": "evidence/release/strict-acceptance.json",
-    "coverage_percent": 92.94,
+    "coverage_percent": 92.9,
     "errors": 0,
     "failures": 0,
     "full_receipt": "evidence/release/strict-verification.json",
@@ -37,7 +37,7 @@
     "scope": "strict_container",
     "skipped": 0,
     "status": "passed",
-    "tests": 197
+    "tests": 205
   },
-  "verification_input_sha256": "64d23f5f4c1972ec7760c87336951095af20e56b98279691d37c6650d93ed01e"
+  "verification_input_sha256": "8ce688171863baf400795ab65aada51202fe99b87579da656e6490cf9335cd45"
 }

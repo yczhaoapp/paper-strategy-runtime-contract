@@ -8,7 +8,7 @@
       "claim_id": "logistic.ohlcv",
       "implementation_path": "src/psrc/strategies/supervised.py",
       "symbol": "LogisticDirectionStrategy",
-      "verification_test": "tests/papers/test_reproduction_oracles.py::test_directional_logistic_reproduces_paper_gradient_descent"
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_logistic_direction_uses_declared_ohlcv_feature_order"
     },
     {
       "claim_id": "logistic.gradient",
@@ -88,6 +88,7 @@
   "strategy_id": "supervised.logistic_direction",
   "strategy_kind": "supervised",
   "verification_tests": [
+    "tests/papers/test_reproduction_oracles.py::test_logistic_direction_uses_declared_ohlcv_feature_order",
     "tests/papers/test_reproduction_oracles.py::test_directional_logistic_reproduces_paper_gradient_descent"
   ],
   "version": "1.1"

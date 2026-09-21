@@ -75,9 +75,17 @@ class BacktraderAdapter:
         *,
         initial_cash: Decimal = Decimal("100000"),
         commission: Decimal = Decimal("0.0005"),
+        declared_capabilities: EngineCapabilities | None = None,
     ) -> None:
         self.initial_cash = initial_cash
         self.commission = commission
+        self._capabilities = declared_capabilities or capabilities()
+        if self._capabilities.engine_id != "backtrader":
+            raise ValueError("BacktraderAdapter capabilities must declare engine_id='backtrader'")
+
+    @property
+    def capabilities(self) -> EngineCapabilities:
+        return self._capabilities
 
     def run(
         self,

@@ -266,7 +266,7 @@ def _demo_sma(output: Path) -> int:
         plan=plan,
         strategy=strategy,
         events=events,
-        engine=ReferenceEngine(),
+        engine=ReferenceEngine(declared_capabilities=engine),
         sandbox_mode=sandbox,
     )
     write_run_bundle(report, output)
@@ -662,6 +662,7 @@ def _demo_compatibility(output: Path) -> int:
         update={
             "timeframe": Timeframe(mode=TimeframeMode.BAR, interval="PT5M"),
             "symbols": ("SYNTH.MAPPED",),
+            "lookback": 2,
         }
     )
     strategy.manifest = strategy.manifest.model_copy(update={"data_requirements": (requirement,)})
@@ -689,7 +690,7 @@ def _demo_compatibility(output: Path) -> int:
         plan=plan,
         strategy=strategy,
         events=events,
-        engine=ReferenceEngine(),
+        engine=ReferenceEngine(declared_capabilities=engine),
         sandbox_mode=sandbox,
     )
     write_run_bundle(report, output)

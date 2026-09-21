@@ -8,7 +8,11 @@ from psrc.contract.errors import ContractError, ContractViolation, ErrorCode, Er
 from psrc.contract.models import ExecutionPlan, SandboxMode
 from psrc.domain.market import MarketEvent
 from psrc.runtime.artifacts import ArtifactStore
-from psrc.runtime.guards import validate_plan_events
+from psrc.runtime.guards import (
+    validate_effective_events,
+    validate_execution_context,
+    validate_plan_events,
+)
 from psrc.runtime.lifecycle import Lifecycle, LifecycleState
 from psrc.runtime.report import RunReport, RuntimeLogRecord
 from psrc.runtime.strategy import RuntimeStrategy
@@ -42,6 +46,7 @@ def _effective_events(
                 cause_chain=(f"{type(exc).__name__}: {exc}",),
             )
         ) from exc
+    validate_effective_events(plan, effective)
     return effective, RuntimeLogRecord(
         sequence=0,
         timestamp=datetime.now(UTC),
@@ -97,6 +102,12 @@ def run_rule(
     engine: BacktestAdapter,
     sandbox_mode: SandboxMode,
 ) -> RunReport:
+    validate_execution_context(
+        plan=plan,
+        strategy=strategy,
+        engine=engine.capabilities,
+        sandbox_mode=sandbox_mode,
+    )
     lifecycle = Lifecycle(
         run_id=plan.run_id,
         strategy_id=strategy.manifest.strategy_id,
@@ -149,6 +160,12 @@ def run_trainable(
     store: ArtifactStore,
     sandbox_mode: SandboxMode,
 ) -> RunReport:
+    validate_execution_context(
+        plan=plan,
+        strategy=strategy,
+        engine=engine.capabilities,
+        sandbox_mode=sandbox_mode,
+    )
     lifecycle = Lifecycle(
         run_id=plan.run_id,
         strategy_id=strategy.manifest.strategy_id,

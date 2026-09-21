@@ -177,7 +177,7 @@
           "uniqueItems": true
         },
         "contract_version": {
-          "default": "1.1.0",
+          "default": "1.2.0",
           "title": "Contract Version",
           "type": "string"
         },
@@ -269,7 +269,7 @@
           "type": "string"
         },
         "contract_version": {
-          "default": "1.1.0",
+          "default": "1.2.0",
           "title": "Contract Version",
           "type": "string"
         },
@@ -718,7 +718,7 @@
       "additionalProperties": false,
       "properties": {
         "contract_version": {
-          "default": "1.1.0",
+          "default": "1.2.0",
           "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
           "title": "Contract Version",
           "type": "string"
@@ -914,7 +914,7 @@
           "type": "string"
         },
         "contract_version": {
-          "default": "1.1.0",
+          "default": "1.2.0",
           "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
           "title": "Contract Version",
           "type": "string"
@@ -1000,10 +1000,18 @@
           "type": "string"
         },
         "contract_version": {
-          "default": "1.1.0",
+          "default": "1.2.0",
           "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
           "title": "Contract Version",
           "type": "string"
+        },
+        "data_requirements": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/DataRequirement"
+          },
+          "title": "Data Requirements",
+          "type": "array"
         },
         "dataset_id": {
           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
@@ -1042,6 +1050,10 @@
           ],
           "default": null,
           "title": "External Strategy Admission Sha256"
+        },
+        "required_sandbox": {
+          "$ref": "#/$defs/SandboxMode",
+          "default": "development"
         },
         "run_id": {
           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
@@ -1182,7 +1194,7 @@
           "$ref": "#/$defs/AgentAuditReport"
         },
         "contract_version": {
-          "default": "1.1.0",
+          "default": "1.2.0",
           "title": "Contract Version",
           "type": "string"
         },
@@ -1848,7 +1860,7 @@
           "type": "array"
         },
         "contract_version": {
-          "default": "1.1.0",
+          "default": "1.2.0",
           "title": "Contract Version",
           "type": "string"
         },
@@ -2362,7 +2374,7 @@
       "additionalProperties": false,
       "properties": {
         "contract_version": {
-          "default": "1.1.0",
+          "default": "1.2.0",
           "title": "Contract Version",
           "type": "string"
         },
@@ -2577,7 +2589,7 @@
           "type": "array"
         },
         "contract_version": {
-          "default": "1.1.0",
+          "default": "1.2.0",
           "title": "Contract Version",
           "type": "string"
         },
@@ -2820,7 +2832,7 @@
           "type": "string"
         },
         "runtime_version": {
-          "default": "1.1.0",
+          "default": "1.2.0",
           "title": "Runtime Version",
           "type": "string"
         }
@@ -2851,7 +2863,7 @@
           "$ref": "#/$defs/ActionRequirements"
         },
         "contract_version": {
-          "default": "1.1.0",
+          "default": "1.2.0",
           "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
           "title": "Contract Version",
           "type": "string"
@@ -3262,7 +3274,7 @@
       "description": "Immutable declaration of the exact embedded training payload.",
       "properties": {
         "contract_version": {
-          "default": "1.1.0",
+          "default": "1.2.0",
           "title": "Contract Version",
           "type": "string"
         },
@@ -3374,12 +3386,12 @@
       "type": "object"
     }
   },
-  "$id": "urn:psrc:schema/run-bundle.schema.json?contract=1.1.0",
+  "$id": "urn:psrc:schema/run-bundle.schema.json?contract=1.2.0",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
     "contract_version": {
-      "default": "1.1.0",
+      "default": "1.2.0",
       "title": "Contract Version",
       "type": "string"
     },

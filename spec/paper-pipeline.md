@@ -8,7 +8,7 @@
 
 `ReproductionSpec` 将 recipe、分页文档哈希、页内规范化字符偏移和页哈希绑定。`arbitrary_code_execution=false`，`empirical_results_reproduced=false`。算法复现不自动提升为论文实证结果复现。
 
-`PaperStrategyBinding` 将 18 个契约示例逐一绑定到 `PaperSource`、至少两个页级 claim、实现文件与符号哈希、精确 pytest 节点、假设和偏差。1.1 要求每个 claim 恰好连接到一个已声明实现符号和验证节点，并保存确定性运行行为签名：输入及决策哈希、数据种类、粒度、动作、原因码、产物算法与 ID、决策/订单/成交计数。总验收从当次 JUnit 和运行包交叉核对，不接受仅存在但未执行的测试。`fidelity` 只允许 `formula_reproduction`、`algorithm_reproduction` 和 `method_reproduction`；前两者强制 A2，后者强制 A1，方法适配不能计入策略集合。数据、实验结果和运行时分别用 D/E/R 轴声明。来源注册表固定 17 份 PDF，18 个策略实际使用其中 15 份。详见[复现等级政策](../docs/reproduction-fidelity-policy.md)。
+`PaperStrategyBinding` 将 18 个契约示例逐一绑定到 `PaperSource`、至少两个页级 claim、实现文件与符号哈希、精确 pytest 节点、假设和偏差。1.1 要求每个 claim 恰好连接到一个已声明实现符号和验证节点，并保存确定性运行行为签名：输入及决策哈希、数据种类、粒度、动作、原因码、产物算法与 ID、决策/订单/成交计数。总验收从当次 JUnit 和运行包交叉核对，不接受仅存在但未执行的测试。`fidelity` 只允许 `formula_reproduction`、`algorithm_reproduction` 和 `method_reproduction`；前两者强制 A2，后者强制 A1，方法适配不能计入策略集合。数据、实验结果和运行时分别用 D/E/R 轴声明。来源注册表固定 16 份 PDF，18 个策略实际使用其中 15 份。详见[复现等级政策](../docs/reproduction-fidelity-policy.md)。
 
 `PaperStrategySpec` 和 `ExternalStrategyAdmission` 构成开放论文的外部实现路径。规格声明论文引用与原文字节哈希、策略类别、数据和动作契约、特征、标签或奖励、训练目标、推理规则、执行假设、歧义，以及带页码和短锚点的证据。`psrc author run` 从调用方提供的实际原文生成 `PaperDocument`，逐项定位证据，再把规格哈希、文档哈希、原文件哈希、manifest 哈希和策略源码证据哈希写进准入记录。准入记录只允许进入普通运行验证，`runtime_authority_granted` 固定为 false。
 

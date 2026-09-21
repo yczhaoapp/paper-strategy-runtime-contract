@@ -6,7 +6,7 @@
         "errors": 0,
         "failures": 0,
         "skipped": 0,
-        "tests": 197
+        "tests": 205
       },
       "passed": true
     },
@@ -23,7 +23,7 @@
     "code_coverage": {
       "detail": {
         "minimum": 90,
-        "percent_covered": 92.94
+        "percent_covered": 92.9
       },
       "passed": true
     },
@@ -62,11 +62,10 @@
     "eighteen_paper_grounded_strategy_bindings": {
       "detail": {
         "algorithm_exact_by_kind": {
-          "reinforcement_learning": 1,
           "rule": 6,
           "supervised": 3
         },
-        "algorithm_exact_count": 10,
+        "algorithm_exact_count": 9,
         "algorithm_exact_without_independent_oracle": [],
         "bindings": [
           {
@@ -124,7 +123,7 @@
           {
             "claim_count": 2,
             "claim_link_count": 2,
-            "fidelity": "algorithm_reproduction",
+            "fidelity": "method_reproduction",
             "kind": "reinforcement_learning",
             "runtime_behavior": {
               "bundle": "runs/all/reinforcement_learning.linear_actor_critic_allocation/bundle.json",
@@ -138,6 +137,7 @@
               "runtime_fidelity_observed": "R2_independent_strict",
               "source_data_sha256": "2708326df26a85ab68d420790ebc7b0c9f24b70faae9bdf5d84893d5d65f3e6f",
               "tests_executed": [
+                "tests/papers/test_reproduction_oracles.py::test_continuous_actor_critic_inference_applies_tanh_and_weight_bound",
                 "tests/papers/test_reproduction_oracles.py::test_continuous_actor_critic_reproduces_policy_and_value_updates"
               ]
             },
@@ -450,6 +450,7 @@
               "runtime_fidelity_observed": "R2_independent_strict",
               "source_data_sha256": "4497637c0e9bbf116623cb67b303971a077a23e1b94c28657acf1db3f246ee2b",
               "tests_executed": [
+                "tests/papers/test_reproduction_oracles.py::test_l1_adverse_selection_uses_normalized_queue_imbalance",
                 "tests/papers/test_reproduction_oracles.py::test_queue_imbalance_logistic_matches_maximum_likelihood_direction"
               ]
             },
@@ -502,7 +503,8 @@
               "runtime_fidelity_observed": "R2_independent_strict",
               "source_data_sha256": "2708326df26a85ab68d420790ebc7b0c9f24b70faae9bdf5d84893d5d65f3e6f",
               "tests_executed": [
-                "tests/papers/test_reproduction_oracles.py::test_directional_logistic_reproduces_paper_gradient_descent"
+                "tests/papers/test_reproduction_oracles.py::test_directional_logistic_reproduces_paper_gradient_descent",
+                "tests/papers/test_reproduction_oracles.py::test_logistic_direction_uses_declared_ohlcv_feature_order"
               ]
             },
             "runtime_verified": true,
@@ -556,9 +558,9 @@
           "E0_runtime_only": 18
         },
         "fidelity_counts": {
-          "algorithm_reproduction": 4,
+          "algorithm_reproduction": 3,
           "formula_reproduction": 6,
-          "method_reproduction": 8
+          "method_reproduction": 9
         },
         "observed_runtime_fidelity_counts": {
           "R2_independent_strict": 18
@@ -691,8 +693,8 @@
     "runtime_boundary_contract_enforcement": {
       "detail": {
         "missing_tests": [],
-        "required_tests": 5,
-        "scope": "cumulative position, day expiry, actual bar grid, invalid version, coherent reused output"
+        "required_tests": 10,
+        "scope": "cumulative position, day expiry, actual bar grid, invalid version, coherent reused output, lookback, staleness, and execution-context binding"
       },
       "passed": true
     },
@@ -787,7 +789,7 @@
       "passed": true
     }
   },
-  "contract_version": "1.1.0",
+  "contract_version": "1.2.0",
   "passed_checks": 19,
   "status": "passed",
   "total_checks": 19,

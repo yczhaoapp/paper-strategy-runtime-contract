@@ -80,7 +80,7 @@
           "$ref": "#/$defs/ErrorCode"
         },
         "contract_version": {
-          "default": "1.1.0",
+          "default": "1.2.0",
           "title": "Contract Version",
           "type": "string"
         },
@@ -238,7 +238,7 @@
       "additionalProperties": false,
       "properties": {
         "contract_version": {
-          "default": "1.1.0",
+          "default": "1.2.0",
           "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
           "title": "Contract Version",
           "type": "string"
@@ -365,7 +365,7 @@
           "type": "string"
         },
         "contract_version": {
-          "default": "1.1.0",
+          "default": "1.2.0",
           "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
           "title": "Contract Version",
           "type": "string"
@@ -448,10 +448,12 @@
         "DATA_KIND_MISMATCH",
         "DATA_ORDERING_INVALID",
         "DATA_RECORD_COUNT_MISMATCH",
+        "DATA_STALENESS_EXCEEDED",
         "DATA_STREAM_MISSING",
         "DATA_TIMEFRAME_MISMATCH",
         "ENGINE_CAPABILITY_UNSUPPORTED",
         "ENGINE_DEPENDENCY_MISSING",
+        "EXECUTION_CONTEXT_MISMATCH",
         "INFERENCE_FAILED",
         "LIFECYCLE_TRANSITION_INVALID",
         "MANIFEST_INVALID",
@@ -728,7 +730,7 @@
           "$ref": "#/$defs/ActionRequirements"
         },
         "contract_version": {
-          "default": "1.1.0",
+          "default": "1.2.0",
           "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
           "title": "Contract Version",
           "type": "string"
@@ -886,7 +888,7 @@
       "type": "string"
     }
   },
-  "$id": "urn:psrc:schema/failure-report.schema.json?contract=1.1.0",
+  "$id": "urn:psrc:schema/failure-report.schema.json?contract=1.2.0",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
@@ -896,7 +898,7 @@
       "type": "object"
     },
     "contract_version": {
-      "default": "1.1.0",
+      "default": "1.2.0",
       "title": "Contract Version",
       "type": "string"
     },

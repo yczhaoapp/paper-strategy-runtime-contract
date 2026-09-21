@@ -1,4 +1,4 @@
-contract_version: 1.1.0
+contract_version: 1.2.0
 strategy_id: reinforcement_learning.risk_averse_contextual_bandit
 strategy_version: 1.0.0
 kind: reinforcement_learning

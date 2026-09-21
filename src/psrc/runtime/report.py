@@ -94,6 +94,18 @@ class RunReport(ContractModel):
     artifacts: tuple[ArtifactManifest, ...] = ()
     errors: tuple[dict[str, Any], ...] = ()
 
+    @model_validator(mode="after")
+    def validate_execution_sandbox(self) -> RunReport:
+        rank = {SandboxMode.DEVELOPMENT: 0, SandboxMode.STRICT_CONTAINER: 1}
+        actual = SandboxMode(self.sandbox_mode)
+        required = SandboxMode(self.execution_plan.required_sandbox)
+        if rank[actual] < rank[required]:
+            raise ValueError(
+                "RunReport sandbox_mode is weaker than the ExecutionPlan requirement: "
+                f"required={required}, actual={actual}"
+            )
+        return self
+
 
 class FailureReport(ContractModel):
     contract_version: str = CONTRACT_VERSION
@@ -171,9 +183,28 @@ class RunBundle(ContractModel):
                     sha256_model(self.engine_capabilities),
                 ),
                 ("run_policy_sha256", plan.run_policy_sha256, sha256_model(self.run_policy)),
+                ("required_sandbox", plan.required_sandbox, self.run_policy.required_sandbox),
+                (
+                    "data_requirements",
+                    plan.data_requirements,
+                    self.strategy_manifest.data_requirements,
+                ),
             )
             if observed != expected
         }
+        if self.report.sandbox_mode not in self.engine_capabilities.sandbox_modes:
+            mismatches["sandbox_mode"] = {
+                "reported": self.report.sandbox_mode,
+                "engine_declared": sorted(self.engine_capabilities.sandbox_modes),
+            }
+        sandbox_rank = {SandboxMode.DEVELOPMENT: 0, SandboxMode.STRICT_CONTAINER: 1}
+        if sandbox_rank[SandboxMode(self.report.sandbox_mode)] < sandbox_rank[
+            SandboxMode(self.run_policy.required_sandbox)
+        ]:
+            mismatches["sandbox_policy_downgrade"] = {
+                "required": self.run_policy.required_sandbox,
+                "reported": self.report.sandbox_mode,
+            }
         if self.report.artifacts and self.training_request is None:
             mismatches["training_request"] = "missing for trainable artifacts"
         if self.training_request is None and self.training_input_evidence is not None:

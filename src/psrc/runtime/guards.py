@@ -8,13 +8,145 @@ from psrc.contract.models import (
     DataKind,
     DatasetManifest,
     DatasetStream,
+    EngineCapabilities,
     ExecutionPlan,
+    SandboxMode,
     StrategyManifest,
     TimeframeMode,
 )
 from psrc.domain.actions import Action, ActionEnvelope, SubmitOrder, TargetPosition
 from psrc.domain.market import BookSnapshotL2Payload, MarketEvent
 from psrc.runtime.strategy import RuntimeStrategy
+
+_SANDBOX_RANK = {
+    SandboxMode.DEVELOPMENT: 0,
+    SandboxMode.STRICT_CONTAINER: 1,
+}
+
+
+def validate_execution_context(
+    *,
+    plan: ExecutionPlan,
+    strategy: RuntimeStrategy,
+    engine: EngineCapabilities,
+    sandbox_mode: SandboxMode,
+) -> None:
+    """Bind a compiled plan to the objects and isolation level that actually execute it."""
+    actual_manifest = strategy.manifest
+    mismatches: dict[str, object] = {}
+    if actual_manifest.strategy_id != plan.strategy_id:
+        mismatches["strategy_id"] = {
+            "planned": plan.strategy_id,
+            "actual": actual_manifest.strategy_id,
+        }
+    actual_manifest_sha256 = sha256_model(actual_manifest)
+    if actual_manifest_sha256 != plan.strategy_manifest_sha256:
+        mismatches["strategy_manifest_sha256"] = {
+            "planned": plan.strategy_manifest_sha256,
+            "actual": actual_manifest_sha256,
+        }
+    if actual_manifest.data_requirements != plan.data_requirements:
+        mismatches["data_requirements"] = "runtime manifest differs from compiled plan"
+    if engine.engine_id != plan.engine_id:
+        mismatches["engine_id"] = {"planned": plan.engine_id, "actual": engine.engine_id}
+    actual_engine_sha256 = sha256_model(engine)
+    if actual_engine_sha256 != plan.engine_capabilities_sha256:
+        mismatches["engine_capabilities_sha256"] = {
+            "planned": plan.engine_capabilities_sha256,
+            "actual": actual_engine_sha256,
+        }
+    actual_sandbox = SandboxMode(sandbox_mode)
+    required_sandbox = SandboxMode(plan.required_sandbox)
+    if _SANDBOX_RANK[actual_sandbox] < _SANDBOX_RANK[required_sandbox]:
+        mismatches["sandbox_mode"] = {
+            "required": required_sandbox,
+            "actual": actual_sandbox,
+        }
+    if actual_sandbox not in engine.sandbox_modes:
+        mismatches["engine_sandbox_modes"] = {
+            "actual": actual_sandbox,
+            "declared": sorted(engine.sandbox_modes),
+        }
+    if mismatches:
+        raise ContractViolation(
+            ContractError(
+                run_id=plan.run_id,
+                strategy_id=plan.strategy_id,
+                engine_id=plan.engine_id,
+                stage=ErrorStage.VALIDATION,
+                code=ErrorCode.EXECUTION_CONTEXT_MISMATCH,
+                message="Actual execution context does not match the compiled plan",
+                details={"mismatches": mismatches, "fallback_used": False},
+            )
+        )
+
+
+def validate_effective_events(plan: ExecutionPlan, events: tuple[MarketEvent, ...]) -> None:
+    """Execute constraints that require the post-transformation event stream."""
+    if len(plan.data_requirements) != 1:
+        raise _input_error(
+            run_id=plan.run_id,
+            strategy_id=plan.strategy_id,
+            code=ErrorCode.DATA_STREAM_MISSING,
+            message="Effective event validation requires one attributable data requirement",
+            details={"declared_requirement_count": len(plan.data_requirements)},
+        )
+    requirement = plan.data_requirements[0]
+    required_symbols = requirement.symbols or tuple(
+        sorted({event.instrument_id for event in events})
+    )
+    counts = {
+        symbol: sum(event.instrument_id == symbol for event in events)
+        for symbol in required_symbols
+    }
+    insufficient = {
+        symbol: count for symbol, count in counts.items() if count < requirement.lookback
+    }
+    if insufficient:
+        raise _input_error(
+            run_id=plan.run_id,
+            strategy_id=plan.strategy_id,
+            code=ErrorCode.DATA_RECORD_COUNT_MISMATCH,
+            message="Effective events do not satisfy the declared per-symbol lookback",
+            details={
+                "stream_id": requirement.stream_id,
+                "required_lookback": requirement.lookback,
+                "observed_by_symbol": counts,
+                "insufficient_symbols": insufficient,
+            },
+        )
+    maximum = requirement.max_staleness_ns
+    if maximum is None:
+        return
+    stale: list[dict[str, object]] = []
+    for event in events:
+        delay = event.available_time - event.event_time
+        actual_ns = (
+            (delay.days * 86400 + delay.seconds) * 1_000_000_000
+            + delay.microseconds * 1000
+        )
+        if actual_ns > maximum:
+            stale.append(
+                {
+                    "event_id": event.event_id,
+                    "actual_staleness_ns": actual_ns,
+                }
+            )
+            if len(stale) == 5:
+                break
+    if stale:
+        raise _input_error(
+            run_id=plan.run_id,
+            strategy_id=plan.strategy_id,
+            code=ErrorCode.DATA_STALENESS_EXCEEDED,
+            message="Effective events exceed the declared maximum data staleness",
+            details={
+                "stream_id": requirement.stream_id,
+                "max_staleness_ns": maximum,
+                "first_invalid_events": stale,
+                "staleness_definition": "available_time_minus_event_time",
+            },
+        )
 
 
 def validate_events(plan: ExecutionPlan, events: tuple[MarketEvent, ...]) -> None:

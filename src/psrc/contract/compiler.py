@@ -251,6 +251,28 @@ def compile_run(
                 details={"stream_id": stream.stream_id, "missing_fields": sorted(missing_fields)},
             )
 
+        required_symbol_count = len(requirement.symbols or tuple(stream.symbols)) or 1
+        minimum_source_records = requirement.lookback * required_symbol_count
+        if (
+            stream.timeframe == requirement.timeframe
+            and stream.record_count < minimum_source_records
+        ):
+            _fail(
+                run_id=run_id,
+                strategy=strategy,
+                engine=engine,
+                code=ErrorCode.DATA_RECORD_COUNT_MISMATCH,
+                message="Dataset cannot supply the declared per-symbol lookback",
+                details={
+                    "stream_id": stream.stream_id,
+                    "required_lookback": requirement.lookback,
+                    "required_symbol_count": required_symbol_count,
+                    "minimum_records": minimum_source_records,
+                    "declared_records": stream.record_count,
+                    "fallback_used": False,
+                },
+            )
+
         transformed = False
         missing_symbols = set(requirement.symbols) - stream.symbols
         if missing_symbols:
@@ -363,6 +385,7 @@ def compile_run(
         strategy_id=strategy.strategy_id,
         dataset_id=dataset.dataset_id,
         engine_id=engine.engine_id,
+        data_requirements=strategy.data_requirements,
         dataset_streams=dataset.streams,
         compatibility=tuple(records),
         strategy_manifest_sha256=sha256_model(strategy),
@@ -372,5 +395,6 @@ def compile_run(
         dataset_manifest_sha256=sha256_model(dataset),
         engine_capabilities_sha256=sha256_model(engine),
         run_policy_sha256=sha256_model(policy),
+        required_sandbox=policy.required_sandbox,
         compiled_at=datetime.now(UTC),
     )

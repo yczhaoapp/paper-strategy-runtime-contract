@@ -609,6 +609,15 @@ def verify_acceptance(
         "test_actual_bar_timestamps_must_match_declared_epoch_grid",
         "tests.e2e.test_cli::test_invalid_contract_version_uses_structured_persisted_failure",
         "tests.e2e.test_cli::test_reused_output_contains_only_the_latest_failed_run",
+        "tests.unit.test_compiler::test_insufficient_declared_lookback_fails_before_execution",
+        "tests.negative.test_runtime_contract_enforcement::"
+        "test_orchestrator_rejects_strategy_identity_mismatch",
+        "tests.negative.test_runtime_contract_enforcement::"
+        "test_orchestrator_rejects_engine_capability_mismatch",
+        "tests.negative.test_runtime_contract_enforcement::"
+        "test_orchestrator_rejects_sandbox_downgrade",
+        "tests.negative.test_runtime_contract_enforcement::"
+        "test_orchestrator_enforces_actual_event_staleness",
     }
     missing_boundary_tests = sorted(required_boundary_tests - executed_tests)
     check(
@@ -619,7 +628,7 @@ def verify_acceptance(
             "missing_tests": missing_boundary_tests,
             "scope": (
                 "cumulative position, day expiry, actual bar grid, invalid version, "
-                "coherent reused output"
+                "coherent reused output, lookback, staleness, and execution-context binding"
             ),
         },
     )

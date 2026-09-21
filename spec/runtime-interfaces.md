@@ -18,7 +18,7 @@ psrc run --strategy-dir <package> \
 
 规范行情联合类型包含 `BarPayload`、`TradePayload`、`QuoteL1Payload` 和 `BookSnapshotL2Payload`。它们分别表达 OHLCV、逐笔成交、Level-1 买卖报价和 Level-2 多档快照。当前公共 v1 不声明 L2 增量簿、逐笔委托或任意 custom payload。
 
-逐事件 tick 数据声明为 `Timeframe(mode="event", interval=null)`；分钟线和日线分别使用 `Timeframe(mode="bar", interval="PT1M")` 与 `P1D`。策略在 `DataRequirement` 中同时声明 stream、kind、粒度、标的、必需/可选字段、lookback、深度和最大陈旧时间。数据集用对应 `DatasetStream` 声明实际供给，编译器在代码导入前比较二者。包加载和 orchestrator 还会核对实际 bar 的 `event_time`：当前 UTC/epoch 网格要求时间戳为声明周期的绝对整数倍，允许跨过任意数量的合法周期。
+逐事件 tick 数据声明为 `Timeframe(mode="event", interval=null)`；分钟线和日线分别使用 `Timeframe(mode="bar", interval="PT1M")` 与 `P1D`。策略在 `DataRequirement` 中同时声明 stream、kind、粒度、标的、必需/可选字段、lookback、深度和最大陈旧时间。数据集用对应 `DatasetStream` 声明实际供给，编译器在代码导入前比较二者。编译期用记录数排除必然无法满足的 lookback；兼容转换完成后，运行时按每个必需标的核对实际观察数。`max_staleness_ns` 的机器语义固定为 `available_time - event_time`，任一事件超过上限即返回 `DATA_STALENESS_EXCEEDED`。包加载和 orchestrator 还会核对实际 bar 的 `event_time`：当前 UTC/epoch 网格要求时间戳为声明周期的绝对整数倍，允许跨过任意数量的合法周期。
 
 ## 账户、动作与输出
 
@@ -85,6 +85,8 @@ class TrainableStrategy(Protocol):
 
 ```python
 class BacktestAdapter(Protocol):
+    capabilities: EngineCapabilities
+
     def run(
         self,
         *,
@@ -95,7 +97,7 @@ class BacktestAdapter(Protocol):
     ) -> RunReport: ...
 ```
 
-适配器驱动 `on_start -> on_event* -> on_finish`，把规范动作映射到原生引擎，并把订单、成交、账户、日志和指标还原为 `RunReport`。它必须遵守 `ExecutionPlan` 中的成交与时间语义，不得吞掉拒单。原生异常统一封装为结构化 `BACKTEST_FAILED`，同时保留原因链。
+适配器实例必须暴露本次运行的稳定 `EngineCapabilities`。orchestrator 在生命周期开始前核对实际策略 ID/manifest 哈希、Adapter 引擎 ID/能力哈希和实际沙箱等级；`RunReport` 与 `RunBundle` 再做防御性一致性校验。适配器驱动 `on_start -> on_event* -> on_finish`，把规范动作映射到原生引擎，并把订单、成交、账户、日志和指标还原为 `RunReport`。它必须遵守 `ExecutionPlan` 中的成交与时间语义，不得吞掉拒单。原生异常统一封装为结构化 `BACKTEST_FAILED`，同时保留原因链。
 
 ## 失败出口
 

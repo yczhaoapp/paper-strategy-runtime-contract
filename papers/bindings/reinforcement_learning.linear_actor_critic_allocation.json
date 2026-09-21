@@ -3,7 +3,7 @@
   "strategy_id": "reinforcement_learning.linear_actor_critic_allocation",
   "strategy_kind": "reinforcement_learning",
   "source_id": "li2023",
-  "fidelity": "algorithm_reproduction",
+  "fidelity": "method_reproduction",
   "claims": [
     {
       "claim_id": "actorcritic.policy_gradient",
@@ -38,7 +38,8 @@
     }
   ],
   "verification_tests": [
-    "tests/papers/test_reproduction_oracles.py::test_continuous_actor_critic_reproduces_policy_and_value_updates"
+    "tests/papers/test_reproduction_oracles.py::test_continuous_actor_critic_reproduces_policy_and_value_updates",
+    "tests/papers/test_reproduction_oracles.py::test_continuous_actor_critic_inference_applies_tanh_and_weight_bound"
   ],
   "claim_links": [
     {
@@ -51,7 +52,7 @@
       "claim_id": "actorcritic.bounded_weight",
       "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
       "symbol": "LinearActorCriticAllocationStrategy",
-      "verification_test": "tests/papers/test_reproduction_oracles.py::test_continuous_actor_critic_reproduces_policy_and_value_updates"
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_continuous_actor_critic_inference_applies_tanh_and_weight_bound"
     }
   ],
   "runtime_expectation": {
@@ -84,8 +85,8 @@
   "deviations": [
     "Uses one public AAPL risky-asset proxy, deterministic offline exploratory weights {-0.8, 0, 0.8} and a linear policy rather than the paper’s multi-asset neural-network experiment."
   ],
-  "mapping_review": "The unrelated pair-trading citation was replaced. The actor now follows a continuous-policy score-function update, the critic uses a TD advantage, and inference applies the paper’s tanh weight bound.",
-  "algorithm_fidelity": "A2_algorithm_exact",
+  "mapping_review": "The implementation preserves the paper’s actor–critic objective and bounded continuous action rule, while the disclosed linear single-asset state and deterministic offline exploration make it an A1 method-equivalent reproduction rather than an exact reproduction of the multi-asset neural experiment.",
+  "algorithm_fidelity": "A1_method_equivalent",
   "data_fidelity": "D1_public_proxy",
   "experimental_fidelity": "E0_runtime_only",
   "runtime_fidelity": "R1_unified_contract"

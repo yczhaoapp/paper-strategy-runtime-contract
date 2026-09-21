@@ -263,7 +263,7 @@ def generate_failure_evidence(output: Path) -> dict[str, str]:
             strategy=trainable,
             training=invalid,
             events=supervised_example.events,
-            engine=ReferenceEngine(),
+            engine=ReferenceEngine(declared_capabilities=engine),
             store=ArtifactStore(output / "_failed-training-artifacts"),
             sandbox_mode=sandbox,
         )

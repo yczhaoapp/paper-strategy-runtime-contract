@@ -15,7 +15,10 @@ from psrc.runtime.orchestrator import run_rule
 def _five_minute_strategy() -> SmaCrossStrategy:
     strategy = SmaCrossStrategy()
     requirement = strategy.manifest.data_requirements[0].model_copy(
-        update={"timeframe": Timeframe(mode=TimeframeMode.BAR, interval="PT5M")}
+        update={
+            "timeframe": Timeframe(mode=TimeframeMode.BAR, interval="PT5M"),
+            "lookback": 2,
+        }
     )
     strategy.manifest = strategy.manifest.model_copy(update={"data_requirements": (requirement,)})
     return strategy

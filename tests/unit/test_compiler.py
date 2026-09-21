@@ -78,6 +78,27 @@ def test_missing_field_is_structured(
     assert raised.value.error.details["missing_fields"] == ["high", "low", "volume"]
 
 
+def test_insufficient_declared_lookback_fails_before_execution(
+    strategy: StrategyManifest,
+    dataset: DatasetManifest,
+    engine: EngineCapabilities,
+    policy: RunPolicy,
+) -> None:
+    requirement = strategy.data_requirements[0].model_copy(update={"lookback": 101})
+    oversized = strategy.model_copy(update={"data_requirements": (requirement,)})
+    with pytest.raises(ContractViolation) as raised:
+        compile_run(
+            run_id="run.insufficient-lookback",
+            strategy=oversized,
+            dataset=dataset,
+            engine=engine,
+            policy=policy,
+        )
+    assert raised.value.error.code == ErrorCode.DATA_RECORD_COUNT_MISMATCH
+    assert raised.value.error.details["required_lookback"] == 101
+    assert raised.value.error.details["declared_records"] == 100
+
+
 def test_timeframe_mismatch_is_not_silently_resampled(
     strategy: StrategyManifest,
     dataset: DatasetManifest,

@@ -358,7 +358,7 @@
       "type": "object"
     }
   },
-  "$id": "urn:psrc:schema/action.schema.json?contract=1.1.0",
+  "$id": "urn:psrc:schema/action.schema.json?contract=1.2.0",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "description": "Schema-export wrapper for the discriminated canonical action union.",
   "discriminator": {

@@ -285,6 +285,7 @@ class ExecutionPlan(ContractModel):
     strategy_id: Identifier
     dataset_id: Identifier
     engine_id: Identifier
+    data_requirements: tuple[DataRequirement, ...] = ()
     dataset_streams: tuple[DatasetStream, ...]
     compatibility: tuple[CompatibilityRecord, ...]
     strategy_manifest_sha256: str
@@ -298,4 +299,5 @@ class ExecutionPlan(ContractModel):
     dataset_manifest_sha256: str
     engine_capabilities_sha256: str
     run_policy_sha256: str
+    required_sandbox: SandboxMode = SandboxMode.DEVELOPMENT
     compiled_at: datetime

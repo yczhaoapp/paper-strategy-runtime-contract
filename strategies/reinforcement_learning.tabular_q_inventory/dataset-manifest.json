@@ -1,5 +1,5 @@
 {
-  "contract_version": "1.1.0",
+  "contract_version": "1.2.0",
   "dataset_id": "synthetic.daily-bars",
   "dataset_version": "1.0.0",
   "extensions": {},

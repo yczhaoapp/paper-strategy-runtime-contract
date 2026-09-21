@@ -22,23 +22,26 @@ class ResolvedAdapter:
 def resolve_adapter(engine_id: EngineId, *, strict_container: bool) -> ResolvedAdapter:
     """Resolve an executable engine without importing optional adapters prematurely."""
     if engine_id == "reference":
+        declared = reference_capabilities(strict_container=strict_container)
         return ResolvedAdapter(
-            engine=ReferenceEngine(),
-            capabilities=reference_capabilities(strict_container=strict_container),
+            engine=ReferenceEngine(declared_capabilities=declared),
+            capabilities=declared,
         )
     try:
         if engine_id == "backtrader":
             from psrc.adapters.backtrader import BacktraderAdapter, capabilities
 
+            declared = capabilities(strict_container=strict_container)
             return ResolvedAdapter(
-                engine=BacktraderAdapter(),
-                capabilities=capabilities(strict_container=strict_container),
+                engine=BacktraderAdapter(declared_capabilities=declared),
+                capabilities=declared,
             )
         from psrc.adapters.nautilus import NautilusAdapter, capabilities
 
+        declared = capabilities(strict_container=strict_container)
         return ResolvedAdapter(
-            engine=NautilusAdapter(),
-            capabilities=capabilities(strict_container=strict_container),
+            engine=NautilusAdapter(declared_capabilities=declared),
+            capabilities=declared,
         )
     except ImportError as exc:
         raise ContractViolation(

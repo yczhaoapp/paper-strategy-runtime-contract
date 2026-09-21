@@ -109,6 +109,88 @@
       "title": "DataKind",
       "type": "string"
     },
+    "DataRequirement": {
+      "additionalProperties": false,
+      "properties": {
+        "depth": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Depth"
+        },
+        "kind": {
+          "$ref": "#/$defs/DataKind"
+        },
+        "lookback": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Lookback",
+          "type": "integer"
+        },
+        "max_staleness_ns": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Staleness Ns"
+        },
+        "optional_fields": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Optional Fields",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "required_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Fields",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "stream_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Stream Id",
+          "type": "string"
+        },
+        "symbols": {
+          "default": [],
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Symbols",
+          "type": "array"
+        },
+        "timeframe": {
+          "$ref": "#/$defs/Timeframe"
+        }
+      },
+      "required": [
+        "kind",
+        "required_fields",
+        "stream_id",
+        "timeframe"
+      ],
+      "title": "DataRequirement",
+      "type": "object"
+    },
     "DatasetStream": {
       "additionalProperties": false,
       "properties": {
@@ -169,6 +251,14 @@
       "title": "DatasetStream",
       "type": "object"
     },
+    "SandboxMode": {
+      "enum": [
+        "development",
+        "strict_container"
+      ],
+      "title": "SandboxMode",
+      "type": "string"
+    },
     "Timeframe": {
       "additionalProperties": false,
       "properties": {
@@ -219,7 +309,7 @@
       "type": "string"
     }
   },
-  "$id": "urn:psrc:schema/execution-plan.schema.json?contract=1.1.0",
+  "$id": "urn:psrc:schema/execution-plan.schema.json?contract=1.2.0",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
@@ -236,10 +326,18 @@
       "type": "string"
     },
     "contract_version": {
-      "default": "1.1.0",
+      "default": "1.2.0",
       "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
       "title": "Contract Version",
       "type": "string"
+    },
+    "data_requirements": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/DataRequirement"
+      },
+      "title": "Data Requirements",
+      "type": "array"
     },
     "dataset_id": {
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
@@ -278,6 +376,10 @@
       ],
       "default": null,
       "title": "External Strategy Admission Sha256"
+    },
+    "required_sandbox": {
+      "$ref": "#/$defs/SandboxMode",
+      "default": "development"
     },
     "run_id": {
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",

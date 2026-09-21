@@ -19,7 +19,7 @@
 | 强化学习 | 风险厌恶 Contextual Bandit | 线性后验 Thompson 抽样、均值方差目标 | Lin, Wang & Zhou 2022 | 等价方法复现 / A1 |
 | 强化学习 | Double-Q 订单簿库存 | 拆分估计器的 L2 库存控制 | Spooner et al. 2018 | 等价方法复现 / A1 |
 | 强化学习 | A2C 配对 | 固定 1:-2 spread 状态、优势 Actor–Critic 更新 | Yang & Malik 2024 | 等价方法复现 / A1 |
-| 强化学习 | 线性 Actor–Critic 配置 | 连续目标权重、策略梯度与价值更新 | Li, Wang & Cao 2023 | 算法复现 / A2 |
+| 强化学习 | 线性 Actor–Critic 配置 | 连续目标权重、策略梯度与价值更新 | Li, Wang & Cao 2023 | 等价方法复现 / A1 |
 
 每个可训练示例都依次执行训练、内容寻址保存、完整性校验重载，再通过同一 Contract 进入推理/回测。每个策略目录包含完整机器 manifest、包内入口源码、数据 manifest、精确输入事件、可选训练请求、`paper-binding.json` 与中文 Strategy Card；`psrc demo all` 从这些目录发现并运行策略，而不是绕过目录调用内置 factory。包内入口在 manifest、输入哈希、能力和源码策略全部验证成功后才允许 import。
 

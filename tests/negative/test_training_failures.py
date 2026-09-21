@@ -63,6 +63,8 @@ def test_trainable_engine_crash_is_backtest_failure(tmp_path: Path) -> None:
     )
 
     class FailingAdapter:
+        capabilities = capabilities()
+
         def run(
             self,
             *,

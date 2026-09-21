@@ -132,6 +132,7 @@ class ReferenceEngine:
         initial_cash: Decimal = Decimal("100000"),
         fee_rate: Decimal = Decimal("0.0005"),
         slippage_bps: Decimal = Decimal("1"),
+        declared_capabilities: EngineCapabilities | None = None,
     ) -> None:
         if initial_cash <= 0:
             raise ValueError("initial_cash must be positive")
@@ -140,6 +141,13 @@ class ReferenceEngine:
         self.initial_cash = initial_cash
         self.fee_rate = fee_rate
         self.slippage_bps = slippage_bps
+        self._capabilities = declared_capabilities or capabilities()
+        if self._capabilities.engine_id != "reference":
+            raise ValueError("ReferenceEngine capabilities must declare engine_id='reference'")
+
+    @property
+    def capabilities(self) -> EngineCapabilities:
+        return self._capabilities
 
     def run(
         self,

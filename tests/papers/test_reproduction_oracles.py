@@ -8,13 +8,14 @@ from pathlib import Path
 import numpy as np
 
 from psrc.domain.account import AccountSnapshot
-from psrc.domain.actions import Action, NoOp, SubmitOrder, TargetPosition
-from psrc.domain.market import BarPayload, MarketEvent
+from psrc.domain.actions import Action, NoOp, Prediction, SubmitOrder, TargetPosition, TargetWeight
+from psrc.domain.market import BarPayload, MarketEvent, QuoteL1Payload
 from psrc.examples.sma_cross import SmaCrossStrategy
 from psrc.runtime.artifacts import ArtifactStore
 from psrc.strategies.catalog import reinforcement_learning_examples
 from psrc.strategies.common import canonicalize_numeric, stable_float
 from psrc.strategies.reinforcement_learning import (
+    LinearActorCriticAllocationStrategy,
     advantage_actor_critic_update,
     linear_actor_critic_update,
     mean_variance_score,
@@ -27,6 +28,8 @@ from psrc.strategies.rule import (
     weighted_microprice,
 )
 from psrc.strategies.supervised import (
+    L1AdverseSelectionStrategy,
+    LogisticDirectionStrategy,
     erlang_race_probability,
     fit_binary_logistic,
     fit_pooled_ols,
@@ -208,6 +211,33 @@ def test_queue_imbalance_logistic_matches_maximum_likelihood_direction() -> None
     assert positive > 0.9
 
 
+def test_l1_adverse_selection_uses_normalized_queue_imbalance() -> None:
+    strategy = L1AdverseSelectionStrategy()
+    strategy.model = {"weights": [2.0], "intercept": -0.25}
+    strategy.artifact_id = "oracle-model"
+    timestamp = datetime(2026, 1, 2, tzinfo=UTC)
+    event = MarketEvent(
+        event_id="oracle:l1:0",
+        instrument_id="SYNTH.L1",
+        event_time=timestamp,
+        available_time=timestamp,
+        receive_time=timestamp,
+        sequence=0,
+        source="independent-oracle.v1",
+        payload=QuoteL1Payload(
+            bid_price=Decimal("100"),
+            bid_size=Decimal("30"),
+            ask_price=Decimal("101"),
+            ask_size=Decimal("10"),
+        ),
+    )
+    prediction = strategy.on_event(event, _account(timestamp))[0]
+    assert isinstance(prediction, Prediction)
+    imbalance = (30 - 10) / (30 + 10)
+    expected = 1 / (1 + np.exp(-(2 * imbalance - 0.25)))
+    assert abs(float(prediction.value) - expected) < 1e-12
+
+
 def test_fill_probability_reproduces_constant_rate_queue_race() -> None:
     assert erlang_race_probability(1, 1, 2.0, 3.0) == 0.4
     observed = erlang_race_probability(2, 2, 1.0, 1.0)
@@ -234,6 +264,34 @@ def test_directional_logistic_reproduces_paper_gradient_descent() -> None:
     probabilities = 1 / (1 + np.exp(-(x @ weights + intercept)))
     assert probabilities[:2].max() < 0.5
     assert probabilities[2:].min() > 0.5
+
+
+def test_logistic_direction_uses_declared_ohlcv_feature_order() -> None:
+    strategy = LogisticDirectionStrategy()
+    strategy.model = {"weights": [1.0, 2.0, 3.0, 4.0, 5.0], "intercept": -0.1}
+    strategy.artifact_id = "oracle-model"
+    timestamp = datetime(2026, 1, 2, tzinfo=UTC)
+    event = MarketEvent(
+        event_id="oracle:ohlcv:0",
+        instrument_id="PUBLIC.AAPL",
+        event_time=timestamp,
+        available_time=timestamp,
+        receive_time=timestamp,
+        sequence=0,
+        source="independent-oracle.v1",
+        payload=BarPayload(
+            open=Decimal("100"),
+            high=Decimal("110"),
+            low=Decimal("90"),
+            close=Decimal("105"),
+            volume=Decimal("999"),
+        ),
+    )
+    prediction = strategy.on_event(event, _account(timestamp))[0]
+    assert isinstance(prediction, Prediction)
+    features = np.asarray([0.05, 0.10, -0.10, 0.20, np.log1p(999) / 10])
+    expected = 1 / (1 + np.exp(-(features @ np.arange(1.0, 6.0) - 0.1)))
+    assert abs(float(prediction.value) - expected) < 1e-12
 
 
 def test_cross_sectional_ranker_reproduces_pooled_ols_and_sort() -> None:
@@ -294,3 +352,29 @@ def test_continuous_actor_critic_reproduces_policy_and_value_updates(tmp_path: P
     assert policy["algorithm"] == "linear-actor-critic-v1"
     assert np.any(np.asarray(policy["actor_weights"]) != 0)
     assert np.any(np.asarray(policy["critic_weights"]) != 0)
+
+
+def test_continuous_actor_critic_inference_applies_tanh_and_weight_bound() -> None:
+    strategy = LinearActorCriticAllocationStrategy()
+    strategy.policy = {"actor_weights": [1_000_000.0, 0.0, 0.0]}
+    strategy.artifact_id = "oracle-policy"
+    timestamp = datetime(2026, 1, 2, tzinfo=UTC)
+    positive = _bar("PUBLIC.AAPL", "105", 0).model_copy(
+        update={
+            "payload": BarPayload(
+                open=Decimal("100"),
+                high=Decimal("106"),
+                low=Decimal("99"),
+                close=Decimal("105"),
+                volume=Decimal("100"),
+            )
+        }
+    )
+    action = strategy.on_event(positive, _account(timestamp))[0]
+    assert isinstance(action, TargetWeight)
+    assert action.weight == Decimal("0.8")
+
+    strategy.policy = {"actor_weights": [-1_000_000.0, 0.0, 0.0]}
+    action = strategy.on_event(positive, _account(timestamp))[0]
+    assert isinstance(action, TargetWeight)
+    assert action.weight == Decimal("-0.8")

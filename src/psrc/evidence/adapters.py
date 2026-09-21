@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-from collections.abc import Callable
 from pathlib import Path
 
 from psrc.adapters.backtrader import BacktraderAdapter
@@ -35,18 +34,23 @@ def generate_adapter_evidence(output: Path) -> dict[str, object]:
     )
     strict = sandbox == SandboxMode.STRICT_CONTAINER
     policy = RunPolicy(required_sandbox=sandbox)
-    adapters: tuple[tuple[str, BacktestAdapter, Callable[[], EngineCapabilities]], ...] = (
-        ("reference", ReferenceEngine(), lambda: reference_capabilities(strict_container=strict)),
+    reference_declared = reference_capabilities(strict_container=strict)
+    backtrader_declared = backtrader_capabilities(strict_container=strict)
+    adapters: tuple[tuple[str, BacktestAdapter, EngineCapabilities], ...] = (
+        (
+            "reference",
+            ReferenceEngine(declared_capabilities=reference_declared),
+            reference_declared,
+        ),
         (
             "backtrader",
-            BacktraderAdapter(),
-            lambda: backtrader_capabilities(strict_container=strict),
+            BacktraderAdapter(declared_capabilities=backtrader_declared),
+            backtrader_declared,
         ),
     )
     reports: dict[str, RunReport] = {}
-    for name, engine, capability_factory in adapters:
+    for name, engine, engine_capabilities in adapters:
         strategy = SmaCrossStrategy()
-        engine_capabilities = capability_factory()
         plan = compile_run(
             run_id=f"adapter-evidence.{name}",
             strategy=strategy.manifest,
