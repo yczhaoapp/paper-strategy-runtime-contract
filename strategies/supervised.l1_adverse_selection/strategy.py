@@ -1,7 +1,8 @@
 # Generated, reviewable package entrypoint.
-from psrc.strategies.supervised import (
-    L1AdverseSelectionStrategy as _BundledStrategy,
-)
+# Bundled implementation: L1AdverseSelectionStrategy
+from psrc.strategy_api import bundled_strategy_class
+
+_BundledStrategy = bundled_strategy_class("supervised.l1_adverse_selection")
 
 
 class Strategy(_BundledStrategy):

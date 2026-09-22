@@ -22,10 +22,10 @@ Contract v1 的可执行策略包是一个可移动目录，最小内容如下�
 1. 只读取并校验 `strategy.yaml`，对包内 Python 文件逐一计算 SHA-256，并计算受信 `psrc` 运行时源码树哈希；此时不得 import 策略代码；
 2. 校验数据 manifest、精确事件、训练请求及 `TrainingInputEvidence`，并核对行情和训练输入 SHA-256；
 3. 使用策略、源码证据、训练输入证据、数据、引擎和运行策略编译不可变 `ExecutionPlan`；
-4. import 前重新计算源码证据，拒绝发现后修改（TOCTOU），再扫描包内全部 Python 源码，执行 manifest 的 import 允许列表及危险调用策略；
-5. 在开发模式或已证明的严格容器中加载相对文件入口；
+4. import 前重新计算源码证据，拒绝发现后修改（TOCTOU），再扫描包内全部 Python 源码，解析 import 别名和属性调用链；运行时命名空间只能使用公开 `psrc.strategy_api`；
+5. 在开发模式或已证明的严格容器中加载相对文件入口；导入、构造和全部回调都受运行时审计围栏约束，直接文件/进程/网络操作失败；
 6. 核对代码实例的 manifest 与目录 manifest 完全相同；
-7. 执行训练、保存、加载、推理和回测，生成含 `strategy-code-evidence.json` 与训练输入证据的聚合 `RunBundle`。
+7. 只允许通过 `ArtifactStore` 写入训练产物，执行训练、保存、加载、推理和回测，生成含 `strategy-code-evidence.json`、`runtime-capabilities.json` 与训练输入证据的聚合 `RunBundle`。
 
 包源码树哈希由按路径排序的 `{path,size_bytes,sha256}` 数组进行规范 JSON 编码后计算；路径必须是包内非符号链接的相对 `.py` 路径。运行时树使用相同算法。`ExecutionPlan.strategy_code_evidence_sha256` 绑定整个证据对象，因此 manifest 哈希、策略代码哈希和运行时实现哈希具有不同职责。
 

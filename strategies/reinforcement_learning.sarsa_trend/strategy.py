@@ -1,7 +1,8 @@
 # Generated, reviewable package entrypoint.
-from psrc.strategies.reinforcement_learning import (
-    SarsaTrendStrategy as _BundledStrategy,
-)
+# Bundled implementation: SarsaTrendStrategy
+from psrc.strategy_api import bundled_strategy_class
+
+_BundledStrategy = bundled_strategy_class("reinforcement_learning.sarsa_trend")
 
 
 class Strategy(_BundledStrategy):

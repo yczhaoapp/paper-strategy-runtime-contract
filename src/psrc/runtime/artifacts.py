@@ -13,6 +13,7 @@ from pydantic import Field
 from psrc.constants import CONTRACT_VERSION
 from psrc.contract.errors import ContractError, ContractViolation, ErrorCode, ErrorStage
 from psrc.contract.models import ContractModel, Identifier
+from psrc.sandbox.runtime import trusted_runtime_io
 
 
 class ArtifactFile(ContractModel):
@@ -74,6 +75,7 @@ class ArtifactStore:
             raise ValueError(f"reserved artifact path component: {value!r}")
         return value
 
+    @trusted_runtime_io
     def save_bytes(
         self,
         *,
@@ -175,6 +177,7 @@ class ArtifactStore:
                 shutil.rmtree(staging)
         return manifest
 
+    @trusted_runtime_io
     def load_bytes(
         self, *, run_id: str, strategy_id: str, manifest: ArtifactManifest
     ) -> dict[str, bytes]:

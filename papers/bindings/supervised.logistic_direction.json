@@ -30,7 +30,7 @@
     },
     {
       "path": "strategies/supervised.logistic_direction/strategy.py",
-      "sha256": "1498f76709ab7c42d1d5cc2ae47fd1d8a7706b5d1b35792a6bd88eb960e3bd15",
+      "sha256": "e3a1e2c5e9d785d35d2fad8a335acfd91ebf091fc57b79207ead7b8549dee308",
       "symbols": [
         "LogisticDirectionStrategy",
         "class Strategy"

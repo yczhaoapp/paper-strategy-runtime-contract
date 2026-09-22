@@ -19,6 +19,7 @@ from psrc.contract.models import SandboxMode, StrategyCodeEvidence, StrategyMani
 from psrc.runtime.source_evidence import build_strategy_code_evidence
 from psrc.runtime.strategy import RuntimeStrategy
 from psrc.sandbox.container import DockerSandbox
+from psrc.sandbox.runtime import GuardedStrategy, RuntimeResourceDenied, strategy_resource_guard
 from psrc.sandbox.static import StaticPolicyScanner
 
 MANIFEST_NAME = "strategy.yaml"
@@ -146,6 +147,13 @@ def load_strategy(
         source_path = _local_entrypoint(package, module_name)
         if source_path is not None:
             _enforce_source_policy(package)
+            library_roots: list[Path] = []
+            for allowed_module in sorted(
+                package.manifest.resources.allowed_imports | frozenset({"psrc.strategy_api"})
+            ):
+                imported = importlib.import_module(allowed_module)
+                module_paths = getattr(imported, "__path__", ())
+                library_roots.extend(Path(path).resolve() for path in module_paths)
             module_id = f"_psrc_package_{package.manifest_sha256[:20]}"
             spec = importlib.util.spec_from_file_location(module_id, source_path)
             if spec is None or spec.loader is None:
@@ -155,19 +163,40 @@ def load_strategy(
             previous_dont_write_bytecode = sys.dont_write_bytecode
             sys.dont_write_bytecode = True
             try:
-                spec.loader.exec_module(module)
+                with strategy_resource_guard(
+                        policy=package.manifest.resources,
+                        package_root=package.root,
+                        library_roots=tuple(library_roots),
+                ):
+                    spec.loader.exec_module(module)
+                    strategy_type: Any = getattr(module, class_name)
+                    strategy = strategy_type()
             finally:
                 sys.dont_write_bytecode = previous_dont_write_bytecode
-            strategy_type: Any = getattr(module, class_name)
         else:
             if sandbox_mode == SandboxMode.STRICT_CONTAINER and not module_name.startswith("psrc."):
                 raise PermissionError(
                     "strict mode only accepts scanned package-local code or trusted psrc modules"
                 )
             strategy_type = getattr(importlib.import_module(module_name), class_name)
-        strategy = strategy_type()
+            strategy = strategy_type()
     except ContractViolation:
         raise
+    except RuntimeResourceDenied as exc:
+        raise ContractViolation(
+            ContractError(
+                run_id="package.load",
+                stage=ErrorStage.SANDBOX,
+                code=ErrorCode.SANDBOX_POLICY_DENIED,
+                message="Strategy import violated its resource policy",
+                strategy_id=package.manifest.strategy_id,
+                details={
+                    "audit_event": exc.event,
+                    "resource": exc.resource,
+                    "fallback_used": False,
+                },
+            )
+        ) from exc
     except Exception as exc:
         raise ContractViolation(
             ContractError(
@@ -199,6 +228,13 @@ def load_strategy(
                 },
             )
         )
+    if source_path is not None:
+        strategy = GuardedStrategy(
+            strategy,
+            policy=package.manifest.resources,
+            package_root=package.root,
+            library_roots=tuple(library_roots),
+        )
     return cast(RuntimeStrategy, strategy)
 
 
@@ -215,7 +251,9 @@ def _local_entrypoint(package: StrategyPackage, module_name: str) -> Path | None
 
 
 def _enforce_source_policy(package: StrategyPackage) -> None:
-    allowed_imports = package.manifest.resources.allowed_imports | frozenset({"psrc"})
+    allowed_imports = package.manifest.resources.allowed_imports | frozenset(
+        {"psrc.strategy_api"}
+    )
     findings: list[dict[str, object]] = []
     for source_path in sorted(package.root.rglob("*.py")):
         for finding in StaticPolicyScanner.scan(
@@ -253,9 +291,9 @@ def _entrypoint_wrapper(manifest: StrategyManifest) -> str:
         raise ValueError("catalog export requires an installed Python entrypoint")
     return (
         "# Generated, reviewable package entrypoint.\n"
-        f"from {module_name} import (\n"
-        f"    {class_name} as _BundledStrategy,\n"
-        ")\n\n\n"
+        f"# Bundled implementation: {class_name}\n"
+        "from psrc.strategy_api import bundled_strategy_class\n\n"
+        f'_BundledStrategy = bundled_strategy_class("{manifest.strategy_id}")\n\n\n'
         "class Strategy(_BundledStrategy):\n"
         "    manifest = _BundledStrategy.manifest.model_copy(\n"
         f'        update={{"entrypoint": "{LOCAL_ENTRYPOINT}"}}\n'

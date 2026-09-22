@@ -30,7 +30,7 @@
     },
     {
       "path": "strategies/rule.l1_microprice/strategy.py",
-      "sha256": "fca55c58b5f6e1de84c0fd2221e8e084c6aeb42f0108ac3ea6243deba5054d19",
+      "sha256": "5deb5e5a17d66dcf0fa2967cf368df7993034543177e2b21f1435b9ffd42f24b",
       "symbols": [
         "L1MicropriceStrategy",
         "class Strategy"

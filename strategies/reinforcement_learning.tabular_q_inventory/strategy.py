@@ -1,7 +1,8 @@
 # Generated, reviewable package entrypoint.
-from psrc.strategies.reinforcement_learning import (
-    TabularQInventoryStrategy as _BundledStrategy,
-)
+# Bundled implementation: TabularQInventoryStrategy
+from psrc.strategy_api import bundled_strategy_class
+
+_BundledStrategy = bundled_strategy_class("reinforcement_learning.tabular_q_inventory")
 
 
 class Strategy(_BundledStrategy):

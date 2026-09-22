@@ -1,7 +1,8 @@
 # Generated, reviewable package entrypoint.
-from psrc.strategies.supervised import (
-    GaussianVolumeBreakoutStrategy as _BundledStrategy,
-)
+# Bundled implementation: GaussianVolumeBreakoutStrategy
+from psrc.strategy_api import bundled_strategy_class
+
+_BundledStrategy = bundled_strategy_class("supervised.gaussian_volume_breakout")
 
 
 class Strategy(_BundledStrategy):

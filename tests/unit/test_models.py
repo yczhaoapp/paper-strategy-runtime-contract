@@ -36,3 +36,6 @@ def test_import_allow_list_cannot_override_denied_resources() -> None:
             filesystem="artifact_store_only",
             allowed_imports=frozenset({"numpy", "pathlib"}),
         )
+    for forbidden in ("psrc", "psrc.sandbox", "subprocess", "shutil"):
+        with pytest.raises(ValidationError):
+            ResourcePolicy(allowed_imports=frozenset({"numpy", forbidden}))

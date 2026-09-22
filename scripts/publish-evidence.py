@@ -111,6 +111,16 @@ def main() -> int:
 
     host_receipt, host_report = published["host"]
     strict_receipt, strict_report = published["strict"]
+    image = read_json(args.strict / "image.json")
+    if (
+        image.get("build_no_cache") is not True
+        or image.get("base_pull_requested") is not True
+        or not str(image.get("image_id", "")).startswith("sha256:")
+    ):
+        raise ValueError("strict image receipt does not prove a no-cache pull build")
+    image_path = args.output / "strict-image.json"
+    write_json(image_path, image)
+    files.append(image_path)
     summary = {
         "software_version": host_receipt["software_version"],
         "contract_version": host_report["contract_version"],
@@ -122,8 +132,11 @@ def main() -> int:
         },
         "strict_container": {
             **accepted_summary(strict_receipt, strict_report),
+            "image_id": image["image_id"],
+            "build_no_cache": image["build_no_cache"],
             "full_receipt": "evidence/release/strict-verification.json",
             "acceptance_report": "evidence/release/strict-acceptance.json",
+            "image_receipt": "evidence/release/strict-image.json",
         },
         "remote_ci": {"status": "pending_repository_creation", "claims": []},
         "published_files": {

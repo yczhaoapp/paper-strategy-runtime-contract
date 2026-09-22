@@ -1,7 +1,8 @@
 # Generated, reviewable package entrypoint.
-from psrc.strategies.reinforcement_learning import (
-    LinearActorCriticAllocationStrategy as _BundledStrategy,
-)
+# Bundled implementation: LinearActorCriticAllocationStrategy
+from psrc.strategy_api import bundled_strategy_class
+
+_BundledStrategy = bundled_strategy_class("reinforcement_learning.linear_actor_critic_allocation")
 
 
 class Strategy(_BundledStrategy):

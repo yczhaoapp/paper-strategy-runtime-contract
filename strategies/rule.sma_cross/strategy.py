@@ -1,7 +1,8 @@
 # Generated, reviewable package entrypoint.
-from psrc.examples.sma_cross import (
-    SmaCrossStrategy as _BundledStrategy,
-)
+# Bundled implementation: SmaCrossStrategy
+from psrc.strategy_api import bundled_strategy_class
+
+_BundledStrategy = bundled_strategy_class("rule.sma_cross")
 
 
 class Strategy(_BundledStrategy):

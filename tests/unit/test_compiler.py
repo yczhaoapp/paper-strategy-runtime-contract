@@ -9,6 +9,7 @@ from psrc.contract.models import (
     DatasetStream,
     EngineCapabilities,
     RunPolicy,
+    RuntimeCapabilities,
     SandboxMode,
     StrategyManifest,
     SupportLevel,
@@ -141,6 +142,83 @@ def test_missing_engine_profile_is_structured(
         )
 
     assert raised.value.error.code == ErrorCode.ENGINE_CAPABILITY_UNSUPPORTED
+
+
+def test_runtime_training_profile_is_not_required_from_engine(
+    strategy: StrategyManifest,
+    dataset: DatasetManifest,
+    engine: EngineCapabilities,
+    policy: RunPolicy,
+) -> None:
+    trainable = strategy.model_copy(
+        update={
+            "required_profiles": strategy.required_profiles
+            | frozenset({"training.supervised.v1"})
+        }
+    )
+    plan = compile_run(
+        run_id="run.runtime-profile",
+        strategy=trainable,
+        dataset=dataset,
+        engine=engine,
+        policy=policy,
+    )
+    assert plan.runtime_required_profiles == frozenset({"training.supervised.v1"})
+    assert plan.engine_required_profiles == strategy.required_profiles
+
+
+def test_missing_runtime_training_profile_is_structured(
+    strategy: StrategyManifest,
+    dataset: DatasetManifest,
+    engine: EngineCapabilities,
+    policy: RunPolicy,
+) -> None:
+    trainable = strategy.model_copy(
+        update={"required_profiles": frozenset({"training.supervised.v2"})}
+    )
+    runtime = RuntimeCapabilities(
+        runtime_id="test.runtime",
+        runtime_version="1.0.0",
+        profiles=frozenset({"training.supervised.v1"}),
+    )
+    with pytest.raises(ContractViolation) as raised:
+        compile_run(
+            run_id="run.missing-runtime-profile",
+            strategy=trainable,
+            dataset=dataset,
+            engine=engine,
+            runtime=runtime,
+            policy=policy,
+        )
+    assert raised.value.error.code == ErrorCode.RUNTIME_CAPABILITY_UNSUPPORTED
+    assert raised.value.error.details["missing_profiles"] == ["training.supervised.v2"]
+
+
+def test_runtime_cannot_claim_an_engine_owned_profile(
+    strategy: StrategyManifest,
+    dataset: DatasetManifest,
+    engine: EngineCapabilities,
+    policy: RunPolicy,
+) -> None:
+    engine_without_execution = engine.model_copy(
+        update={"profiles": engine.profiles - {"execution.basic.v1"}}
+    )
+    overclaiming_runtime = RuntimeCapabilities(
+        runtime_id="test.runtime",
+        runtime_version="1.0.0",
+        profiles=frozenset({"training.supervised.v1", "execution.basic.v1"}),
+    )
+    with pytest.raises(ContractViolation) as raised:
+        compile_run(
+            run_id="run.runtime-overclaim",
+            strategy=strategy,
+            dataset=dataset,
+            engine=engine_without_execution,
+            runtime=overclaiming_runtime,
+            policy=policy,
+        )
+    assert raised.value.error.code == ErrorCode.ENGINE_CAPABILITY_UNSUPPORTED
+    assert raised.value.error.details["missing_profiles"] == ["execution.basic.v1"]
 
 
 def test_profile_only_engine_cannot_silently_compile_as_runnable(

@@ -1,4 +1,4 @@
-contract_version: 1.3.0
+contract_version: 1.4.0
 strategy_id: reinforcement_learning.a2c_pairs
 strategy_version: 1.0.0
 kind: reinforcement_learning

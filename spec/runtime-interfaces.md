@@ -24,7 +24,7 @@ psrc run --strategy-dir <package> \
 
 `AccountSnapshot` 每次推理提供时间、基础币种、现金、权益、持仓和活动订单；持仓包含数量、均价、已实现和未实现损益，活动订单包含类型、方向、数量、目标数量、限价和状态。策略返回 no-op、prediction、target position、target weight、submit、cancel 或 replace 七种规范动作。Adapter 必须将订单生命周期写成 `OrderEventRecord`，成交写成 `Fill`，账户逐事件写成快照。
 
-成功运行同时输出执行计划、决策、订单、成交、账户、模型产物、生命周期和 `RuntimeLogRecord`；`RunBundle` 再绑定实际输入、manifest、引擎能力、运行策略、源码及可选训练/外部准入证据。字段清单与实际支持边界见[公开接口覆盖](../docs/public-interface-coverage.md)。
+成功运行同时输出执行计划、决策、订单、成交、账户、模型产物、生命周期和 `RuntimeLogRecord`；`RunBundle` 再绑定实际输入、manifest、运行时能力、引擎能力、运行策略、源码及可选训练/外部准入证据。字段清单与实际支持边界见[公开接口覆盖](../docs/public-interface-coverage.md)。
 
 ## 编译入口
 
@@ -35,11 +35,12 @@ compile_run(
     strategy: StrategyManifest,
     dataset: DatasetManifest,
     engine: EngineCapabilities,
+    runtime: RuntimeCapabilities | None = None,
     policy: RunPolicy,
 ) -> ExecutionPlan
 ```
 
-编译发生在策略 import 和运行之前。成功结果包含四份声明的哈希及逐项兼容性记录；不满足要求时抛出带 `ContractError` 的 `ContractViolation`，不得尝试替代引擎或隐藏转换。
+编译发生在策略 import 和运行之前。`training.supervised.v1` 与 `training.rl.v1` 由 `RuntimeCapabilities` 提供；数据、动作和执行画像由 `EngineCapabilities` 提供。成功结果包含五份声明的哈希、两类能力画像的无重叠分工及逐项兼容性记录；不满足要求时抛出带 `ContractError` 的 `ContractViolation`，不得尝试替代引擎、运行时或隐藏转换。
 
 ## 策略推理入口
 

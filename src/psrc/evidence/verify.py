@@ -460,6 +460,12 @@ def verify_acceptance(
 
     dockerfile = (repository / "Dockerfile").read_text(encoding="utf-8")
     sandbox_source = (repository / "src/psrc/sandbox/container.py").read_text(encoding="utf-8")
+    runtime_sandbox_source = (repository / "src/psrc/sandbox/runtime.py").read_text(
+        encoding="utf-8"
+    )
+    static_sandbox_source = (repository / "src/psrc/sandbox/static.py").read_text(
+        encoding="utf-8"
+    )
     package_source = (repository / "src/psrc/runtime/package.py").read_text(encoding="utf-8")
     compiler_source = (repository / "src/psrc/contract/compiler.py").read_text(encoding="utf-8")
     cli_source = (repository / "src/psrc/cli.py").read_text(encoding="utf-8")
@@ -492,6 +498,10 @@ def verify_acceptance(
         and "FROM python:3.12-slim@sha256:" in dockerfile
         and "uv sync --frozen" in dockerfile
         and "StaticPolicyScanner.scan" in package_source
+        and 'frozenset({"psrc.strategy_api"})' in package_source
+        and "strategy_resource_guard" in package_source
+        and "sys.addaudithook" in runtime_sandbox_source
+        and "filesystem_call_paths" in static_sandbox_source
         and "SANDBOX_POLICY_DENIED" in package_source
         and "SANDBOX_POLICY_DOWNGRADE" in compiler_source
         and "DockerSandbox.execute(" in cli_source
@@ -505,6 +515,13 @@ def verify_acceptance(
             "package_source_policy_enforced": (
                 "StaticPolicyScanner.scan" in package_source
                 and "SANDBOX_POLICY_DENIED" in package_source
+            ),
+            "minimal_strategy_api_only": (
+                'frozenset({"psrc.strategy_api"})' in package_source
+            ),
+            "runtime_audit_fence": (
+                "strategy_resource_guard" in package_source
+                and "sys.addaudithook" in runtime_sandbox_source
             ),
             "strategy_minimum_sandbox_enforced": ("SANDBOX_POLICY_DOWNGRADE" in compiler_source),
             "single_package_docker_entrypoint": (
@@ -600,6 +617,39 @@ def verify_acceptance(
             "required_unseen_paper_strategy_shapes": 3,
         },
     )
+    required_trainable_adapter_tests = {
+        "tests.adapters.test_trainable_lifecycle::"
+        "test_backtrader_executes_train_save_reload_infer_backtest_lifecycle[supervised-logistic]",
+        "tests.adapters.test_trainable_lifecycle::"
+        "test_backtrader_executes_train_save_reload_infer_backtest_lifecycle[rl-tabular-q]",
+    }
+    missing_trainable_adapter_tests = sorted(
+        required_trainable_adapter_tests - executed_tests
+    )
+    check(
+        "external_engine_trainable_lifecycle",
+        not missing_trainable_adapter_tests,
+        {
+            "engine": "backtrader",
+            "required_strategy_kinds": ["supervised", "reinforcement_learning"],
+            "missing_tests": missing_trainable_adapter_tests,
+        },
+    )
+    required_sandbox_regressions = {
+        "tests.sandbox.test_policy::"
+        "test_static_scanner_resolves_aliases_and_rejects_runtime_namespace_escape",
+        "tests.sandbox.test_policy::"
+        "test_static_scanner_rejects_private_dependency_escape_and_strategy_api_children",
+        "tests.sandbox.test_policy::"
+        "test_runtime_audit_blocks_file_process_and_report_mount_access",
+        "tests.sandbox.test_policy::test_artifact_store_is_the_only_writable_strategy_channel",
+    }
+    missing_sandbox_regressions = sorted(required_sandbox_regressions - executed_tests)
+    check(
+        "strategy_resource_policy_regressions",
+        not missing_sandbox_regressions,
+        {"missing_tests": missing_sandbox_regressions},
+    )
     required_boundary_tests = {
         "tests.negative.test_reference_engine_failures::"
         "test_direct_orders_cannot_accumulate_beyond_position_limit",
@@ -610,10 +660,15 @@ def verify_acceptance(
         "tests.e2e.test_cli::test_invalid_contract_version_uses_structured_persisted_failure",
         "tests.e2e.test_cli::test_reused_output_contains_only_the_latest_failed_run",
         "tests.unit.test_compiler::test_insufficient_declared_lookback_fails_before_execution",
+        "tests.unit.test_compiler::test_runtime_training_profile_is_not_required_from_engine",
+        "tests.unit.test_compiler::test_missing_runtime_training_profile_is_structured",
+        "tests.unit.test_compiler::test_runtime_cannot_claim_an_engine_owned_profile",
         "tests.negative.test_runtime_contract_enforcement::"
         "test_orchestrator_rejects_strategy_identity_mismatch",
         "tests.negative.test_runtime_contract_enforcement::"
         "test_orchestrator_rejects_engine_capability_mismatch",
+        "tests.negative.test_runtime_contract_enforcement::"
+        "test_orchestrator_rejects_runtime_capability_mismatch",
         "tests.negative.test_runtime_contract_enforcement::"
         "test_orchestrator_rejects_sandbox_downgrade",
         "tests.negative.test_runtime_contract_enforcement::"

@@ -14,12 +14,14 @@ from psrc.contract.models import (
     EngineCapabilities,
     ExecutionPlan,
     RunPolicy,
+    RuntimeCapabilities,
     SandboxMode,
     StrategyManifest,
     SupportLevel,
     Timeframe,
     TimeframeMode,
 )
+from psrc.runtime.capabilities import capabilities as runtime_capabilities
 
 
 def _major(version: str) -> int | None:
@@ -119,14 +121,17 @@ def compile_run(
     dataset: DatasetManifest,
     engine: EngineCapabilities,
     policy: RunPolicy,
+    runtime: RuntimeCapabilities | None = None,
     strategy_code_evidence_sha256: str | None = None,
     training_input_evidence_sha256: str | None = None,
     external_strategy_admission_sha256: str | None = None,
 ) -> ExecutionPlan:
+    runtime = runtime or runtime_capabilities()
     versions = {
         "strategy": strategy.contract_version,
         "dataset": dataset.contract_version,
         "engine": engine.contract_version,
+        "runtime": runtime.contract_version,
     }
     incompatible = {
         name: version for name, version in versions.items() if _major(version) != CONTRACT_MAJOR
@@ -185,15 +190,34 @@ def compile_run(
             },
         )
 
-    missing_profiles = strategy.required_profiles - engine.profiles
-    if missing_profiles:
+    runtime_namespace_profiles = frozenset(
+        profile for profile in strategy.required_profiles if profile.startswith("training.")
+    )
+    runtime_required_profiles = runtime_namespace_profiles
+    missing_runtime_profiles = runtime_required_profiles - runtime.profiles
+    if missing_runtime_profiles:
+        _fail(
+            run_id=run_id,
+            strategy=strategy,
+            engine=engine,
+            code=ErrorCode.RUNTIME_CAPABILITY_UNSUPPORTED,
+            message="Runtime does not satisfy required orchestration capability profiles",
+            details={
+                "runtime_id": runtime.runtime_id,
+                "missing_profiles": sorted(missing_runtime_profiles),
+            },
+        )
+
+    engine_required_profiles = strategy.required_profiles - runtime_required_profiles
+    missing_engine_profiles = engine_required_profiles - engine.profiles
+    if missing_engine_profiles:
         _fail(
             run_id=run_id,
             strategy=strategy,
             engine=engine,
             code=ErrorCode.ENGINE_CAPABILITY_UNSUPPORTED,
             message="Engine does not satisfy required capability profiles",
-            details={"missing_profiles": sorted(missing_profiles)},
+            details={"missing_profiles": sorted(missing_engine_profiles)},
         )
 
     missing_actions = strategy.action_requirements.allowed - engine.action_kinds
@@ -385,6 +409,9 @@ def compile_run(
         strategy_id=strategy.strategy_id,
         dataset_id=dataset.dataset_id,
         engine_id=engine.engine_id,
+        runtime_id=runtime.runtime_id,
+        runtime_required_profiles=runtime_required_profiles,
+        engine_required_profiles=engine_required_profiles,
         data_requirements=strategy.data_requirements,
         dataset_streams=dataset.streams,
         compatibility=tuple(records),
@@ -394,6 +421,7 @@ def compile_run(
         external_strategy_admission_sha256=external_strategy_admission_sha256,
         dataset_manifest_sha256=sha256_model(dataset),
         engine_capabilities_sha256=sha256_model(engine),
+        runtime_capabilities_sha256=sha256_model(runtime),
         run_policy_sha256=sha256_model(policy),
         required_sandbox=policy.required_sandbox,
         compiled_at=datetime.now(UTC),

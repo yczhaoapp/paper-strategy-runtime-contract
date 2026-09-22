@@ -1,5 +1,5 @@
 challenge: SX-CH-003
-contract_version: "1.3.0"
+contract_version: "1.4.0"
 policy:
   no_silent_fallback: true
   strict_compatibility_default: true
@@ -71,7 +71,7 @@ criteria:
       - reports/generated/runs/compatibility/bundle.json
 
   tests_security_extension:
-    description: 正常与失败测试、严格沙箱、适配器、能力画像和统一报告。
+    description: 正常与失败测试、静态与运行时策略资源围栏、严格容器、适配器、运行时/引擎能力分工、可训练策略的外部引擎全生命周期和统一报告。
     required_verified_adapters:
       - reference
       - backtrader

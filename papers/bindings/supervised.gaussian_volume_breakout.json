@@ -30,7 +30,7 @@
     },
     {
       "path": "strategies/supervised.gaussian_volume_breakout/strategy.py",
-      "sha256": "6b977d28dc0fe8784a2f0d875c125004907d75ff1acef46cb6056fb9828f8d7a",
+      "sha256": "a3a176619efd321a11be73ceaffa97f9c55a56cbeced0b8d5a55adff893864eb",
       "symbols": [
         "GaussianVolumeBreakoutStrategy",
         "class Strategy"

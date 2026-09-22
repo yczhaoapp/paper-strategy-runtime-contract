@@ -1,3 +1,11 @@
+# 2.7.0 — 2026-09-22
+
+- Runtime Contract 升级到 1.4：新增 `RuntimeCapabilities`，把 `training.supervised.v1` / `training.rl.v1` 与引擎的数据、动作、执行画像分开协商，并在执行计划与 RunBundle 中固定提供者和哈希。
+- Backtrader 增加监督 Logistic 与 RL Tabular-Q 的训练、保存、重载、推理、回测全生命周期门禁，不再只验证规则型 bar 策略。
+- 策略包只开放 `psrc.strategy_api`；静态扫描解析 import 别名和完整属性路径，运行时审计钩子阻止直接文件、进程、网络访问，只有受信 `ArtifactStore` 可写产物。
+- Tabular Q、SARSA 与 Double Q 增加专用数值 oracle 并接入论文声明测试绑定；鉴于状态、动作和实验环境仍有差异，三者继续保持 A1，未虚报 A2。
+- 严格容器构建默认使用 `--no-cache --pull`，并记录镜像内容 ID。
+
 # 2.6.3 — 2026-09-22
 
 - Runtime Contract 升级到 1.3：`BacktestAdapter.run` 成为统一的已验证模板入口；直接调用也会绑定计划、策略、引擎能力、沙箱和源事件，并执行声明的兼容转换后再进入引擎钩子。

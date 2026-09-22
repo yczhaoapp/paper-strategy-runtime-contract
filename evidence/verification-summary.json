@@ -1,10 +1,10 @@
 {
-  "contract_version": "1.3.0",
+  "contract_version": "1.4.0",
   "host": {
-    "acceptance_checks_passed": 19,
-    "acceptance_checks_total": 19,
+    "acceptance_checks_passed": 21,
+    "acceptance_checks_total": 21,
     "acceptance_report": "evidence/release/host-acceptance.json",
-    "coverage_percent": 92.65,
+    "coverage_percent": 91.8,
     "errors": 0,
     "failures": 0,
     "full_receipt": "evidence/release/host-verification.json",
@@ -12,32 +12,36 @@
     "scope": "development_preflight",
     "skipped": 0,
     "status": "passed",
-    "tests": 208
+    "tests": 222
   },
   "published_files": {
-    "evidence/release/host-acceptance.json": "d72e5e8bae03b3a60b0b2f494f46b6ca5682eb7b593fc242e5f9e4e89f43b454",
-    "evidence/release/host-verification.json": "e6959ced79fcdf352ed423cb662722b4718fe89911fbc0249f01e2e523fe0874",
-    "evidence/release/strict-acceptance.json": "831378d63c745f0434a0337f74c1662ba048c4863688f36238f10c01ca19944b",
-    "evidence/release/strict-verification.json": "0318d3f91cae2edb55bc5addc9b589803dec8e44c92db10931970cb95da7e841"
+    "evidence/release/host-acceptance.json": "a1b6522b8761e5475fe20284184bcc648e7b9bd11b99fd2be25c3c7209b99e51",
+    "evidence/release/host-verification.json": "de5a109b2baceb1740edaa4796877497830473886cac8d8222848e31b809927c",
+    "evidence/release/strict-acceptance.json": "37f3f35d07a567aedd31c4356252d1dd3acf01546a6f38b65a1ac70b908eb137",
+    "evidence/release/strict-image.json": "f81616c92946ab43a659ff517bbdcff48fea26ab062287ff94bed1c4fd10d6c8",
+    "evidence/release/strict-verification.json": "4a2df6e48f72cc9ffbae46ef3ea10ddcfba78710840dc6a30bfdc6eaa12bb61a"
   },
   "remote_ci": {
     "claims": [],
     "status": "pending_repository_creation"
   },
-  "software_version": "2.6.3",
+  "software_version": "2.7.0",
   "strict_container": {
-    "acceptance_checks_passed": 19,
-    "acceptance_checks_total": 19,
+    "acceptance_checks_passed": 21,
+    "acceptance_checks_total": 21,
     "acceptance_report": "evidence/release/strict-acceptance.json",
-    "coverage_percent": 92.87,
+    "build_no_cache": true,
+    "coverage_percent": 92.01,
     "errors": 0,
     "failures": 0,
     "full_receipt": "evidence/release/strict-verification.json",
+    "image_id": "sha256:395bed6f882b4a19658fc304e8dee96ef5e54e6ef13a530de18d65825419c441",
+    "image_receipt": "evidence/release/strict-image.json",
     "python": "3.12.14 (main, Aug 31 2026, 23:47:53) [GCC 14.2.0]",
     "scope": "strict_container",
     "skipped": 0,
     "status": "passed",
-    "tests": 208
+    "tests": 222
   },
-  "verification_input_sha256": "78257c93def2d0a82209ac8c8728164babd5c05b399a7bd99c33e073b66e2634"
+  "verification_input_sha256": "4259490273e42297478fc9a9e5985d53c7585b9fe939be92f1550591dcc4233e"
 }

@@ -17,8 +17,11 @@ from psrc.strategies.common import canonicalize_numeric, stable_float
 from psrc.strategies.reinforcement_learning import (
     LinearActorCriticAllocationStrategy,
     advantage_actor_critic_update,
+    double_q_update,
     linear_actor_critic_update,
     mean_variance_score,
+    q_learning_update,
+    sarsa_update,
 )
 from psrc.strategies.rule import (
     DonchianBreakoutStrategy,
@@ -311,6 +314,58 @@ def test_risk_averse_bandit_reproduces_mean_variance_thompson_objective(
     policy = _rl_policy("reinforcement_learning.risk_averse_contextual_bandit", tmp_path)
     assert policy["algorithm"] == "mean-variance-thompson-disjoint-v1"
     assert len(policy["arms"]) == 3  # type: ignore[arg-type]
+
+
+def test_tabular_q_reproduces_off_policy_bellman_update(tmp_path: Path) -> None:
+    values = [1.0, 0.0, 0.0]
+    next_values = [2.0, 4.0, 3.0]
+    q_learning_update(
+        values,
+        next_values,
+        action=0,
+        reward=2.0,
+        terminated=False,
+    )
+    assert abs(values[0] - (1.0 + 0.2 * (2.0 + 0.9 * 4.0 - 1.0))) < 1e-12
+    policy = _rl_policy("reinforcement_learning.tabular_q_inventory", tmp_path)
+    assert policy["algorithm"] == "tabular-q-learning-v1"
+
+
+def test_sarsa_reproduces_observed_next_action_backup(tmp_path: Path) -> None:
+    values = [1.0, 0.0, 0.0]
+    next_values = [9.0, 4.0, 2.0]
+    sarsa_update(
+        values,
+        next_values,
+        action=0,
+        next_action=1,
+        reward=2.0,
+        terminated=False,
+    )
+    expected = 1.0 + 0.15 * (2.0 + 0.85 * 4.0 - 1.0)
+    assert abs(values[0] - expected) < 1e-12
+    assert values[0] != 1.0 + 0.15 * (2.0 + 0.85 * max(next_values) - 1.0)
+    policy = _rl_policy("reinforcement_learning.sarsa_trend", tmp_path)
+    assert policy["algorithm"] == "on-policy-sarsa-v1"
+
+
+def test_double_q_selects_and_evaluates_with_different_tables(tmp_path: Path) -> None:
+    values = [1.0, 0.0, 0.0]
+    selection_values = [2.0, 5.0, 3.0]
+    evaluation_values = [11.0, 7.0, 13.0]
+    double_q_update(
+        values,
+        selection_values,
+        evaluation_values,
+        action=0,
+        reward=2.0,
+        terminated=False,
+    )
+    expected = 1.0 + 0.18 * (2.0 + 0.9 * 7.0 - 1.0)
+    assert abs(values[0] - expected) < 1e-12
+    assert values[0] != 1.0 + 0.18 * (2.0 + 0.9 * max(evaluation_values) - 1.0)
+    policy = _rl_policy("reinforcement_learning.double_q_book_inventory", tmp_path)
+    assert policy["algorithm"] == "double-q-learning-v1"
 
 
 def test_a2c_pairs_reproduces_advantage_actor_critic_update(tmp_path: Path) -> None:

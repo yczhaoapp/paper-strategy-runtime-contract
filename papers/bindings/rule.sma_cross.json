@@ -30,7 +30,7 @@
     },
     {
       "path": "strategies/rule.sma_cross/strategy.py",
-      "sha256": "87263b5ec65eaf7741f56626e20875b1e54f9d05e42a4efaacd8ace3c4bf86fb",
+      "sha256": "3113788ba8fdb3677a425a45e25399a644851845e46d43e4b1b41235c03b92d3",
       "symbols": [
         "SmaCrossStrategy",
         "class Strategy"

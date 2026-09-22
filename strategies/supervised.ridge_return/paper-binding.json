@@ -51,7 +51,7 @@
     },
     {
       "path": "strategies/supervised.ridge_return/strategy.py",
-      "sha256": "4370e3a18813dd82c456c4cb009a459f150261159d7df38a0ead40981f533795",
+      "sha256": "d4c27b724ff10d989889407226a99bcaa4b11add820eeb7199b6223535f8ca84",
       "symbols": [
         "RidgeReturnStrategy",
         "class Strategy"

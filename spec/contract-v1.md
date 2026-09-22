@@ -8,13 +8,14 @@ PSRC 在论文衍生交易策略、数据集、模型训练环境、回测引擎
 
 本文中的**必须**、**不得**、**必需**、**应当**和**可以**为规范性要求，分别对应 **MUST**、**MUST NOT**、**REQUIRED**、**SHOULD** 和 **MAY**。
 
-## 四份声明
+## 五份声明
 
 一次运行必须由以下对象共同编译：
 
 - `StrategyManifest`；
 - `DatasetManifest`；
 - `EngineCapabilities`；
+- `RuntimeCapabilities`；
 - `RunPolicy`。
 
 编译器必须返回 `ExecutionPlan` 或结构化 `ContractError`。编译成功之前，不得 import 或执行策略代码。
@@ -37,7 +38,8 @@ Python 类型是参考 SDK。生成的 JSON Schema 与生命周期消息语义�
 | `TrainingRequest` | 运行和数据集 ID、确定性种子，以及监督特征/标签或 RL transitions |
 | `ArtifactManifest` | 模型/策略/状态文件、字节数、SHA-256、框架、数据集和种子来源 |
 | `EngineCapabilities` | 支持等级、画像、数据/动作、成交/费用/滑点/队列/延迟/排序与沙箱模式 |
-| `ExecutionPlan` | 四份声明的哈希、实际数据要求、最低沙箱，以及每项要求对应的兼容性记录 |
+| `RuntimeCapabilities` | orchestrator 实际提供的训练和生命周期画像；与引擎能力独立版本化 |
+| `ExecutionPlan` | 五份声明的哈希、运行时/引擎画像分工、实际数据要求、最低沙箱，以及每项要求对应的兼容性记录 |
 | `RunReport` / `FailureReport` | 带原始语义上下文的完整成功或失败证据 |
 | `RunBundle` | 成功报告、四份原始声明及可选训练请求的单一聚合对象 |
 
@@ -47,7 +49,7 @@ Python 类型是参考 SDK。生成的 JSON Schema 与生命周期消息语义�
 
 `ActionRequirements.max_abs_position` 是成交后总持仓约束，不是 `TargetPosition` 专属字段。适配器在接受或替换直接订单时必须计入现有持仓和待成交订单，并在实际成交前再次验证。单笔数量另由 `max_order_quantity` 约束。
 
-所有对象拒绝未知核心字段。JSON 是线传输/存储格式，YAML 可用于人工编写声明。`schemas/generated/` 中具有稳定 `$id` 的 Schema 是 Contract `1.3.0` 的规范机器表示；历史 Release 保持不可变。每份 Schema 明确声明 JSON Schema Draft 2020-12，所有内部 `$ref` 均指向本文档的 `#/$defs`，因此标准验证器无需网络或外部 registry 即可验证实例。
+所有对象拒绝未知核心字段。JSON 是线传输/存储格式，YAML 可用于人工编写声明。`schemas/generated/` 中具有稳定 `$id` 的 Schema 是 Contract `1.4.0` 的规范机器表示；历史 Release 保持不可变。每份 Schema 明确声明 JSON Schema Draft 2020-12，所有内部 `$ref` 均指向本文档的 `#/$defs`，因此标准验证器无需网络或外部 registry 即可验证实例。
 
 `StrategyCodeEvidence` 是 `1.1.0` 新增的可选线对象：它列出策略包 Python 文件的路径、大小和 SHA-256，并记录受信运行时源码树哈希。`ExecutionPlan.strategy_code_evidence_sha256` 绑定整个证据对象，当前完整验证要求新生成的 Bundle 包含它；字段保持可选是为了让 `1.0.0` 文档继续可读。
 
@@ -56,6 +58,8 @@ Python 类型是参考 SDK。生成的 JSON Schema 与生命周期消息语义�
 Contract 1.2 编译后的 `ExecutionPlan` 同时保存策略数据要求和最低沙箱。orchestrator 在生命周期开始前重算实际策略 manifest 与 Adapter 能力哈希，并核对策略、引擎和沙箱；兼容转换后再按标的执行 lookback，并以 `available_time - event_time` 的纳秒值执行最大陈旧时间。任何错配均失败，不生成成功报告。
 
 Contract 1.3 把上述棚栏固化到 `BacktestAdapter.run` 的公共模板方法：直接调用仍须校验源事件内容哈希并执行计划中的兼容转换，具体引擎只能实现接收已验证事件的钩子。可训练运行还在训练前比较实际 `TrainingInputEvidence` 与计划哈希；`ArtifactManifest.training_request_sha256` 将模型产物绑定到准确训练请求，`RunBundle` 再次核对该 provenance。
+
+Contract 1.4 将 `training.*` 画像归属于 `RuntimeCapabilities`，其余行情、执行和组合画像归属于 `EngineCapabilities`。`ExecutionPlan` 保存两组必需画像及两份能力哈希，orchestrator 和 `RunBundle` 都会重新核对。策略包只能导入最小 `psrc.strategy_api`；别名感知的静态扫描与运行时审计围栏阻止文件、进程、网络和私有运行时命名空间绕过，文件写入只能经受信 `ArtifactStore` 服务完成。
 
 ## 能力画像
 
@@ -73,7 +77,7 @@ v1 注册表初始包含：
 - `training.rl.v1`
 - `live.broker.v1`
 
-画像采用加法扩展。策略必须声明所需画像及具体约束；引擎只能声明适配器已实际覆盖的画像。
+画像采用加法扩展。策略必须声明所需画像及具体约束；运行时只能声明 orchestrator 实际提供的 `training.*` 画像，引擎只能声明适配器已实际覆盖的行情、动作和撮合画像。编译器分别协商两个提供者，不能要求引擎伪装成训练器。
 
 引擎支持等级与能力形状是两个概念。`PROFILED` 不代表可运行。默认策略至少要求 `ADAPTER_AVAILABLE`，只有原生引擎自动化一致性证据才能标记为 `CONFORMANCE_VERIFIED`。
 

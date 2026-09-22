@@ -30,7 +30,7 @@
     },
     {
       "path": "strategies/supervised.cross_sectional_ranker/strategy.py",
-      "sha256": "60eed375ce040431391ba400998b7f3b79a321a2476312329f8d85cb884f9c21",
+      "sha256": "87c0cbe3baae954addf64ae04686c917583c8fa298fd211b59163024258adbe8",
       "symbols": [
         "CrossSectionalRankerStrategy",
         "class Strategy"

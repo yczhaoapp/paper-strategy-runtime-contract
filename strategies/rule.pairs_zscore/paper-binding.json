@@ -51,7 +51,7 @@
     },
     {
       "path": "strategies/rule.pairs_zscore/strategy.py",
-      "sha256": "c89fae5514788f1f2ba66a4a9672b11ba53a52b27ab3b75271ed8274888f5dc8",
+      "sha256": "3f194bc0fb3dc60e821942ae59e35cc00a00a814c553c78e2ed1da14c09ba595",
       "symbols": [
         "PairsZScoreStrategy",
         "class Strategy"

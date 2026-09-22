@@ -119,6 +119,23 @@ def test_orchestrator_rejects_engine_capability_mismatch() -> None:
     assert "engine_capabilities_sha256" in caught.value.error.details["mismatches"]
 
 
+def test_orchestrator_rejects_runtime_capability_mismatch() -> None:
+    events = minute_bars()
+    strategy = SmaCrossStrategy()
+    plan, declared = _plan_for(strategy, events)
+    tampered = plan.model_copy(update={"runtime_capabilities_sha256": "f" * 64})
+    with pytest.raises(ContractViolation) as caught:
+        run_rule(
+            plan=tampered,
+            strategy=strategy,
+            events=events,
+            engine=ReferenceEngine(declared_capabilities=declared),
+            sandbox_mode=SandboxMode.DEVELOPMENT,
+        )
+    assert caught.value.error.code == ErrorCode.EXECUTION_CONTEXT_MISMATCH
+    assert "runtime_capabilities_sha256" in caught.value.error.details["mismatches"]
+
+
 def test_orchestrator_rejects_sandbox_downgrade() -> None:
     events = minute_bars()
     strategy = SmaCrossStrategy()

@@ -6,7 +6,7 @@
         "errors": 0,
         "failures": 0,
         "skipped": 0,
-        "tests": 208
+        "tests": 222
       },
       "passed": true
     },
@@ -23,7 +23,7 @@
     "code_coverage": {
       "detail": {
         "minimum": 90,
-        "percent_covered": 92.65
+        "percent_covered": 91.8
       },
       "passed": true
     },
@@ -111,7 +111,8 @@
               "runtime_fidelity_observed": "R1_unified_contract",
               "source_data_sha256": "ae71a1d713137b0d3029474773bf04977870b69e2b422dd98555aff935fe7cda",
               "tests_executed": [
-                "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.double_q_book_inventory]"
+                "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.double_q_book_inventory]",
+                "tests/papers/test_reproduction_oracles.py::test_double_q_selects_and_evaluates_with_different_tables"
               ]
             },
             "runtime_verified": true,
@@ -190,7 +191,8 @@
               "runtime_fidelity_observed": "R1_unified_contract",
               "source_data_sha256": "6993433f37d1cd97bff46b9b1c19bb48c3a62fd0912b9489fca49b07a87bc2a8",
               "tests_executed": [
-                "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.sarsa_trend]"
+                "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.sarsa_trend]",
+                "tests/papers/test_reproduction_oracles.py::test_sarsa_reproduces_observed_next_action_backup"
               ]
             },
             "runtime_verified": true,
@@ -216,7 +218,8 @@
               "runtime_fidelity_observed": "R1_unified_contract",
               "source_data_sha256": "be7aee95ff610f58ed3821fae4a7b5048671cd959b94101db284d98a859f8471",
               "tests_executed": [
-                "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.tabular_q_inventory]"
+                "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.tabular_q_inventory]",
+                "tests/papers/test_reproduction_oracles.py::test_tabular_q_reproduces_off_policy_bellman_update"
               ]
             },
             "runtime_verified": true,
@@ -626,14 +629,27 @@
       },
       "passed": true
     },
+    "external_engine_trainable_lifecycle": {
+      "detail": {
+        "engine": "backtrader",
+        "missing_tests": [],
+        "required_strategy_kinds": [
+          "supervised",
+          "reinforcement_learning"
+        ]
+      },
+      "passed": true
+    },
     "fail_closed_sandbox": {
       "detail": {
         "base_image_digest_pinned": true,
         "dependency_lock_enforced": true,
+        "minimal_strategy_api_only": true,
         "missing_controls": [],
         "missing_runtime_attestation_checks": [],
         "non_root_image": true,
         "package_source_policy_enforced": true,
+        "runtime_audit_fence": true,
         "single_package_docker_entrypoint": true,
         "strategy_minimum_sandbox_enforced": true
       },
@@ -693,7 +709,7 @@
     "runtime_boundary_contract_enforcement": {
       "detail": {
         "missing_tests": [],
-        "required_tests": 13,
+        "required_tests": 17,
         "scope": "cumulative position, day expiry, actual bar grid, invalid version, coherent reused output, lookback, staleness, adapter-bound execution context, and training provenance"
       },
       "passed": true
@@ -708,6 +724,12 @@
         "incomplete_executable_packages": [],
         "materially_distinct_contract_shapes": 18,
         "total": 18
+      },
+      "passed": true
+    },
+    "strategy_resource_policy_regressions": {
+      "detail": {
+        "missing_tests": []
       },
       "passed": true
     },
@@ -782,17 +804,17 @@
         "external_references": {},
         "issues": [],
         "reverse_dns_extensions_enforced": true,
-        "schema_count": 31,
+        "schema_count": 32,
         "standalone_references": true,
-        "unique_ids": 31
+        "unique_ids": 32
       },
       "passed": true
     }
   },
-  "contract_version": "1.3.0",
-  "passed_checks": 19,
+  "contract_version": "1.4.0",
+  "passed_checks": 21,
   "status": "passed",
-  "total_checks": 19,
+  "total_checks": 21,
   "verification_scope": "development_preflight",
   "verifier_policy": "generated evidence only; matrix narrative is not a result"
 }

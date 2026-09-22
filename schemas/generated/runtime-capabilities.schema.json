@@ -1,0 +1,48 @@
+{
+  "$id": "urn:psrc:schema/runtime-capabilities.schema.json?contract=1.4.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "default": "1.4.0",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "extensions": {
+      "patternProperties": {
+        "^(?:[a-z](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z](?:[a-z0-9-]*[a-z0-9])?$": {
+          "additionalProperties": true,
+          "type": "object"
+        }
+      },
+      "title": "Extensions",
+      "type": "object"
+    },
+    "profiles": {
+      "items": {
+        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+        "type": "string"
+      },
+      "title": "Profiles",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "runtime_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Runtime Id",
+      "type": "string"
+    },
+    "runtime_version": {
+      "title": "Runtime Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "profiles",
+    "runtime_id",
+    "runtime_version"
+  ],
+  "title": "RuntimeCapabilities",
+  "type": "object"
+}

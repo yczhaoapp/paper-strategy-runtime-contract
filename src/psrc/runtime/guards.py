@@ -11,18 +11,52 @@ from psrc.contract.models import (
     DatasetStream,
     EngineCapabilities,
     ExecutionPlan,
+    RuntimeCapabilities,
     SandboxMode,
     StrategyManifest,
     TimeframeMode,
 )
 from psrc.domain.actions import Action, ActionEnvelope, SubmitOrder, TargetPosition
 from psrc.domain.market import BookSnapshotL2Payload, MarketEvent
+from psrc.runtime.capabilities import capabilities as runtime_capabilities
 from psrc.runtime.strategy import RuntimeStrategy
 
 _SANDBOX_RANK = {
     SandboxMode.DEVELOPMENT: 0,
     SandboxMode.STRICT_CONTAINER: 1,
 }
+
+
+def validate_runtime_context(plan: ExecutionPlan) -> None:
+    """Bind orchestration-owned profiles to the runtime that executes the plan."""
+    runtime: RuntimeCapabilities = runtime_capabilities()
+    mismatches: dict[str, object] = {}
+    if runtime.runtime_id != plan.runtime_id:
+        mismatches["runtime_id"] = {"planned": plan.runtime_id, "actual": runtime.runtime_id}
+    actual_sha256 = sha256_model(runtime)
+    if actual_sha256 != plan.runtime_capabilities_sha256:
+        mismatches["runtime_capabilities_sha256"] = {
+            "planned": plan.runtime_capabilities_sha256,
+            "actual": actual_sha256,
+        }
+    missing = plan.runtime_required_profiles - runtime.profiles
+    if missing:
+        mismatches["runtime_required_profiles"] = {
+            "missing": sorted(missing),
+            "actual": sorted(runtime.profiles),
+        }
+    if mismatches:
+        raise ContractViolation(
+            ContractError(
+                run_id=plan.run_id,
+                strategy_id=plan.strategy_id,
+                engine_id=plan.engine_id,
+                stage=ErrorStage.VALIDATION,
+                code=ErrorCode.EXECUTION_CONTEXT_MISMATCH,
+                message="Actual runtime context does not match the compiled plan",
+                details={"mismatches": mismatches, "fallback_used": False},
+            )
+        )
 
 
 def validate_execution_context(

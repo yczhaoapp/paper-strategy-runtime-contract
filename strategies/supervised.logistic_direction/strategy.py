@@ -1,7 +1,8 @@
 # Generated, reviewable package entrypoint.
-from psrc.strategies.supervised import (
-    LogisticDirectionStrategy as _BundledStrategy,
-)
+# Bundled implementation: LogisticDirectionStrategy
+from psrc.strategy_api import bundled_strategy_class
+
+_BundledStrategy = bundled_strategy_class("supervised.logistic_direction")
 
 
 class Strategy(_BundledStrategy):

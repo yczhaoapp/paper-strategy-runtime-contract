@@ -51,7 +51,7 @@
     },
     {
       "path": "strategies/supervised.l2_fill_probability/strategy.py",
-      "sha256": "9c57c173cf34b7388ff380f54ce959a527da7ff6ca57ae9eb800895c0eb1d468",
+      "sha256": "5f82bd739df00aeea3d1ca76e2b59de051388bc187564073a30ec6b1d143bd50",
       "symbols": [
         "L2FillProbabilityStrategy",
         "class Strategy"

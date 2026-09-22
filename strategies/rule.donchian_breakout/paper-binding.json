@@ -51,7 +51,7 @@
     },
     {
       "path": "strategies/rule.donchian_breakout/strategy.py",
-      "sha256": "c0d06f7a7a54b1d642061b0283ac6a1115f75a3c646ab686a27139c1f84956b3",
+      "sha256": "77aaa035ac9eb5a646dfc70d32324fce8103a91cb6145c1ffac1531b7e513c55",
       "symbols": [
         "DonchianBreakoutStrategy",
         "class Strategy"

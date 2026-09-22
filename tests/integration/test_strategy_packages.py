@@ -140,8 +140,7 @@ def test_standalone_external_strategy_directory_executes_without_catalog(
     for filename in ("dataset-manifest.json", "input-events.json"):
         (package_root / filename).write_bytes((generated.root / filename).read_bytes())
 
-    source = f"""from psrc.contract.models import StrategyManifest
-from psrc.domain.actions import TargetPosition
+    source = f"""from psrc.strategy_api import StrategyManifest, TargetPosition
 
 
 class Strategy:
@@ -193,8 +192,7 @@ class Strategy:
 def _external_supervised_source(manifest: StrategyManifest) -> str:
     return f"""from hashlib import sha256
 
-from psrc.contract.models import StrategyManifest
-from psrc.domain.actions import Prediction, TargetPosition
+from psrc.strategy_api import Prediction, StrategyManifest, TargetPosition
 
 
 class Strategy:
@@ -264,8 +262,7 @@ class Strategy:
 
 
 def _external_rule_source(manifest: StrategyManifest) -> str:
-    return f"""from psrc.contract.models import StrategyManifest
-from psrc.domain.actions import TargetPosition
+    return f"""from psrc.strategy_api import StrategyManifest, TargetPosition
 
 
 class Strategy:
@@ -291,8 +288,7 @@ class Strategy:
 def _external_rl_source(manifest: StrategyManifest) -> str:
     return f"""from hashlib import sha256
 
-from psrc.contract.models import StrategyManifest
-from psrc.domain.actions import TargetPosition
+from psrc.strategy_api import StrategyManifest, TargetPosition
 
 
 class Strategy:

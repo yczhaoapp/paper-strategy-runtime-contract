@@ -140,14 +140,22 @@ class ResourcePolicy(ContractModel):
             {"aiohttp", "ftplib", "http", "requests", "smtplib", "socket", "urllib"}
         )
         filesystem_modules = frozenset({"os", "pathlib", "shutil", "tempfile"})
+        process_modules = frozenset({"ctypes", "multiprocessing", "pty", "subprocess"})
         forbidden: set[str] = set()
+        runtime_modules = {
+            module
+            for module in self.allowed_imports
+            if module == "psrc" or module.startswith("psrc.")
+        }
         if self.network == "deny":
             forbidden.update(self.allowed_imports & network_modules)
         if self.filesystem != "unrestricted":
             forbidden.update(self.allowed_imports & filesystem_modules)
+        forbidden.update(runtime_modules)
+        forbidden.update(self.allowed_imports & process_modules)
         if forbidden:
             raise ValueError(
-                "allowed_imports conflicts with denied network/filesystem capabilities: "
+                "allowed_imports contains reserved runtime or denied resource modules: "
                 f"{sorted(forbidden)}"
             )
         return self
@@ -256,6 +264,14 @@ class EngineCapabilities(ContractModel):
     extensions: ExtensionMap = Field(default_factory=dict)
 
 
+class RuntimeCapabilities(ContractModel):
+    contract_version: ContractVersion = CONTRACT_VERSION
+    runtime_id: Identifier
+    runtime_version: str
+    profiles: frozenset[Identifier]
+    extensions: ExtensionMap = Field(default_factory=dict)
+
+
 class RunPolicy(ContractModel):
     strict: bool = True
     allow_lossy: bool = False
@@ -285,6 +301,9 @@ class ExecutionPlan(ContractModel):
     strategy_id: Identifier
     dataset_id: Identifier
     engine_id: Identifier
+    runtime_id: Identifier
+    runtime_required_profiles: frozenset[Identifier] = frozenset()
+    engine_required_profiles: frozenset[Identifier] = frozenset()
     data_requirements: tuple[DataRequirement, ...] = ()
     dataset_streams: tuple[DatasetStream, ...]
     compatibility: tuple[CompatibilityRecord, ...]
@@ -298,6 +317,7 @@ class ExecutionPlan(ContractModel):
     )
     dataset_manifest_sha256: str
     engine_capabilities_sha256: str
+    runtime_capabilities_sha256: str
     run_policy_sha256: str
     required_sandbox: SandboxMode = SandboxMode.DEVELOPMENT
     compiled_at: datetime

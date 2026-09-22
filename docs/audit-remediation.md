@@ -21,6 +21,9 @@
 | 三个 A2 claim 的 oracle 未覆盖全部语义 | 不影响官方数量门槛，但不满足项目自身逐 claim 证据标准 | 增加 OHLCV 特征顺序、队列不平衡和推理边界 oracle；线性 Actor–Critic 因实质偏差降为 A1 |
 | 直接调用 `BacktestAdapter.run` 可绕过 orchestrator 棚栏 | 公开回测入口能产生错误归因的成功报告 | Adapter 基类以不可覆写模板统一校验上下文、源事件、兼容转换和有效事件；引擎只实现已验证钩子 |
 | 实际训练请求未与计划和产物绑定 | 可用另一份训练载荷生成模型后配上原证据 | 训练前重算证据哈希；产物记录训练请求哈希；orchestrator 与 `RunBundle` 分层核对 |
+| 属性调用和宽泛 `psrc` 导入可绕过资源策略 | 与 `artifact_store_only` 声明冲突，策略可读容器文件、启动进程或篡改报告 | 只开放 `psrc.strategy_api`；别名/属性路径静态拒绝；导入和回调期审计围栏；仅 `ArtifactStore` 服务可写；增加 NumPy、子进程和篡改反例 |
+| 训练画像被错误要求由回测引擎提供 | 会拒绝本可运行的监督/RL 外部引擎生命周期 | 新增 `RuntimeCapabilities` 并固定能力分工与哈希；Backtrader 增加监督和 RL 全生命周期门禁 |
+| Tabular Q、SARSA、Double Q 缺少方法级 oracle | 通用生命周期不能区分错误的 Bellman、on-policy 或双表更新 | 三种更新提取为可独立验证的步骤，增加手算数值 oracle 并绑定相应论文 claim；因市场环境仍有偏差，忠实度保持 A1 |
 | 普通 `psrc run` 失败只输出 stdout | 不利于机器审计 | 所有普通运行失败写出 `FailureReport`、错误 JSON 和 HTML，尽可能保留已取得的上下文 |
 | 没有固定提交和目标平台证据 | 属于交付闭环缺口 | 本轮建立本地不可变提交；远端仓库建立后由 CI 生成 Linux、Windows、macOS 和严格容器证据 |
 

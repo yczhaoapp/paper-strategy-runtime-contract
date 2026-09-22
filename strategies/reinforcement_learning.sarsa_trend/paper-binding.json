@@ -7,8 +7,8 @@
     {
       "claim_id": "sarsa.algorithm",
       "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
-      "symbol": "SarsaTrendStrategy",
-      "verification_test": "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.sarsa_trend]"
+      "symbol": "sarsa_update",
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_sarsa_reproduces_observed_next_action_backup"
     },
     {
       "claim_id": "sarsa.state",
@@ -44,14 +44,15 @@
   "implementation": [
     {
       "path": "src/psrc/strategies/reinforcement_learning.py",
-      "sha256": "745225bf20b508faf347fe84c07069da4ca7ca9da36799b62d2827d5153e111a",
+      "sha256": "492006c4369ad58223098a69b5af806a1c2627fdb8885eef994e563572c99460",
       "symbols": [
-        "SarsaTrendStrategy"
+        "SarsaTrendStrategy",
+        "sarsa_update"
       ]
     },
     {
       "path": "strategies/reinforcement_learning.sarsa_trend/strategy.py",
-      "sha256": "b87f86238772e019fb73cb13cd121f8059cc453a2dc63bb753c771e3092535f7",
+      "sha256": "641103b183c47b8b3a9609b4a213bc6d7d7e8bf1d7aeb873db24407aee6cda87",
       "symbols": [
         "SarsaTrendStrategy",
         "class Strategy"
@@ -86,7 +87,8 @@
   "strategy_id": "reinforcement_learning.sarsa_trend",
   "strategy_kind": "reinforcement_learning",
   "verification_tests": [
-    "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.sarsa_trend]"
+    "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.sarsa_trend]",
+    "tests/papers/test_reproduction_oracles.py::test_sarsa_reproduces_observed_next_action_backup"
   ],
   "version": "1.1"
 }

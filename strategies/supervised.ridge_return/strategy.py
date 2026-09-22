@@ -1,7 +1,8 @@
 # Generated, reviewable package entrypoint.
-from psrc.strategies.supervised import (
-    RidgeReturnStrategy as _BundledStrategy,
-)
+# Bundled implementation: RidgeReturnStrategy
+from psrc.strategy_api import bundled_strategy_class
+
+_BundledStrategy = bundled_strategy_class("supervised.ridge_return")
 
 
 class Strategy(_BundledStrategy):

@@ -1,7 +1,8 @@
 # Generated, reviewable package entrypoint.
-from psrc.strategies.rule import (
-    PairsZScoreStrategy as _BundledStrategy,
-)
+# Bundled implementation: PairsZScoreStrategy
+from psrc.strategy_api import bundled_strategy_class
+
+_BundledStrategy = bundled_strategy_class("rule.pairs_zscore")
 
 
 class Strategy(_BundledStrategy):

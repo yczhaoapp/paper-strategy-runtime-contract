@@ -1,5 +1,5 @@
 {
-  "contract_version": "1.3.0",
+  "contract_version": "1.4.0",
   "schemas": {
     "account-snapshot": "account-snapshot.schema.json",
     "action": "action.schema.json",
@@ -26,6 +26,7 @@
     "run-input-evidence": "run-input-evidence.schema.json",
     "run-policy": "run-policy.schema.json",
     "run-report": "run-report.schema.json",
+    "runtime-capabilities": "runtime-capabilities.schema.json",
     "runtime-log-record": "runtime-log-record.schema.json",
     "strategy-code-evidence": "strategy-code-evidence.schema.json",
     "strategy-manifest": "strategy-manifest.schema.json",

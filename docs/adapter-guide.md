@@ -2,7 +2,7 @@
 
 # 引擎适配器指南
 
-适配器必须继承 `psrc.adapters.base.BacktestAdapter`，发布一份 `EngineCapabilities`，并实现 `_run_validated`；不得覆盖公共 `run` 模板。该模板在任何直接或 orchestrator 调用中统一绑定执行计划、实际策略、能力、沙箱和源事件，并在进入引擎前执行显式兼容转换。能力声明是一项可检验的承诺，因此必须保守，不能用“计划支持”冒充“已经支持”。
+适配器必须继承 `psrc.adapters.base.BacktestAdapter`，发布一份 `EngineCapabilities`，并实现 `_run_validated`；不得覆盖公共 `run` 模板。该模板在任何直接或 orchestrator 调用中统一绑定执行计划、实际策略、能力、沙箱和源事件，并在进入引擎前执行显式兼容转换。能力声明是一项可检验的承诺，因此必须保守，不能用“计划支持”冒充“已经支持”。训练画像由 `RuntimeCapabilities` 声明；适配器只负责行情、动作、执行和回测能力，不重复声明 orchestrator 的训练能力。
 
 ## 支持等级
 
@@ -42,7 +42,7 @@ psrc run --strategy-dir <package> --engine backtrader --output <report-directory
 | 引擎 | 状态 | 已执行范围 |
 | --- | --- | --- |
 | Reference | `CONFORMANCE_VERIFIED` | bar、trade、L1、L2；Contract v1 全部动作 |
-| Backtrader | `CONFORMANCE_VERIFIED` | 单标的 bar/基础执行画像 |
+| Backtrader | `CONFORMANCE_VERIFIED` | 单标的 bar/基础执行画像；监督 Logistic 与 RL Tabular-Q 的完整训练—保存—重载—推理—回测 |
 | NautilusTrader | `ADAPTER_AVAILABLE` | 单标的 bar/基础执行画像；默认门禁不动态认证 |
 | QuantConnect LEAN | `PROFILED` | 仅设计映射 |
 | Microsoft Qlib | `PROFILED` | 仅批量 ML/信号映射 |

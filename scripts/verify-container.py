@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import shutil
 import subprocess
@@ -11,6 +12,11 @@ from pathlib import Path
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--output", type=Path, default=Path("reports/strict"))
+parser.add_argument(
+    "--allow-cache",
+    action="store_true",
+    help="permit Docker layer cache (release verification defaults to a clean rebuild)",
+)
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
 output = args.output.resolve()
@@ -24,7 +30,30 @@ if docker is None:
     docker = str(desktop_cli) if desktop_cli.is_file() else None
 if docker is None:
     raise SystemExit("Docker CLI is unavailable; install or start Docker Desktop")
-subprocess.run([docker, "build", "--tag", "psrc-verifier:local", str(root)], check=True)
+build = [docker, "build", "--pull", "--tag", "psrc-verifier:local"]
+if not args.allow_cache:
+    build.append("--no-cache")
+build.append(str(root))
+subprocess.run(build, check=True)
+image_id = subprocess.run(
+    [docker, "image", "inspect", "--format", "{{.Id}}", "psrc-verifier:local"],
+    check=True,
+    capture_output=True,
+    text=True,
+).stdout.strip()
+(output / "image.json").write_text(
+    json.dumps(
+        {
+            "image": "psrc-verifier:local",
+            "image_id": image_id,
+            "build_no_cache": not args.allow_cache,
+            "base_pull_requested": True,
+        },
+        indent=2,
+    )
+    + "\n",
+    encoding="utf-8",
+)
 subprocess.run(
     [
         docker,

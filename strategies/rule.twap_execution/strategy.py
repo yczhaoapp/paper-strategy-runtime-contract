@@ -1,7 +1,8 @@
 # Generated, reviewable package entrypoint.
-from psrc.strategies.rule import (
-    TwapExecutionStrategy as _BundledStrategy,
-)
+# Bundled implementation: TwapExecutionStrategy
+from psrc.strategy_api import bundled_strategy_class
+
+_BundledStrategy = bundled_strategy_class("rule.twap_execution")
 
 
 class Strategy(_BundledStrategy):

@@ -48,6 +48,62 @@ def allocation_for_action(action: int) -> float:
     return (-0.8, 0.0, 0.8)[action]
 
 
+def q_learning_update(
+    values: list[float],
+    next_values: list[float],
+    *,
+    action: int,
+    reward: float,
+    terminated: bool,
+    learning_rate: float = 0.2,
+    discount: float = 0.9,
+) -> None:
+    """Apply one off-policy tabular Q-learning Bellman update."""
+    bootstrap = 0.0 if terminated else discount * max(next_values)
+    values[action] += learning_rate * (reward + bootstrap - values[action])
+
+
+def sarsa_update(
+    values: list[float],
+    next_values: list[float],
+    *,
+    action: int,
+    next_action: int | None,
+    reward: float,
+    terminated: bool,
+    learning_rate: float = 0.15,
+    discount: float = 0.85,
+) -> None:
+    """Apply one on-policy SARSA update using the observed next action."""
+    if not terminated and next_action is None:
+        raise ValueError("non-terminal SARSA transitions require the actual next action")
+    if terminated:
+        bootstrap = 0.0
+    else:
+        assert next_action is not None
+        bootstrap = discount * next_values[next_action]
+    values[action] += learning_rate * (reward + bootstrap - values[action])
+
+
+def double_q_update(
+    update_values: list[float],
+    update_next_values: list[float],
+    evaluation_next_values: list[float],
+    *,
+    action: int,
+    reward: float,
+    terminated: bool,
+    learning_rate: float = 0.18,
+    discount: float = 0.9,
+) -> None:
+    """Apply one Double-Q update: select with one table, evaluate with the other."""
+    greedy = int(np.argmax(np.asarray(update_next_values)))
+    bootstrap = 0.0 if terminated else discount * evaluation_next_values[greedy]
+    update_values[action] += learning_rate * (
+        reward + bootstrap - update_values[action]
+    )
+
+
 class _RLStrategy:
     manifest = make_manifest(
         strategy_id="reinforcement_learning.abstract",
@@ -165,9 +221,13 @@ class TabularQInventoryStrategy(_RLStrategy):
                 next_state = _state_key(item.next_state)
                 q.setdefault(state, [0.0, 0.0, 0.0])
                 q.setdefault(next_state, [0.0, 0.0, 0.0])
-                bootstrap = 0.0 if item.terminated else 0.9 * max(q[next_state])
-                target = item.reward + bootstrap
-                q[state][item.action] += 0.2 * (target - q[state][item.action])
+                q_learning_update(
+                    q[state],
+                    q[next_state],
+                    action=item.action,
+                    reward=item.reward,
+                    terminated=item.terminated,
+                )
         return self._save(
             request,
             store,
@@ -216,9 +276,14 @@ class SarsaTrendStrategy(_RLStrategy):
                 next_state = _state_key(item.next_state)
                 q.setdefault(state, [0.0, 0.0, 0.0])
                 q.setdefault(next_state, [0.0, 0.0, 0.0])
-                next_action = item.next_action if item.next_action is not None else 1
-                bootstrap = 0.0 if item.terminated else 0.85 * q[next_state][next_action]
-                q[state][item.action] += 0.15 * (item.reward + bootstrap - q[state][item.action])
+                sarsa_update(
+                    q[state],
+                    q[next_state],
+                    action=item.action,
+                    next_action=item.next_action,
+                    reward=item.reward,
+                    terminated=item.terminated,
+                )
         return self._save(
             request,
             store,
@@ -433,10 +498,13 @@ class DoubleQBookInventoryStrategy(_RLStrategy):
                 q2.setdefault(state, [0.0] * 3)
                 q2.setdefault(next_state, [0.0] * 3)
                 left, right = (q1, q2) if (epoch + index) % 2 == 0 else (q2, q1)
-                greedy = int(np.argmax(left[next_state]))
-                bootstrap = 0.0 if item.terminated else 0.9 * right[next_state][greedy]
-                left[state][item.action] += 0.18 * (
-                    item.reward + bootstrap - left[state][item.action]
+                double_q_update(
+                    left[state],
+                    left[next_state],
+                    right[next_state],
+                    action=item.action,
+                    reward=item.reward,
+                    terminated=item.terminated,
                 )
         combined = {
             state: [q1[state][index] + q2[state][index] for index in range(3)] for state in q1

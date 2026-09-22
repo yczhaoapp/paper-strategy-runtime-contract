@@ -30,7 +30,7 @@
     },
     {
       "path": "strategies/rule.l2_imbalance_maker/strategy.py",
-      "sha256": "6b055b1bbed8d1dff3ad05951e541e3c7b2b5633c1605d7f0f81ba5827e2653b",
+      "sha256": "7774e581d6cc4bc3a389e7f4e63c9fdbfc3604aa77c333481e8f2eb206f7d32e",
       "symbols": [
         "L2ImbalanceMakerStrategy",
         "class Strategy"

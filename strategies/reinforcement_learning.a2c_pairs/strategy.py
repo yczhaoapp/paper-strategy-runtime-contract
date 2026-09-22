@@ -1,7 +1,8 @@
 # Generated, reviewable package entrypoint.
-from psrc.strategies.reinforcement_learning import (
-    A2CPairsStrategy as _BundledStrategy,
-)
+# Bundled implementation: A2CPairsStrategy
+from psrc.strategy_api import bundled_strategy_class
+
+_BundledStrategy = bundled_strategy_class("reinforcement_learning.a2c_pairs")
 
 
 class Strategy(_BundledStrategy):

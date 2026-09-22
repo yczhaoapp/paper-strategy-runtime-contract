@@ -23,6 +23,7 @@ from psrc.contract.models import (
     ExecutionPlan,
     Identifier,
     RunPolicy,
+    RuntimeCapabilities,
     SandboxMode,
     StrategyCodeEvidence,
     StrategyManifest,
@@ -32,6 +33,7 @@ from psrc.domain.actions import Action
 from psrc.domain.market import MarketEvent
 from psrc.papers.models import PaperDocument
 from psrc.runtime.artifacts import ArtifactManifest
+from psrc.runtime.capabilities import capabilities as runtime_capabilities
 from psrc.runtime.training import (
     TrainingInputEvidence,
     TrainingRequest,
@@ -149,6 +151,7 @@ class RunBundle(ContractModel):
     strategy_manifest: StrategyManifest
     dataset_manifest: DatasetManifest
     engine_capabilities: EngineCapabilities
+    runtime_capabilities: RuntimeCapabilities
     run_policy: RunPolicy
     input_evidence: RunInputEvidence
     strategy_code_evidence: StrategyCodeEvidence | None = None
@@ -182,6 +185,12 @@ class RunBundle(ContractModel):
                     plan.engine_capabilities_sha256,
                     sha256_model(self.engine_capabilities),
                 ),
+                ("runtime_id", plan.runtime_id, self.runtime_capabilities.runtime_id),
+                (
+                    "runtime_capabilities_sha256",
+                    plan.runtime_capabilities_sha256,
+                    sha256_model(self.runtime_capabilities),
+                ),
                 ("run_policy_sha256", plan.run_policy_sha256, sha256_model(self.run_policy)),
                 ("required_sandbox", plan.required_sandbox, self.run_policy.required_sandbox),
                 (
@@ -196,6 +205,26 @@ class RunBundle(ContractModel):
             mismatches["sandbox_mode"] = {
                 "reported": self.report.sandbox_mode,
                 "engine_declared": sorted(self.engine_capabilities.sandbox_modes),
+            }
+        if not plan.runtime_required_profiles <= self.runtime_capabilities.profiles:
+            mismatches["runtime_required_profiles"] = sorted(
+                plan.runtime_required_profiles - self.runtime_capabilities.profiles
+            )
+        if not plan.engine_required_profiles <= self.engine_capabilities.profiles:
+            mismatches["engine_required_profiles"] = sorted(
+                plan.engine_required_profiles - self.engine_capabilities.profiles
+            )
+        if plan.runtime_required_profiles & plan.engine_required_profiles:
+            mismatches["capability_provider_overlap"] = sorted(
+                plan.runtime_required_profiles & plan.engine_required_profiles
+            )
+        if (
+            plan.runtime_required_profiles | plan.engine_required_profiles
+        ) != self.strategy_manifest.required_profiles:
+            mismatches["capability_profile_partition"] = {
+                "strategy": sorted(self.strategy_manifest.required_profiles),
+                "runtime": sorted(plan.runtime_required_profiles),
+                "engine": sorted(plan.engine_required_profiles),
             }
         sandbox_rank = {SandboxMode.DEVELOPMENT: 0, SandboxMode.STRICT_CONTAINER: 1}
         if sandbox_rank[SandboxMode(self.report.sandbox_mode)] < sandbox_rank[
@@ -342,6 +371,7 @@ _RUN_OUTPUT_FILES = frozenset(
         "report.html",
         "report.json",
         "run-policy.json",
+        "runtime-capabilities.json",
         "source-events.json",
         "strategy-code-evidence.json",
         "strategy-manifest.json",
@@ -506,6 +536,7 @@ def write_input_evidence(
     strategy: StrategyManifest,
     dataset: DatasetManifest,
     engine: EngineCapabilities,
+    runtime: RuntimeCapabilities | None = None,
     policy: RunPolicy,
     events: tuple[MarketEvent, ...],
     strategy_code_evidence: StrategyCodeEvidence | None = None,
@@ -514,6 +545,7 @@ def write_input_evidence(
     external_strategy_admission: ExternalStrategyAdmission | None = None,
     external_paper_document: PaperDocument | None = None,
 ) -> None:
+    runtime = runtime or runtime_capabilities()
     effective_events = apply_compatibility_plan(events, report.execution_plan)
     input_evidence = RunInputEvidence(
         dataset_id=dataset.dataset_id,
@@ -532,6 +564,7 @@ def write_input_evidence(
         strategy_manifest=strategy,
         dataset_manifest=dataset,
         engine_capabilities=engine,
+        runtime_capabilities=runtime,
         run_policy=policy,
         input_evidence=input_evidence,
         strategy_code_evidence=strategy_code_evidence,
@@ -543,6 +576,7 @@ def write_input_evidence(
     _write_json(output / "strategy-manifest.json", strategy.model_dump(mode="json"))
     _write_json(output / "dataset-manifest.json", dataset.model_dump(mode="json"))
     _write_json(output / "engine-capabilities.json", engine.model_dump(mode="json"))
+    _write_json(output / "runtime-capabilities.json", runtime.model_dump(mode="json"))
     _write_json(output / "run-policy.json", policy.model_dump(mode="json"))
     _write_json(output / "input-evidence.json", input_evidence.model_dump(mode="json"))
     if strategy_code_evidence is not None:

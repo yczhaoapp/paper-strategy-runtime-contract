@@ -4,17 +4,20 @@ import os
 import subprocess
 from pathlib import Path
 
+import numpy as np
 import pytest
 
 from psrc.cli import main
 from psrc.contract.errors import ContractViolation, ErrorCode
 from psrc.contract.models import ResourcePolicy
+from psrc.runtime.artifacts import ArtifactStore
 from psrc.sandbox.container import (
     ContainerMounts,
     DockerSandbox,
     SandboxExecutionResult,
     _network_namespace_isolated,
 )
+from psrc.sandbox.runtime import RuntimeResourceDenied, strategy_resource_guard
 from psrc.sandbox.static import StaticPolicyScanner
 
 
@@ -67,6 +70,114 @@ def test_static_scanner_accepts_manifest_allow_list() -> None:
         frozenset({"math", "numpy"}),
     )
     assert findings == ()
+
+
+def test_static_scanner_resolves_aliases_and_rejects_runtime_namespace_escape() -> None:
+    source = """
+import numpy as np
+from numpy import loadtxt as read_rows
+from psrc import sandbox
+np.save('/psrc/reports/overwrite.npy', [1])
+read_rows('/etc/passwd')
+"""
+    findings = StaticPolicyScanner.scan(
+        source,
+        frozenset({"numpy", "psrc.strategy_api"}),
+    )
+    codes = [finding.code for finding in findings]
+    assert codes.count("FILESYSTEM_CALL_DENIED") == 2
+    assert "IMPORT_DENIED" in codes
+
+
+def test_static_scanner_accepts_only_public_strategy_api_exports() -> None:
+    accepted = StaticPolicyScanner.scan(
+        "from psrc.strategy_api import StrategyManifest, TargetPosition\n",
+        frozenset({"psrc.strategy_api"}),
+    )
+    denied = StaticPolicyScanner.scan(
+        "from psrc.strategy_api import _BUNDLED_STRATEGIES\n",
+        frozenset({"psrc.strategy_api"}),
+    )
+    assert accepted == ()
+    assert {finding.code for finding in denied} == {
+        "PRIVATE_IMPORT_DENIED",
+        "STRATEGY_API_EXPORT_DENIED",
+    }
+
+
+def test_static_scanner_rejects_private_dependency_escape_and_strategy_api_children() -> None:
+    private_escape = StaticPolicyScanner.scan(
+        "import numpy as np\n"
+        "import numpy.lib._npyio_impl as impl\n"
+        "impl.os.remove('/psrc/reports/result.json')\n"
+        "np.lib._npyio_impl.os.remove('/psrc/reports/result.json')\n"
+        "from numpy.ctypeslib import ctypes as ffi\n"
+        "ffi.pythonapi.Py_GetVersion()\n",
+        frozenset({"numpy", "psrc.strategy_api"}),
+    )
+    api_child = StaticPolicyScanner.scan(
+        "import psrc.strategy_api.internal\n",
+        frozenset({"psrc.strategy_api"}),
+    )
+    private_codes = {finding.code for finding in private_escape}
+    assert "PRIVATE_IMPORT_DENIED" in private_codes
+    assert "PRIVATE_ATTRIBUTE_DENIED" in private_codes
+    assert "RESOURCE_NAMESPACE_ESCAPE_DENIED" in private_codes
+    assert {finding.code for finding in api_child} == {"IMPORT_DENIED"}
+
+
+def test_runtime_audit_blocks_file_process_and_report_mount_access(tmp_path: Path) -> None:
+    package = tmp_path / "package"
+    reports = tmp_path / "reports"
+    package.mkdir()
+    reports.mkdir()
+    secret = tmp_path / "secret.txt"
+    secret.write_text("secret", encoding="utf-8")
+    policy = ResourcePolicy()
+
+    with strategy_resource_guard(policy=policy, package_root=package):
+        with pytest.raises(RuntimeResourceDenied):
+            np.save(reports / "overwrite.npy", np.asarray([1.0]))
+        with pytest.raises(RuntimeResourceDenied):
+            np.loadtxt(secret)
+        with pytest.raises(RuntimeResourceDenied):
+            subprocess.run(["true"], check=False)
+        with pytest.raises(RuntimeResourceDenied):
+            os.listdir(tmp_path)
+        with pytest.raises(RuntimeResourceDenied):
+            os.remove(secret)
+
+    assert not (reports / "overwrite.npy").exists()
+    assert secret.is_file()
+
+
+def test_artifact_store_is_the_only_writable_strategy_channel(tmp_path: Path) -> None:
+    package = tmp_path / "package"
+    package.mkdir()
+    store = ArtifactStore(tmp_path / "artifacts")
+    policy = ResourcePolicy()
+    with strategy_resource_guard(policy=policy, package_root=package):
+        artifact = store.save_bytes(
+            run_id="test.runtime-audit",
+            artifact_id="sha256-test",
+            strategy_id="rule.test",
+            strategy_version="1.0.0",
+            artifact_kind="state",
+            framework="test",
+            logical_name="state.txt",
+            media_type="text/plain",
+            payload=b"ok",
+            training_dataset_id="test.dataset",
+            seed=0,
+        )
+        with pytest.raises(RuntimeResourceDenied):
+            (store.root / artifact.artifact_id / "tamper.txt").write_text("bad")
+
+    assert store.load_bytes(
+        run_id="test.runtime-audit",
+        strategy_id="rule.test",
+        manifest=artifact,
+    ) == {"state.txt": b"ok"}
 
 
 def test_docker_command_is_fail_closed(tmp_path: Path) -> None:

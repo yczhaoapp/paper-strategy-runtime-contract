@@ -10,6 +10,7 @@ from psrc.domain.market import MarketEvent
 from psrc.runtime.artifacts import ArtifactManifest, ArtifactStore
 from psrc.runtime.guards import (
     prepare_adapter_invocation,
+    validate_runtime_context,
 )
 from psrc.runtime.lifecycle import Lifecycle, LifecycleState
 from psrc.runtime.report import RunReport, RuntimeLogRecord
@@ -20,6 +21,7 @@ from psrc.runtime.training import (
     TrainingRequest,
     build_training_input_evidence,
 )
+from psrc.sandbox.runtime import bind_strategy_run_id
 
 
 def _effective_events(
@@ -30,6 +32,7 @@ def _effective_events(
     engine: BacktestAdapter,
     sandbox_mode: SandboxMode,
 ) -> tuple[tuple[MarketEvent, ...], RuntimeLogRecord]:
+    validate_runtime_context(plan)
     effective = prepare_adapter_invocation(
         plan=plan,
         strategy=strategy,
@@ -152,6 +155,7 @@ def run_rule(
     engine: BacktestAdapter,
     sandbox_mode: SandboxMode,
 ) -> RunReport:
+    bind_strategy_run_id(strategy, plan.run_id)
     lifecycle = Lifecycle(
         run_id=plan.run_id,
         strategy_id=strategy.manifest.strategy_id,
@@ -210,6 +214,7 @@ def run_trainable(
     store: ArtifactStore,
     sandbox_mode: SandboxMode,
 ) -> RunReport:
+    bind_strategy_run_id(strategy, plan.run_id)
     training_evidence = _validate_training_binding(plan, training)
     lifecycle = Lifecycle(
         run_id=plan.run_id,

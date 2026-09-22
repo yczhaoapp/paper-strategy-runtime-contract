@@ -39,6 +39,10 @@ def test_cli_builds_complete_reproduction_bundle(tmp_path: Path, capsys: object)
     tampered_input["input_evidence"]["source_events"][0]["payload"]["close"] = "999"
     with pytest.raises(ValidationError):
         RunBundle.model_validate(tampered_input)
+    tampered_runtime = json.loads((evidence / "runs/sma/bundle.json").read_text())
+    tampered_runtime["runtime_capabilities"]["runtime_version"] = "tampered"
+    with pytest.raises(ValidationError):
+        RunBundle.model_validate(tampered_runtime)
     bundle_payload["report"]["execution_plan"]["strategy_id"] = "rule.mismatched"
     with pytest.raises(ValidationError):
         RunBundle.model_validate(bundle_payload)
@@ -134,12 +138,54 @@ def test_cli_builds_complete_reproduction_bundle(tmp_path: Path, capsys: object)
             "test_insufficient_declared_lookback_fails_before_execution",
         ),
         (
+            "tests.unit.test_compiler",
+            "test_runtime_training_profile_is_not_required_from_engine",
+        ),
+        (
+            "tests.unit.test_compiler",
+            "test_missing_runtime_training_profile_is_structured",
+        ),
+        (
+            "tests.unit.test_compiler",
+            "test_runtime_cannot_claim_an_engine_owned_profile",
+        ),
+        (
+            "tests.adapters.test_trainable_lifecycle",
+            "test_backtrader_executes_train_save_reload_infer_backtest_lifecycle["
+            "supervised-logistic]",
+        ),
+        (
+            "tests.adapters.test_trainable_lifecycle",
+            "test_backtrader_executes_train_save_reload_infer_backtest_lifecycle["
+            "rl-tabular-q]",
+        ),
+        (
+            "tests.sandbox.test_policy",
+            "test_static_scanner_resolves_aliases_and_rejects_runtime_namespace_escape",
+        ),
+        (
+            "tests.sandbox.test_policy",
+            "test_static_scanner_rejects_private_dependency_escape_and_strategy_api_children",
+        ),
+        (
+            "tests.sandbox.test_policy",
+            "test_runtime_audit_blocks_file_process_and_report_mount_access",
+        ),
+        (
+            "tests.sandbox.test_policy",
+            "test_artifact_store_is_the_only_writable_strategy_channel",
+        ),
+        (
             "tests.negative.test_runtime_contract_enforcement",
             "test_orchestrator_rejects_strategy_identity_mismatch",
         ),
         (
             "tests.negative.test_runtime_contract_enforcement",
             "test_orchestrator_rejects_engine_capability_mismatch",
+        ),
+        (
+            "tests.negative.test_runtime_contract_enforcement",
+            "test_orchestrator_rejects_runtime_capability_mismatch",
         ),
         (
             "tests.negative.test_runtime_contract_enforcement",
@@ -314,7 +360,7 @@ def test_invalid_contract_version_uses_structured_persisted_failure(
     manifest = packages / "rule.sma_cross/strategy.yaml"
     manifest.write_text(
         manifest.read_text(encoding="utf-8").replace(
-            "contract_version: 1.3.0", "contract_version: invalid", 1
+            "contract_version: 1.4.0", "contract_version: invalid", 1
         ),
         encoding="utf-8",
     )

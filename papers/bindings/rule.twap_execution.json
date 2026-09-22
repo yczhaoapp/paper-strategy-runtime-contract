@@ -30,7 +30,7 @@
     },
     {
       "path": "strategies/rule.twap_execution/strategy.py",
-      "sha256": "23266ca8e1aa388e3e975c4927377dd3128403b343ee04b84f18e1b4f28f8e13",
+      "sha256": "2283a1d7ca8b2f3814a4eae11a461bbab23f6aaf18039d0bee21bb924c9e4c8f",
       "symbols": [
         "TwapExecutionStrategy",
         "class Strategy"

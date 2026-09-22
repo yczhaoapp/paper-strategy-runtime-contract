@@ -1,7 +1,8 @@
 # Generated, reviewable package entrypoint.
-from psrc.strategies.rule import (
-    L2ImbalanceMakerStrategy as _BundledStrategy,
-)
+# Bundled implementation: L2ImbalanceMakerStrategy
+from psrc.strategy_api import bundled_strategy_class
+
+_BundledStrategy = bundled_strategy_class("rule.l2_imbalance_maker")
 
 
 class Strategy(_BundledStrategy):
