@@ -6,7 +6,7 @@
         "errors": 0,
         "failures": 0,
         "skipped": 0,
-        "tests": 222
+        "tests": 239
       },
       "passed": true
     },
@@ -23,7 +23,7 @@
     "code_coverage": {
       "detail": {
         "minimum": 90,
-        "percent_covered": 91.8
+        "percent_covered": 91.82
       },
       "passed": true
     },
@@ -112,7 +112,13 @@
               "source_data_sha256": "ae71a1d713137b0d3029474773bf04977870b69e2b422dd98555aff935fe7cda",
               "tests_executed": [
                 "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.double_q_book_inventory]",
-                "tests/papers/test_reproduction_oracles.py::test_double_q_selects_and_evaluates_with_different_tables"
+                "tests/papers/test_reproduction_oracles.py::test_double_q_selects_and_evaluates_with_different_tables",
+                "tests/papers/test_rl_update_properties.py::test_double_q_matches_independent_seeded_reference_batch",
+                "tests/papers/test_rl_update_properties.py::test_double_q_parameterized_cross_table_reference[terminal]",
+                "tests/papers/test_rl_update_properties.py::test_double_q_parameterized_cross_table_reference[update-a]",
+                "tests/papers/test_rl_update_properties.py::test_double_q_parameterized_cross_table_reference[update-b]",
+                "tests/papers/test_rl_update_properties.py::test_double_q_table_swap_swaps_selector_and_evaluator",
+                "tests/papers/test_rl_update_properties.py::test_rl_production_source_has_no_test_fixture_dispatch"
               ]
             },
             "runtime_verified": true,
@@ -192,7 +198,14 @@
               "source_data_sha256": "6993433f37d1cd97bff46b9b1c19bb48c3a62fd0912b9489fca49b07a87bc2a8",
               "tests_executed": [
                 "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.sarsa_trend]",
-                "tests/papers/test_reproduction_oracles.py::test_sarsa_reproduces_observed_next_action_backup"
+                "tests/papers/test_reproduction_oracles.py::test_sarsa_reproduces_observed_next_action_backup",
+                "tests/papers/test_rl_update_properties.py::test_rl_production_source_has_no_test_fixture_dispatch",
+                "tests/papers/test_rl_update_properties.py::test_sarsa_changes_with_observed_action_and_rejects_missing_action",
+                "tests/papers/test_rl_update_properties.py::test_sarsa_matches_independent_seeded_reference_batch",
+                "tests/papers/test_rl_update_properties.py::test_sarsa_parameterized_reference_formula[negative-reward]",
+                "tests/papers/test_rl_update_properties.py::test_sarsa_parameterized_reference_formula[observed-nongreedy]",
+                "tests/papers/test_rl_update_properties.py::test_sarsa_parameterized_reference_formula[terminal]",
+                "tests/papers/test_rl_update_properties.py::test_sarsa_parameterized_reference_formula[zero-alpha]"
               ]
             },
             "runtime_verified": true,
@@ -219,7 +232,13 @@
               "source_data_sha256": "be7aee95ff610f58ed3821fae4a7b5048671cd959b94101db284d98a859f8471",
               "tests_executed": [
                 "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.tabular_q_inventory]",
-                "tests/papers/test_reproduction_oracles.py::test_tabular_q_reproduces_off_policy_bellman_update"
+                "tests/papers/test_reproduction_oracles.py::test_tabular_q_reproduces_off_policy_bellman_update",
+                "tests/papers/test_rl_update_properties.py::test_q_learning_matches_independent_seeded_reference_batch",
+                "tests/papers/test_rl_update_properties.py::test_q_learning_parameterized_reference_formula[negative-reward]",
+                "tests/papers/test_rl_update_properties.py::test_q_learning_parameterized_reference_formula[positive-bootstrap]",
+                "tests/papers/test_rl_update_properties.py::test_q_learning_parameterized_reference_formula[terminal]",
+                "tests/papers/test_rl_update_properties.py::test_q_learning_parameterized_reference_formula[zero-alpha]",
+                "tests/papers/test_rl_update_properties.py::test_rl_production_source_has_no_test_fixture_dispatch"
               ]
             },
             "runtime_verified": true,
@@ -706,6 +725,22 @@
       },
       "passed": true
     },
+    "rl_oracle_anti_fixture_evidence": {
+      "detail": {
+        "missing_tests": [],
+        "properties": [
+          "terminal transitions never bootstrap",
+          "zero learning rate is invariant",
+          "SARSA uses the observed non-greedy action",
+          "Double-Q swaps selection and evaluation tables",
+          "production source has no test-fixture dispatch",
+          "training-save-reload-infer-backtest remains executable"
+        ],
+        "required_tests": 21,
+        "seeded_cases_per_algorithm": 64
+      },
+      "passed": true
+    },
     "runtime_boundary_contract_enforcement": {
       "detail": {
         "missing_tests": [],
@@ -812,9 +847,9 @@
     }
   },
   "contract_version": "1.4.0",
-  "passed_checks": 21,
+  "passed_checks": 22,
   "status": "passed",
-  "total_checks": 21,
+  "total_checks": 22,
   "verification_scope": "development_preflight",
   "verifier_policy": "generated evidence only; matrix narrative is not a result"
 }

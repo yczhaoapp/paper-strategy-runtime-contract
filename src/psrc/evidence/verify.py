@@ -650,6 +650,71 @@ def verify_acceptance(
         not missing_sandbox_regressions,
         {"missing_tests": missing_sandbox_regressions},
     )
+    required_rl_oracle_tests = {
+        "tests.papers.test_rl_update_properties::"
+        "test_rl_production_source_has_no_test_fixture_dispatch",
+        "tests.papers.test_rl_update_properties::"
+        "test_q_learning_parameterized_reference_formula[positive-bootstrap]",
+        "tests.papers.test_rl_update_properties::"
+        "test_q_learning_parameterized_reference_formula[negative-reward]",
+        "tests.papers.test_rl_update_properties::"
+        "test_q_learning_parameterized_reference_formula[terminal]",
+        "tests.papers.test_rl_update_properties::"
+        "test_q_learning_parameterized_reference_formula[zero-alpha]",
+        "tests.papers.test_rl_update_properties::"
+        "test_q_learning_matches_independent_seeded_reference_batch",
+        "tests.papers.test_rl_update_properties::"
+        "test_sarsa_parameterized_reference_formula[observed-nongreedy]",
+        "tests.papers.test_rl_update_properties::"
+        "test_sarsa_parameterized_reference_formula[negative-reward]",
+        "tests.papers.test_rl_update_properties::"
+        "test_sarsa_parameterized_reference_formula[terminal]",
+        "tests.papers.test_rl_update_properties::"
+        "test_sarsa_parameterized_reference_formula[zero-alpha]",
+        "tests.papers.test_rl_update_properties::"
+        "test_sarsa_changes_with_observed_action_and_rejects_missing_action",
+        "tests.papers.test_rl_update_properties::"
+        "test_sarsa_matches_independent_seeded_reference_batch",
+        "tests.papers.test_rl_update_properties::"
+        "test_double_q_parameterized_cross_table_reference[update-a]",
+        "tests.papers.test_rl_update_properties::"
+        "test_double_q_parameterized_cross_table_reference[update-b]",
+        "tests.papers.test_rl_update_properties::"
+        "test_double_q_parameterized_cross_table_reference[terminal]",
+        "tests.papers.test_rl_update_properties::"
+        "test_double_q_table_swap_swaps_selector_and_evaluator",
+        "tests.papers.test_rl_update_properties::"
+        "test_double_q_matches_independent_seeded_reference_batch",
+        "tests.integration.test_rl_strategy_matrix::"
+        "test_every_rl_strategy_trains_reloads_and_backtests["
+        "reinforcement_learning.tabular_q_inventory]",
+        "tests.integration.test_rl_strategy_matrix::"
+        "test_every_rl_strategy_trains_reloads_and_backtests["
+        "reinforcement_learning.sarsa_trend]",
+        "tests.integration.test_rl_strategy_matrix::"
+        "test_every_rl_strategy_trains_reloads_and_backtests["
+        "reinforcement_learning.double_q_book_inventory]",
+        "tests.adapters.test_trainable_lifecycle::"
+        "test_backtrader_executes_train_save_reload_infer_backtest_lifecycle[rl-tabular-q]",
+    }
+    missing_rl_oracle_tests = sorted(required_rl_oracle_tests - executed_tests)
+    check(
+        "rl_oracle_anti_fixture_evidence",
+        not missing_rl_oracle_tests,
+        {
+            "required_tests": len(required_rl_oracle_tests),
+            "seeded_cases_per_algorithm": 64,
+            "properties": [
+                "terminal transitions never bootstrap",
+                "zero learning rate is invariant",
+                "SARSA uses the observed non-greedy action",
+                "Double-Q swaps selection and evaluation tables",
+                "production source has no test-fixture dispatch",
+                "training-save-reload-infer-backtest remains executable",
+            ],
+            "missing_tests": missing_rl_oracle_tests,
+        },
+    )
     required_boundary_tests = {
         "tests.negative.test_reference_engine_failures::"
         "test_direct_orders_cannot_accumulate_beyond_position_limit",

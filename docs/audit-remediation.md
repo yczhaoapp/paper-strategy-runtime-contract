@@ -23,7 +23,7 @@
 | 实际训练请求未与计划和产物绑定 | 可用另一份训练载荷生成模型后配上原证据 | 训练前重算证据哈希；产物记录训练请求哈希；orchestrator 与 `RunBundle` 分层核对 |
 | 属性调用和宽泛 `psrc` 导入可绕过资源策略 | 与 `artifact_store_only` 声明冲突，策略可读容器文件、启动进程或篡改报告 | 只开放 `psrc.strategy_api`；别名/属性路径静态拒绝；导入和回调期审计围栏；仅 `ArtifactStore` 服务可写；增加 NumPy、子进程和篡改反例 |
 | 训练画像被错误要求由回测引擎提供 | 会拒绝本可运行的监督/RL 外部引擎生命周期 | 新增 `RuntimeCapabilities` 并固定能力分工与哈希；Backtrader 增加监督和 RL 全生命周期门禁 |
-| Tabular Q、SARSA、Double Q 缺少方法级 oracle | 通用生命周期不能区分错误的 Bellman、on-policy 或双表更新 | 三种更新提取为可独立验证的步骤，增加手算数值 oracle 并绑定相应论文 claim；因市场环境仍有偏差，忠实度保持 A1 |
+| Tabular Q、SARSA、Double Q 缺少方法级 oracle | 通用生命周期不能区分错误的 Bellman、on-policy 或双表更新；单一 golden case 仍可能被夹具硬编码蒙混 | 三种更新提取为独立步骤，增加多参数、terminal、零学习率、非贪心动作、双表交换、每种 64 组固定 seed 随机参考公式，并与完整生命周期共同绑定；生产源码另有无测试分支 AST 门禁；因市场环境仍有偏差，忠实度保持 A1 |
 | 普通 `psrc run` 失败只输出 stdout | 不利于机器审计 | 所有普通运行失败写出 `FailureReport`、错误 JSON 和 HTML，尽可能保留已取得的上下文 |
 | 没有固定提交和目标平台证据 | 属于交付闭环缺口 | 本轮建立本地不可变提交；远端仓库建立后由 CI 生成 Linux、Windows、macOS 和严格容器证据 |
 

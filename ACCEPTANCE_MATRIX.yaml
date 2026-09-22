@@ -37,7 +37,7 @@ criteria:
       - src/psrc/runtime
 
   strategies:
-    description: 规则、监督学习、强化学习各 6 个，具有实质差异并逐一绑定真实论文证据。
+    description: 规则、监督学习、强化学习各 6 个，具有实质差异并逐一绑定真实论文证据；Tabular Q、SARSA、Double Q 另有多参数、性质和随机批次独立 oracle。
     required_counts:
       rule: 6
       supervised: 6
@@ -51,6 +51,7 @@ criteria:
       - papers/source-registry.json
       - papers/bindings
       - tests/papers/test_pipeline.py
+      - tests/papers/test_rl_update_properties.py
 
   explainable_failures:
     description: 强制失败结构化，兼容性转换显式且可审计。
@@ -71,7 +72,7 @@ criteria:
       - reports/generated/runs/compatibility/bundle.json
 
   tests_security_extension:
-    description: 正常与失败测试、静态与运行时策略资源围栏、严格容器、适配器、运行时/引擎能力分工、可训练策略的外部引擎全生命周期和统一报告。
+    description: 正常与失败测试、静态与运行时策略资源围栏、严格容器、适配器、运行时/引擎能力分工、RL 抗夹具 oracle、可训练策略的外部引擎全生命周期和统一报告。
     required_verified_adapters:
       - reference
       - backtrader

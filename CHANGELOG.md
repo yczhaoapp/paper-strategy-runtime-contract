@@ -1,3 +1,9 @@
+# 2.7.1 — 2026-09-22
+
+- Tabular Q、SARSA、Double Q 新增 17 个多层 oracle 节点：多参数、terminal、零学习率、非贪心实际动作、双表交换对称性，以及每种算法 64 组固定 seed 随机样本。
+- 预期值全部由测试侧独立论文公式计算；生产实现不参与 expected 计算，并增加 AST 回归以禁止测试、数据集、seed 或哈希驱动的生产分支。
+- 三个 RL 论文绑定和硬验收直接要求新 oracle，同时保留训练、制品保存、重载、推理、下单、回测生命周期证明；忠实度继续保持 A1。
+
 # 2.7.0 — 2026-09-22
 
 - Runtime Contract 升级到 1.4：新增 `RuntimeCapabilities`，把 `training.supervised.v1` / `training.rl.v1` 与引擎的数据、动作、执行画像分开协商，并在执行计划与 RunBundle 中固定提供者和哈希。

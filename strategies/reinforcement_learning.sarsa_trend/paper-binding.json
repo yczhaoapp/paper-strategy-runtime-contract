@@ -8,7 +8,7 @@
       "claim_id": "sarsa.algorithm",
       "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
       "symbol": "sarsa_update",
-      "verification_test": "tests/papers/test_reproduction_oracles.py::test_sarsa_reproduces_observed_next_action_backup"
+      "verification_test": "tests/papers/test_rl_update_properties.py::test_sarsa_changes_with_observed_action_and_rejects_missing_action"
     },
     {
       "claim_id": "sarsa.state",
@@ -88,7 +88,14 @@
   "strategy_kind": "reinforcement_learning",
   "verification_tests": [
     "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.sarsa_trend]",
-    "tests/papers/test_reproduction_oracles.py::test_sarsa_reproduces_observed_next_action_backup"
+    "tests/papers/test_reproduction_oracles.py::test_sarsa_reproduces_observed_next_action_backup",
+    "tests/papers/test_rl_update_properties.py::test_sarsa_parameterized_reference_formula[observed-nongreedy]",
+    "tests/papers/test_rl_update_properties.py::test_sarsa_parameterized_reference_formula[negative-reward]",
+    "tests/papers/test_rl_update_properties.py::test_sarsa_parameterized_reference_formula[terminal]",
+    "tests/papers/test_rl_update_properties.py::test_sarsa_parameterized_reference_formula[zero-alpha]",
+    "tests/papers/test_rl_update_properties.py::test_sarsa_changes_with_observed_action_and_rejects_missing_action",
+    "tests/papers/test_rl_update_properties.py::test_sarsa_matches_independent_seeded_reference_batch",
+    "tests/papers/test_rl_update_properties.py::test_rl_production_source_has_no_test_fixture_dispatch"
   ],
   "version": "1.1"
 }

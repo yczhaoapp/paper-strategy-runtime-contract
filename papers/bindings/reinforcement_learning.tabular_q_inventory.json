@@ -40,7 +40,13 @@
   ],
   "verification_tests": [
     "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.tabular_q_inventory]",
-    "tests/papers/test_reproduction_oracles.py::test_tabular_q_reproduces_off_policy_bellman_update"
+    "tests/papers/test_reproduction_oracles.py::test_tabular_q_reproduces_off_policy_bellman_update",
+    "tests/papers/test_rl_update_properties.py::test_q_learning_parameterized_reference_formula[positive-bootstrap]",
+    "tests/papers/test_rl_update_properties.py::test_q_learning_parameterized_reference_formula[negative-reward]",
+    "tests/papers/test_rl_update_properties.py::test_q_learning_parameterized_reference_formula[terminal]",
+    "tests/papers/test_rl_update_properties.py::test_q_learning_parameterized_reference_formula[zero-alpha]",
+    "tests/papers/test_rl_update_properties.py::test_q_learning_matches_independent_seeded_reference_batch",
+    "tests/papers/test_rl_update_properties.py::test_rl_production_source_has_no_test_fixture_dispatch"
   ],
   "claim_links": [
     {
@@ -53,7 +59,7 @@
       "claim_id": "q.algorithm",
       "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
       "symbol": "q_learning_update",
-      "verification_test": "tests/papers/test_reproduction_oracles.py::test_tabular_q_reproduces_off_policy_bellman_update"
+      "verification_test": "tests/papers/test_rl_update_properties.py::test_q_learning_matches_independent_seeded_reference_batch"
     }
   ],
   "runtime_expectation": {
