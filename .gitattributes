@@ -1,4 +1,6 @@
-* text=auto
+* text=auto eol=lf
+*.csv -text
+data/public/PLOTLY-DATASETS-LICENSE -text
 *.sh text eol=lf
 *.py text eol=lf
 *.json text eol=lf

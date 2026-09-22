@@ -1,8 +1,8 @@
-# Paper Strategy Runtime Contract 2.7.2
+# Paper Strategy Runtime Contract 2.7.3
 
 [![PSRC 完整验证](https://github.com/yczhaoapp/paper-strategy-runtime-contract/actions/workflows/ci.yml/badge.svg)](https://github.com/yczhaoapp/paper-strategy-runtime-contract/actions/workflows/ci.yml)
 
-Paper Strategy Runtime Contract（PSRC）是面向 [SX-CH-003](https://github.com/SingularityX-Evolution/.github/blob/main/profile/challenge-board/tasks/SX-CH-003-paper-strategy-runtime-contract.md) 的独立维护实现，用统一契约连接论文策略、训练、推理和最小回测。软件版本 2.7.2；稳定运行契约为 1.4，论文绑定契约为 1.1。
+Paper Strategy Runtime Contract（PSRC）是面向 [SX-CH-003](https://github.com/SingularityX-Evolution/.github/blob/main/profile/challenge-board/tasks/SX-CH-003-paper-strategy-runtime-contract.md) 的独立维护实现，用统一契约连接论文策略、训练、推理和最小回测。软件版本 2.7.3；稳定运行契约为 1.4，论文绑定契约为 1.1。
 
 **交付范围：18 个逐一论文落地的契约策略（三类各 6 个）+ 4 个 PDF 到代码的深度纵向案例、32 份 JSON Schema、统一训练/保存/重载/推理/回测、结构化失败、可关闭的兼容转换、沙箱和机器验收。** 每个契约策略都带来源 PDF 哈希、页级声明、声明到实现符号和已执行测试的连接、实现文件哈希、确定性运行行为签名、假设与偏差；第四个深度案例直接运行于 Backtrader。
 

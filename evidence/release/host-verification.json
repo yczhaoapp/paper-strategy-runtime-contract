@@ -49,7 +49,7 @@
   ],
   "strict_requested": false,
   "python": "3.13.7 (main, Sep 18 2025, 22:52:34) [Clang 20.1.4 ]",
-  "software_version": "2.7.2",
-  "verification_input_sha256": "be625d765fb78d9f5b6aefab05d31c375f35f051e7658574f578fe8efb11412a",
+  "software_version": "2.7.3",
+  "verification_input_sha256": "deeb99811300402717d7f43ebfc18e854398c27da9accfb10c01ad3c3fb11367",
   "scope": "development_preflight"
 }

@@ -1,15 +1,15 @@
 # 交付状态 · 2026-09-22
 
-当前工作区已完成 2.7.2 / Runtime Contract 1.4 的本地发布复验，状态为 **S 级候选实现，宿主机和 Linux/arm64 严格容器完整验收通过**。远端跨平台状态由公开 GitHub Actions 记录单独证明；最终档位仍由独立评审决定。
+当前工作区已完成 2.7.3 / Runtime Contract 1.4 的本地发布复验，状态为 **S 级候选实现，宿主机和 Linux/arm64 严格容器完整验收通过**。2.7.3 修复了公开干净克隆的逐字节数据校验问题；远端跨平台状态由公开 GitHub Actions 记录单独证明。最终档位仍由独立评审决定。
 
 ## 实际执行结果
 
 | 检查 | 结果 | 证据 |
 | --- | --- | --- |
-| 2.7.2 macOS / Python 3.13.7 完整门禁 | 11 个步骤全部通过；收据绑定最终输入树哈希 | `evidence/release/host-verification.json` |
-| 2.7.2 pytest | 242 通过，0 失败，0 错误，0 跳过 | `evidence/release/host-acceptance.json`；完整 JUnit 位于本地报告/CI artifact |
-| 2.7.2 核心覆盖率 | 宿主 91.82%，严格容器 92.03% | 两份发布 acceptance 记录；可选 Nautilus 单独排除 |
-| 2.7.2 Linux/arm64 / Python 3.12.14 严格 Docker | `--no-cache --pull` 重建、16 份论文获取校验、断网运行通过；镜像内容 ID 单独固定；18 个运行包均为 R2 | `evidence/release/strict-verification.json`、`strict-acceptance.json` 与 `strict-image.json` |
+| 2.7.3 macOS / Python 3.13.7 完整门禁 | 11 个步骤全部通过；收据绑定最终输入树哈希 | `evidence/release/host-verification.json` |
+| 2.7.3 pytest | 242 通过，0 失败，0 错误，0 跳过 | `evidence/release/host-acceptance.json`；完整 JUnit 位于本地报告/CI artifact |
+| 2.7.3 核心覆盖率 | 宿主 91.82%，严格容器 92.03% | 两份发布 acceptance 记录；可选 Nautilus 单独排除 |
+| 2.7.3 Linux/arm64 / Python 3.12.14 严格 Docker | `--no-cache --pull` 重建、16 份论文获取校验、断网运行通过；镜像内容 ID 单独固定；18 个运行包均为 R2 | `evidence/release/strict-verification.json`、`strict-acceptance.json` 与 `strict-image.json` |
 | Ruff + 严格 mypy | 通过 | 完整验证日志 |
 | 硬验收项 | 22/22 通过 | acceptance-report.json |
 | Schema | 32 份，自包含引用、真对象验证与生成物漂移检查通过 | `schemas/generated/`；另有 1 份 catalog.json |
@@ -25,7 +25,7 @@
 
 ## 环境边界
 
-2.7.2 已在 Docker Desktop 的 Linux/arm64 VM 内从排除本机 `papers/sources` 缓存的构建上下文以 `--no-cache --pull` 重新构建；依赖安装层实际重新执行，构建阶段实际获取并校验 16 份注册论文。运行阶段实测断网、只读根目录、非 root、capabilities 清零、`NoNewPrivs`、PID/CPU/内存限制和 `noexec` 临时目录。严格运行调用镜像构建期安装的解释器，不在断网阶段调用 uv、pip 或项目构建。`strict-image.json` 保存镜像内容 ID、无缓存标志和基础镜像拉取标志。
+2.7.3 已在 Docker Desktop 的 Linux/arm64 VM 内从排除本机 `papers/sources` 缓存的构建上下文以 `--no-cache --pull` 重新构建；依赖安装层实际重新执行，构建阶段实际获取并校验 16 份注册论文。运行阶段实测断网、只读根目录、非 root、capabilities 清零、`NoNewPrivs`、PID/CPU/内存限制和 `noexec` 临时目录。严格运行调用镜像构建期安装的解释器，不在断网阶段调用 uv、pip 或项目构建。`strict-image.json` 保存镜像内容 ID、无缓存标志和基础镜像拉取标志。
 
 Linux/Windows/macOS 的 GitHub Actions CI 使用同一条 `scripts/verify.py --fetch` 完整门禁，Linux 另执行严格容器。远端每次运行的结论和完整日志以[公开工作流页面](https://github.com/yczhaoapp/paper-strategy-runtime-contract/actions/workflows/ci.yml)及其可下载 artifact 为准；版本库内的本地收据不冒充 Windows 真机证据。
 
