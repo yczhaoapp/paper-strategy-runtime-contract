@@ -93,7 +93,7 @@ read_rows('/etc/passwd')
 
 def test_static_scanner_accepts_only_public_strategy_api_exports() -> None:
     accepted = StaticPolicyScanner.scan(
-        "from psrc.strategy_api import StrategyManifest, TargetPosition\n",
+        "from psrc.strategy_api import ArtifactIO, StrategyManifest, TargetPosition\n",
         frozenset({"psrc.strategy_api"}),
     )
     denied = StaticPolicyScanner.scan(
@@ -264,7 +264,41 @@ def test_sandbox_timeout_is_structured(tmp_path: Path, monkeypatch: pytest.Monke
             command=("demo", "all"),
         )
     assert raised.value.error.code == ErrorCode.SANDBOX_TIMEOUT
+    assert raised.value.error.details["container_cleanup_attempted"] is True
+    assert raised.value.error.details["container_cleanup_succeeded"] is False
     assert raised.value.error.details["fallback_used"] is False
+
+
+def test_sandbox_timeout_force_removes_the_named_container(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    mounts = ContainerMounts(
+        data=tmp_path / "data",
+        artifacts=tmp_path / "artifacts",
+        reports=tmp_path / "reports",
+    )
+    monkeypatch.setattr(DockerSandbox, "available", staticmethod(lambda: True))
+    calls: list[tuple[str, ...]] = []
+
+    def run(command: tuple[str, ...], **kwargs: object) -> subprocess.CompletedProcess[str]:
+        del kwargs
+        calls.append(tuple(command))
+        if "run" in command:
+            raise subprocess.TimeoutExpired(cmd=command, timeout=1)
+        return subprocess.CompletedProcess(command, 0, "", "")
+
+    monkeypatch.setattr(subprocess, "run", run)
+    with pytest.raises(ContractViolation) as raised:
+        DockerSandbox.execute(
+            run_id="test.timeout-cleanup",
+            strategy_id="rule.test",
+            policy=ResourcePolicy(timeout_seconds=1),
+            mounts=mounts,
+            command=("demo", "all"),
+        )
+    container_name = calls[0][calls[0].index("--name") + 1]
+    assert calls[1][-3:] == ("rm", "--force", container_name)
+    assert raised.value.error.details["container_cleanup_succeeded"] is True
 
 
 def test_process_attestation_requires_both_markers_and_non_root(

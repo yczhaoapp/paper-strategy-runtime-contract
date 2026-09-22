@@ -68,19 +68,19 @@ class TrainableStrategy(Protocol):
     def train(
         self,
         request: TrainingRequest,
-        store: ArtifactStore,
+        store: ArtifactIO,
     ) -> ArtifactManifest: ...
 
     def load(
         self,
         manifest: ArtifactManifest,
-        store: ArtifactStore,
+        store: ArtifactIO,
         *,
         run_id: str,
     ) -> None: ...
 ```
 
-`TrainingRequest` 包含运行 ID、数据集 ID、确定性种子，以及监督学习的特征/标签或强化学习 transitions。orchestrator 在训练开始前重算 `TrainingInputEvidence` 并与 `ExecutionPlan.training_input_evidence_sha256` 比较；缺失或不同都以 `TRAINING_DATA_MISMATCH` 失败。`train` 必须把可重载内容写入 `ArtifactStore`，返回带 `training_request_sha256` 的 `ArtifactManifest`；orchestrator 在重载前核对请求哈希、数据集和 seed，并从受信存储根独立重读规范 manifest，核对路径、大小和 SHA-256。`load` 回调完成后重复验证，`RunBundle` 再次核对来源。产物缺失或哈希不符分别返回 `ARTIFACT_NOT_FOUND`、`ARTIFACT_HASH_MISMATCH`。只有受信验证和重载都成功后才可进入推理/回测。
+`TrainingRequest` 包含运行 ID、数据集 ID、确定性种子，以及监督学习的特征/标签或强化学习 transitions。orchestrator 在训练开始前重算 `TrainingInputEvidence` 并与 `ExecutionPlan.training_input_evidence_sha256` 比较；缺失或不同都以 `TRAINING_DATA_MISMATCH` 失败。`ArtifactIO` 是每次运行独立的最小能力对象，只开放字节保存和读取；它不暴露主机 `ArtifactStore`、存储根或验证方法，并在进入受信 I/O 前拒绝非内建标量和字节类型。`train` 返回带 `training_request_sha256` 的 `ArtifactManifest` 后，orchestrator 使用独立主机服务核对请求哈希、数据集、seed、路径、大小和 SHA-256。`load` 必须通过同一能力对象实际读取该规范产物；空回调或被替换的能力方法没有受信读取记录，不能进入推理。产物缺失或哈希不符分别返回 `ARTIFACT_NOT_FOUND`、`ARTIFACT_HASH_MISMATCH`。
 
 ## 回测引擎入口
 

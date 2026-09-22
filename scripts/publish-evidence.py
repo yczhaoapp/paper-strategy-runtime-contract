@@ -138,7 +138,14 @@ def main() -> int:
             "acceptance_report": "evidence/release/strict-acceptance.json",
             "image_receipt": "evidence/release/strict-image.json",
         },
-        "remote_ci": {"status": "pending_repository_creation", "claims": []},
+        "remote_ci": {
+            "status": "see_public_workflow_for_current_commit",
+            "workflow": (
+                "https://github.com/yczhaoapp/paper-strategy-runtime-contract/"
+                "actions/workflows/ci.yml"
+            ),
+            "claims": [],
+        },
         "published_files": {
             path.relative_to(ROOT).as_posix(): sha256(path) for path in sorted(files)
         },

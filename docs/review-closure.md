@@ -8,7 +8,7 @@
 | 论文内容与实现忠实度无法验证 | 18 个策略逐一绑定页级声明、实现符号、实现哈希、精确测试节点、假设、偏差和确定性运行签名；高等级公式/算法另有数值 oracle；改变核心交易问题的 4 个样例明确标 A0，不计入复现 | `papers/bindings/`、`tests/papers/test_reproduction_oracles.py`、绑定验收 | 短锚点和哈希证明可追溯性；人工解释正确性仍需评审 |
 | 断网严格验收会触发依赖构建或下载 | 镜像构建期安装依赖并获取/核对论文；严格验证期直接调用已安装 Python，断网、只读、非 root 且拒绝降级 | `Dockerfile`、`scripts/verify-container.py`、严格收据 | 从零构建需要访问公开依赖和论文源；运行验收不需要网络 |
 | Docker 构建可能误用本机论文缓存 | `.dockerignore` 排除 `papers/sources`，镜像必须从来源注册表重新取得并校验全部论文 | `.dockerignore`、`Dockerfile`、`scripts/fetch-papers.py` | 公开站点不可用会使构建明确失败，不使用未声明镜像源替代 |
-| Windows 专有失败 | 平台身份调用、长路径、原子产物发布和跨平台脚本已有回归；Win32/Linux 严格类型检查通过 | `tests/papers/test_platform_regressions.py`、CI 配置 | 尚无当前提交的 Windows 真机/远程 CI 收据，不声明动态通过 |
+| Windows 专有失败 | 平台身份调用、长路径、原子产物发布和跨平台脚本已有回归；公开 CI 对发布提交执行 Windows、Linux、macOS 完整门禁 | `tests/papers/test_platform_regressions.py`、`.github/workflows/ci.yml`、公开 Actions 记录 | 本地收据不冒充 Windows 证据；每个新提交仍须等待对应远端任务完成 |
 | 实际数据与声明、动作、订单语义可能错误成功 | 在公共引擎边界统一校验实际事件、动作与风险；不支持的订单有效期明确拒绝 | 负例矩阵、适配器差分、8 类强制失败验收 | 只声明能力表中实现的语义 |
 | 训练数据集标识可以与实际训练载荷脱离 | 新增 `TrainingInputEvidence`，绑定完整请求并由执行计划和 RunBundle 再绑定；篡改在训练前失败 | `training-input-evidence.schema.json`、`test_package_run_rejects_training_payload_that_differs_from_evidence` | 训练集可与留出回测集不同，不用虚假的同 ID 约束替代证据 |
 | 普通运行失败没有持久统一报告 | `psrc run` 的契约失败均写入 `FailureReport`，保留已取得的策略、数据、引擎和实际事件摘要 | `tests/e2e/test_cli.py` 与负例测试 | 解析前不可得字段保持为空并记录上下文错误 |
@@ -20,10 +20,10 @@
 
 当前严格口径是：
 
-1. 原始论文先由格式接入器归一化为带原文件哈希和定位信息的 `PaperDocument`。当前支持 PDF、HTML、Markdown 和 UTF-8 文本；PDF 保留页号，单页格式保留文档级定位。
+1. 原始论文先由格式接入器归一化为带原文件哈希和定位信息的 `PaperDocument`。当前声明支持 PDF、HTML 和 UTF-8 纯文本；Markdown 只能按纯文本输入，不是独立媒体类型。PDF 保留页号，单页格式保留文档级定位。
 2. 论文到实现之间必须有受 Schema 约束的结构化层。当前 `PaperRecipe` 与 `ReproductionSpec` 固定声明、算法族、参数、假设、偏差、数据模式和原文定位；通用作者入口用 `PaperStrategySpec` 表达数据、特征、标签或奖励、训练目标、推理规则、动作与歧义，并由 `ExternalStrategyAdmission` 绑定实际原文、manifest 和源码。
 3. 代码生成只能由已审阅、已测试的算法后端消费结构化规格。论文正文、LLM 输出或解释文字不能进入 `eval`/`exec`；不支持的算法明确失败。
 4. LLM/Agent 可以作为未来的候选规格提取器，但其输出必须视为不可信草稿，经过 Schema、来源定位、歧义阻断和人工审阅后才能获得编译资格。它不应成为离线运行或 S 级验收的网络依赖。
 5. 当前四个深度端到端案例均以真实 PDF 为输入。HTML/文本已有解析安全测试，但没有被计作独立深度复现案例；TeX 尚未作为支持格式声明。增加一种格式只有在提供真实来源、固定字节、定位规则和完整端到端案例时才算新的复现证据。
 
-因此当前选择是强化统一结构化规格和编译资格门禁，而不是接入一个不可审计的 LLM 生成器。外部未知论文已有三类策略黑盒执行测试；HTML/文本接入继续作为格式能力，不能在没有真实来源和方法证据时冒充新的深度复现案例。TeX 尚未声明为支持格式。
+因此当前选择是强化统一结构化规格和编译资格门禁，而不是接入一个不可审计的 LLM 生成器。通用外部路径已有三类确定性作者夹具黑盒测试；这些夹具只证明接口不依赖内置目录。HTML/文本解析继续作为格式能力，不能在没有真实来源和方法证据时冒充新的深度复现案例。TeX 尚未声明为支持格式。

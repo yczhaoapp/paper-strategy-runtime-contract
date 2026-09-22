@@ -13,7 +13,13 @@ from psrc.runtime.package import load_strategy_manifest
 from psrc.runtime.report import RunBundle
 
 
-def verify_papers(root: Path, sources: Path, recipes: Path) -> dict[str, Any]:
+def verify_papers(
+    root: Path,
+    sources: Path,
+    recipes: Path,
+    *,
+    required_paper_ids: frozenset[str],
+) -> dict[str, Any]:
     """Reconstruct provenance and generated code; never accept status flags alone."""
     results = []
     paths = sorted(recipes.glob("*.json"))
@@ -89,8 +95,7 @@ def verify_papers(root: Path, sources: Path, recipes: Path) -> dict[str, Any]:
             )
         except Exception as exc:
             results.append({"paper_id": recipe.paper_id, "status": "failed", "reason": str(exc)})
-    expected_ids = {"avellaneda2008", "gould2015", "ma2015", "nevmyvaka2006"}
-    passed = {row["paper_id"] for row in results} == expected_ids and kinds == {
+    passed = {row["paper_id"] for row in results} == required_paper_ids and kinds == {
         "rule",
         "supervised",
         "reinforcement_learning",
@@ -104,4 +109,5 @@ def verify_papers(root: Path, sources: Path, recipes: Path) -> dict[str, Any]:
             "source reparse, spec rebuild, package recompile, runtime and artifact hashes"
         ),
         "data_origins": sorted(origins),
+        "required_paper_ids": sorted(required_paper_ids),
     }

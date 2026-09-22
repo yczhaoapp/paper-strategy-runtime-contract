@@ -57,6 +57,9 @@ def verify_acceptance(
     """Verify generated evidence without treating matrix prose as a result."""
     repository = matrix_path.resolve().parent
     matrix = yaml.safe_load(matrix_path.read_text(encoding="utf-8"))
+    from psrc.papers.catalog import read_paper_acceptance_policy
+
+    paper_policy = read_paper_acceptance_policy(matrix_path)
     checks: dict[str, dict[str, Any]] = {}
 
     def check(name: str, passed: bool, detail: object) -> None:
@@ -420,7 +423,11 @@ def verify_acceptance(
     from psrc.papers.catalog import verify_strategy_bindings
     from psrc.papers.evidence import verify_papers
 
-    binding_evidence = verify_strategy_bindings(repository, evidence_root=evidence_root)
+    binding_evidence = verify_strategy_bindings(
+        repository,
+        evidence_root=evidence_root,
+        policy=paper_policy,
+    )
     check(
         "eighteen_strategy_bindings_with_fidelity_classification",
         binding_evidence["status"] == "passed",
@@ -428,7 +435,10 @@ def verify_acceptance(
     )
 
     paper_evidence = verify_papers(
-        evidence_root / "runs/papers", repository / "papers/sources", repository / "papers/recipes"
+        evidence_root / "runs/papers",
+        repository / "papers/sources",
+        repository / "papers/recipes",
+        required_paper_ids=frozenset(paper_policy.required_paper_ids),
     )
     check("real_paper_to_runtime_evidence", paper_evidence["status"] == "passed", paper_evidence)
 
@@ -602,19 +612,19 @@ def verify_acceptance(
     }
     external_authoring_prefix = (
         "tests.integration.test_strategy_packages::"
-        "test_unregistered_paper_spec_and_external_code_use_formal_authoring_path["
+        "test_unregistered_authoring_fixture_and_external_code_use_formal_path["
     )
     external_authoring_runs = sum(
         node.startswith(external_authoring_prefix) for node in executed_tests
     )
     missing_interface_tests = sorted(required_interface_tests - executed_tests)
     check(
-        "public_interface_and_unseen_paper_execution",
+        "public_interface_and_external_authoring_fixtures",
         not missing_interface_tests and external_authoring_runs == 3,
         {
             "missing_interface_tests": missing_interface_tests,
-            "unseen_paper_strategy_shapes_executed": external_authoring_runs,
-            "required_unseen_paper_strategy_shapes": 3,
+            "external_authoring_fixture_shapes_executed": external_authoring_runs,
+            "required_external_authoring_fixture_shapes": 3,
         },
     )
     required_trainable_adapter_tests = {
@@ -773,10 +783,18 @@ def verify_acceptance(
 
     required_audit_counterexamples = {
         "tests.negative.test_training_failures::"
+        "test_strategy_channel_class_mutation_cannot_bypass_host_manifest_verification",
+        "tests.negative.test_training_failures::"
+        "test_noop_load_cannot_be_reported_as_verified_artifact_reload",
+        "tests.negative.test_training_failures::"
         "test_runtime_independently_verifies_returned_training_artifact[missing]",
         "tests.negative.test_training_failures::"
         "test_runtime_independently_verifies_returned_training_artifact[size]",
         "tests.unit.test_artifacts::test_artifact_size_and_authorized_root_cannot_be_forged",
+        "tests.unit.test_artifacts::"
+        "test_strategy_artifact_channel_rejects_executable_scalar_subclasses",
+        "tests.unit.test_artifacts::"
+        "test_strategy_channel_class_root_does_not_change_host_authority",
         "tests.adapters.test_public_boundary_failures::"
         "test_public_adapter_wraps_unexpected_strategy_exceptions["
         "on_start-ReferenceEngine-capabilities]",
@@ -818,7 +836,8 @@ def verify_acceptance(
             "required_tests": len(required_audit_counterexamples),
             "missing_tests": missing_audit_counterexamples,
             "scope": (
-                "artifact authority and integrity, guarded descriptors, adapter exception and "
+                "artifact capability separation, callback-safe scalar normalization, physical "
+                "reload evidence, artifact integrity, guarded descriptors, adapter exception and "
                 "payload boundaries, derived order limits, market-time resampling, and paper "
                 "claim corrections"
             ),
@@ -842,7 +861,10 @@ def verify_acceptance(
         ),
         "contract_version": matrix.get("contract_version"),
         "status": "passed" if passed else "failed",
-        "verifier_policy": "generated evidence only; matrix narrative is not a result",
+        "verifier_policy": (
+            "generated evidence only, evaluated against parsed matrix thresholds; "
+            "matrix narrative is not evidence"
+        ),
         "checks": checks,
         "passed_checks": sum(int(item["passed"]) for item in checks.values()),
         "total_checks": len(checks),

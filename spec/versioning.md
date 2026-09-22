@@ -12,4 +12,4 @@ Contract 遵循语义化版本。任何不兼容的 Schema 或生命周期变更
 
 `1.3.0` 为 `ArtifactManifest` 增加可选 `training_request_sha256`。旧文档仍可解析；1.3 新运行对可训练策略失败关闭，要求执行计划、实际训练请求、模型产物和最终 Bundle 的哈希链一致。Adapter 的公开 `run` 方法同时升级为统一验证模板，具体引擎扩展实现受保护的已验证钩子。
 
-`1.4.0` 将运行时能力与引擎能力分开协商，并把两类能力提供者及其哈希写入执行计划和 RunBundle。策略包导入面收敛为 `psrc.strategy_api`；静态别名/属性路径扫描、Python 审计钩子和受控 ArtifactStore 共同执行声明的文件、进程与网络策略。
+`1.4.0` 将运行时能力与引擎能力分开协商，并把两类能力提供者及其哈希写入执行计划和 RunBundle。策略包导入面收敛为 `psrc.strategy_api`；静态别名/属性路径扫描、Python 审计钩子和与主机 `ArtifactStore` 分离的最小产物能力共同执行声明的资源策略。2.8.1 收紧的是 SDK 的信任边界，不改变 Contract 1.4 的线格式。

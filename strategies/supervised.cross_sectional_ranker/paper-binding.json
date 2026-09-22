@@ -44,7 +44,7 @@
   "implementation": [
     {
       "path": "src/psrc/strategies/supervised.py",
-      "sha256": "7d66ab0ad7c342ffa81361842023e6c343c6eb0a20f47ea905a6cf4a7549645d",
+      "sha256": "cf55b88f7364fbe29f503867c8b58a39da341d0eaeca05a4fa19c52cea2571fb",
       "symbols": [
         "CrossSectionalRankerStrategy"
       ]

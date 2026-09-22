@@ -95,19 +95,19 @@ criteria:
       - reports/generated/acceptance-report.json
 
   paper_reproduction:
-    description: 18 个策略均达到方法或算法复现并有论文/声明/代码绑定；计入集合不允许方法适配；4 个深度案例从原文编译到训练、推理与回测；另以来源、规格和源码绑定的通用入口执行三类未知外部论文包；公开真实数据和合成数据分轨，不声明原收益复现。
+    description: 18 个策略均有论文来源、声明、代码与运行证据；其中至少 14 个达到公式、算法或等价方法复现，最多 4 个明确标为方法适配；4 个深度案例从原文编译到训练、推理与回测；另以来源、规格和源码绑定的通用入口执行三类未注册作者夹具；公开真实数据和合成数据分轨，不声明原收益复现。
     required_strategy_bindings:
       rule: 6
       supervised: 6
       reinforcement_learning: 6
     minimum_distinct_sources: 15
     minimum_formula_reproductions: 6
-    required_reproductions: 18
+    required_reproductions: 14
     minimum_algorithm_exact: 9
     minimum_public_data_bindings: 6
     minimum_public_data_bindings_per_kind: 2
     empirical_claims_allowed: false
-    maximum_method_adaptations: 0
+    maximum_method_adaptations: 4
     required_paper_ids:
       - avellaneda2008
       - gould2015

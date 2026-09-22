@@ -415,20 +415,20 @@ def test_external_trainable_strategy_directories_execute_without_internal_catalo
 @pytest.mark.parametrize(
     ("base_strategy_id", "external_strategy_id", "source_builder"),
     (
-        ("rule.sma_cross", "rule.unseen_paper", _external_rule_source),
+        ("rule.sma_cross", "rule.external_authoring_fixture", _external_rule_source),
         (
             "supervised.ridge_return",
-            "supervised.unseen_paper",
+            "supervised.external_authoring_fixture",
             _external_supervised_source,
         ),
         (
             "reinforcement_learning.sarsa_trend",
-            "reinforcement_learning.unseen_paper",
+            "reinforcement_learning.external_authoring_fixture",
             _external_rl_source,
         ),
     ),
 )
-def test_unregistered_paper_spec_and_external_code_use_formal_authoring_path(
+def test_unregistered_authoring_fixture_and_external_code_use_formal_path(
     tmp_path: Path,
     base_strategy_id: str,
     external_strategy_id: str,
@@ -454,7 +454,7 @@ def test_unregistered_paper_spec_and_external_code_use_formal_authoring_path(
     )
     kind = StrategyKind(manifest.kind)
     paper_text = (
-        "Holdout paper fixture. The reviewed signal maps deterministically to a "
+        "External authoring fixture. The reviewed signal maps deterministically to a "
         "canonical trading action using only information available at event time."
     )
     media_type: Literal["text/html", "text/plain"]
@@ -470,9 +470,9 @@ def test_unregistered_paper_spec_and_external_code_use_formal_authoring_path(
     spec = PaperStrategySpec(
         spec_id=f"holdout.{external_strategy_id}",
         reference=PaperReference(
-            title="Unregistered holdout paper used only by this black-box test",
-            locator="https://example.invalid/unregistered-paper",
-            citation="Independent holdout fixture",
+            title="Unregistered authoring fixture used only by this interface test",
+            locator="urn:psrc:test:external-authoring-fixture",
+            citation="Deterministic external authoring fixture",
             source_sha256=sha256(paper_payload.encode()).hexdigest(),
             media_type=media_type,
         ),
@@ -497,7 +497,7 @@ def test_unregistered_paper_spec_and_external_code_use_formal_authoring_path(
                 claim_id=f"{external_strategy_id}.claim",
                 page=1,
                 anchor="The reviewed signal maps deterministically",
-                locator="Section 2, holdout claim",
+                locator="Fixture claim",
                 interpretation="The claim defines the signal used by the external code.",
             ),
         ),

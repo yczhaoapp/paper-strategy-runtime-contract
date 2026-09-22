@@ -59,7 +59,7 @@ Contract 1.2 编译后的 `ExecutionPlan` 同时保存策略数据要求和最�
 
 Contract 1.3 把上述棚栏固化到 `BacktestAdapter.run` 的公共模板方法：直接调用仍须校验源事件内容哈希并执行计划中的兼容转换，具体引擎只能实现接收已验证事件的钩子。可训练运行还在训练前比较实际 `TrainingInputEvidence` 与计划哈希；`ArtifactManifest.training_request_sha256` 将模型产物绑定到准确训练请求，`RunBundle` 再次核对该 provenance。
 
-Contract 1.4 将 `training.*` 画像归属于 `RuntimeCapabilities`，其余行情、执行和组合画像归属于 `EngineCapabilities`。`ExecutionPlan` 保存两组必需画像及两份能力哈希，orchestrator 和 `RunBundle` 都会重新核对。策略包只能导入最小 `psrc.strategy_api`；别名感知的静态扫描与运行时审计围栏阻止文件、进程、网络和私有运行时命名空间绕过，文件写入只能经受信 `ArtifactStore` 服务完成。
+Contract 1.4 将 `training.*` 画像归属于 `RuntimeCapabilities`，其余行情、执行和组合画像归属于 `EngineCapabilities`。`ExecutionPlan` 保存两组必需画像及两份能力哈希，orchestrator 和 `RunBundle` 都会重新核对。策略包只能导入最小 `psrc.strategy_api`；别名感知的静态扫描与运行时审计围栏拒绝已覆盖的文件、进程、网络和私有运行时命名空间操作。训练策略只接收最小 `ArtifactIO` 能力，受信 `ArtifactStore`、根路径和最终验证留在主机侧。
 
 ## 能力画像
 

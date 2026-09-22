@@ -6,7 +6,7 @@
         "errors": 0,
         "failures": 0,
         "skipped": 0,
-        "tests": 266
+        "tests": 272
       },
       "passed": true
     },
@@ -23,7 +23,7 @@
     "code_coverage": {
       "detail": {
         "minimum": 90,
-        "percent_covered": 91.68
+        "percent_covered": 91.44
       },
       "passed": true
     },
@@ -602,7 +602,18 @@
           "minimum_formula_reproductions": 6,
           "minimum_public_data_bindings": 6,
           "minimum_public_data_bindings_per_kind": 2,
-          "minimum_reproductions": 14
+          "required_paper_ids": [
+            "avellaneda2008",
+            "gould2015",
+            "nevmyvaka2006",
+            "ma2015"
+          ],
+          "required_reproductions": 14,
+          "required_strategy_bindings": {
+            "reinforcement_learning": 6,
+            "rule": 6,
+            "supervised": 6
+          }
         },
         "public_data_by_kind": {
           "reinforcement_learning": 2,
@@ -684,16 +695,16 @@
     "independent_audit_counterexamples_closed": {
       "detail": {
         "missing_tests": [],
-        "required_tests": 16,
-        "scope": "artifact authority and integrity, guarded descriptors, adapter exception and payload boundaries, derived order limits, market-time resampling, and paper claim corrections"
+        "required_tests": 20,
+        "scope": "artifact capability separation, callback-safe scalar normalization, physical reload evidence, artifact integrity, guarded descriptors, adapter exception and payload boundaries, derived order limits, market-time resampling, and paper claim corrections"
       },
       "passed": true
     },
-    "public_interface_and_unseen_paper_execution": {
+    "public_interface_and_external_authoring_fixtures": {
       "detail": {
+        "external_authoring_fixture_shapes_executed": 3,
         "missing_interface_tests": [],
-        "required_unseen_paper_strategy_shapes": 3,
-        "unseen_paper_strategy_shapes_executed": 3
+        "required_external_authoring_fixture_shapes": 3
       },
       "passed": true
     },
@@ -728,6 +739,12 @@
             "paper_id": "nevmyvaka2006",
             "status": "passed"
           }
+        ],
+        "required_paper_ids": [
+          "avellaneda2008",
+          "gould2015",
+          "ma2015",
+          "nevmyvaka2006"
         ],
         "status": "passed",
         "verification": "source reparse, spec rebuild, package recompile, runtime and artifact hashes"
@@ -870,5 +887,5 @@
   "status": "passed",
   "total_checks": 23,
   "verification_scope": "development_preflight",
-  "verifier_policy": "generated evidence only; matrix narrative is not a result"
+  "verifier_policy": "generated evidence only, evaluated against parsed matrix thresholds; matrix narrative is not evidence"
 }

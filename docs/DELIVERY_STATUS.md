@@ -1,15 +1,15 @@
 # 交付状态 · 2026-09-23
 
-当前工作区已完成 2.8.0 / Runtime Contract 1.4 / Paper Binding 1.2 的本地发布复验，状态为 **S 级候选实现，宿主机和 Linux/arm64 严格容器完整验收通过**。本版关闭产物权限、公共 Adapter、目标订单、迟到重采样和论文声明反例；远端跨平台状态由公开 GitHub Actions 记录单独证明。最终档位仍由独立评审决定。
+当前工作区的 2.8.1 / Runtime Contract 1.4 / Paper Binding 1.2 已通过项目自有的 S 档映射门禁。宿主机和 Linux/arm64 严格容器均执行完整验收；远端跨平台状态由公开 GitHub Actions 单独证明。这里的“S 档映射通过”只表示本项目按公开题目建立的机器门禁全部通过，不代表主办方已经授予档位。本版关闭策略产物权限、受信 I/O 回调、验收矩阵漂移、公共 Adapter、目标订单、迟到重采样和论文声明反例。
 
 ## 实际执行结果
 
 | 检查 | 结果 | 证据 |
 | --- | --- | --- |
-| 2.8.0 macOS / Python 3.13.7 完整门禁 | 11 个步骤全部通过；收据绑定最终输入树哈希 | `evidence/release/host-verification.json` |
-| 2.8.0 pytest | 266 通过，0 失败，0 错误，0 跳过 | `evidence/release/host-acceptance.json`；完整 JUnit 位于本地报告/CI artifact |
-| 2.8.0 核心覆盖率 | 宿主 91.68%，严格容器 91.88% | 两份发布 acceptance 记录；可选 Nautilus 单独排除 |
-| 2.8.0 Linux/arm64 / Python 3.12.14 严格 Docker | `--no-cache --pull` 重建、16 份论文获取校验、断网运行通过；镜像内容 ID 单独固定；18 个运行包均为 R2 | `evidence/release/strict-verification.json`、`strict-acceptance.json` 与 `strict-image.json` |
+| 2.8.1 macOS / Python 3.13.7 完整门禁 | 11 个步骤全部通过；收据绑定最终输入树哈希 | `evidence/release/host-verification.json` |
+| 2.8.1 pytest | 272 通过，0 失败，0 错误，0 跳过 | `evidence/release/host-acceptance.json`；完整 JUnit 位于本地报告/CI artifact |
+| 2.8.1 核心覆盖率 | 宿主和严格容器均高于 90% 门槛；精确值由两份发布收据给出 | 两份发布 acceptance 记录；可选 Nautilus 单独排除 |
+| 2.8.1 Linux/arm64 严格 Docker | `--no-cache --pull` 重建、16 份论文获取校验、断网运行通过；镜像内容 ID 单独固定；18 个运行包均为 R2 | `evidence/release/strict-verification.json`、`strict-acceptance.json` 与 `strict-image.json` |
 | Ruff + 严格 mypy | 通过 | 完整验证日志 |
 | 硬验收项 | 23/23 通过 | acceptance-report.json |
 | Schema | 32 份，自包含引用、真对象验证与生成物漂移检查通过 | `schemas/generated/`；另有 1 份 catalog.json |
@@ -19,14 +19,15 @@
 | 默认原生引擎 | Reference + Backtrader 差分通过；Backtrader 另通过监督与 RL 的训练—重载—回测 | runs/adapters/comparison.json 与 JUnit |
 | 强制运行失败 | 8 类官方关键失败均实际触发 | runs/failures/summary.json |
 | 边界契约反例 | 累计仓位、day 到期、bar 网格、无效版本、输出复用、lookback、staleness、策略/运行时/引擎/沙箱、训练载荷和模型 provenance 精确测试节点通过 | JUnit 与 `runtime_boundary_contract_enforcement` |
-| 策略资源围栏 | `psrc.strategy_api` 最小导入面；NumPy 文件 API、动态文件访问、子进程和产物篡改反例通过 | JUnit 与 `strategy_resource_policy_regressions` |
+| 策略资源围栏 | `psrc.strategy_api` 最小导入面；策略只得到逐次运行、不可取得宿主路径或校验服务的产物通道；NumPy 文件 API、动态文件访问、子进程、标量回调和产物篡改反例通过 | JUnit 与 `strategy_resource_policy_regressions` |
 | RL 抗夹具 oracle | Tabular Q、SARSA、Double Q 共 20 个强制节点；每种算法执行 64 组固定 seed 随机单步公式和 16 组动态完整训练，独立核对持久化 Q 表、来源与未见状态公开推理；生产源码无测试专用分支 | JUnit 与 `rl_oracle_anti_fixture_evidence` |
-| 本轮独立审计反例 | 产物权限/完整性、描述符、Adapter 异常/字段/L2 深度、目标订单、市场时间重采样、Ridge/L2 论文声明共 16 个强制节点通过 | JUnit 与 `independent_audit_counterexamples_closed` |
+| 本轮独立审计反例 | 产物权限/完整性、受信标量回调、训练加载确认、描述符、Adapter 异常/字段/L2 深度、目标订单、市场时间重采样、Ridge/L2 论文声明共 20 个强制节点通过 | JUnit 与 `independent_audit_counterexamples_closed` |
+| 论文验收政策 | 计数、保真度、来源、D1/E0 和深度案例阈值全部从 `ACCEPTANCE_MATRIX.yaml` 解析；当前为 14 个复现、最多 4 个方法适配 | `paper_strategy_evidence` 与矩阵漂移回归测试 |
 | 兼容转换 | 实际 10→2 事件及可核查哈希 | runs/compatibility/bundle.json |
 
 ## 环境边界
 
-2.8.0 已在 Docker Desktop 的 Linux/arm64 VM 内从排除本机 `papers/sources` 缓存的构建上下文以 `--no-cache --pull` 重新构建；依赖安装层实际重新执行，构建阶段实际获取并校验 16 份注册论文。运行阶段实测断网、只读根目录、非 root、capabilities 清零、`NoNewPrivs`、PID/CPU/内存限制和 `noexec` 临时目录。严格运行调用镜像构建期安装的解释器，不在断网阶段调用 uv、pip 或项目构建。`strict-image.json` 保存镜像内容 ID、无缓存标志和基础镜像拉取标志。
+2.8.1 已在 Docker Desktop 的 Linux/arm64 VM 内从排除本机 `papers/sources` 缓存的构建上下文以 `--no-cache --pull` 重新构建；依赖安装层实际重新执行，构建阶段实际获取并校验 16 份注册论文。运行阶段实测断网、只读根目录、非 root、capabilities 清零、`NoNewPrivs`、PID/CPU/内存限制和 `noexec` 临时目录。严格运行调用镜像构建期安装的解释器，不在断网阶段调用 uv、pip 或项目构建。Docker 客户端超时后会按随机容器名显式强制清理。`strict-image.json` 保存镜像内容 ID、无缓存标志和基础镜像拉取标志。
 
 Linux/Windows/macOS 的 GitHub Actions CI 使用同一条 `scripts/verify.py --fetch` 完整门禁，Linux 另执行严格容器。远端每次运行的结论和完整日志以[公开工作流页面](https://github.com/yczhaoapp/paper-strategy-runtime-contract/actions/workflows/ci.yml)及其可下载 artifact 为准；版本库内的本地收据不冒充 Windows 真机证据。
 

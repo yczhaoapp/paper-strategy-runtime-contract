@@ -12,7 +12,7 @@ from psrc.contract.models import ActionKind, DataKind, StrategyKind, TrainingMod
 from psrc.domain.account import AccountSnapshot
 from psrc.domain.actions import Action, NoOp, TargetPosition, TargetWeight
 from psrc.domain.market import BarPayload, BookSnapshotL2Payload, MarketEvent
-from psrc.runtime.artifacts import ArtifactManifest, ArtifactStore
+from psrc.runtime.artifacts import ArtifactIO, ArtifactManifest
 from psrc.runtime.training import RLTransition, TrainingRequest
 from psrc.strategies.common import (
     bar_requirement,
@@ -131,7 +131,7 @@ class _RLStrategy:
         return transitions
 
     def _save(
-        self, request: TrainingRequest, store: ArtifactStore, policy: dict[str, object]
+        self, request: TrainingRequest, store: ArtifactIO, policy: dict[str, object]
     ) -> ArtifactManifest:
         canonical_policy = canonicalize_numeric(policy)
         if not isinstance(canonical_policy, dict):
@@ -154,7 +154,7 @@ class _RLStrategy:
             metadata={"algorithm": str(policy["algorithm"])},
         )
 
-    def load(self, manifest: ArtifactManifest, store: ArtifactStore, *, run_id: str) -> None:
+    def load(self, manifest: ArtifactManifest, store: ArtifactIO, *, run_id: str) -> None:
         if manifest.strategy_id != self.manifest.strategy_id:
             raise ValueError("policy strategy_id does not match strategy")
         payload = store.load_bytes(
@@ -212,7 +212,7 @@ class TabularQInventoryStrategy(_RLStrategy):
         max_position=Decimal("1"),
     )
 
-    def train(self, request: TrainingRequest, store: ArtifactStore) -> ArtifactManifest:
+    def train(self, request: TrainingRequest, store: ArtifactIO) -> ArtifactManifest:
         transitions = self._transitions(request)
         q: dict[str, list[float]] = {}
         for _ in range(25):
@@ -267,7 +267,7 @@ class SarsaTrendStrategy(_RLStrategy):
         max_position=Decimal("2"),
     )
 
-    def train(self, request: TrainingRequest, store: ArtifactStore) -> ArtifactManifest:
+    def train(self, request: TrainingRequest, store: ArtifactIO) -> ArtifactManifest:
         transitions = self._transitions(request)
         q: dict[str, list[float]] = {}
         for _ in range(20):
@@ -383,7 +383,7 @@ class RiskAverseContextualBanditStrategy(_RLStrategy):
         super().__init__()
         self.counter = 0
 
-    def train(self, request: TrainingRequest, store: ArtifactStore) -> ArtifactManifest:
+    def train(self, request: TrainingRequest, store: ArtifactIO) -> ArtifactManifest:
         transitions = self._transitions(request)
         arms: list[dict[str, object]] = []
         for action in range(3):
@@ -486,7 +486,7 @@ class DoubleQBookInventoryStrategy(_RLStrategy):
         max_position=Decimal("1"),
     )
 
-    def train(self, request: TrainingRequest, store: ArtifactStore) -> ArtifactManifest:
+    def train(self, request: TrainingRequest, store: ArtifactIO) -> ArtifactManifest:
         transitions = self._transitions(request)
         q1: dict[str, list[float]] = {}
         q2: dict[str, list[float]] = {}
@@ -558,7 +558,7 @@ class A2CPairsStrategy(_RLStrategy):
         self.latest: dict[str, tuple[object, Decimal]] = {}
         self.spreads: deque[float] = deque(maxlen=6)
 
-    def train(self, request: TrainingRequest, store: ArtifactStore) -> ArtifactManifest:
+    def train(self, request: TrainingRequest, store: ArtifactIO) -> ArtifactManifest:
         transitions = self._transitions(request)
         actor = np.zeros((3, 3), dtype=float)
         critic = np.zeros(3, dtype=float)
@@ -635,7 +635,7 @@ class LinearActorCriticAllocationStrategy(_RLStrategy):
         max_position=None,
     )
 
-    def train(self, request: TrainingRequest, store: ArtifactStore) -> ArtifactManifest:
+    def train(self, request: TrainingRequest, store: ArtifactIO) -> ArtifactManifest:
         transitions = self._transitions(request)
         actor = np.zeros(3)
         critic = np.zeros(3)

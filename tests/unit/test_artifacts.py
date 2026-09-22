@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from psrc.contract.errors import ContractViolation, ErrorCode
-from psrc.runtime.artifacts import ArtifactStore
+from psrc.runtime.artifacts import ArtifactStore, create_strategy_artifact_channel
 
 
 def test_artifact_round_trip_and_integrity(tmp_path: Path) -> None:
@@ -126,3 +126,56 @@ def test_artifact_id_collision_with_different_content_fails(tmp_path: Path) -> N
     with pytest.raises(ContractViolation) as raised:
         store.save_bytes(payload=b'{"weight":2}', **common)  # type: ignore[arg-type]
     assert raised.value.error.code == ErrorCode.ARTIFACT_HASH_MISMATCH
+
+
+def test_strategy_artifact_channel_rejects_executable_scalar_subclasses(tmp_path: Path) -> None:
+    marker = tmp_path / "callback-marker.txt"
+    channel = create_strategy_artifact_channel(ArtifactStore(tmp_path / "artifacts"))
+
+    class CallbackName(str):
+        def endswith(self, *args: object, **kwargs: object) -> bool:
+            del args, kwargs
+            marker.write_text("callback executed", encoding="utf-8")
+            return False
+
+    with pytest.raises(TypeError, match="logical_name must be a plain string"):
+        channel.save_bytes(
+            run_id="test.channel-callback",
+            artifact_id="model-001",
+            strategy_id="supervised.test",
+            strategy_version="1.0.0",
+            artifact_kind="model",
+            framework="test",
+            logical_name=CallbackName("model.json"),
+            media_type="application/json",
+            payload=b"{}",
+            training_dataset_id="synthetic.train",
+            seed=7,
+        )
+    assert not marker.exists()
+
+
+def test_strategy_channel_class_root_does_not_change_host_authority(tmp_path: Path) -> None:
+    root = tmp_path / "artifacts"
+    escaped = tmp_path / "escaped"
+    store = ArtifactStore(root)
+    channel = create_strategy_artifact_channel(store)
+    assert not hasattr(channel, "root")
+    type(channel).root = property(lambda _: escaped)  # type: ignore[attr-defined]
+
+    manifest = channel.save_bytes(
+        run_id="test.channel-root",
+        artifact_id="model-001",
+        strategy_id="supervised.test",
+        strategy_version="1.0.0",
+        artifact_kind="model",
+        framework="test",
+        logical_name="model.json",
+        media_type="application/json",
+        payload=b"{}",
+        training_dataset_id="synthetic.train",
+        seed=7,
+    )
+
+    assert (root / manifest.artifact_id / "model.json").read_bytes() == b"{}"
+    assert not escaped.exists()

@@ -7,7 +7,13 @@ from psrc.contract.errors import ContractError, ContractViolation, ErrorCode, Er
 from psrc.contract.hashing import sha256_model
 from psrc.contract.models import ExecutionPlan, SandboxMode
 from psrc.domain.market import MarketEvent
-from psrc.runtime.artifacts import ArtifactManifest, ArtifactStore
+from psrc.runtime.artifacts import (
+    ArtifactManifest,
+    ArtifactStore,
+    begin_verified_artifact_load,
+    create_strategy_artifact_channel,
+    require_verified_artifact_load,
+)
 from psrc.runtime.guards import (
     prepare_adapter_invocation,
     validate_runtime_context,
@@ -238,7 +244,8 @@ def run_trainable(
         ]
         lifecycle.transition(LifecycleState.TRAINING)
         prefix_logs.append(_log("training", "Model or policy training started"))
-        artifact = strategy.train(training, store)
+        artifact_channel = create_strategy_artifact_channel(store)
+        artifact = strategy.train(training, artifact_channel)
         artifact = store.verify_manifest(
             run_id=plan.run_id,
             strategy_id=strategy.manifest.strategy_id,
@@ -258,7 +265,14 @@ def run_trainable(
         prefix_logs.append(
             _log("artifact", "Training artifact saved", artifact_id=artifact.artifact_id)
         )
-        strategy.load(artifact, store, run_id=plan.run_id)
+        begin_verified_artifact_load(artifact_channel, artifact)
+        strategy.load(artifact, artifact_channel, run_id=plan.run_id)
+        require_verified_artifact_load(
+            artifact_channel,
+            artifact,
+            run_id=plan.run_id,
+            strategy_id=strategy.manifest.strategy_id,
+        )
         store.verify_manifest(
             run_id=plan.run_id,
             strategy_id=strategy.manifest.strategy_id,
@@ -269,7 +283,7 @@ def run_trainable(
         prefix_logs.append(
             _log(
                 "artifact",
-                "Stored artifact bytes rechecked and strategy load callback completed",
+                "Host-verified artifact bytes were read during strategy load and rechecked",
                 artifact_id=artifact.artifact_id,
             )
         )

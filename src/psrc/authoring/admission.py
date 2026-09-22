@@ -10,7 +10,7 @@ from psrc.runtime.package import StrategyPackage
 def build_external_admission(
     spec: PaperStrategySpec, document: PaperDocument, package: StrategyPackage
 ) -> ExternalStrategyAdmission:
-    """Bind an unseen paper spec to package metadata and source before any import occurs."""
+    """Bind an unregistered authoring spec to package metadata and source before import."""
     audit = audit_external_implementation(spec, package.manifest, document)
     return ExternalStrategyAdmission(
         paper_spec=spec,

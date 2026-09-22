@@ -192,6 +192,22 @@ def test_cli_builds_complete_reproduction_bundle(tmp_path: Path, capsys: object)
             "test_artifact_size_and_authorized_root_cannot_be_forged",
         ),
         (
+            "tests.unit.test_artifacts",
+            "test_strategy_artifact_channel_rejects_executable_scalar_subclasses",
+        ),
+        (
+            "tests.unit.test_artifacts",
+            "test_strategy_channel_class_root_does_not_change_host_authority",
+        ),
+        (
+            "tests.negative.test_training_failures",
+            "test_strategy_channel_class_mutation_cannot_bypass_host_manifest_verification",
+        ),
+        (
+            "tests.negative.test_training_failures",
+            "test_noop_load_cannot_be_reported_as_verified_artifact_reload",
+        ),
+        (
             "tests.adapters.test_public_boundary_failures",
             "test_public_adapter_wraps_unexpected_strategy_exceptions["
             "on_start-ReferenceEngine-capabilities]",
@@ -268,7 +284,7 @@ def test_cli_builds_complete_reproduction_bundle(tmp_path: Path, capsys: object)
             *(
             (
                 "tests.integration.test_strategy_packages",
-                "test_unregistered_paper_spec_and_external_code_use_formal_authoring_path["
+                "test_unregistered_authoring_fixture_and_external_code_use_formal_path["
                 f"{kind}]",
             )
             for kind in ("rule", "supervised", "reinforcement_learning")

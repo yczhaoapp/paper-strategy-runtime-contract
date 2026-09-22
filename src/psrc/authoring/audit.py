@@ -86,7 +86,7 @@ def audit_manifest(spec: PaperStrategySpec, manifest: StrategyManifest) -> Agent
 def audit_external_implementation(
     spec: PaperStrategySpec, manifest: StrategyManifest, document: PaperDocument
 ) -> AgentAuditReport:
-    """Apply the stricter admission policy used for an unseen external paper package."""
+    """Apply the admission policy used for an unregistered external paper package."""
     base = audit_manifest(spec, manifest)
     issues = list(base.issues)
 

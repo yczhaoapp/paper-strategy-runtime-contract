@@ -8,7 +8,7 @@ from pydantic import Field, model_validator
 from psrc.constants import CONTRACT_VERSION
 from psrc.contract.hashing import sha256_model
 from psrc.contract.models import ContractModel, Identifier
-from psrc.runtime.artifacts import ArtifactManifest, ArtifactStore
+from psrc.runtime.artifacts import ArtifactIO, ArtifactManifest
 from psrc.runtime.strategy import RuntimeStrategy
 
 
@@ -112,9 +112,9 @@ def validate_training_input_evidence(
 
 
 class TrainableStrategy(Protocol):
-    def train(self, request: TrainingRequest, store: ArtifactStore) -> ArtifactManifest: ...
+    def train(self, request: TrainingRequest, store: ArtifactIO) -> ArtifactManifest: ...
 
-    def load(self, manifest: ArtifactManifest, store: ArtifactStore, *, run_id: str) -> None: ...
+    def load(self, manifest: ArtifactManifest, store: ArtifactIO, *, run_id: str) -> None: ...
 
 
 class TrainableRuntimeStrategy(RuntimeStrategy, TrainableStrategy, Protocol):

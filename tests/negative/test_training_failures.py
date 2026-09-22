@@ -13,7 +13,7 @@ from psrc.contract.errors import ContractViolation, ErrorCode
 from psrc.contract.hashing import sha256_model
 from psrc.contract.models import ExecutionPlan, RunPolicy, SandboxMode
 from psrc.domain.market import MarketEvent
-from psrc.runtime.artifacts import ArtifactManifest, ArtifactStore
+from psrc.runtime.artifacts import ArtifactIO, ArtifactManifest, ArtifactStore
 from psrc.runtime.orchestrator import run_trainable
 from psrc.runtime.report import RunBundle, RunReport
 from psrc.runtime.strategy import RuntimeStrategy
@@ -106,7 +106,7 @@ def test_runtime_independently_verifies_returned_training_artifact(
     example = supervised_examples()[0]
 
     class ForgedArtifactStrategy(LogisticDirectionStrategy):
-        def train(self, request: TrainingRequest, store: ArtifactStore) -> ArtifactManifest:
+        def train(self, request: TrainingRequest, store: ArtifactIO) -> ArtifactManifest:
             artifact = super().train(request, store)
             if forgery == "missing":
                 return artifact.model_copy(update={"artifact_id": "nonexistent-artifact"})
@@ -116,7 +116,7 @@ def test_runtime_independently_verifies_returned_training_artifact(
         def load(
             self,
             manifest: ArtifactManifest,
-            store: ArtifactStore,
+            store: ArtifactIO,
             *,
             run_id: str,
         ) -> None:
@@ -181,6 +181,83 @@ def test_orchestrator_rejects_training_request_not_bound_to_plan(tmp_path: Path)
     assert raised.value.error.code == ErrorCode.TRAINING_DATA_MISMATCH
     assert raised.value.error.stage == "validation"
     assert not any(store_root.iterdir())
+
+
+def test_strategy_channel_class_mutation_cannot_bypass_host_manifest_verification(
+    tmp_path: Path,
+) -> None:
+    example = supervised_examples()[0]
+
+    class MutatingStrategy(LogisticDirectionStrategy):
+        def train(self, request: TrainingRequest, store: ArtifactIO) -> ArtifactManifest:
+            artifact = super().train(request, store)
+            type(store).verify_manifest = lambda instance, **kwargs: kwargs[  # type: ignore[attr-defined]
+                "candidate"
+            ]
+            return artifact.model_copy(update={"artifact_id": "nonexistent-artifact"})
+
+    strategy = MutatingStrategy()
+    plan = compile_run(
+        run_id="test.channel-class-mutation",
+        strategy=strategy.manifest,
+        dataset=example.dataset,
+        engine=capabilities(),
+        policy=RunPolicy(required_sandbox=SandboxMode.DEVELOPMENT),
+        training_input_evidence_sha256=sha256_model(
+            build_training_input_evidence(example.training)
+        ),
+    )
+
+    with pytest.raises(ContractViolation) as raised:
+        run_trainable(
+            plan=plan,
+            strategy=strategy,
+            training=example.training,
+            events=example.events,
+            engine=ReferenceEngine(),
+            store=ArtifactStore(tmp_path / "artifacts"),
+            sandbox_mode=SandboxMode.DEVELOPMENT,
+        )
+    assert raised.value.error.code == ErrorCode.ARTIFACT_NOT_FOUND
+
+
+def test_noop_load_cannot_be_reported_as_verified_artifact_reload(tmp_path: Path) -> None:
+    example = supervised_examples()[0]
+
+    class NoLoadStrategy(LogisticDirectionStrategy):
+        def load(
+            self,
+            manifest: ArtifactManifest,
+            store: ArtifactIO,
+            *,
+            run_id: str,
+        ) -> None:
+            del manifest, store, run_id
+
+    strategy = NoLoadStrategy()
+    plan = compile_run(
+        run_id="test.noop-load",
+        strategy=strategy.manifest,
+        dataset=example.dataset,
+        engine=capabilities(),
+        policy=RunPolicy(required_sandbox=SandboxMode.DEVELOPMENT),
+        training_input_evidence_sha256=sha256_model(
+            build_training_input_evidence(example.training)
+        ),
+    )
+
+    with pytest.raises(ContractViolation) as raised:
+        run_trainable(
+            plan=plan,
+            strategy=strategy,
+            training=example.training,
+            events=example.events,
+            engine=ReferenceEngine(),
+            store=ArtifactStore(tmp_path / "artifacts"),
+            sandbox_mode=SandboxMode.DEVELOPMENT,
+        )
+    assert raised.value.error.code == ErrorCode.ARTIFACT_HASH_MISMATCH
+    assert "did not read" in raised.value.error.message
 
 
 def test_package_run_rejects_training_payload_that_differs_from_evidence(

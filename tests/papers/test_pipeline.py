@@ -15,7 +15,11 @@ from pypdf import PdfWriter
 from psrc.cli import main
 from psrc.contract.errors import ContractViolation, ErrorCode
 from psrc.domain.market import BarPayload
-from psrc.papers.catalog import read_bindings, verify_strategy_bindings
+from psrc.papers.catalog import (
+    read_bindings,
+    read_paper_acceptance_policy,
+    verify_strategy_bindings,
+)
 from psrc.papers.compiler import compile_paper, extract_spec, read_recipe
 from psrc.papers.data import public_daily_bars, public_pair_daily_bars, quote_fixture
 from psrc.papers.evidence import verify_papers
@@ -31,6 +35,8 @@ from psrc.strategies.catalog import (
 from psrc.strategies.common import stable_float
 
 ROOT = Path(__file__).parents[2]
+PAPER_POLICY = read_paper_acceptance_policy(ROOT / "ACCEPTANCE_MATRIX.yaml")
+REQUIRED_DEEP_PAPERS = frozenset(PAPER_POLICY.required_paper_ids)
 
 
 @pytest.fixture
@@ -44,12 +50,22 @@ def test_four_deep_reproductions_cover_three_kinds_and_independent_verifier(
     summary = run_suite(ROOT / "papers/sources", ROOT / "papers/recipes", tmp_path)
     assert summary["paper_count"] == 4
     assert {r["kind"] for r in summary["runs"]} == {"rule", "supervised", "reinforcement_learning"}
-    report = verify_papers(tmp_path, ROOT / "papers/sources", ROOT / "papers/recipes")
+    report = verify_papers(
+        tmp_path,
+        ROOT / "papers/sources",
+        ROOT / "papers/recipes",
+        required_paper_ids=REQUIRED_DEEP_PAPERS,
+    )
     assert report["status"] == "passed", report
     assert report["data_origins"] == ["public_historical", "synthetic_fixture"]
     victim = tmp_path / "gould2015/package/strategy.py"
     victim.write_text(victim.read_text() + "\n# tampered\n")
-    report = verify_papers(tmp_path, ROOT / "papers/sources", ROOT / "papers/recipes")
+    report = verify_papers(
+        tmp_path,
+        ROOT / "papers/sources",
+        ROOT / "papers/recipes",
+        required_paper_ids=REQUIRED_DEEP_PAPERS,
+    )
     assert report["status"] == "failed"
     assert "recompilation" in report["papers"][1]["reason"]
 
@@ -82,6 +98,18 @@ def test_all_eighteen_contract_strategies_have_grounded_paper_bindings() -> None
     }
     assert report["algorithm_exact_by_kind"] == {"rule": 6, "supervised": 3}
     assert len(read_bindings(ROOT / "papers/bindings")) == 18
+
+
+def test_binding_verifier_enforces_the_declared_matrix_thresholds() -> None:
+    stricter = PAPER_POLICY.model_copy(
+        update={"required_reproductions": 15, "maximum_method_adaptations": 3}
+    )
+    report = verify_strategy_bindings(ROOT, policy=stricter)
+    assert report["status"] == "failed"
+    assert report["reproduction_count"] == 14
+    assert report["fidelity_counts"]["method_adaptation"] == 4
+    assert report["policy"]["required_reproductions"] == 15
+    assert report["policy"]["maximum_method_adaptations"] == 3
 
 
 def test_every_registered_paper_host_is_fetchable_in_a_clean_environment() -> None:

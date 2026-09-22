@@ -16,7 +16,7 @@ from psrc.papers.algorithms import (
     probability,
     reservation_quotes,
 )
-from psrc.runtime.artifacts import ArtifactManifest, ArtifactStore
+from psrc.runtime.artifacts import ArtifactIO, ArtifactManifest
 from psrc.runtime.training import TrainingRequest
 
 
@@ -36,7 +36,7 @@ class PaperStrategy:
         pass
 
     def save(
-        self, request: TrainingRequest, store: ArtifactStore, model: dict[str, Any]
+        self, request: TrainingRequest, store: ArtifactIO, model: dict[str, Any]
     ) -> ArtifactManifest:
         provenance = {
             "strategy": self.manifest.strategy_id,
@@ -63,7 +63,7 @@ class PaperStrategy:
             },
         )
 
-    def load(self, manifest: ArtifactManifest, store: ArtifactStore, *, run_id: str) -> None:
+    def load(self, manifest: ArtifactManifest, store: ArtifactIO, *, run_id: str) -> None:
         if manifest.strategy_id != self.manifest.strategy_id:
             raise ValueError("artifact belongs to another strategy")
         if manifest.metadata.get("parameters_sha256") != sha256_model(self.parameters):
@@ -133,7 +133,7 @@ class AvellanedaStrategy(PaperStrategy):
 
 
 class QueueLogisticStrategy(PaperStrategy):
-    def train(self, request: TrainingRequest, store: ArtifactStore) -> ArtifactManifest:
+    def train(self, request: TrainingRequest, store: ArtifactIO) -> ArtifactManifest:
         model = fit_logistic(
             request.features,
             request.labels,
@@ -168,7 +168,7 @@ class QueueLogisticStrategy(PaperStrategy):
 
 
 class ExecutionQStrategy(PaperStrategy):
-    def train(self, request: TrainingRequest, store: ArtifactStore) -> ArtifactManifest:
+    def train(self, request: TrainingRequest, store: ArtifactIO) -> ArtifactManifest:
         table = backward_q(request.transitions)
         return self.save(
             request,

@@ -8,12 +8,18 @@ from pathlib import Path
 from typing import Any
 from xml.etree import ElementTree
 
+import yaml
 from pydantic import TypeAdapter
 
 from psrc.contract.hashing import sha256_model
 from psrc.contract.models import StrategyKind
 from psrc.papers.ingest import digest, ingest, normalize
-from psrc.papers.models import DataSourceEvidence, PaperSource, PaperStrategyBinding
+from psrc.papers.models import (
+    DataSourceEvidence,
+    PaperAcceptancePolicy,
+    PaperSource,
+    PaperStrategyBinding,
+)
 from psrc.runtime.package import discover_strategy_packages
 from psrc.runtime.report import RunBundle
 
@@ -36,6 +42,30 @@ def read_bindings(root: Path) -> tuple[PaperStrategyBinding, ...]:
     if len({binding.strategy_id for binding in bindings}) != len(bindings):
         raise ValueError("paper strategy bindings must be one-to-one")
     return bindings
+
+
+_PAPER_POLICY_FIELDS = frozenset(PaperAcceptancePolicy.model_fields)
+_PAPER_POLICY_DOCUMENTATION_FIELDS = frozenset({"description", "evidence"})
+
+
+def read_paper_acceptance_policy(path: Path) -> PaperAcceptancePolicy:
+    raw = yaml.safe_load(path.read_text(encoding="utf-8"))
+    try:
+        section = raw["criteria"]["paper_reproduction"]
+    except (KeyError, TypeError) as exc:
+        raise ValueError("acceptance matrix lacks criteria.paper_reproduction") from exc
+    if not isinstance(section, dict):
+        raise ValueError("paper reproduction acceptance policy must be an object")
+    unknown = set(section) - _PAPER_POLICY_FIELDS - _PAPER_POLICY_DOCUMENTATION_FIELDS
+    missing = _PAPER_POLICY_FIELDS - set(section)
+    if unknown or missing:
+        raise ValueError(
+            f"paper reproduction policy fields differ: missing={sorted(missing)}, "
+            f"unknown={sorted(unknown)}"
+        )
+    return PaperAcceptancePolicy.model_validate(
+        {name: section[name] for name in _PAPER_POLICY_FIELDS}
+    )
 
 
 def _validate_test_node(repository: Path, node_id: str) -> None:
@@ -157,12 +187,17 @@ def _runtime_behavior(
 
 
 def verify_strategy_bindings(
-    repository: Path, *, evidence_root: Path | None = None
+    repository: Path,
+    *,
+    evidence_root: Path | None = None,
+    policy: PaperAcceptancePolicy | None = None,
 ) -> dict[str, Any]:
     """Rebuild every source, claim and code binding instead of trusting catalog prose."""
     results: list[dict[str, Any]] = []
     errors: list[str] = []
     try:
+        if policy is None:
+            policy = read_paper_acceptance_policy(repository / "ACCEPTANCE_MATRIX.yaml")
         sources = read_source_registry(repository / "papers/source-registry.json")
         bindings = read_bindings(repository / "papers/bindings")
         packages = discover_strategy_packages(repository / "strategies")
@@ -282,20 +317,30 @@ def verify_strategy_bindings(
     )
     reproduction_count = len(reproductions)
     adaptation_count = fidelities["method_adaptation"]
+    required_counts = Counter(
+        {str(kind): count for kind, count in policy.required_strategy_bindings.items()}
+    )
+    required_total = sum(required_counts.values())
     coverage_ok = (
-        len(bindings) == 18
+        len(bindings) == required_total
         and actual_ids == expected_ids
-        and kinds == Counter({kind.value: 6 for kind in StrategyKind})
+        and kinds == required_counts
         and all(result["status"] == "passed" for result in results)
-        and len({binding.source_id for binding in bindings}) >= 15
-        and fidelities["formula_reproduction"] >= 6
-        and reproduction_count >= 14
-        and adaptation_count <= 4
-        and exact_count >= 9
+        and len({binding.source_id for binding in bindings}) >= policy.minimum_distinct_sources
+        and fidelities["formula_reproduction"] >= policy.minimum_formula_reproductions
+        and reproduction_count >= policy.required_reproductions
+        and adaptation_count <= policy.maximum_method_adaptations
+        and exact_count >= policy.minimum_algorithm_exact
         and not a2_without_independent_oracles
-        and data_fidelities["D1_public_proxy"] >= 6
-        and all(public_by_kind[kind.value] >= 2 for kind in StrategyKind)
-        and experimental_fidelities == Counter({"E0_runtime_only": 18})
+        and data_fidelities["D1_public_proxy"] >= policy.minimum_public_data_bindings
+        and all(
+            public_by_kind[kind.value] >= policy.minimum_public_data_bindings_per_kind
+            for kind in StrategyKind
+        )
+        and (
+            policy.empirical_claims_allowed
+            or experimental_fidelities == Counter({"E0_runtime_only": required_total})
+        )
         and (
             evidence_root is None
             or all(result.get("runtime_verified") is True for result in results)
@@ -317,16 +362,7 @@ def verify_strategy_bindings(
         "experimental_fidelity_counts": dict(experimental_fidelities),
         "declared_runtime_fidelity_counts": dict(declared_runtime_fidelities),
         "observed_runtime_fidelity_counts": dict(observed_runtime_fidelities),
-        "policy": {
-            "minimum_distinct_sources": 15,
-            "minimum_formula_reproductions": 6,
-            "minimum_reproductions": 14,
-            "maximum_method_adaptations": 4,
-            "minimum_algorithm_exact": 9,
-            "minimum_public_data_bindings": 6,
-            "minimum_public_data_bindings_per_kind": 2,
-            "empirical_claims_allowed": False,
-        },
+        "policy": policy.model_dump(mode="json"),
         "coverage_is_one_to_one": actual_ids == expected_ids,
         "runtime_evidence_required": evidence_root is not None,
         "bindings": results,

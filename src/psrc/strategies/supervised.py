@@ -20,7 +20,7 @@ from psrc.domain.market import (
     MarketEvent,
     QuoteL1Payload,
 )
-from psrc.runtime.artifacts import ArtifactManifest, ArtifactStore
+from psrc.runtime.artifacts import ArtifactIO, ArtifactManifest
 from psrc.runtime.training import TrainingRequest
 from psrc.strategies.common import (
     bar_requirement,
@@ -141,7 +141,7 @@ class _JsonModelStrategy:
         self.artifact_id: str | None = None
 
     def _save(
-        self, request: TrainingRequest, store: ArtifactStore, model: dict[str, object]
+        self, request: TrainingRequest, store: ArtifactIO, model: dict[str, object]
     ) -> ArtifactManifest:
         canonical_model = canonicalize_numeric(model)
         if not isinstance(canonical_model, dict):
@@ -164,7 +164,7 @@ class _JsonModelStrategy:
             metadata={"algorithm": str(model["algorithm"])},
         )
 
-    def load(self, manifest: ArtifactManifest, store: ArtifactStore, *, run_id: str) -> None:
+    def load(self, manifest: ArtifactManifest, store: ArtifactIO, *, run_id: str) -> None:
         if manifest.strategy_id != self.manifest.strategy_id:
             raise ValueError("artifact strategy_id does not match strategy")
         payload = store.load_bytes(
@@ -218,7 +218,7 @@ class LogisticDirectionStrategy(_JsonModelStrategy):
         max_position=Decimal("1"),
     )
 
-    def train(self, request: TrainingRequest, store: ArtifactStore) -> ArtifactManifest:
+    def train(self, request: TrainingRequest, store: ArtifactIO) -> ArtifactManifest:
         x, y = self._arrays(request, 5)
         weights, intercept = fit_binary_logistic(x, y, learning_rate=0.01, epochs=1000)
         return self._save(
@@ -282,7 +282,7 @@ class RidgeReturnStrategy(_JsonModelStrategy):
     def on_start(self) -> None:
         self.closes.clear()
 
-    def train(self, request: TrainingRequest, store: ArtifactStore) -> ArtifactManifest:
+    def train(self, request: TrainingRequest, store: ArtifactIO) -> ArtifactManifest:
         x, y = self._arrays(request, 3)
         design = np.column_stack([np.ones(len(x)), x])
         penalty = np.eye(design.shape[1]) * 0.2
@@ -349,7 +349,7 @@ class GaussianVolumeBreakoutStrategy(_JsonModelStrategy):
         max_position=Decimal("1"),
     )
 
-    def train(self, request: TrainingRequest, store: ArtifactStore) -> ArtifactManifest:
+    def train(self, request: TrainingRequest, store: ArtifactIO) -> ArtifactManifest:
         x, y = self._arrays(request, 2)
         labels = (y > 0).astype(int)
         if set(labels.tolist()) != {0, 1}:
@@ -425,7 +425,7 @@ class L1AdverseSelectionStrategy(_JsonModelStrategy):
         max_position=Decimal("1"),
     )
 
-    def train(self, request: TrainingRequest, store: ArtifactStore) -> ArtifactManifest:
+    def train(self, request: TrainingRequest, store: ArtifactIO) -> ArtifactManifest:
         x, y = self._arrays(request, 3)
         # Gould and Bonart regress the next-move indicator on queue imbalance alone.
         imbalance = x[:, :1]
@@ -490,7 +490,7 @@ class L2FillProbabilityStrategy(_JsonModelStrategy):
         super().__init__()
         self.counter = 0
 
-    def train(self, request: TrainingRequest, store: ArtifactStore) -> ArtifactManifest:
+    def train(self, request: TrainingRequest, store: ArtifactIO) -> ArtifactManifest:
         x, y = self._arrays(request, 3)
         del y
         exposure = x[:, 2]
@@ -586,7 +586,7 @@ class CrossSectionalRankerStrategy(_JsonModelStrategy):
         self.symbols = ("SYNTH.XS-A", "SYNTH.XS-B", "SYNTH.XS-C")
         self.current: dict[str, tuple[object, tuple[float, ...]]] = {}
 
-    def train(self, request: TrainingRequest, store: ArtifactStore) -> ArtifactManifest:
+    def train(self, request: TrainingRequest, store: ArtifactIO) -> ArtifactManifest:
         x, y = self._arrays(request, 3)
         weights, intercept = fit_pooled_ols(x, y)
         return self._save(

@@ -12,11 +12,11 @@
 
 | 范围 | 公开对象或入口 | 可执行证据 | 当前边界 |
 | --- | --- | --- | --- |
-| 规则、监督、强化学习 | `StrategyKind`；`RuntimeStrategy`；`TrainableStrategy` | 18 个包三类各 6 个；外部未知规格三类黑盒运行各 1 次 | 未实现开放域论文的无审阅自动理解 |
-| 训练入口 | `train(TrainingRequest, ArtifactStore)`；`RuntimeCapabilities` | 监督与 RL 全矩阵训练、原子保存和重载；实际请求与计划、产物及 Bundle 哈希链负例；训练画像与引擎画像分开协商 | 规则策略声明 `not_required` |
+| 规则、监督、强化学习 | `StrategyKind`；`RuntimeStrategy`；`TrainableStrategy` | 18 个包三类各 6 个；未注册作者夹具三类各运行 1 次 | 夹具只验证外部接入接口；未实现开放域论文的无审阅自动理解 |
+| 训练入口 | `train(TrainingRequest, ArtifactIO)`；`RuntimeCapabilities` | 监督与 RL 全矩阵训练、原子保存和重载；实际请求与计划、产物及 Bundle 哈希链负例；训练画像与引擎画像分开协商 | `ArtifactIO` 是不含存储根和验证方法的最小能力；规则策略声明 `not_required` |
 | 推理入口 | `on_event(MarketEvent, AccountSnapshot)` | 18 个策略统一回调与决策记录 | 单次目录输入在 Contract v1 中只允许一个可归属 stream |
 | 最小回测 | `BacktestAdapter.capabilities`、`BacktestAdapter.run` / `psrc run` | Reference 全矩阵；Backtrader 规则差分及监督/RL 完整生命周期；直接 Adapter 也核对上下文、真实字段、L2 深度，并结构化封装异常 | NautilusTrader 为可选依赖，不能作为默认实测能力 |
-| 模型产物 | `ArtifactManifest`、内容寻址文件、训练输入证据 | 保存后由运行时独立重读规范 manifest，按路径、大小和 SHA-256 在加载前后校验；产物固定训练请求规范哈希；根权限不可由策略改写 | 不把内存对象或策略自报成功当作可交付模型 |
+| 模型产物 | `ArtifactManifest`、内容寻址文件、训练输入证据 | 策略只操作每次运行独立的基础类型能力通道；主机独立重读 manifest，按路径、大小和 SHA-256 校验，并要求加载回调实际读取已验证字节 | 不把内存对象、空加载回调或策略自报成功当作可交付模型 |
 | 日志与报告 | `RuntimeLogRecord`、`RunReport`、`FailureReport`、`RunBundle` | 成功和失败均输出机器可读文件 | 日志不能替代结构化订单、成交和错误对象 |
 | tick / 事件 | `Timeframe(mode="event", interval=null)` | Trade、L1 quote、L2 snapshot 在 Reference 可运行 | “tick”在 v1 表示逐事件，不虚构固定 tick 周期 |
 | 分钟线 / 日线 | `Timeframe(mode="bar", interval="PT1M" | "P1D")` | 18 个目录包同时覆盖 PT1M 与 P1D；实际时间错位反例失败 | UTC/epoch 逐 bar 校验；允许周期整数倍的缺口 |
@@ -37,4 +37,4 @@
 
 每条兼容记录包含结果等级、转换 ID 和版本、理由、参数、输入/输出 Schema 哈希、影响记录数、是否可逆，以及固定为 true 的可关闭标志。源事件和转换后事件分别保存并计算 SHA-256。没有白名单的转换在策略代码导入前失败。
 
-`tests/integration/test_public_interface_coverage.py` 直接执行 trade tick、账户现金/权益/持仓、挂单状态、改单和成交；同一文件还验证三类策略及 event/PT1M/P1D 三种要求确实存在于可运行目录。`tests/integration/test_strategy_packages.py` 用未注册规格和独立源码分别执行规则、监督和 RL 外部包，证明接入入口不依赖内置策略目录。
+`tests/integration/test_public_interface_coverage.py` 直接执行 trade tick、账户现金/权益/持仓、挂单状态、改单和成交；同一文件还验证三类策略及 event/PT1M/P1D 三种要求确实存在于可运行目录。`tests/integration/test_strategy_packages.py` 用自建、未注册的确定性作者夹具和独立源码分别执行规则、监督和 RL 外部包，证明接入入口不依赖内置策略目录。该测试不计作真实外部论文复现，也不评价夹具的学术忠实度。

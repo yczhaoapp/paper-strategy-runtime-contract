@@ -36,6 +36,8 @@ from psrc.papers.strategies import (
     MovingAverageBandStrategy,
     QueueLogisticStrategy,
 )
+from psrc.runtime.artifacts import ArtifactIO, ArtifactManifest
+from psrc.runtime.training import TrainingRequest
 from psrc.strategies.reinforcement_learning import (
     A2CPairsStrategy,
     DoubleQBookInventoryStrategy,
@@ -98,6 +100,8 @@ __all__ = [
     "Action",
     "ActionEnvelope",
     "ActionKind",
+    "ArtifactIO",
+    "ArtifactManifest",
     "AvellanedaStrategy",
     "BarPayload",
     "BookLevel",
@@ -117,5 +121,6 @@ __all__ = [
     "TargetPosition",
     "TargetWeight",
     "TradePayload",
+    "TrainingRequest",
     "bundled_strategy_class",
 ]

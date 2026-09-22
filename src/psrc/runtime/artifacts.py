@@ -6,7 +6,7 @@ import shutil
 import tempfile
 from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
-from typing import Literal
+from typing import Literal, Never, Protocol, cast
 from weakref import WeakKeyDictionary
 
 from pydantic import Field
@@ -37,6 +37,37 @@ class ArtifactManifest(ContractModel):
     training_request_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
     files: tuple[ArtifactFile, ...]
     metadata: dict[str, str] = Field(default_factory=dict)
+
+
+class ArtifactIO(Protocol):
+    """Minimal byte channel available to a strategy callback.
+
+    The orchestrator supplies a capability implementation, not the authoritative
+    :class:`ArtifactStore` service.  Keeping this as a protocol also lets trusted
+    unit tests exercise strategy serialization directly with an ArtifactStore.
+    """
+
+    def save_bytes(
+        self,
+        *,
+        run_id: str,
+        artifact_id: str,
+        strategy_id: str,
+        strategy_version: str,
+        artifact_kind: Literal["model", "policy", "state"],
+        framework: str,
+        logical_name: str,
+        media_type: str,
+        payload: bytes,
+        training_dataset_id: str,
+        seed: int,
+        training_request_sha256: str | None = None,
+        metadata: dict[str, str] | None = None,
+    ) -> ArtifactManifest: ...
+
+    def load_bytes(
+        self, *, run_id: str, strategy_id: str, manifest: ArtifactManifest
+    ) -> dict[str, bytes]: ...
 
 
 _AUTHORIZED_ROOTS: WeakKeyDictionary[ArtifactStore, Path] = WeakKeyDictionary()
@@ -317,7 +348,7 @@ class ArtifactStore:
         code: ErrorCode,
         message: str,
         details: dict[str, object],
-    ) -> None:
+    ) -> Never:
         raise ContractViolation(
             ContractError(
                 run_id=run_id,
@@ -328,3 +359,157 @@ class ArtifactStore:
                 details=details,
             )
         )
+
+
+class _StrategyArtifactChannel:
+    """Per-run capability that never exposes the trusted store object or root."""
+
+    __slots__ = ("__weakref__",)
+
+    def save_bytes(
+        self,
+        *,
+        run_id: str,
+        artifact_id: str,
+        strategy_id: str,
+        strategy_version: str,
+        artifact_kind: Literal["model", "policy", "state"],
+        framework: str,
+        logical_name: str,
+        media_type: str,
+        payload: bytes,
+        training_dataset_id: str,
+        seed: int,
+        training_request_sha256: str | None = None,
+        metadata: dict[str, str] | None = None,
+    ) -> ArtifactManifest:
+        values = {
+            "run_id": run_id,
+            "artifact_id": artifact_id,
+            "strategy_id": strategy_id,
+            "strategy_version": strategy_version,
+            "artifact_kind": artifact_kind,
+            "framework": framework,
+            "logical_name": logical_name,
+            "media_type": media_type,
+            "training_dataset_id": training_dataset_id,
+        }
+        for name, value in values.items():
+            if type(value) is not str:
+                raise TypeError(f"artifact channel {name} must be a plain string")
+        if type(payload) is not bytes:
+            raise TypeError("artifact channel payload must be plain bytes")
+        if type(seed) is not int:
+            raise TypeError("artifact channel seed must be a plain integer")
+        if training_request_sha256 is not None and type(training_request_sha256) is not str:
+            raise TypeError("artifact channel training_request_sha256 must be a plain string")
+        if metadata is None:
+            safe_metadata: dict[str, str] = {}
+        else:
+            if type(metadata) is not dict or any(
+                type(key) is not str or type(value) is not str
+                for key, value in metadata.items()
+            ):
+                raise TypeError("artifact channel metadata must be a plain string dictionary")
+            safe_metadata = dict(metadata)
+        state = _CHANNEL_STATES.get(self)
+        if state is None:
+            raise RuntimeError("artifact channel is not authorized")
+        return state.store.save_bytes(
+            run_id=run_id,
+            artifact_id=artifact_id,
+            strategy_id=strategy_id,
+            strategy_version=strategy_version,
+            artifact_kind=artifact_kind,
+            framework=framework,
+            logical_name=logical_name,
+            media_type=media_type,
+            payload=payload,
+            training_dataset_id=training_dataset_id,
+            seed=seed,
+            training_request_sha256=training_request_sha256,
+            metadata=safe_metadata,
+        )
+
+    def load_bytes(
+        self, *, run_id: str, strategy_id: str, manifest: ArtifactManifest
+    ) -> dict[str, bytes]:
+        if type(run_id) is not str or type(strategy_id) is not str:
+            raise TypeError("artifact channel identifiers must be plain strings")
+        if type(manifest) is not ArtifactManifest:
+            raise TypeError("artifact channel manifest must be the verified runtime model")
+        state = _CHANNEL_STATES.get(self)
+        if state is None:
+            raise RuntimeError("artifact channel is not authorized")
+        if state.expected_load != manifest:
+            raise ValueError(
+                "strategy attempted to load an artifact outside the verified load phase"
+            )
+        loaded = state.store.load_bytes(
+            run_id=run_id,
+            strategy_id=strategy_id,
+            manifest=manifest,
+        )
+        state.observed_load = manifest
+        return loaded
+
+
+class _ChannelState:
+    __slots__ = ("expected_load", "observed_load", "store")
+
+    def __init__(self, store: ArtifactStore) -> None:
+        self.store = store
+        self.expected_load: ArtifactManifest | None = None
+        self.observed_load: ArtifactManifest | None = None
+
+
+_CHANNEL_STATES: WeakKeyDictionary[_StrategyArtifactChannel, _ChannelState] = WeakKeyDictionary()
+
+
+def create_strategy_artifact_channel(store: ArtifactStore) -> ArtifactIO:
+    """Create a single-run, independently mutable capability class.
+
+    A strategy can alter its own Python class, but that class is unique to the
+    run and is never used by the host for authoritative verification.
+    """
+
+    channel_type = type(
+        f"_RunArtifactChannel_{id(store):x}",
+        (_StrategyArtifactChannel,),
+        {"__slots__": ()},
+    )
+    channel = cast(_StrategyArtifactChannel, channel_type())
+    _CHANNEL_STATES[channel] = _ChannelState(store)
+    return channel
+
+
+def begin_verified_artifact_load(channel: ArtifactIO, manifest: ArtifactManifest) -> None:
+    if not isinstance(channel, _StrategyArtifactChannel):
+        raise RuntimeError("artifact channel is not authorized")
+    state = _CHANNEL_STATES.get(channel)
+    if state is None:
+        raise RuntimeError("artifact channel is not authorized")
+    state.expected_load = manifest
+    state.observed_load = None
+
+
+def require_verified_artifact_load(
+    channel: ArtifactIO,
+    manifest: ArtifactManifest,
+    *,
+    run_id: str,
+    strategy_id: str,
+) -> None:
+    if not isinstance(channel, _StrategyArtifactChannel):
+        raise RuntimeError("artifact channel is not authorized")
+    state = _CHANNEL_STATES.get(channel)
+    if state is None or state.expected_load != manifest or state.observed_load != manifest:
+        ArtifactStore._fail(
+            run_id=run_id,
+            strategy_id=strategy_id,
+            code=ErrorCode.ARTIFACT_HASH_MISMATCH,
+            message="Strategy load callback did not read the host-verified artifact bytes",
+            details={"artifact_id": manifest.artifact_id, "fallback_used": False},
+        )
+    state.expected_load = None
+    state.observed_load = None

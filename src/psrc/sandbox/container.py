@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 import shutil
 import subprocess
+import uuid
 from dataclasses import dataclass
 from pathlib import Path
 from typing import NoReturn
@@ -102,14 +103,17 @@ class DockerSandbox:
         policy: ResourcePolicy,
         mounts: ContainerMounts,
         command: tuple[str, ...],
+        container_name: str | None = None,
     ) -> tuple[str, ...]:
         uid = getattr(os, "getuid", lambda: 65532)()
         gid = getattr(os, "getgid", lambda: 65532)()
         container_user = f"{uid}:{gid}" if uid != 0 else "65532:65532"
+        identity = ("--name", container_name) if container_name is not None else ()
         return (
             docker_executable() or "docker",
             "run",
             "--rm",
+            *identity,
             "--network",
             "none",
             "--read-only",
@@ -189,7 +193,13 @@ class DockerSandbox:
         command: tuple[str, ...],
     ) -> SandboxExecutionResult:
         cls.require_available(run_id=run_id, strategy_id=strategy_id)
-        invocation = cls.command(policy=policy, mounts=mounts, command=command)
+        container_name = f"psrc-{uuid.uuid4().hex}"
+        invocation = cls.command(
+            policy=policy,
+            mounts=mounts,
+            command=command,
+            container_name=container_name,
+        )
         try:
             completed = subprocess.run(
                 invocation,
@@ -199,12 +209,18 @@ class DockerSandbox:
                 timeout=policy.timeout_seconds,
             )
         except subprocess.TimeoutExpired:
+            cleanup_succeeded = cls._force_remove(container_name)
             cls._fail(
                 run_id=run_id,
                 strategy_id=strategy_id,
                 code=ErrorCode.SANDBOX_TIMEOUT,
                 message="Strict-container strategy exceeded its declared timeout",
-                details={"timeout_seconds": policy.timeout_seconds, "fallback_used": False},
+                details={
+                    "timeout_seconds": policy.timeout_seconds,
+                    "container_cleanup_attempted": True,
+                    "container_cleanup_succeeded": cleanup_succeeded,
+                    "fallback_used": False,
+                },
             )
         if completed.returncode != 0:
             exhausted = completed.returncode in {137, -9}
@@ -228,6 +244,22 @@ class DockerSandbox:
             stdout=completed.stdout,
             stderr=completed.stderr,
         )
+
+    @staticmethod
+    def _force_remove(container_name: str) -> bool:
+        """Best-effort cleanup after the Docker client itself times out."""
+
+        try:
+            completed = subprocess.run(
+                (docker_executable() or "docker", "rm", "--force", container_name),
+                check=False,
+                capture_output=True,
+                text=True,
+                timeout=15,
+            )
+        except (OSError, subprocess.TimeoutExpired):
+            return False
+        return completed.returncode == 0
 
     @staticmethod
     def _fail(

@@ -77,6 +77,8 @@ class StaticPolicyScanner(ast.NodeVisitor):
             "ActionEnvelope",
             "ActionKind",
             "AccountSnapshot",
+            "ArtifactIO",
+            "ArtifactManifest",
             "AvellanedaStrategy",
             "BarPayload",
             "BookLevel",
@@ -96,6 +98,7 @@ class StaticPolicyScanner(ast.NodeVisitor):
             "TargetPosition",
             "TargetWeight",
             "TradePayload",
+            "TrainingRequest",
             "bundled_strategy_class",
         }
     )

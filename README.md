@@ -1,8 +1,8 @@
-# Paper Strategy Runtime Contract 2.8.0
+# Paper Strategy Runtime Contract 2.8.1
 
 [![PSRC 完整验证](https://github.com/yczhaoapp/paper-strategy-runtime-contract/actions/workflows/ci.yml/badge.svg)](https://github.com/yczhaoapp/paper-strategy-runtime-contract/actions/workflows/ci.yml)
 
-Paper Strategy Runtime Contract（PSRC）是面向 [SX-CH-003](https://github.com/SingularityX-Evolution/.github/blob/main/profile/challenge-board/tasks/SX-CH-003-paper-strategy-runtime-contract.md) 的独立维护实现，用统一契约连接论文策略、训练、推理和最小回测。软件版本 2.8.0；稳定运行契约为 1.4，论文绑定契约为 1.2。
+Paper Strategy Runtime Contract（PSRC）是面向 [SX-CH-003](https://github.com/SingularityX-Evolution/.github/blob/main/profile/challenge-board/tasks/SX-CH-003-paper-strategy-runtime-contract.md) 的独立维护实现，用统一契约连接论文策略、训练、推理和最小回测。软件版本 2.8.1；稳定运行契约为 1.4，论文绑定契约为 1.2。
 
 **交付范围：18 个论文可追溯的契约策略（三类各 6 个）+ 4 个 PDF 到代码的深度纵向案例、32 份 JSON Schema、统一训练/保存/重载/推理/回测、结构化失败、可关闭的兼容转换、沙箱和机器验收。** 每个契约策略都带来源 PDF 哈希、页级声明、声明到实现符号和已执行测试的连接、实现文件哈希、确定性运行行为签名、假设与偏差；第四个深度案例直接运行于 Backtrader。
 
@@ -72,7 +72,7 @@ uv run --no-sync psrc paper suite --output runs/papers
 
 18 个绑定还固定一次确定性统一运行的输入哈希、决策哈希、实际动作和原因码、训练算法与内容寻址产物，以及决策/订单/成交计数。总验收只接受本轮 JUnit 中确实执行过的精确测试节点；运行行为、测试选择或策略源码任一变化都要求显式重新审阅绑定。
 
-**新增论文有两条路径：**受审内置算法可进入 registry、recipe 和确定性编译器；其他论文可由人或 LLM 形成 `PaperStrategySpec` 与独立策略包，再走通用外部接入门禁。后者会把原始 PDF/HTML/文本的字节哈希和页内锚点、规格、manifest 与策略源码一起绑定，支持规则、监督和 RL，但不声称系统能在无人审阅时理解任意论文。详见 [论文契约](spec/paper-pipeline.md)与[公开接口覆盖](docs/public-interface-coverage.md)。
+**新增论文有两条路径：**受审内置算法可进入 registry、recipe 和确定性编译器；其他论文可由人或 LLM 形成 `PaperStrategySpec` 与独立策略包，再走通用外部接入门禁。后者会把调用方提供的 PDF/HTML/文本、页内锚点、规格、manifest 与策略源码绑定，支持规则、监督和 RL。当前自动化测试使用三类确定性作者夹具验证这条接口；它们不是额外的真实论文复现案例，也不证明系统能在无人审阅时理解任意论文。详见 [论文契约](spec/paper-pipeline.md)与[公开接口覆盖](docs/public-interface-coverage.md)。
 
 ```bash
 uv run --no-sync psrc author run \
@@ -90,8 +90,8 @@ uv run --no-sync psrc author run \
 - Tabular Q、SARSA、Double Q 同时要求多参数公式、终止/零学习率性质、每种算法 64 组固定 seed 随机单步公式，以及 16 组动态生成训练请求的完整多轮差分训练。后者核对整张持久化 Q 表、训练来源并通过公开事件入口验证训练集中未见状态；这些证据证明算法实现和生命周期真实，不把已改变的市场问题提升为论文复现。
 - `RuntimeCapabilities` 单独声明 orchestrator 提供的监督/RL 训练能力；行情、动作和撮合画像仍由 `EngineCapabilities` 提供。`Reference` 与 `Backtrader` 为默认实测引擎，Backtrader 另有监督与 RL 的训练—重载—推理—回测门禁。NautilusTrader 是单独的可选适配器：`uv sync --extra dev --extra adapters --extra nautilus`；它的安装平台有额外要求，不计入默认验证。选择缺失或不支持的能力提供者会失败。
 - 兼容转换默认关闭；显式开启后记录依据、是否有损、源/目标字段、影响范围及哈希。
-- 训练产物按内容和来源寻址，先在临时目录完整写入再原子发布；存储根由运行时私有授权表持有，策略不能改写。运行时在 `train` 返回后和 `load` 回调后独立重读规范 manifest，并核对路径、大小、哈希和训练来源；Windows 使用长路径表示，拒绝路径穿越。
-- 包内策略只能导入 manifest 白名单模块和最小 `psrc.strategy_api`。扫描器解析 import 别名与完整属性路径；回调期审计钩子阻止直接文件、进程和网络访问，只有受控 `ArtifactStore` 可写模型。Docker 的内核控制构成宿主隔离边界；`--require-strict` 不可降级。
+- 训练产物按内容和来源寻址，先在临时目录完整写入再原子发布。策略只收到每次运行独立的最小产物读写能力对象，不会收到受信 `ArtifactStore`、存储根或验证方法；输入必须先归一化为内建字符串、字节、整数和字符串字典。运行时在 `train` 返回后独立重读规范 manifest，在 `load` 阶段要求策略实际读取同一份已验证字节，随后再次核对路径、大小、哈希和训练来源。
+- 包内策略只能导入 manifest 白名单模块和最小 `psrc.strategy_api`。扫描器与进程内审计钩子执行资源契约并覆盖已知文件、进程和网络反例；它们不是抵御任意恶意 Python 的独立安全边界。严格模式的宿主隔离由非 root、断网、只读根目录和资源受限的 Docker 容器提供；`--require-strict` 不可降级。
 
 ```bash
 uv run --no-sync psrc run --strategy-dir strategies/rule.sma_cross \

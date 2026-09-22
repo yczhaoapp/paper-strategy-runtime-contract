@@ -246,6 +246,48 @@ class PaperStrategyBinding(ContractModel):
         return self
 
 
+class PaperAcceptancePolicy(ContractModel):
+    """Machine-enforced paper thresholds declared by the acceptance matrix."""
+
+    required_strategy_bindings: dict[StrategyKind, int]
+    minimum_distinct_sources: int = Field(ge=1)
+    minimum_formula_reproductions: int = Field(ge=0)
+    required_reproductions: int = Field(ge=0)
+    minimum_algorithm_exact: int = Field(ge=0)
+    minimum_public_data_bindings: int = Field(ge=0)
+    minimum_public_data_bindings_per_kind: int = Field(ge=0)
+    empirical_claims_allowed: bool
+    maximum_method_adaptations: int = Field(ge=0)
+    required_paper_ids: tuple[Identifier, ...] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def validate_thresholds(self) -> PaperAcceptancePolicy:
+        kinds = set(StrategyKind)
+        if set(self.required_strategy_bindings) != kinds:
+            raise ValueError("paper policy must declare one count for every strategy kind")
+        if any(
+            type(count) is not int or count < 1
+            for count in self.required_strategy_bindings.values()
+        ):
+            raise ValueError("paper policy strategy counts must be positive integers")
+        total = sum(self.required_strategy_bindings.values())
+        if self.required_reproductions > total:
+            raise ValueError("required reproductions cannot exceed required strategy bindings")
+        if self.maximum_method_adaptations > total:
+            raise ValueError("maximum method adaptations cannot exceed required strategy bindings")
+        if self.required_reproductions + self.maximum_method_adaptations < total:
+            raise ValueError("paper policy leaves some required strategy bindings unclassified")
+        if self.minimum_formula_reproductions > self.required_reproductions:
+            raise ValueError("formula minimum cannot exceed the reproduction minimum")
+        if self.minimum_algorithm_exact > self.required_reproductions:
+            raise ValueError("algorithm-exact minimum cannot exceed the reproduction minimum")
+        if self.minimum_public_data_bindings > total:
+            raise ValueError("public-data minimum cannot exceed required strategy bindings")
+        if len(set(self.required_paper_ids)) != len(self.required_paper_ids):
+            raise ValueError("required paper IDs must be unique")
+        return self
+
+
 class DataSourceEvidence(ContractModel):
     """Data origin is independent from paper and algorithm fidelity."""
 
