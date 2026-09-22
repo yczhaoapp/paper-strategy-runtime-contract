@@ -19,7 +19,12 @@ from psrc.contract.models import SandboxMode, StrategyCodeEvidence, StrategyMani
 from psrc.runtime.source_evidence import build_strategy_code_evidence
 from psrc.runtime.strategy import RuntimeStrategy
 from psrc.sandbox.container import DockerSandbox
-from psrc.sandbox.runtime import GuardedStrategy, RuntimeResourceDenied, strategy_resource_guard
+from psrc.sandbox.runtime import (
+    GuardedStrategy,
+    RuntimeResourceDenied,
+    normalize_strategy_manifest,
+    strategy_resource_guard,
+)
 from psrc.sandbox.static import StaticPolicyScanner
 
 MANIFEST_NAME = "strategy.yaml"
@@ -142,6 +147,7 @@ def load_strategy(
                 },
             )
         )
+    loaded_manifest: object
     try:
         module_name, class_name = package.manifest.entrypoint.split(":", maxsplit=1)
         source_path = _local_entrypoint(package, module_name)
@@ -171,7 +177,9 @@ def load_strategy(
                     spec.loader.exec_module(module)
                     strategy_type: Any = getattr(module, class_name)
                     strategy = strategy_type()
-                    loaded_manifest = getattr(strategy, "manifest", None)
+                    loaded_manifest = normalize_strategy_manifest(
+                        getattr(strategy, "manifest", None)
+                    )
             finally:
                 sys.dont_write_bytecode = previous_dont_write_bytecode
         else:

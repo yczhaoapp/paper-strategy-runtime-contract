@@ -8,10 +8,13 @@ from contextvars import ContextVar
 from dataclasses import dataclass
 from pathlib import Path
 from threading import Lock
-from typing import Any
+from typing import Any, cast
+
+from pydantic import TypeAdapter
 
 from psrc.contract.errors import ContractError, ContractViolation, ErrorCode, ErrorStage
 from psrc.contract.models import ResourcePolicy, StrategyManifest
+from psrc.domain.actions import Action
 
 
 class RuntimeResourceDenied(PermissionError):
@@ -33,6 +36,9 @@ _ACTIVE_SCOPE: ContextVar[_AuditScope | None] = ContextVar("psrc_audit_scope", d
 _TRUSTED_RUNTIME_IO: ContextVar[int] = ContextVar("psrc_trusted_runtime_io", default=0)
 _HOOK_LOCK = Lock()
 _HOOK_INSTALLED = False
+_UNTRUSTED_OUTPUT_ADAPTER = TypeAdapter(object)
+_ACTION_OUTPUT_ADAPTER = TypeAdapter(tuple[Action, ...])
+_STRATEGY_MANIFEST_OUTPUT_ADAPTER = TypeAdapter(StrategyManifest)
 
 _SINGLE_PATH_READ_EVENTS = frozenset(
     {
@@ -195,6 +201,40 @@ def trusted_runtime_io[**P, R](function: Callable[P, R]) -> Callable[P, R]:
     return wrapped
 
 
+def _normalize_untrusted_output[T](value: object, adapter: TypeAdapter[T]) -> T:
+    """Copy a strategy-owned value into trusted contract model instances.
+
+    Serialization and validation must be called while ``strategy_resource_guard``
+    is active.  The JSON boundary consumes lazy containers before the host sees
+    them and removes executable scalar/container subclasses from nested values.
+    """
+
+    payload = _UNTRUSTED_OUTPUT_ADAPTER.dump_json(
+        value,
+        warnings="error",
+        serialize_as_any=True,
+    )
+    return adapter.validate_json(payload)
+
+
+def normalize_strategy_manifest(value: object) -> StrategyManifest:
+    """Return a callback-free manifest snapshot from a strategy-owned value."""
+
+    return _normalize_untrusted_output(value, _STRATEGY_MANIFEST_OUTPUT_ADAPTER)
+
+
+def _normalize_actions(value: object) -> tuple[Action, ...]:
+    return _normalize_untrusted_output(value, _ACTION_OUTPUT_ADAPTER)
+
+
+def _normalize_artifact_manifest(value: object) -> object:
+    # Imported lazily because runtime.artifacts imports ``trusted_runtime_io``
+    # from this module while it is being initialized.
+    from psrc.runtime.artifacts import ArtifactManifest
+
+    return _normalize_untrusted_output(value, TypeAdapter(ArtifactManifest))
+
+
 class GuardedStrategy:
     """Proxy that applies the manifest resource policy to every strategy callback."""
 
@@ -226,6 +266,7 @@ class GuardedStrategy:
         method: str,
         *args: object,
         artifact_roots: tuple[Path, ...] = (),
+        normalize: Callable[[object], object] | None = None,
         **kwargs: object,
     ) -> Any:
         try:
@@ -236,7 +277,8 @@ class GuardedStrategy:
                 library_roots=self._library_roots,
             ):
                 target = getattr(self._strategy, method)
-                return target(*args, **kwargs)
+                result = target(*args, **kwargs)
+                return normalize(result) if normalize is not None else result
         except RuntimeResourceDenied as exc:
             raise ContractViolation(
                 ContractError(
@@ -258,14 +300,20 @@ class GuardedStrategy:
     def on_start(self) -> None:
         self._invoke("on_start")
 
-    def on_event(self, event: object, account: object) -> Any:
-        return self._invoke("on_event", event, account)
+    def on_event(self, event: object, account: object) -> tuple[Action, ...]:
+        result = self._invoke("on_event", event, account, normalize=_normalize_actions)
+        return cast(tuple[Action, ...], result)
 
     def on_finish(self) -> None:
         self._invoke("on_finish")
 
     def train(self, request: object, store: Any) -> Any:
-        return self._invoke("train", request, store)
+        return self._invoke(
+            "train",
+            request,
+            store,
+            normalize=_normalize_artifact_manifest,
+        )
 
     def load(self, manifest: object, store: Any, *, run_id: str) -> None:
         self._invoke("load", manifest, store, run_id=run_id)

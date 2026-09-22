@@ -6,7 +6,7 @@
         "errors": 0,
         "failures": 0,
         "skipped": 0,
-        "tests": 272
+        "tests": 274
       },
       "passed": true
     },
@@ -23,7 +23,7 @@
     "code_coverage": {
       "detail": {
         "minimum": 90,
-        "percent_covered": 91.63
+        "percent_covered": 91.66
       },
       "passed": true
     },
@@ -695,8 +695,8 @@
     "independent_audit_counterexamples_closed": {
       "detail": {
         "missing_tests": [],
-        "required_tests": 20,
-        "scope": "artifact capability separation, callback-safe scalar normalization, physical reload evidence, artifact integrity, guarded descriptors, adapter exception and payload boundaries, derived order limits, market-time resampling, and paper claim corrections"
+        "required_tests": 22,
+        "scope": "artifact capability separation, callback-safe scalar and callback return normalization, physical reload evidence, artifact integrity, guarded descriptors, adapter exception and payload boundaries, derived order limits, market-time resampling, and paper claim corrections"
       },
       "passed": true
     },

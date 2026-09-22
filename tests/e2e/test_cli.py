@@ -180,6 +180,10 @@ def test_cli_builds_complete_reproduction_bundle(tmp_path: Path, capsys: object)
             "test_manifest_descriptor_executes_inside_resource_guard",
         ),
         (
+            "tests.sandbox.test_policy",
+            "test_guarded_action_return_is_canonicalized_before_leaving_policy_scope",
+        ),
+        (
             "tests.negative.test_training_failures",
             "test_runtime_independently_verifies_returned_training_artifact[missing]",
         ),
@@ -206,6 +210,10 @@ def test_cli_builds_complete_reproduction_bundle(tmp_path: Path, capsys: object)
         (
             "tests.negative.test_training_failures",
             "test_noop_load_cannot_be_reported_as_verified_artifact_reload",
+        ),
+        (
+            "tests.negative.test_training_failures",
+            "test_guarded_training_return_is_canonicalized_before_trusted_artifact_io",
         ),
         (
             "tests.adapters.test_public_boundary_failures",

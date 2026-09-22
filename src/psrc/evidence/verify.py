@@ -654,6 +654,8 @@ def verify_acceptance(
         "test_runtime_audit_blocks_file_process_and_report_mount_access",
         "tests.sandbox.test_policy::test_artifact_store_is_the_only_writable_strategy_channel",
         "tests.sandbox.test_policy::test_manifest_descriptor_executes_inside_resource_guard",
+        "tests.sandbox.test_policy::"
+        "test_guarded_action_return_is_canonicalized_before_leaving_policy_scope",
     }
     missing_sandbox_regressions = sorted(required_sandbox_regressions - executed_tests)
     check(
@@ -795,6 +797,10 @@ def verify_acceptance(
         "test_strategy_artifact_channel_rejects_executable_scalar_subclasses",
         "tests.unit.test_artifacts::"
         "test_strategy_channel_class_root_does_not_change_host_authority",
+        "tests.sandbox.test_policy::"
+        "test_guarded_action_return_is_canonicalized_before_leaving_policy_scope",
+        "tests.negative.test_training_failures::"
+        "test_guarded_training_return_is_canonicalized_before_trusted_artifact_io",
         "tests.adapters.test_public_boundary_failures::"
         "test_public_adapter_wraps_unexpected_strategy_exceptions["
         "on_start-ReferenceEngine-capabilities]",
@@ -836,10 +842,10 @@ def verify_acceptance(
             "required_tests": len(required_audit_counterexamples),
             "missing_tests": missing_audit_counterexamples,
             "scope": (
-                "artifact capability separation, callback-safe scalar normalization, physical "
-                "reload evidence, artifact integrity, guarded descriptors, adapter exception and "
-                "payload boundaries, derived order limits, market-time resampling, and paper "
-                "claim corrections"
+                "artifact capability separation, callback-safe scalar and callback return "
+                "normalization, physical reload evidence, artifact integrity, guarded "
+                "descriptors, adapter exception and payload boundaries, derived order limits, "
+                "market-time resampling, and paper claim corrections"
             ),
         },
     )

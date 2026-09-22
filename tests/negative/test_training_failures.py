@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import cast
 
 import pytest
 
@@ -17,7 +18,12 @@ from psrc.runtime.artifacts import ArtifactIO, ArtifactManifest, ArtifactStore
 from psrc.runtime.orchestrator import run_trainable
 from psrc.runtime.report import RunBundle, RunReport
 from psrc.runtime.strategy import RuntimeStrategy
-from psrc.runtime.training import TrainingRequest, build_training_input_evidence
+from psrc.runtime.training import (
+    TrainableRuntimeStrategy,
+    TrainingRequest,
+    build_training_input_evidence,
+)
+from psrc.sandbox.runtime import GuardedStrategy
 from psrc.strategies.catalog import supervised_examples
 from psrc.strategies.supervised import LogisticDirectionStrategy
 
@@ -219,6 +225,60 @@ def test_strategy_channel_class_mutation_cannot_bypass_host_manifest_verificatio
             sandbox_mode=SandboxMode.DEVELOPMENT,
         )
     assert raised.value.error.code == ErrorCode.ARTIFACT_NOT_FOUND
+
+
+def test_guarded_training_return_is_canonicalized_before_trusted_artifact_io(
+    tmp_path: Path,
+) -> None:
+    example = supervised_examples()[0]
+    package = tmp_path / "package"
+    package.mkdir()
+    marker = tmp_path / "outside-marker.txt"
+
+    class ExecutableText(str):
+        def endswith(self, suffix: object, *args: object) -> bool:
+            marker.write_text("forbidden", encoding="utf-8")
+            return super().endswith(suffix, *args)  # type: ignore[arg-type]
+
+    class ExecutableScalarStrategy(LogisticDirectionStrategy):
+        def train(self, request: TrainingRequest, store: ArtifactIO) -> ArtifactManifest:
+            artifact = super().train(request, store)
+            return artifact.model_copy(
+                update={"artifact_id": ExecutableText(artifact.artifact_id)}
+            )
+
+    raw_strategy = ExecutableScalarStrategy()
+    strategy = GuardedStrategy(
+        raw_strategy,
+        manifest=raw_strategy.manifest,
+        policy=raw_strategy.manifest.resources,
+        package_root=package,
+    )
+    plan = compile_run(
+        run_id="test.guarded-training-output",
+        strategy=strategy.manifest,
+        dataset=example.dataset,
+        engine=capabilities(),
+        policy=RunPolicy(required_sandbox=SandboxMode.DEVELOPMENT),
+        training_input_evidence_sha256=sha256_model(
+            build_training_input_evidence(example.training)
+        ),
+    )
+
+    report = run_trainable(
+        plan=plan,
+        strategy=cast(TrainableRuntimeStrategy, strategy),
+        training=example.training,
+        events=example.events,
+        engine=ReferenceEngine(),
+        store=ArtifactStore(tmp_path / "artifacts"),
+        sandbox_mode=SandboxMode.DEVELOPMENT,
+    )
+
+    assert report.status == "succeeded"
+    assert type(report.artifacts[0]) is ArtifactManifest
+    assert type(report.artifacts[0].artifact_id) is str
+    assert not marker.exists()
 
 
 def test_noop_load_cannot_be_reported_as_verified_artifact_reload(tmp_path: Path) -> None:

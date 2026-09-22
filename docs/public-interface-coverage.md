@@ -14,9 +14,9 @@
 | --- | --- | --- | --- |
 | 规则、监督、强化学习 | `StrategyKind`；`RuntimeStrategy`；`TrainableStrategy` | 18 个包三类各 6 个；未注册作者夹具三类各运行 1 次 | 夹具只验证外部接入接口；未实现开放域论文的无审阅自动理解 |
 | 训练入口 | `train(TrainingRequest, ArtifactIO)`；`RuntimeCapabilities` | 监督与 RL 全矩阵训练、原子保存和重载；实际请求与计划、产物及 Bundle 哈希链负例；训练画像与引擎画像分开协商 | `ArtifactIO` 是不含存储根和验证方法的最小能力；规则策略声明 `not_required` |
-| 推理入口 | `on_event(MarketEvent, AccountSnapshot)` | 18 个策略统一回调与决策记录 | 单次目录输入在 Contract v1 中只允许一个可归属 stream |
+| 推理入口 | `on_event(MarketEvent, AccountSnapshot)` | 18 个策略统一回调与决策记录；返回动作在资源围栏内消费并重建为规范 tuple/Action | 单次目录输入在 Contract v1 中只允许一个可归属 stream |
 | 最小回测 | `BacktestAdapter.capabilities`、`BacktestAdapter.run` / `psrc run` | Reference 全矩阵；Backtrader 规则差分及监督/RL 完整生命周期；直接 Adapter 也核对上下文、真实字段、L2 深度，并结构化封装异常 | NautilusTrader 为可选依赖，不能作为默认实测能力 |
-| 模型产物 | `ArtifactManifest`、内容寻址文件、训练输入证据 | 策略只操作每次运行独立的基础类型能力通道；主机独立重读 manifest，按路径、大小和 SHA-256 校验，并要求加载回调实际读取已验证字节 | 不把内存对象、空加载回调或策略自报成功当作可交付模型 |
+| 模型产物 | `ArtifactManifest`、内容寻址文件、训练输入证据 | 策略只操作每次运行独立的基础类型能力通道；训练返回值在围栏内规范化；主机独立重读 manifest，按路径、大小和 SHA-256 校验，并要求加载回调实际读取已验证字节 | 不把内存对象、空加载回调或策略自报成功当作可交付模型 |
 | 日志与报告 | `RuntimeLogRecord`、`RunReport`、`FailureReport`、`RunBundle` | 成功和失败均输出机器可读文件 | 日志不能替代结构化订单、成交和错误对象 |
 | tick / 事件 | `Timeframe(mode="event", interval=null)` | Trade、L1 quote、L2 snapshot 在 Reference 可运行 | “tick”在 v1 表示逐事件，不虚构固定 tick 周期 |
 | 分钟线 / 日线 | `Timeframe(mode="bar", interval="PT1M" | "P1D")` | 18 个目录包同时覆盖 PT1M 与 P1D；实际时间错位反例失败 | UTC/epoch 逐 bar 校验；允许周期整数倍的缺口 |

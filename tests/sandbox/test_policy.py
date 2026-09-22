@@ -11,6 +11,8 @@ import pytest
 from psrc.cli import main
 from psrc.contract.errors import ContractViolation, ErrorCode
 from psrc.contract.models import ResourcePolicy, SandboxMode
+from psrc.domain.actions import Action, NoOp
+from psrc.examples.sma_cross import SmaCrossStrategy
 from psrc.runtime.artifacts import ArtifactStore
 from psrc.runtime.package import load_strategy, load_strategy_manifest
 from psrc.sandbox.container import (
@@ -19,7 +21,7 @@ from psrc.sandbox.container import (
     SandboxExecutionResult,
     _network_namespace_isolated,
 )
-from psrc.sandbox.runtime import RuntimeResourceDenied, strategy_resource_guard
+from psrc.sandbox.runtime import GuardedStrategy, RuntimeResourceDenied, strategy_resource_guard
 from psrc.sandbox.static import StaticPolicyScanner
 
 
@@ -205,6 +207,41 @@ def test_manifest_descriptor_executes_inside_resource_guard(tmp_path: Path) -> N
             load_strategy_manifest(package), sandbox_mode=SandboxMode.DEVELOPMENT
         )
     assert raised.value.error.code == ErrorCode.SANDBOX_POLICY_DENIED
+    assert not marker.exists()
+
+
+def test_guarded_action_return_is_canonicalized_before_leaving_policy_scope(
+    tmp_path: Path,
+) -> None:
+    package = tmp_path / "package"
+    package.mkdir()
+    marker = tmp_path / "outside-marker.txt"
+
+    class DeferredActions(list[Action]):
+        def __iter__(self):  # type: ignore[no-untyped-def]
+            marker.write_text("forbidden", encoding="utf-8")
+            return super().__iter__()
+
+    class DeferredActionStrategy(SmaCrossStrategy):
+        def on_event(self, event: object, account: object) -> tuple[Action, ...]:
+            del event, account
+            return DeferredActions(
+                [NoOp(reason_code="test.deferred", explanation="deferred container")]
+            )  # type: ignore[return-value]
+
+    raw_strategy = DeferredActionStrategy()
+    strategy = GuardedStrategy(
+        raw_strategy,
+        manifest=raw_strategy.manifest,
+        policy=raw_strategy.manifest.resources,
+        package_root=package,
+    )
+
+    actions = strategy.on_event(object(), object())
+
+    assert type(actions) is tuple
+    assert len(actions) == 1
+    assert type(actions[0]) is NoOp
     assert not marker.exists()
 
 

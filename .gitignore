@@ -19,4 +19,6 @@ papers/sources/
 reports/local/
 reports/strict/
 reports/audit-*/
+reports/independent-review-*/
 reports/package-*/
+reports/strict-debug/
