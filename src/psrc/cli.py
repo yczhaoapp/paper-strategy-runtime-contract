@@ -133,7 +133,7 @@ def _load_yaml(path: Path) -> Any:
 
 def _write_json(path: Path, payload: object) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as handle:
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
         json.dump(payload, handle, ensure_ascii=False, indent=2, sort_keys=True)
         handle.write("\n")
 
@@ -525,6 +525,7 @@ def _package_export(output: Path) -> int:
             + f"- 忠实度：`{binding['fidelity']}`\n"
             + "- 机器证据：`paper-binding.json`；包含页级声明、实现哈希、假设与偏差。\n",
             encoding="utf-8",
+            newline="\n",
         )
     print(f"exported {len(manifests)} strategy packages to {output}")
     return 0

@@ -308,14 +308,18 @@ def export_strategy_packages(root: Path, manifests: tuple[StrategyManifest, ...]
         package_manifest = _local_manifest(manifest)
         package = root / manifest.strategy_id
         package.mkdir(parents=True, exist_ok=True)
-        with (package / MANIFEST_NAME).open("w", encoding="utf-8") as handle:
+        with (package / MANIFEST_NAME).open(
+            "w", encoding="utf-8", newline="\n"
+        ) as handle:
             yaml.safe_dump(
                 _deterministic_yaml_value(package_manifest.model_dump(mode="python")),
                 handle,
                 allow_unicode=True,
                 sort_keys=False,
             )
-        (package / "strategy.py").write_text(_entrypoint_wrapper(manifest), encoding="utf-8")
+        (package / "strategy.py").write_text(
+            _entrypoint_wrapper(manifest), encoding="utf-8", newline="\n"
+        )
         requirements = "\n".join(
             f"- `{item.kind}` / `{item.timeframe.mode}`"
             f"{f' `{item.timeframe.interval}`' if item.timeframe.interval else ''}: "
@@ -335,4 +339,6 @@ def export_strategy_packages(root: Path, manifests: tuple[StrategyManifest, ...]
             f"{requirements}\n\n"
             "本策略仅用于可复现研究演示，不构成投资建议。\n"
         )
-        (package / "STRATEGY_CARD.md").write_text(card, encoding="utf-8")
+        (package / "STRATEGY_CARD.md").write_text(
+            card, encoding="utf-8", newline="\n"
+        )

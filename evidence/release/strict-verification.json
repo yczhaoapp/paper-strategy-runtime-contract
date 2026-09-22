@@ -49,7 +49,7 @@
   ],
   "strict_requested": true,
   "python": "3.12.14 (main, Aug 31 2026, 23:47:53) [GCC 14.2.0]",
-  "software_version": "2.7.3",
-  "verification_input_sha256": "deeb99811300402717d7f43ebfc18e854398c27da9accfb10c01ad3c3fb11367",
+  "software_version": "2.7.4",
+  "verification_input_sha256": "25c9a85da2123dd4daa04b48463ba8108e1e9bbe49275c7c592c3381b5ae1ac9",
   "scope": "strict_container"
 }
