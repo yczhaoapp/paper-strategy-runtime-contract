@@ -6,7 +6,7 @@
         "errors": 0,
         "failures": 0,
         "skipped": 0,
-        "tests": 239
+        "tests": 242
       },
       "passed": true
     },
@@ -113,6 +113,7 @@
               "tests_executed": [
                 "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.double_q_book_inventory]",
                 "tests/papers/test_reproduction_oracles.py::test_double_q_selects_and_evaluates_with_different_tables",
+                "tests/papers/test_rl_training_differential.py::test_double_q_randomized_full_training_artifact_and_unseen_inference",
                 "tests/papers/test_rl_update_properties.py::test_double_q_matches_independent_seeded_reference_batch",
                 "tests/papers/test_rl_update_properties.py::test_double_q_parameterized_cross_table_reference[terminal]",
                 "tests/papers/test_rl_update_properties.py::test_double_q_parameterized_cross_table_reference[update-a]",
@@ -199,6 +200,7 @@
               "tests_executed": [
                 "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.sarsa_trend]",
                 "tests/papers/test_reproduction_oracles.py::test_sarsa_reproduces_observed_next_action_backup",
+                "tests/papers/test_rl_training_differential.py::test_sarsa_randomized_full_training_artifact_and_unseen_inference",
                 "tests/papers/test_rl_update_properties.py::test_rl_production_source_has_no_test_fixture_dispatch",
                 "tests/papers/test_rl_update_properties.py::test_sarsa_changes_with_observed_action_and_rejects_missing_action",
                 "tests/papers/test_rl_update_properties.py::test_sarsa_matches_independent_seeded_reference_batch",
@@ -233,6 +235,7 @@
               "tests_executed": [
                 "tests/integration/test_rl_strategy_matrix.py::test_every_rl_strategy_trains_reloads_and_backtests[reinforcement_learning.tabular_q_inventory]",
                 "tests/papers/test_reproduction_oracles.py::test_tabular_q_reproduces_off_policy_bellman_update",
+                "tests/papers/test_rl_training_differential.py::test_tabular_q_randomized_full_training_artifact_and_unseen_inference",
                 "tests/papers/test_rl_update_properties.py::test_q_learning_matches_independent_seeded_reference_batch",
                 "tests/papers/test_rl_update_properties.py::test_q_learning_parameterized_reference_formula[negative-reward]",
                 "tests/papers/test_rl_update_properties.py::test_q_learning_parameterized_reference_formula[positive-bootstrap]",
@@ -727,6 +730,7 @@
     },
     "rl_oracle_anti_fixture_evidence": {
       "detail": {
+        "generated_full_training_cases_per_algorithm": 16,
         "missing_tests": [],
         "properties": [
           "terminal transitions never bootstrap",
@@ -734,9 +738,12 @@
           "SARSA uses the observed non-greedy action",
           "Double-Q swaps selection and evaluation tables",
           "production source has no test-fixture dispatch",
+          "randomized full training matches an independent implementation",
+          "saved policy tables and training provenance match the generated request",
+          "unseen-state inference is verified through the public event callback",
           "training-save-reload-infer-backtest remains executable"
         ],
-        "required_tests": 21,
+        "required_tests": 24,
         "seeded_cases_per_algorithm": 64
       },
       "passed": true

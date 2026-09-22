@@ -14,7 +14,7 @@
       "claim_id": "q.algorithm",
       "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
       "symbol": "q_learning_update",
-      "verification_test": "tests/papers/test_rl_update_properties.py::test_q_learning_matches_independent_seeded_reference_batch"
+      "verification_test": "tests/papers/test_rl_training_differential.py::test_tabular_q_randomized_full_training_artifact_and_unseen_inference"
     }
   ],
   "claims": [
@@ -94,6 +94,7 @@
     "tests/papers/test_rl_update_properties.py::test_q_learning_parameterized_reference_formula[terminal]",
     "tests/papers/test_rl_update_properties.py::test_q_learning_parameterized_reference_formula[zero-alpha]",
     "tests/papers/test_rl_update_properties.py::test_q_learning_matches_independent_seeded_reference_batch",
+    "tests/papers/test_rl_training_differential.py::test_tabular_q_randomized_full_training_artifact_and_unseen_inference",
     "tests/papers/test_rl_update_properties.py::test_rl_production_source_has_no_test_fixture_dispatch"
   ],
   "version": "1.1"

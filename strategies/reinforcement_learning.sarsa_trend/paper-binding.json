@@ -8,7 +8,7 @@
       "claim_id": "sarsa.algorithm",
       "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
       "symbol": "sarsa_update",
-      "verification_test": "tests/papers/test_rl_update_properties.py::test_sarsa_changes_with_observed_action_and_rejects_missing_action"
+      "verification_test": "tests/papers/test_rl_training_differential.py::test_sarsa_randomized_full_training_artifact_and_unseen_inference"
     },
     {
       "claim_id": "sarsa.state",
@@ -95,6 +95,7 @@
     "tests/papers/test_rl_update_properties.py::test_sarsa_parameterized_reference_formula[zero-alpha]",
     "tests/papers/test_rl_update_properties.py::test_sarsa_changes_with_observed_action_and_rejects_missing_action",
     "tests/papers/test_rl_update_properties.py::test_sarsa_matches_independent_seeded_reference_batch",
+    "tests/papers/test_rl_training_differential.py::test_sarsa_randomized_full_training_artifact_and_unseen_inference",
     "tests/papers/test_rl_update_properties.py::test_rl_production_source_has_no_test_fixture_dispatch"
   ],
   "version": "1.1"

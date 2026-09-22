@@ -8,7 +8,7 @@
       "claim_id": "doubleq.variant",
       "implementation_path": "src/psrc/strategies/reinforcement_learning.py",
       "symbol": "double_q_update",
-      "verification_test": "tests/papers/test_rl_update_properties.py::test_double_q_table_swap_swaps_selector_and_evaluator"
+      "verification_test": "tests/papers/test_rl_training_differential.py::test_double_q_randomized_full_training_artifact_and_unseen_inference"
     },
     {
       "claim_id": "doubleq.inventory",
@@ -94,6 +94,7 @@
     "tests/papers/test_rl_update_properties.py::test_double_q_parameterized_cross_table_reference[terminal]",
     "tests/papers/test_rl_update_properties.py::test_double_q_table_swap_swaps_selector_and_evaluator",
     "tests/papers/test_rl_update_properties.py::test_double_q_matches_independent_seeded_reference_batch",
+    "tests/papers/test_rl_training_differential.py::test_double_q_randomized_full_training_artifact_and_unseen_inference",
     "tests/papers/test_rl_update_properties.py::test_rl_production_source_has_no_test_fixture_dispatch"
   ],
   "version": "1.1"

@@ -685,6 +685,12 @@ def verify_acceptance(
         "test_double_q_table_swap_swaps_selector_and_evaluator",
         "tests.papers.test_rl_update_properties::"
         "test_double_q_matches_independent_seeded_reference_batch",
+        "tests.papers.test_rl_training_differential::"
+        "test_tabular_q_randomized_full_training_artifact_and_unseen_inference",
+        "tests.papers.test_rl_training_differential::"
+        "test_sarsa_randomized_full_training_artifact_and_unseen_inference",
+        "tests.papers.test_rl_training_differential::"
+        "test_double_q_randomized_full_training_artifact_and_unseen_inference",
         "tests.integration.test_rl_strategy_matrix::"
         "test_every_rl_strategy_trains_reloads_and_backtests["
         "reinforcement_learning.tabular_q_inventory]",
@@ -704,12 +710,16 @@ def verify_acceptance(
         {
             "required_tests": len(required_rl_oracle_tests),
             "seeded_cases_per_algorithm": 64,
+            "generated_full_training_cases_per_algorithm": 16,
             "properties": [
                 "terminal transitions never bootstrap",
                 "zero learning rate is invariant",
                 "SARSA uses the observed non-greedy action",
                 "Double-Q swaps selection and evaluation tables",
                 "production source has no test-fixture dispatch",
+                "randomized full training matches an independent implementation",
+                "saved policy tables and training provenance match the generated request",
+                "unseen-state inference is verified through the public event callback",
                 "training-save-reload-infer-backtest remains executable",
             ],
             "missing_tests": missing_rl_oracle_tests,

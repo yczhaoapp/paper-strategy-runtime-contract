@@ -37,7 +37,7 @@ criteria:
       - src/psrc/runtime
 
   strategies:
-    description: 规则、监督学习、强化学习各 6 个，具有实质差异并逐一绑定真实论文证据；Tabular Q、SARSA、Double Q 另有多参数、性质和随机批次独立 oracle。
+    description: 规则、监督学习、强化学习各 6 个，具有实质差异并逐一绑定真实论文证据；Tabular Q、SARSA、Double Q 另有多参数、性质、随机批次以及完整随机训练—制品—未见状态推理的独立差分 oracle。
     required_counts:
       rule: 6
       supervised: 6
@@ -52,6 +52,7 @@ criteria:
       - papers/bindings
       - tests/papers/test_pipeline.py
       - tests/papers/test_rl_update_properties.py
+      - tests/papers/test_rl_training_differential.py
 
   explainable_failures:
     description: 强制失败结构化，兼容性转换显式且可审计。

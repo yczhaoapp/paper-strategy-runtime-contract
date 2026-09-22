@@ -1,6 +1,8 @@
-# Paper Strategy Runtime Contract 2.7.1
+# Paper Strategy Runtime Contract 2.7.2
 
-Paper Strategy Runtime Contract（PSRC）是面向 [SX-CH-003](https://github.com/SingularityX-Evolution/.github/blob/main/profile/challenge-board/tasks/SX-CH-003-paper-strategy-runtime-contract.md) 的独立维护实现，用统一契约连接论文策略、训练、推理和最小回测。软件版本 2.7.1；稳定运行契约为 1.4，论文绑定契约为 1.1。
+[![PSRC 完整验证](https://github.com/yczhaoapp/paper-strategy-runtime-contract/actions/workflows/ci.yml/badge.svg)](https://github.com/yczhaoapp/paper-strategy-runtime-contract/actions/workflows/ci.yml)
+
+Paper Strategy Runtime Contract（PSRC）是面向 [SX-CH-003](https://github.com/SingularityX-Evolution/.github/blob/main/profile/challenge-board/tasks/SX-CH-003-paper-strategy-runtime-contract.md) 的独立维护实现，用统一契约连接论文策略、训练、推理和最小回测。软件版本 2.7.2；稳定运行契约为 1.4，论文绑定契约为 1.1。
 
 **交付范围：18 个逐一论文落地的契约策略（三类各 6 个）+ 4 个 PDF 到代码的深度纵向案例、32 份 JSON Schema、统一训练/保存/重载/推理/回测、结构化失败、可关闭的兼容转换、沙箱和机器验收。** 每个契约策略都带来源 PDF 哈希、页级声明、声明到实现符号和已执行测试的连接、实现文件哈希、确定性运行行为签名、假设与偏差；第四个深度案例直接运行于 Backtrader。
 
@@ -33,7 +35,7 @@ python scripts/verify-container.py
 
 构建阶段使用 `--no-cache --pull` 安装依赖和取得论文；验证阶段为 `--network none`、只读根目录、非 root、无 capabilities、`no-new-privileges`、CPU/内存/PID 限制和 `noexec` 临时目录。验证脚本直接调用镜像内解释器，**不会在断网阶段运行 uv sync、pip 或项目构建**。产物在 `reports/strict/`，`image.json` 固定本次镜像内容 ID 与构建策略。
 
-当前宿主机的实测范围见 [交付状态](docs/DELIVERY_STATUS.md)。Docker 与 Windows 的实际执行记录必须以相应环境产物为准；本机通过不等于 S 级认证通过。
+当前宿主机和严格 Docker 的实测范围见 [交付状态](docs/DELIVERY_STATUS.md)。Windows、Linux 与 macOS 的远端结果以 [GitHub Actions](https://github.com/yczhaoapp/paper-strategy-runtime-contract/actions/workflows/ci.yml) 及相应 artifact 为准；本机通过不替代远端平台证据，也不等于评审方的最终档位认定。
 
 ## 真实论文链路
 
@@ -85,7 +87,7 @@ uv run --no-sync psrc author run \
 - 统一声明覆盖规则、监督和 RL；tick/L1/L2、分钟线、日线；账户、订单、模型、日志和生命周期。
 - tick 在 Contract v1 中用 `event` 粒度表达；当前可执行行情类型严格限定为 OHLCV bar、trade、L1 quote 和 L2 snapshot。
 - 18 个契约示例是不同算法，覆盖配对、截面、预测、目标仓位、订单和撤改；每个包内含 `paper-binding.json`。[策略矩阵](docs/strategy-matrix.md) 列明来源和忠实度。
-- Tabular Q、SARSA、Double Q 的论文绑定同时要求多参数公式、终止/零学习率性质、64 组固定 seed 随机参考公式和完整运行时生命周期，避免用单一 golden case 支撑算法声明。
+- Tabular Q、SARSA、Double Q 的论文绑定同时要求多参数公式、终止/零学习率性质、每种算法 64 组固定 seed 随机单步公式，以及 16 组动态生成训练请求的完整多轮差分训练。后者核对整张持久化 Q 表、训练来源并通过公开事件入口验证训练集中未见状态，避免用单一 golden case 支撑算法声明。
 - `RuntimeCapabilities` 单独声明 orchestrator 提供的监督/RL 训练能力；行情、动作和撮合画像仍由 `EngineCapabilities` 提供。`Reference` 与 `Backtrader` 为默认实测引擎，Backtrader 另有监督与 RL 的训练—重载—推理—回测门禁。NautilusTrader 是单独的可选适配器：`uv sync --extra dev --extra adapters --extra nautilus`；它的安装平台有额外要求，不计入默认验证。选择缺失或不支持的能力提供者会失败。
 - 兼容转换默认关闭；显式开启后记录依据、是否有损、源/目标字段、影响范围及哈希。
 - 训练产物按内容和来源寻址，先在临时目录完整写入再原子发布；Windows 使用长路径表示，拒绝路径穿越。

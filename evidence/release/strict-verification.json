@@ -1,55 +1,55 @@
 {
-  "error": null,
-  "python": "3.12.14 (main, Aug 31 2026, 23:47:53) [GCC 14.2.0]",
-  "scope": "strict_container",
-  "software_version": "2.7.1",
   "status": "passed",
+  "error": null,
   "steps": [
     {
-      "returncode": 0,
-      "step": "ruff"
+      "step": "ruff",
+      "returncode": 0
     },
     {
-      "returncode": 0,
-      "step": "mypy"
+      "step": "mypy",
+      "returncode": 0
     },
     {
-      "returncode": 0,
-      "step": "schema"
+      "step": "schema",
+      "returncode": 0
     },
     {
-      "returncode": 0,
-      "step": "packages"
+      "step": "packages",
+      "returncode": 0
     },
     {
-      "returncode": 0,
-      "step": "pytest"
+      "step": "pytest",
+      "returncode": 0
     },
     {
-      "returncode": 0,
-      "step": "all"
+      "step": "all",
+      "returncode": 0
     },
     {
-      "returncode": 0,
-      "step": "failures"
+      "step": "failures",
+      "returncode": 0
     },
     {
-      "returncode": 0,
-      "step": "adapters"
+      "step": "adapters",
+      "returncode": 0
     },
     {
-      "returncode": 0,
-      "step": "compatibility"
+      "step": "compatibility",
+      "returncode": 0
     },
     {
-      "returncode": 0,
-      "step": "papers"
+      "step": "papers",
+      "returncode": 0
     },
     {
-      "returncode": 0,
-      "step": "acceptance"
+      "step": "acceptance",
+      "returncode": 0
     }
   ],
   "strict_requested": true,
-  "verification_input_sha256": "31e856953a25b9ae872f5a45888cc23649e651dad1fcd6b1802c8063c337f751"
+  "python": "3.12.14 (main, Aug 31 2026, 23:47:53) [GCC 14.2.0]",
+  "software_version": "2.7.2",
+  "verification_input_sha256": "be625d765fb78d9f5b6aefab05d31c375f35f051e7658574f578fe8efb11412a",
+  "scope": "strict_container"
 }
