@@ -1,5 +1,5 @@
 {
-  "contract_version": "1.2.0",
+  "contract_version": "1.3.0",
   "dataset_id": "public.plotly.aapl-2015-2017.train",
   "input_width": 3,
   "kind": "supervised",

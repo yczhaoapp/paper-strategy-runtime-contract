@@ -3,50 +3,40 @@ from __future__ import annotations
 from datetime import UTC, datetime
 
 from psrc.adapters.base import BacktestAdapter
-from psrc.contract.compatibility import apply_compatibility_plan
 from psrc.contract.errors import ContractError, ContractViolation, ErrorCode, ErrorStage
+from psrc.contract.hashing import sha256_model
 from psrc.contract.models import ExecutionPlan, SandboxMode
 from psrc.domain.market import MarketEvent
-from psrc.runtime.artifacts import ArtifactStore
+from psrc.runtime.artifacts import ArtifactManifest, ArtifactStore
 from psrc.runtime.guards import (
-    validate_effective_events,
-    validate_execution_context,
-    validate_plan_events,
+    prepare_adapter_invocation,
 )
 from psrc.runtime.lifecycle import Lifecycle, LifecycleState
 from psrc.runtime.report import RunReport, RuntimeLogRecord
 from psrc.runtime.strategy import RuntimeStrategy
-from psrc.runtime.training import TrainableRuntimeStrategy, TrainingRequest
+from psrc.runtime.training import (
+    TrainableRuntimeStrategy,
+    TrainingInputEvidence,
+    TrainingRequest,
+    build_training_input_evidence,
+)
 
 
 def _effective_events(
-    plan: ExecutionPlan, events: tuple[MarketEvent, ...]
+    *,
+    plan: ExecutionPlan,
+    strategy: RuntimeStrategy,
+    events: tuple[MarketEvent, ...],
+    engine: BacktestAdapter,
+    sandbox_mode: SandboxMode,
 ) -> tuple[tuple[MarketEvent, ...], RuntimeLogRecord]:
-    validate_plan_events(plan, events)
-    try:
-        effective = apply_compatibility_plan(events, plan)
-    except Exception as exc:
-        raise ContractViolation(
-            ContractError(
-                run_id=plan.run_id,
-                stage=ErrorStage.VALIDATION,
-                code=ErrorCode.COMPATIBILITY_TRANSFORM_FAILED,
-                message="A compiled compatibility transformation failed before engine execution",
-                strategy_id=plan.strategy_id,
-                engine_id=plan.engine_id,
-                details={
-                    "source_event_count": len(events),
-                    "transformations": [
-                        item.transformation_id
-                        for item in plan.compatibility
-                        if item.transformation_id is not None
-                    ],
-                    "fallback_used": False,
-                },
-                cause_chain=(f"{type(exc).__name__}: {exc}",),
-            )
-        ) from exc
-    validate_effective_events(plan, effective)
+    effective = prepare_adapter_invocation(
+        plan=plan,
+        strategy=strategy,
+        engine=engine.capabilities,
+        sandbox_mode=sandbox_mode,
+        source_events=events,
+    )
     return effective, RuntimeLogRecord(
         sequence=0,
         timestamp=datetime.now(UTC),
@@ -76,6 +66,66 @@ def _log(stage: str, message: str, **fields: object) -> RuntimeLogRecord:
     )
 
 
+def _validate_training_binding(
+    plan: ExecutionPlan, training: TrainingRequest
+) -> TrainingInputEvidence:
+    evidence = build_training_input_evidence(training)
+    actual = sha256_model(evidence)
+    expected = plan.training_input_evidence_sha256
+    if expected != actual:
+        raise ContractViolation(
+            ContractError(
+                run_id=plan.run_id,
+                strategy_id=plan.strategy_id,
+                engine_id=plan.engine_id,
+                stage=ErrorStage.VALIDATION,
+                code=ErrorCode.TRAINING_DATA_MISMATCH,
+                message="Actual training request does not match the compiled execution plan",
+                details={
+                    "planned_training_input_evidence_sha256": expected,
+                    "actual_training_input_evidence_sha256": actual,
+                    "actual_training_request_sha256": evidence.request_sha256,
+                    "fallback_used": False,
+                },
+            )
+        )
+    return evidence
+
+
+def _validate_artifact_training_provenance(
+    *,
+    plan: ExecutionPlan,
+    training: TrainingRequest,
+    evidence: TrainingInputEvidence,
+    artifact: ArtifactManifest,
+) -> None:
+    mismatches: dict[str, object] = {}
+    if artifact.training_request_sha256 != evidence.request_sha256:
+        mismatches["training_request_sha256"] = {
+            "expected": evidence.request_sha256,
+            "actual": artifact.training_request_sha256,
+        }
+    if artifact.training_dataset_id != training.dataset_id:
+        mismatches["training_dataset_id"] = {
+            "expected": training.dataset_id,
+            "actual": artifact.training_dataset_id,
+        }
+    if artifact.seed != training.seed:
+        mismatches["seed"] = {"expected": training.seed, "actual": artifact.seed}
+    if mismatches:
+        raise ContractViolation(
+            ContractError(
+                run_id=plan.run_id,
+                strategy_id=plan.strategy_id,
+                engine_id=plan.engine_id,
+                stage=ErrorStage.ARTIFACT,
+                code=ErrorCode.TRAINING_DATA_MISMATCH,
+                message="Training artifact provenance does not match the executed request",
+                details={"mismatches": mismatches, "fallback_used": False},
+            )
+        )
+
+
 def _finalize_report(
     report: RunReport,
     *,
@@ -102,19 +152,19 @@ def run_rule(
     engine: BacktestAdapter,
     sandbox_mode: SandboxMode,
 ) -> RunReport:
-    validate_execution_context(
-        plan=plan,
-        strategy=strategy,
-        engine=engine.capabilities,
-        sandbox_mode=sandbox_mode,
-    )
     lifecycle = Lifecycle(
         run_id=plan.run_id,
         strategy_id=strategy.manifest.strategy_id,
         engine_id=plan.engine_id,
     )
     try:
-        effective_events, compatibility_log = _effective_events(plan, events)
+        effective_events, compatibility_log = _effective_events(
+            plan=plan,
+            strategy=strategy,
+            events=events,
+            engine=engine,
+            sandbox_mode=sandbox_mode,
+        )
         lifecycle.transition(LifecycleState.VALIDATED)
         lifecycle.transition(LifecycleState.CAPABILITIES_NEGOTIATED)
         lifecycle.transition(LifecycleState.INITIALIZED)
@@ -127,7 +177,7 @@ def run_rule(
         report = engine.run(
             plan=plan,
             strategy=strategy,
-            events=effective_events,
+            events=events,
             sandbox_mode=sandbox_mode,
         )
         lifecycle.transition(LifecycleState.FINALIZED)
@@ -160,12 +210,7 @@ def run_trainable(
     store: ArtifactStore,
     sandbox_mode: SandboxMode,
 ) -> RunReport:
-    validate_execution_context(
-        plan=plan,
-        strategy=strategy,
-        engine=engine.capabilities,
-        sandbox_mode=sandbox_mode,
-    )
+    training_evidence = _validate_training_binding(plan, training)
     lifecycle = Lifecycle(
         run_id=plan.run_id,
         strategy_id=strategy.manifest.strategy_id,
@@ -175,7 +220,13 @@ def run_trainable(
     lifecycle.transition(LifecycleState.CAPABILITIES_NEGOTIATED)
     lifecycle.transition(LifecycleState.INITIALIZED)
     try:
-        effective_events, compatibility_log = _effective_events(plan, events)
+        effective_events, compatibility_log = _effective_events(
+            plan=plan,
+            strategy=strategy,
+            events=events,
+            engine=engine,
+            sandbox_mode=sandbox_mode,
+        )
         prefix_logs = [
             _log("initialization", "Strategy initialized"),
             compatibility_log,
@@ -183,6 +234,12 @@ def run_trainable(
         lifecycle.transition(LifecycleState.TRAINING)
         prefix_logs.append(_log("training", "Model or policy training started"))
         artifact = strategy.train(training, store)
+        _validate_artifact_training_provenance(
+            plan=plan,
+            training=training,
+            evidence=training_evidence,
+            artifact=artifact,
+        )
         prefix_logs.append(
             _log("training", "Model or policy training completed", artifact_id=artifact.artifact_id)
         )
@@ -206,7 +263,7 @@ def run_trainable(
         report = engine.run(
             plan=plan,
             strategy=strategy,
-            events=effective_events,
+            events=events,
             sandbox_mode=sandbox_mode,
         )
         lifecycle.transition(LifecycleState.FINALIZED)

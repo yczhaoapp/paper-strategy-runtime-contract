@@ -9,6 +9,7 @@ from pathlib import Path
 from psrc.adapters.reference import ReferenceEngine, capabilities
 from psrc.contract.compiler import compile_run
 from psrc.contract.errors import ContractViolation, ErrorCode
+from psrc.contract.hashing import sha256_model
 from psrc.contract.models import (
     DatasetManifest,
     RunPolicy,
@@ -25,7 +26,7 @@ from psrc.examples.synthetic import minute_bar_manifest, minute_bars
 from psrc.runtime.artifacts import ArtifactFile, ArtifactManifest, ArtifactStore
 from psrc.runtime.orchestrator import run_trainable
 from psrc.runtime.report import FailureReport, write_failure_bundle
-from psrc.runtime.training import TrainingRequest
+from psrc.runtime.training import TrainingRequest, build_training_input_evidence
 from psrc.sandbox.container import DockerSandbox
 from psrc.strategies.catalog import rule_examples, supervised_examples
 from psrc.strategies.rule import TwapExecutionStrategy
@@ -197,7 +198,7 @@ def generate_failure_evidence(output: Path) -> dict[str, str]:
             engine=engine,
             policy=policy,
         )
-        return ReferenceEngine().run(
+        return ReferenceEngine(declared_capabilities=engine).run(
             plan=plan,
             strategy=illegal,
             events=events,
@@ -224,7 +225,7 @@ def generate_failure_evidence(output: Path) -> dict[str, str]:
             engine=engine,
             policy=policy,
         )
-        return ReferenceEngine().run(
+        return ReferenceEngine(declared_capabilities=engine).run(
             plan=plan,
             strategy=illegal,
             events=twap_example.events,
@@ -244,19 +245,22 @@ def generate_failure_evidence(output: Path) -> dict[str, str]:
 
     def training_failure() -> object:
         trainable = supervised_example.factory()
-        plan = compile_run(
-            run_id="evidence.training-failed",
-            strategy=trainable.manifest,
-            dataset=supervised_example.dataset,
-            engine=engine,
-            policy=policy,
-        )
         invalid = TrainingRequest(
             run_id="evidence.invalid-training-request",
             dataset_id="synthetic.invalid",
             seed=7,
             features=((1.0,), (2.0,)),
             labels=(1.0, -1.0),
+        )
+        plan = compile_run(
+            run_id="evidence.training-failed",
+            strategy=trainable.manifest,
+            dataset=supervised_example.dataset,
+            engine=engine,
+            policy=policy,
+            training_input_evidence_sha256=sha256_model(
+                build_training_input_evidence(invalid)
+            ),
         )
         return run_trainable(
             plan=plan,
@@ -289,7 +293,7 @@ def generate_failure_evidence(output: Path) -> dict[str, str]:
             engine=engine,
             policy=policy,
         )
-        return ReferenceEngine().run(
+        return ReferenceEngine(declared_capabilities=engine).run(
             plan=plan,
             strategy=strategy,
             events=(),

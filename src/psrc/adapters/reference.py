@@ -5,6 +5,7 @@ from datetime import UTC, datetime
 from decimal import Decimal
 from typing import Literal, NoReturn
 
+from psrc.adapters.base import BacktestAdapter
 from psrc.contract.errors import ContractError, ContractViolation, ErrorCode, ErrorStage
 from psrc.contract.models import (
     ActionKind,
@@ -32,7 +33,7 @@ from psrc.domain.market import (
     QuoteL1Payload,
     TradePayload,
 )
-from psrc.runtime.guards import validate_actions, validate_events
+from psrc.runtime.guards import validate_actions
 from psrc.runtime.report import (
     DecisionRecord,
     OrderEventRecord,
@@ -49,8 +50,8 @@ def capabilities(*, strict_container: bool = False) -> EngineCapabilities:
         sandbox_modes.add(SandboxMode.STRICT_CONTAINER)
     return EngineCapabilities(
         engine_id="reference",
-        engine_version="0.3.0",
-        adapter_version="0.3.0",
+        engine_version="0.4.0",
+        adapter_version="0.4.0",
         support_level=SupportLevel.CONFORMANCE_VERIFIED,
         profiles=frozenset(
             {
@@ -123,7 +124,7 @@ class _PendingOrder:
     status: Literal["accepted", "replaced", "partially_filled"] = "accepted"
 
 
-class ReferenceEngine:
+class ReferenceEngine(BacktestAdapter):
     """Deterministic event engine with explicit next-event execution semantics."""
 
     def __init__(
@@ -149,7 +150,7 @@ class ReferenceEngine:
     def capabilities(self) -> EngineCapabilities:
         return self._capabilities
 
-    def run(
+    def _run_validated(
         self,
         *,
         plan: ExecutionPlan,
@@ -158,7 +159,6 @@ class ReferenceEngine:
         sandbox_mode: SandboxMode,
     ) -> RunReport:
         started_at = datetime.now(UTC)
-        validate_events(plan, events)
         self._validate_direct_order_session(plan, strategy)
         universe = frozenset(event.instrument_id for event in events)
 

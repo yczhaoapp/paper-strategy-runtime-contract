@@ -6,9 +6,11 @@ import pytest
 
 from psrc.adapters.reference import ReferenceEngine, capabilities
 from psrc.contract.compiler import compile_run
+from psrc.contract.hashing import sha256_model
 from psrc.contract.models import RunPolicy, SandboxMode, StrategyKind
 from psrc.runtime.artifacts import ArtifactStore
 from psrc.runtime.orchestrator import run_trainable
+from psrc.runtime.training import build_training_input_evidence
 from psrc.strategies.catalog import TrainableExample, reinforcement_learning_examples
 
 
@@ -40,6 +42,9 @@ def test_every_rl_strategy_trains_reloads_and_backtests(
         dataset=example.dataset,
         engine=capabilities(),
         policy=RunPolicy(required_sandbox=SandboxMode.DEVELOPMENT),
+        training_input_evidence_sha256=sha256_model(
+            build_training_input_evidence(example.training)
+        ),
     )
     report = run_trainable(
         plan=plan,
@@ -52,6 +57,7 @@ def test_every_rl_strategy_trains_reloads_and_backtests(
     )
     assert report.status == "succeeded"
     assert report.artifacts[0].artifact_kind == "policy"
+    assert report.artifacts[0].training_request_sha256 == example.training.request_sha256
     assert "TRAINING" in report.lifecycle
     assert report.metrics.decisions == len(example.events)
     assert report.metrics.fills > 0

@@ -15,6 +15,7 @@ from nautilus_trader.model.instruments.equity import Equity
 from nautilus_trader.model.objects import Currency, Money, Price, Quantity
 from nautilus_trader.trading.strategy import Strategy
 
+from psrc.adapters.base import BacktestAdapter
 from psrc.contract.errors import ContractError, ContractViolation, ErrorCode, ErrorStage
 from psrc.contract.models import (
     ActionKind,
@@ -28,7 +29,7 @@ from psrc.contract.models import (
 from psrc.domain.account import AccountSnapshot, Fill, Position
 from psrc.domain.actions import NoOp, Prediction, TargetPosition
 from psrc.domain.market import BarPayload, MarketEvent
-from psrc.runtime.guards import validate_actions, validate_events
+from psrc.runtime.guards import validate_actions
 from psrc.runtime.report import (
     DecisionRecord,
     OrderEventRecord,
@@ -46,7 +47,7 @@ def capabilities(*, strict_container: bool = False) -> EngineCapabilities:
     return EngineCapabilities(
         engine_id="nautilus-trader",
         engine_version=str(nautilus_trader.__version__),
-        adapter_version="0.1.0",
+        adapter_version="0.2.0",
         support_level=SupportLevel.ADAPTER_AVAILABLE,
         profiles=frozenset({"core.bar.v1", "execution.basic.v1"}),
         data_kinds=frozenset({DataKind.BAR}),
@@ -82,7 +83,7 @@ class _BridgeConfig(StrategyConfig, frozen=True):
     bar_type: BarType
 
 
-class NautilusAdapter:
+class NautilusAdapter(BacktestAdapter):
     """Run the canonical bar profile through NautilusTrader's native engine."""
 
     _venue = Venue("SIM")
@@ -107,7 +108,7 @@ class NautilusAdapter:
     def capabilities(self) -> EngineCapabilities:
         return self._capabilities
 
-    def run(
+    def _run_validated(
         self,
         *,
         plan: ExecutionPlan,
@@ -115,7 +116,6 @@ class NautilusAdapter:
         events: tuple[MarketEvent, ...],
         sandbox_mode: SandboxMode,
     ) -> RunReport:
-        validate_events(plan, events)
         started = datetime.now(UTC)
         if not events or any(not isinstance(event.payload, BarPayload) for event in events):
             self._fail(

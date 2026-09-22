@@ -1,5 +1,5 @@
 challenge: SX-CH-003
-contract_version: "1.2.0"
+contract_version: "1.3.0"
 policy:
   no_silent_fallback: true
   strict_compatibility_default: true
@@ -21,7 +21,7 @@ criteria:
       - reports/generated/acceptance-report.json
 
   contract:
-    description: 策略、数据、账户、动作、产物、日志与报告的版本化 Schema 和生命周期。
+    description: 策略、数据、账户、动作、产物、日志与报告的版本化 Schema 和生命周期；公开 Adapter 入口与训练产物均绑定执行计划。
     evidence:
       - spec/contract-v1.md
       - spec/lifecycle.md

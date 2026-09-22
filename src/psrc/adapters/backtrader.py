@@ -7,6 +7,7 @@ from typing import Any, Literal, NoReturn
 import backtrader as bt  # type: ignore[import-untyped]
 import pandas as pd
 
+from psrc.adapters.base import BacktestAdapter
 from psrc.contract.errors import ContractError, ContractViolation, ErrorCode, ErrorStage
 from psrc.contract.models import (
     ActionKind,
@@ -20,7 +21,7 @@ from psrc.contract.models import (
 from psrc.domain.account import AccountSnapshot, Fill, Position
 from psrc.domain.actions import NoOp, Prediction, TargetPosition
 from psrc.domain.market import BarPayload, MarketEvent
-from psrc.runtime.guards import validate_actions, validate_events
+from psrc.runtime.guards import validate_actions
 from psrc.runtime.report import (
     DecisionRecord,
     OrderEventRecord,
@@ -38,7 +39,7 @@ def capabilities(*, strict_container: bool = False) -> EngineCapabilities:
     return EngineCapabilities(
         engine_id="backtrader",
         engine_version=str(bt.__version__),
-        adapter_version="0.1.0",
+        adapter_version="0.2.0",
         support_level=SupportLevel.CONFORMANCE_VERIFIED,
         profiles=frozenset({"core.bar.v1", "execution.basic.v1"}),
         data_kinds=frozenset({DataKind.BAR}),
@@ -67,7 +68,7 @@ def capabilities(*, strict_container: bool = False) -> EngineCapabilities:
     )
 
 
-class BacktraderAdapter:
+class BacktraderAdapter(BacktestAdapter):
     """Bar-profile bridge that runs a canonical strategy inside Backtrader."""
 
     def __init__(
@@ -87,7 +88,7 @@ class BacktraderAdapter:
     def capabilities(self) -> EngineCapabilities:
         return self._capabilities
 
-    def run(
+    def _run_validated(
         self,
         *,
         plan: ExecutionPlan,
@@ -95,7 +96,6 @@ class BacktraderAdapter:
         events: tuple[MarketEvent, ...],
         sandbox_mode: SandboxMode,
     ) -> RunReport:
-        validate_events(plan, events)
         started = datetime.now(UTC)
         if not events or any(not isinstance(event.payload, BarPayload) for event in events):
             self._fail(

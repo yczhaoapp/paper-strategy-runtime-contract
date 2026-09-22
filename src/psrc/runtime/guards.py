@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import UTC, datetime
 
+from psrc.contract.compatibility import apply_compatibility_plan
 from psrc.contract.errors import ContractError, ContractViolation, ErrorCode, ErrorStage
 from psrc.contract.hashing import sha256_model
 from psrc.contract.models import (
@@ -79,6 +80,51 @@ def validate_execution_context(
                 details={"mismatches": mismatches, "fallback_used": False},
             )
         )
+
+
+def prepare_adapter_invocation(
+    *,
+    plan: ExecutionPlan,
+    strategy: RuntimeStrategy,
+    engine: EngineCapabilities,
+    sandbox_mode: SandboxMode,
+    source_events: tuple[MarketEvent, ...],
+) -> tuple[MarketEvent, ...]:
+    """Validate the public adapter boundary and return deterministic effective events."""
+    validate_execution_context(
+        plan=plan,
+        strategy=strategy,
+        engine=engine,
+        sandbox_mode=sandbox_mode,
+    )
+    validate_events(plan, source_events)
+    validate_plan_events(plan, source_events)
+    try:
+        effective_events = apply_compatibility_plan(source_events, plan)
+    except Exception as exc:
+        raise ContractViolation(
+            ContractError(
+                run_id=plan.run_id,
+                stage=ErrorStage.VALIDATION,
+                code=ErrorCode.COMPATIBILITY_TRANSFORM_FAILED,
+                message="A compiled compatibility transformation failed before engine execution",
+                strategy_id=plan.strategy_id,
+                engine_id=plan.engine_id,
+                details={
+                    "source_event_count": len(source_events),
+                    "transformations": [
+                        item.transformation_id
+                        for item in plan.compatibility
+                        if item.transformation_id is not None
+                    ],
+                    "fallback_used": False,
+                },
+                cause_chain=(f"{type(exc).__name__}: {exc}",),
+            )
+        ) from exc
+    validate_effective_events(plan, effective_events)
+    validate_events(plan, effective_events)
+    return effective_events
 
 
 def validate_effective_events(plan: ExecutionPlan, events: tuple[MarketEvent, ...]) -> None:

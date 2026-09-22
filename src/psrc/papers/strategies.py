@@ -56,6 +56,7 @@ class PaperStrategy:
             payload=json.dumps(model, sort_keys=True).encode(),
             training_dataset_id=request.dataset_id,
             seed=request.seed,
+            training_request_sha256=request.request_sha256,
             metadata={
                 "request_sha256": sha256_model(request),
                 "parameters_sha256": sha256_model(self.parameters),

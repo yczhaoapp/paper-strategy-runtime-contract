@@ -300,6 +300,10 @@ class RunBundle(ContractModel):
                     mismatches["artifact_training_dataset_id"] = artifact.training_dataset_id
                 if artifact.seed != self.training_request.seed:
                     mismatches["artifact_seed"] = artifact.seed
+                if artifact.training_request_sha256 != self.training_request.request_sha256:
+                    mismatches["artifact_training_request_sha256"] = (
+                        artifact.training_request_sha256
+                    )
         if mismatches:
             raise ValueError(f"RunBundle context does not match its execution plan: {mismatches}")
         return self

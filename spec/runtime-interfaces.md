@@ -79,14 +79,15 @@ class TrainableStrategy(Protocol):
     ) -> None: ...
 ```
 
-`TrainingRequest` 包含运行 ID、数据集 ID、确定性种子，以及监督学习的特征/标签或强化学习 transitions。`train` 必须把可重载内容写入 `ArtifactStore` 并返回 `ArtifactManifest`；`load` 必须验证声明文件的大小和 SHA-256。产物缺失或哈希不符分别返回 `ARTIFACT_NOT_FOUND`、`ARTIFACT_HASH_MISMATCH`。只有重载成功后才可进入推理/回测。
+`TrainingRequest` 包含运行 ID、数据集 ID、确定性种子，以及监督学习的特征/标签或强化学习 transitions。orchestrator 在训练开始前重算 `TrainingInputEvidence` 并与 `ExecutionPlan.training_input_evidence_sha256` 比较；缺失或不同都以 `TRAINING_DATA_MISMATCH` 失败。`train` 必须把可重载内容写入 `ArtifactStore`，返回带 `training_request_sha256` 的 `ArtifactManifest`；orchestrator 在重载前核对请求哈希、数据集和 seed，`RunBundle` 再次核对。`load` 必须验证声明文件的大小和 SHA-256。产物缺失或哈希不符分别返回 `ARTIFACT_NOT_FOUND`、`ARTIFACT_HASH_MISMATCH`。只有重载成功后才可进入推理/回测。
 
 ## 回测引擎入口
 
 ```python
-class BacktestAdapter(Protocol):
+class BacktestAdapter(ABC):
     capabilities: EngineCapabilities
 
+    @final
     def run(
         self,
         *,
@@ -94,10 +95,15 @@ class BacktestAdapter(Protocol):
         strategy: RuntimeStrategy,
         events: tuple[MarketEvent, ...],
         sandbox_mode: SandboxMode,
-    ) -> RunReport: ...
+    ) -> RunReport:
+        # 公共模板：绑定上下文和源事件、执行兼容计划、验证有效事件。
+        ...
+
+    @abstractmethod
+    def _run_validated(..., events: tuple[MarketEvent, ...]) -> RunReport: ...
 ```
 
-适配器实例必须暴露本次运行的稳定 `EngineCapabilities`。orchestrator 在生命周期开始前核对实际策略 ID/manifest 哈希、Adapter 引擎 ID/能力哈希和实际沙箱等级；`RunReport` 与 `RunBundle` 再做防御性一致性校验。适配器驱动 `on_start -> on_event* -> on_finish`，把规范动作映射到原生引擎，并把订单、成交、账户、日志和指标还原为 `RunReport`。它必须遵守 `ExecutionPlan` 中的成交与时间语义，不得吞掉拒单。原生异常统一封装为结构化 `BACKTEST_FAILED`，同时保留原因链。
+适配器实例必须暴露本次运行的稳定 `EngineCapabilities`。`run` 是基类提供的最终公共模板，不允许具体引擎覆盖：它核对实际策略 ID/manifest 哈希、Adapter 引擎 ID/能力哈希、沙箱等级和源事件内容哈希，执行计划中的显式兼容转换，再验证转换后的数据要求。具体引擎只实现 `_run_validated`。orchestrator 在训练前调用同一棚栏预检；`RunReport` 与 `RunBundle` 再做防御性一致性校验。适配器驱动 `on_start -> on_event* -> on_finish`，把规范动作映射到原生引擎，并把订单、成交、账户、日志和指标还原为 `RunReport`。它必须遵守 `ExecutionPlan` 中的成交与时间语义，不得吞掉拒单。原生异常统一封装为结构化 `BACKTEST_FAILED`，同时保留原因链。
 
 ## 失败出口
 

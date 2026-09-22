@@ -2,7 +2,7 @@
 
 # 引擎适配器指南
 
-适配器实现 `psrc.adapters.base.BacktestAdapter`，并发布一份 `EngineCapabilities`。能力声明是一项可检验的承诺，因此必须保守，不能用“计划支持”冒充“已经支持”。
+适配器必须继承 `psrc.adapters.base.BacktestAdapter`，发布一份 `EngineCapabilities`，并实现 `_run_validated`；不得覆盖公共 `run` 模板。该模板在任何直接或 orchestrator 调用中统一绑定执行计划、实际策略、能力、沙箱和源事件，并在进入引擎前执行显式兼容转换。能力声明是一项可检验的承诺，因此必须保守，不能用“计划支持”冒充“已经支持”。
 
 ## 支持等级
 
@@ -27,14 +27,15 @@ psrc run --strategy-dir <package> --engine backtrader --output <report-directory
 
 ## 新增适配器的必要步骤
 
-1. 映射每一种规范数据类型，不得伪造缺失信息。
-2. 声明标的映射、时区、交易日历和时间戳含义。
-3. 转换 `AccountSnapshot` 与已支持动作，拒绝其余所有动作。
-4. 固定成交、费用、滑点、队列、延迟及同时间戳排序语义。
-5. 保持 next-event/no-look-ahead 语义；若不同，必须声明并审计。
-6. 把原生订单/成交规范化到 `RunReport`，不得吞掉拒单。
-7. 增加引擎画像 YAML、负向测试及真实依赖上的原生一致性测试。
-8. 只有生成证据中出现该原生测试后，才能提升支持等级。
+1. 继承 `BacktestAdapter` 并只实现 `_run_validated`；不得复制或绕过公共入口棚栏。
+2. 映射每一种规范数据类型，不得伪造缺失信息。
+3. 声明标的映射、时区、交易日历和时间戳含义。
+4. 转换 `AccountSnapshot` 与已支持动作，拒绝其余所有动作。
+5. 固定成交、费用、滑点、队列、延迟及同时间戳排序语义。
+6. 保持 next-event/no-look-ahead 语义；若不同，必须声明并审计。
+7. 把原生订单/成交规范化到 `RunReport`，不得吞掉拒单。
+8. 增加引擎画像 YAML、直接入口负例及真实依赖上的原生一致性测试。
+9. 只有生成证据中出现该原生测试后，才能提升支持等级。
 
 ## 当前清单
 

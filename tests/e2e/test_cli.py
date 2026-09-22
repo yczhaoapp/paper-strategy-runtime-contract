@@ -145,11 +145,23 @@ def test_cli_builds_complete_reproduction_bundle(tmp_path: Path, capsys: object)
             "tests.negative.test_runtime_contract_enforcement",
             "test_orchestrator_rejects_sandbox_downgrade",
         ),
-        (
-            "tests.negative.test_runtime_contract_enforcement",
-            "test_orchestrator_enforces_actual_event_staleness",
-        ),
-        *(
+            (
+                "tests.negative.test_runtime_contract_enforcement",
+                "test_orchestrator_enforces_actual_event_staleness",
+            ),
+            (
+                "tests.negative.test_runtime_contract_enforcement",
+                "test_adapter_public_run_rejects_strategy_identity_mismatch",
+            ),
+            (
+                "tests.negative.test_training_failures",
+                "test_orchestrator_rejects_training_request_not_bound_to_plan",
+            ),
+            (
+                "tests.negative.test_training_failures",
+                "test_run_bundle_rejects_tampered_artifact_training_request_hash",
+            ),
+            *(
             (
                 "tests.integration.test_strategy_packages",
                 "test_unregistered_paper_spec_and_external_code_use_formal_authoring_path["
@@ -302,7 +314,7 @@ def test_invalid_contract_version_uses_structured_persisted_failure(
     manifest = packages / "rule.sma_cross/strategy.yaml"
     manifest.write_text(
         manifest.read_text(encoding="utf-8").replace(
-            "contract_version: 1.2.0", "contract_version: invalid", 1
+            "contract_version: 1.3.0", "contract_version: invalid", 1
         ),
         encoding="utf-8",
     )

@@ -81,6 +81,27 @@ def test_orchestrator_rejects_strategy_identity_mismatch() -> None:
     assert "strategy_id" in caught.value.error.details["mismatches"]
 
 
+def test_adapter_public_run_rejects_strategy_identity_mismatch() -> None:
+    events = minute_bars()
+    planned = SmaCrossStrategy()
+    plan, declared = _plan_for(planned, events)
+
+    class DifferentIdentity(SmaCrossStrategy):
+        manifest = SmaCrossStrategy.manifest.model_copy(
+            update={"strategy_id": "rule.actual-different"}
+        )
+
+    with pytest.raises(ContractViolation) as caught:
+        ReferenceEngine(declared_capabilities=declared).run(
+            plan=plan,
+            strategy=DifferentIdentity(),
+            events=events,
+            sandbox_mode=SandboxMode.DEVELOPMENT,
+        )
+    assert caught.value.error.code == ErrorCode.EXECUTION_CONTEXT_MISMATCH
+    assert "strategy_id" in caught.value.error.details["mismatches"]
+
+
 def test_orchestrator_rejects_engine_capability_mismatch() -> None:
     events = minute_bars()
     strategy = SmaCrossStrategy()

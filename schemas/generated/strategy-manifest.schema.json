@@ -326,7 +326,7 @@
       "type": "string"
     }
   },
-  "$id": "urn:psrc:schema/strategy-manifest.schema.json?contract=1.2.0",
+  "$id": "urn:psrc:schema/strategy-manifest.schema.json?contract=1.3.0",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
@@ -334,7 +334,7 @@
       "$ref": "#/$defs/ActionRequirements"
     },
     "contract_version": {
-      "default": "1.2.0",
+      "default": "1.3.0",
       "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
       "title": "Contract Version",
       "type": "string"

@@ -618,6 +618,12 @@ def verify_acceptance(
         "test_orchestrator_rejects_sandbox_downgrade",
         "tests.negative.test_runtime_contract_enforcement::"
         "test_orchestrator_enforces_actual_event_staleness",
+        "tests.negative.test_runtime_contract_enforcement::"
+        "test_adapter_public_run_rejects_strategy_identity_mismatch",
+        "tests.negative.test_training_failures::"
+        "test_orchestrator_rejects_training_request_not_bound_to_plan",
+        "tests.negative.test_training_failures::"
+        "test_run_bundle_rejects_tampered_artifact_training_request_hash",
     }
     missing_boundary_tests = sorted(required_boundary_tests - executed_tests)
     check(
@@ -628,7 +634,8 @@ def verify_acceptance(
             "missing_tests": missing_boundary_tests,
             "scope": (
                 "cumulative position, day expiry, actual bar grid, invalid version, "
-                "coherent reused output, lookback, staleness, and execution-context binding"
+                "coherent reused output, lookback, staleness, adapter-bound execution context, "
+                "and training provenance"
             ),
         },
     )

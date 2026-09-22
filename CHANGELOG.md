@@ -1,3 +1,9 @@
+# 2.6.3 — 2026-09-22
+
+- Runtime Contract 升级到 1.3：`BacktestAdapter.run` 成为统一的已验证模板入口；直接调用也会绑定计划、策略、引擎能力、沙箱和源事件，并执行声明的兼容转换后再进入引擎钩子。
+- `run_trainable` 在训练开始前重算实际 `TrainingInputEvidence` 并与执行计划比较，训练载荷漂移以 `TRAINING_DATA_MISMATCH` 失败且不产生模型。
+- `ArtifactManifest` 增加训练请求规范哈希；orchestrator 和 `RunBundle` 同时核对请求哈希、训练数据集与 seed，模型产物不能再借用另一份训练证据。
+
 # 2.6.2 — 2026-09-22
 
 - Runtime Contract 升级到 1.2：`ExecutionPlan` 固定策略数据要求和最低沙箱，Adapter 实例公开稳定能力声明；orchestrator 在生命周期开始前强制核对实际策略、引擎能力和沙箱等级。

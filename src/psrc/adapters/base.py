@@ -1,19 +1,23 @@
 from __future__ import annotations
 
-from typing import Protocol
+from abc import ABC, abstractmethod
+from typing import final
 
 from psrc.contract.models import EngineCapabilities, ExecutionPlan, SandboxMode
 from psrc.domain.market import MarketEvent
+from psrc.runtime.guards import prepare_adapter_invocation
 from psrc.runtime.report import RunReport
 from psrc.runtime.strategy import RuntimeStrategy
 
 
-class BacktestAdapter(Protocol):
-    """Stable execution boundary implemented by every engine bridge."""
+class BacktestAdapter(ABC):
+    """Validated public execution boundary shared by every engine bridge."""
 
     @property
+    @abstractmethod
     def capabilities(self) -> EngineCapabilities: ...
 
+    @final
     def run(
         self,
         *,
@@ -21,4 +25,28 @@ class BacktestAdapter(Protocol):
         strategy: RuntimeStrategy,
         events: tuple[MarketEvent, ...],
         sandbox_mode: SandboxMode,
-    ) -> RunReport: ...
+    ) -> RunReport:
+        effective_events = prepare_adapter_invocation(
+            plan=plan,
+            strategy=strategy,
+            engine=self.capabilities,
+            sandbox_mode=sandbox_mode,
+            source_events=events,
+        )
+        return self._run_validated(
+            plan=plan,
+            strategy=strategy,
+            events=effective_events,
+            sandbox_mode=sandbox_mode,
+        )
+
+    @abstractmethod
+    def _run_validated(
+        self,
+        *,
+        plan: ExecutionPlan,
+        strategy: RuntimeStrategy,
+        events: tuple[MarketEvent, ...],
+        sandbox_mode: SandboxMode,
+    ) -> RunReport:
+        """Execute events after the final public boundary has validated them."""

@@ -13,10 +13,10 @@
 | 范围 | 公开对象或入口 | 可执行证据 | 当前边界 |
 | --- | --- | --- | --- |
 | 规则、监督、强化学习 | `StrategyKind`；`RuntimeStrategy`；`TrainableStrategy` | 18 个包三类各 6 个；外部未知规格三类黑盒运行各 1 次 | 未实现开放域论文的无审阅自动理解 |
-| 训练入口 | `train(TrainingRequest, ArtifactStore)` | 监督与 RL 全矩阵训练、原子保存和重载 | 规则策略声明 `not_required` |
+| 训练入口 | `train(TrainingRequest, ArtifactStore)` | 监督与 RL 全矩阵训练、原子保存和重载；实际请求与计划、产物及 Bundle 哈希链负例 | 规则策略声明 `not_required` |
 | 推理入口 | `on_event(MarketEvent, AccountSnapshot)` | 18 个策略统一回调与决策记录 | 单次目录输入在 Contract v1 中只允许一个可归属 stream |
-| 最小回测 | `BacktestAdapter.capabilities`、`BacktestAdapter.run` / `psrc run` | Reference 全矩阵；Backtrader 原生案例与差分测试；计划/策略/引擎/沙箱错配负例 | NautilusTrader 为可选依赖，不能作为默认实测能力 |
-| 模型产物 | `ArtifactManifest`、内容寻址文件、训练输入证据 | 保存后重新按大小和 SHA-256 校验加载 | 不把内存对象当作可交付模型 |
+| 最小回测 | `BacktestAdapter.capabilities`、`BacktestAdapter.run` / `psrc run` | Reference 全矩阵；Backtrader 原生案例与差分测试；orchestrator 与直接 Adapter 调用的计划/策略/引擎/沙箱错配负例 | NautilusTrader 为可选依赖，不能作为默认实测能力 |
+| 模型产物 | `ArtifactManifest`、内容寻址文件、训练输入证据 | 保存后重新按大小和 SHA-256 校验加载；产物固定训练请求规范哈希 | 不把内存对象当作可交付模型 |
 | 日志与报告 | `RuntimeLogRecord`、`RunReport`、`FailureReport`、`RunBundle` | 成功和失败均输出机器可读文件 | 日志不能替代结构化订单、成交和错误对象 |
 | tick / 事件 | `Timeframe(mode="event", interval=null)` | Trade、L1 quote、L2 snapshot 在 Reference 可运行 | “tick”在 v1 表示逐事件，不虚构固定 tick 周期 |
 | 分钟线 / 日线 | `Timeframe(mode="bar", interval="PT1M" | "P1D")` | 18 个目录包同时覆盖 PT1M 与 P1D；实际时间错位反例失败 | UTC/epoch 逐 bar 校验；允许周期整数倍的缺口 |

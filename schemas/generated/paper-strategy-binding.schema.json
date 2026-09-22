@@ -236,7 +236,7 @@
       "type": "string"
     }
   },
-  "$id": "urn:psrc:schema/paper-strategy-binding.schema.json?contract=1.2.0",
+  "$id": "urn:psrc:schema/paper-strategy-binding.schema.json?contract=1.3.0",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "description": "Review record binding a contract example to grounded paper claims and code.",

@@ -19,6 +19,8 @@
 | ExecutionPlan 未绑定实际策略、Adapter 和沙箱 | 可形成归因错误或虚假严格模式的成功报告，属于公开运行契约缺陷 | 计划固定数据要求与最低沙箱；Adapter 暴露能力；orchestrator、RunReport 和 RunBundle 分层核对实际上下文 |
 | lookback 与 max_staleness_ns 只声明未执行 | 文档强于实现，会让不满足数据要求的新策略错误通过 | 编译期检查 lookback 必要条件，转换后按标的执行；陈旧度固定为 available time 减 event time 并结构化失败 |
 | 三个 A2 claim 的 oracle 未覆盖全部语义 | 不影响官方数量门槛，但不满足项目自身逐 claim 证据标准 | 增加 OHLCV 特征顺序、队列不平衡和推理边界 oracle；线性 Actor–Critic 因实质偏差降为 A1 |
+| 直接调用 `BacktestAdapter.run` 可绕过 orchestrator 棚栏 | 公开回测入口能产生错误归因的成功报告 | Adapter 基类以不可覆写模板统一校验上下文、源事件、兼容转换和有效事件；引擎只实现已验证钩子 |
+| 实际训练请求未与计划和产物绑定 | 可用另一份训练载荷生成模型后配上原证据 | 训练前重算证据哈希；产物记录训练请求哈希；orchestrator 与 `RunBundle` 分层核对 |
 | 普通 `psrc run` 失败只输出 stdout | 不利于机器审计 | 所有普通运行失败写出 `FailureReport`、错误 JSON 和 HTML，尽可能保留已取得的上下文 |
 | 没有固定提交和目标平台证据 | 属于交付闭环缺口 | 本轮建立本地不可变提交；远端仓库建立后由 CI 生成 Linux、Windows、macOS 和严格容器证据 |
 

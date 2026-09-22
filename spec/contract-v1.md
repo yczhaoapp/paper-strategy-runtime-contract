@@ -47,13 +47,15 @@ Python 类型是参考 SDK。生成的 JSON Schema 与生命周期消息语义�
 
 `ActionRequirements.max_abs_position` 是成交后总持仓约束，不是 `TargetPosition` 专属字段。适配器在接受或替换直接订单时必须计入现有持仓和待成交订单，并在实际成交前再次验证。单笔数量另由 `max_order_quantity` 约束。
 
-所有对象拒绝未知核心字段。JSON 是线传输/存储格式，YAML 可用于人工编写声明。`schemas/generated/` 中具有稳定 `$id` 的 Schema 是 Contract `1.2.0` 的规范机器表示；历史 Release 保持不可变。每份 Schema 明确声明 JSON Schema Draft 2020-12，所有内部 `$ref` 均指向本文档的 `#/$defs`，因此标准验证器无需网络或外部 registry 即可验证实例。
+所有对象拒绝未知核心字段。JSON 是线传输/存储格式，YAML 可用于人工编写声明。`schemas/generated/` 中具有稳定 `$id` 的 Schema 是 Contract `1.3.0` 的规范机器表示；历史 Release 保持不可变。每份 Schema 明确声明 JSON Schema Draft 2020-12，所有内部 `$ref` 均指向本文档的 `#/$defs`，因此标准验证器无需网络或外部 registry 即可验证实例。
 
 `StrategyCodeEvidence` 是 `1.1.0` 新增的可选线对象：它列出策略包 Python 文件的路径、大小和 SHA-256，并记录受信运行时源码树哈希。`ExecutionPlan.strategy_code_evidence_sha256` 绑定整个证据对象，当前完整验证要求新生成的 Bundle 包含它；字段保持可选是为了让 `1.0.0` 文档继续可读。
 
 `TrainingInputEvidence` 对训练请求的完整规范 JSON、数据集标识、样本类型、记录数和输入宽度建立 SHA-256 绑定。当前策略包与新生成的可训练 Bundle 必须包含该对象，执行计划同时固定其哈希；字段在线格式中保持可选，以便读取 1.0/1.1 的既有 Bundle，但当前完整验证不会接受缺少训练输入证据的新生成物。
 
 Contract 1.2 编译后的 `ExecutionPlan` 同时保存策略数据要求和最低沙箱。orchestrator 在生命周期开始前重算实际策略 manifest 与 Adapter 能力哈希，并核对策略、引擎和沙箱；兼容转换后再按标的执行 lookback，并以 `available_time - event_time` 的纳秒值执行最大陈旧时间。任何错配均失败，不生成成功报告。
+
+Contract 1.3 把上述棚栏固化到 `BacktestAdapter.run` 的公共模板方法：直接调用仍须校验源事件内容哈希并执行计划中的兼容转换，具体引擎只能实现接收已验证事件的钩子。可训练运行还在训练前比较实际 `TrainingInputEvidence` 与计划哈希；`ArtifactManifest.training_request_sha256` 将模型产物绑定到准确训练请求，`RunBundle` 再次核对该 provenance。
 
 ## 能力画像
 

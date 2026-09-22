@@ -33,6 +33,11 @@ class TrainingRequest(ContractModel):
     transitions: tuple[RLTransition, ...] = ()
     metadata: dict[str, str] = Field(default_factory=dict)
 
+    @property
+    def request_sha256(self) -> str:
+        """Canonical content hash used by plans, artifacts, and reports."""
+        return sha256_model(self)
+
     @model_validator(mode="after")
     def validate_payload_shape(self) -> TrainingRequest:
         supervised = bool(self.features or self.labels)
@@ -90,7 +95,7 @@ def build_training_input_evidence(request: TrainingRequest) -> TrainingInputEvid
         kind=kind,
         record_count=record_count,
         input_width=input_width,
-        request_sha256=sha256_model(request),
+        request_sha256=request.request_sha256,
     )
 
 

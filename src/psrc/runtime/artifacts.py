@@ -32,6 +32,7 @@ class ArtifactManifest(ContractModel):
     created_at: datetime
     training_dataset_id: Identifier | None = None
     seed: int | None = None
+    training_request_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
     files: tuple[ArtifactFile, ...]
     metadata: dict[str, str] = Field(default_factory=dict)
 
@@ -87,6 +88,7 @@ class ArtifactStore:
         payload: bytes,
         training_dataset_id: str,
         seed: int,
+        training_request_sha256: str | None = None,
         metadata: dict[str, str] | None = None,
     ) -> ArtifactManifest:
         safe_artifact = self._validate_component(artifact_id)
@@ -123,6 +125,7 @@ class ArtifactStore:
                 and existing.framework == framework
                 and existing.training_dataset_id == training_dataset_id
                 and existing.seed == seed
+                and existing.training_request_sha256 == training_request_sha256
                 and existing.metadata == expected_metadata
                 and len(existing.files) == 1
                 and existing.files[0].logical_name == logical_name
@@ -149,6 +152,7 @@ class ArtifactStore:
             created_at=datetime.now(UTC),
             training_dataset_id=training_dataset_id,
             seed=seed,
+            training_request_sha256=training_request_sha256,
             files=(
                 ArtifactFile(
                     logical_name=logical_name,

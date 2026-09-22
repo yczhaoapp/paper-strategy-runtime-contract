@@ -222,6 +222,7 @@ class Strategy:
             payload=payload,
             training_dataset_id=request.dataset_id,
             seed=request.seed,
+            training_request_sha256=request.request_sha256,
         )
 
     def load(self, manifest, store, *, run_id):
@@ -322,6 +323,7 @@ class Strategy:
             payload=payload,
             training_dataset_id=request.dataset_id,
             seed=request.seed,
+            training_request_sha256=request.request_sha256,
         )
 
     def load(self, manifest, store, *, run_id):

@@ -117,6 +117,7 @@ class _JsonModelStrategy:
             payload=payload,
             training_dataset_id=request.dataset_id,
             seed=request.seed,
+            training_request_sha256=request.request_sha256,
             metadata={"algorithm": str(model["algorithm"])},
         )
 

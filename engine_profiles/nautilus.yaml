@@ -1,7 +1,7 @@
 contract_version: 1.0.0
 engine_id: nautilus-trader
 engine_version: 1.231.0
-adapter_version: 0.1.0
+adapter_version: 0.2.0
 support_level: ADAPTER_AVAILABLE
 profiles: [core.bar.v1, execution.basic.v1]
 data_kinds: [bar]
