@@ -30,7 +30,7 @@ data_requirements:
   - open
   - volume
   optional_fields: []
-  lookback: 3
+  lookback: 4
   depth: null
   max_staleness_ns: null
 action_requirements:
@@ -39,7 +39,7 @@ action_requirements:
   - prediction
   - target_position
   max_abs_position: '2'
-  max_order_quantity: '10'
+  max_order_quantity: '4'
 resources:
   sandbox: development
   network: deny

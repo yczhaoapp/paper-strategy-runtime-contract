@@ -1,10 +1,10 @@
 {
   "contract_version": "1.4.0",
   "host": {
-    "acceptance_checks_passed": 22,
-    "acceptance_checks_total": 22,
+    "acceptance_checks_passed": 23,
+    "acceptance_checks_total": 23,
     "acceptance_report": "evidence/release/host-acceptance.json",
-    "coverage_percent": 91.82,
+    "coverage_percent": 91.68,
     "errors": 0,
     "failures": 0,
     "full_receipt": "evidence/release/host-verification.json",
@@ -12,36 +12,36 @@
     "scope": "development_preflight",
     "skipped": 0,
     "status": "passed",
-    "tests": 239
+    "tests": 266
   },
   "published_files": {
-    "evidence/release/host-acceptance.json": "5de3ff7bb3ccacb477908d1a764ae780fce87e50adad56b0dd8f340b7b99b54d",
-    "evidence/release/host-verification.json": "6bad23ec0499a558581537f32586d694b4f0e8c0f0861e9c536d52404c112f3f",
-    "evidence/release/strict-acceptance.json": "c89ac159e31071665ce09afc470fc1bec56a01280251752b909eb90c162b3202",
-    "evidence/release/strict-image.json": "5cc9c5c93da81628ec995894542d28261e4a6e3de2745ed0b7afd01c86239c07",
-    "evidence/release/strict-verification.json": "40f59423435cdd744c846da3655fc451134bf59fccaf45f1de2388d8e365ec6e"
+    "evidence/release/host-acceptance.json": "16a1d280578648b8a2ef0631a5c327f84da7f3e60bd10fed7676a0836bbe0bc8",
+    "evidence/release/host-verification.json": "fb56aa1c8484a9be4041adb56381f6e018b829212b9db0a75dd0e402fc48bd36",
+    "evidence/release/strict-acceptance.json": "3dd24a45dc92fd699a3e8fae279175bc72bc77c41737ab5bad9d42047c97e89e",
+    "evidence/release/strict-image.json": "78e5f3536a4ac384683b044f32ed222ddb00806a541e0cc58c2e94e2c9ef9a07",
+    "evidence/release/strict-verification.json": "db86897c763d29477e60c0ab7be787a71deade220733e0a1c52ba87e314ec7ea"
   },
   "remote_ci": {
     "claims": [],
-    "status": "pending_repository_creation"
+    "status": "see_public_workflow_for_current_commit"
   },
-  "software_version": "2.7.1",
+  "software_version": "2.8.0",
   "strict_container": {
-    "acceptance_checks_passed": 22,
-    "acceptance_checks_total": 22,
+    "acceptance_checks_passed": 23,
+    "acceptance_checks_total": 23,
     "acceptance_report": "evidence/release/strict-acceptance.json",
     "build_no_cache": true,
-    "coverage_percent": 92.03,
+    "coverage_percent": 91.88,
     "errors": 0,
     "failures": 0,
     "full_receipt": "evidence/release/strict-verification.json",
-    "image_id": "sha256:bbc2ee1197a0df26fa7ddf7720518d6dbcf18709ca5f0a43ca4839c0341f2b0e",
+    "image_id": "sha256:32ed4515b0633b20ab0feb9b342113870655b489dcfeaa31945006a5bf33bc6b",
     "image_receipt": "evidence/release/strict-image.json",
     "python": "3.12.14 (main, Aug 31 2026, 23:47:53) [GCC 14.2.0]",
     "scope": "strict_container",
     "skipped": 0,
     "status": "passed",
-    "tests": 239
+    "tests": 266
   },
-  "verification_input_sha256": "31e856953a25b9ae872f5a45888cc23649e651dad1fcd6b1802c8063c337f751"
+  "verification_input_sha256": "bf5c8df3fbe29b8ea963e5d662eefd13c562345735110dff02b02d87e7ffd95a"
 }

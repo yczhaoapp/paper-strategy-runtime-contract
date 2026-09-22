@@ -1,5 +1,5 @@
 {
-  "algorithm_fidelity": "A1_method_equivalent",
+  "algorithm_fidelity": "A0_method_adaptation",
   "assumptions": [
     "Two value tables alternate updates and the opposite table evaluates the greedy next action."
   ],
@@ -36,11 +36,11 @@
   "data_fidelity": "D0_synthetic",
   "data_mode": "synthetic_fixture",
   "deviations": [
-    "Uses a compact rounded L2 state and target positions rather than tile coding, quote actions, and the paper simulator."
+    "The implementation preserves Double-Q selection/evaluation separation and an L2 inventory state, but substitutes three target-position actions and a fixture reward for the paper’s quote/liquidation actions and execution-derived reward."
   ],
   "empirical_results_reproduced": false,
   "experimental_fidelity": "E0_runtime_only",
-  "fidelity": "method_reproduction",
+  "fidelity": "method_adaptation",
   "implementation": [
     {
       "path": "src/psrc/strategies/reinforcement_learning.py",
@@ -59,7 +59,7 @@
       ]
     }
   ],
-  "mapping_review": "Manual claim-to-code review completed; hashes bind the reviewed paper, implementation module, and executable package wrapper.",
+  "mapping_review": "This is a runtime-contract method adaptation. Its independent oracles prove Double-Q mechanics and lifecycle, not reproduction of Spooner et al.’s market-making environment.",
   "original_paper_dataset": false,
   "runtime_expectation": {
     "artifact_algorithm": "double-q-learning-v1",
@@ -97,5 +97,5 @@
     "tests/papers/test_rl_training_differential.py::test_double_q_randomized_full_training_artifact_and_unseen_inference",
     "tests/papers/test_rl_update_properties.py::test_rl_production_source_has_no_test_fixture_dispatch"
   ],
-  "version": "1.1"
+  "version": "1.2"
 }

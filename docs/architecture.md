@@ -33,7 +33,7 @@ RL 对训练报价枚举私有时间、库存和动作，按剩余时间递增�
 
 ## 沙箱
 
-包加载器只开放 manifest 白名单和 `psrc.strategy_api`，静态检查解析 import 别名与完整属性调用链。导入、构造和回调处于 Python 审计围栏中：直接文件、子进程和网络操作被拒绝，运行时服务仅在 `ArtifactStore` 内部临时取得可信 I/O 权限，因此策略不能直接改写报告或产物文件。
+包加载器只开放 manifest 白名单和 `psrc.strategy_api`，静态检查解析 import 别名与完整属性调用链。导入、构造、manifest 描述符访问、方法解析和回调处于 Python 审计围栏中：直接文件、子进程和网络操作被拒绝，运行时服务仅在 `ArtifactStore` 内部临时取得可信 I/O 权限，因此策略不能直接改写报告或产物文件。ArtifactStore 的授权根不保存在可改写实例属性中；orchestrator 在训练后和加载后独立重读磁盘 manifest 与全部产物字节。
 
 上述进程内围栏执行资源契约，但开发模式仍不是恶意代码的宿主隔离边界。外部任意 Python 包应在严格容器中执行。容器需要同时证明非 root、真实容器标记、无网卡、能力清零、NoNewPrivs、只读根目录及 noexec/nosuid/nodev 临时目录。调用命令另外声明 CPU、内存、PID、超时限制。
 

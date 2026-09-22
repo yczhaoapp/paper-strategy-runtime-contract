@@ -39,6 +39,37 @@ def test_artifact_round_trip_and_integrity(tmp_path: Path) -> None:
     assert raised.value.error.code == ErrorCode.ARTIFACT_HASH_MISMATCH
 
 
+def test_artifact_size_and_authorized_root_cannot_be_forged(tmp_path: Path) -> None:
+    store = ArtifactStore(tmp_path / "artifacts")
+    manifest = store.save_bytes(
+        run_id="test.artifact-authority",
+        artifact_id="model-001",
+        strategy_id="supervised.test",
+        strategy_version="1.0.0",
+        artifact_kind="model",
+        framework="numpy",
+        logical_name="model.json",
+        media_type="application/json",
+        payload=b"{}",
+        training_dataset_id="synthetic.train",
+        seed=7,
+    )
+    forged_file = manifest.files[0].model_copy(update={"size_bytes": 999999})
+    forged = manifest.model_copy(update={"files": (forged_file,)})
+
+    with pytest.raises(AttributeError):
+        store.root = tmp_path  # type: ignore[misc]
+    with pytest.raises(ContractViolation) as raised:
+        store.verify_manifest(
+            run_id="test.artifact-authority",
+            strategy_id="supervised.test",
+            strategy_version="1.0.0",
+            candidate=forged,
+        )
+    assert raised.value.error.code == ErrorCode.ARTIFACT_HASH_MISMATCH
+    assert not (tmp_path / "model-001").exists()
+
+
 def test_artifact_store_rejects_path_traversal(tmp_path: Path) -> None:
     store = ArtifactStore(tmp_path / "artifacts")
     with pytest.raises(ValueError):

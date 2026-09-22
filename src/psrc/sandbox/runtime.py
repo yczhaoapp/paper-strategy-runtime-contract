@@ -11,7 +11,7 @@ from threading import Lock
 from typing import Any
 
 from psrc.contract.errors import ContractError, ContractViolation, ErrorCode, ErrorStage
-from psrc.contract.models import ResourcePolicy
+from psrc.contract.models import ResourcePolicy, StrategyManifest
 
 
 class RuntimeResourceDenied(PermissionError):
@@ -202,19 +202,21 @@ class GuardedStrategy:
         self,
         strategy: Any,
         *,
+        manifest: StrategyManifest,
         policy: ResourcePolicy,
         package_root: Path,
         library_roots: tuple[Path, ...] = (),
     ) -> None:
         self._strategy = strategy
+        self._manifest = manifest
         self._policy = policy
         self._package_root = package_root.resolve()
         self._library_roots = tuple(root.resolve() for root in library_roots)
         self._run_id = "package.runtime"
 
     @property
-    def manifest(self) -> Any:
-        return self._strategy.manifest
+    def manifest(self) -> StrategyManifest:
+        return self._manifest
 
     def bind_run_id(self, run_id: str) -> None:
         self._run_id = run_id
@@ -226,7 +228,6 @@ class GuardedStrategy:
         artifact_roots: tuple[Path, ...] = (),
         **kwargs: object,
     ) -> Any:
-        target = getattr(self._strategy, method)
         try:
             with strategy_resource_guard(
                 policy=self._policy,
@@ -234,6 +235,7 @@ class GuardedStrategy:
                 artifact_roots=artifact_roots,
                 library_roots=self._library_roots,
             ):
+                target = getattr(self._strategy, method)
                 return target(*args, **kwargs)
         except RuntimeResourceDenied as exc:
             raise ContractViolation(
@@ -242,7 +244,7 @@ class GuardedStrategy:
                     stage=ErrorStage.SANDBOX,
                     code=ErrorCode.SANDBOX_POLICY_DENIED,
                     message="Strategy runtime operation violated its resource policy",
-                    strategy_id=self.manifest.strategy_id,
+                    strategy_id=self._manifest.strategy_id,
                     details={
                         "audit_event": exc.event,
                         "resource": exc.resource,

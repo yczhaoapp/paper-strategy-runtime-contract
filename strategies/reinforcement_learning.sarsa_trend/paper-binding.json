@@ -1,5 +1,5 @@
 {
-  "algorithm_fidelity": "A1_method_equivalent",
+  "algorithm_fidelity": "A0_method_adaptation",
   "assumptions": [
     "Training transitions include the next on-policy action used by the SARSA backup."
   ],
@@ -36,11 +36,11 @@
   "data_fidelity": "D0_synthetic",
   "data_mode": "synthetic_fixture",
   "deviations": [
-    "Uses bar trend/range/inventory state and target positions rather than the paper market-making environment."
+    "The implementation preserves on-policy SARSA, but substitutes bar-trend states, target positions and a fixture reward for the paper’s order-book quotation problem."
   ],
   "empirical_results_reproduced": false,
   "experimental_fidelity": "E0_runtime_only",
-  "fidelity": "method_reproduction",
+  "fidelity": "method_adaptation",
   "implementation": [
     {
       "path": "src/psrc/strategies/reinforcement_learning.py",
@@ -59,7 +59,7 @@
       ]
     }
   ],
-  "mapping_review": "Manual claim-to-code review completed; hashes bind the reviewed paper, implementation module, and executable package wrapper.",
+  "mapping_review": "This is a runtime-contract method adaptation. Its independent oracles distinguish SARSA from Q-learning, but do not claim reproduction of Spooner et al.’s market-making environment.",
   "original_paper_dataset": false,
   "runtime_expectation": {
     "artifact_algorithm": "on-policy-sarsa-v1",
@@ -98,5 +98,5 @@
     "tests/papers/test_rl_training_differential.py::test_sarsa_randomized_full_training_artifact_and_unseen_inference",
     "tests/papers/test_rl_update_properties.py::test_rl_production_source_has_no_test_fixture_dispatch"
   ],
-  "version": "1.1"
+  "version": "1.2"
 }

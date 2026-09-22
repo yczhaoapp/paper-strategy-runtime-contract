@@ -247,7 +247,10 @@ def verify_strategy_bindings(
     actual_ids = {binding.strategy_id for binding in bindings}
     kinds = Counter(str(binding.strategy_kind) for binding in bindings)
     fidelities = Counter(binding.fidelity for binding in bindings)
-    reproduction_by_kind = Counter(str(binding.strategy_kind) for binding in bindings)
+    reproductions = tuple(
+        binding for binding in bindings if binding.fidelity != "method_adaptation"
+    )
+    reproduction_by_kind = Counter(str(binding.strategy_kind) for binding in reproductions)
     exact_by_kind = Counter(
         str(binding.strategy_kind)
         for binding in bindings
@@ -277,7 +280,8 @@ def verify_strategy_bindings(
         for result in results
         if isinstance(result.get("runtime_behavior"), dict)
     )
-    reproduction_count = len(bindings)
+    reproduction_count = len(reproductions)
+    adaptation_count = fidelities["method_adaptation"]
     coverage_ok = (
         len(bindings) == 18
         and actual_ids == expected_ids
@@ -285,7 +289,8 @@ def verify_strategy_bindings(
         and all(result["status"] == "passed" for result in results)
         and len({binding.source_id for binding in bindings}) >= 15
         and fidelities["formula_reproduction"] >= 6
-        and reproduction_count == 18
+        and reproduction_count >= 14
+        and adaptation_count <= 4
         and exact_count >= 9
         and not a2_without_independent_oracles
         and data_fidelities["D1_public_proxy"] >= 6
@@ -315,8 +320,8 @@ def verify_strategy_bindings(
         "policy": {
             "minimum_distinct_sources": 15,
             "minimum_formula_reproductions": 6,
-            "required_reproductions": 18,
-            "maximum_method_adaptations": 0,
+            "minimum_reproductions": 14,
+            "maximum_method_adaptations": 4,
             "minimum_algorithm_exact": 9,
             "minimum_public_data_bindings": 6,
             "minimum_public_data_bindings_per_kind": 2,

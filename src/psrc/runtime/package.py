@@ -171,6 +171,7 @@ def load_strategy(
                     spec.loader.exec_module(module)
                     strategy_type: Any = getattr(module, class_name)
                     strategy = strategy_type()
+                    loaded_manifest = getattr(strategy, "manifest", None)
             finally:
                 sys.dont_write_bytecode = previous_dont_write_bytecode
         else:
@@ -180,6 +181,7 @@ def load_strategy(
                 )
             strategy_type = getattr(importlib.import_module(module_name), class_name)
             strategy = strategy_type()
+            loaded_manifest = getattr(strategy, "manifest", None)
     except ContractViolation:
         raise
     except RuntimeResourceDenied as exc:
@@ -209,7 +211,6 @@ def load_strategy(
                 cause_chain=(f"{type(exc).__name__}: {exc}",),
             )
         ) from exc
-    loaded_manifest = getattr(strategy, "manifest", None)
     if loaded_manifest != package.manifest:
         raise ContractViolation(
             ContractError(
@@ -231,6 +232,7 @@ def load_strategy(
     if source_path is not None:
         strategy = GuardedStrategy(
             strategy,
+            manifest=package.manifest,
             policy=package.manifest.resources,
             package_root=package.root,
             library_roots=tuple(library_roots),

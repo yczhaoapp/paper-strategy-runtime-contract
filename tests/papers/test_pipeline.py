@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import runpy
+from itertools import pairwise
 from pathlib import Path
 from typing import Any, cast
 from urllib.parse import urlsplit
@@ -13,6 +14,7 @@ from pypdf import PdfWriter
 
 from psrc.cli import main
 from psrc.contract.errors import ContractViolation, ErrorCode
+from psrc.domain.market import BarPayload
 from psrc.papers.catalog import read_bindings, verify_strategy_bindings
 from psrc.papers.compiler import compile_paper, extract_spec, read_recipe
 from psrc.papers.data import public_daily_bars, public_pair_daily_bars, quote_fixture
@@ -26,6 +28,7 @@ from psrc.strategies.catalog import (
     _public_pair_rows,
     _public_ridge_training,
 )
+from psrc.strategies.common import stable_float
 
 ROOT = Path(__file__).parents[2]
 
@@ -62,7 +65,7 @@ def test_all_eighteen_contract_strategies_have_grounded_paper_bindings() -> None
     }
     assert report["source_count"] >= 15
     assert report["fidelity_counts"]["formula_reproduction"] >= 6
-    assert report["reproduction_count"] == 18
+    assert report["reproduction_count"] == 14
     assert report["algorithm_exact_count"] >= 9
     assert report["data_fidelity_counts"]["D1_public_proxy"] >= 6
     assert report["public_data_by_kind"] == {
@@ -71,7 +74,12 @@ def test_all_eighteen_contract_strategies_have_grounded_paper_bindings() -> None
         "reinforcement_learning": 2,
     }
     assert report["experimental_fidelity_counts"] == {"E0_runtime_only": 18}
-    assert "method_adaptation" not in report["fidelity_counts"]
+    assert report["fidelity_counts"]["method_adaptation"] == 4
+    assert report["reproduction_by_kind"] == {
+        "rule": 6,
+        "supervised": 6,
+        "reinforcement_learning": 2,
+    }
     assert report["algorithm_exact_by_kind"] == {"rule": 6, "supervised": 3}
     assert len(read_bindings(ROOT / "papers/bindings")) == 18
 
@@ -207,6 +215,18 @@ def test_public_supervised_training_rejects_non_bar_observations() -> None:
         _public_logistic_training(mixed)
     with pytest.raises(TypeError, match="ridge training requires bars"):
         _public_ridge_training(mixed)
+
+
+def test_public_ridge_training_builds_a_causal_three_return_window() -> None:
+    events, _ = public_daily_bars()
+    request = _public_ridge_training(events[:8])
+    closes = [event.payload.close for event in events[:8] if isinstance(event.payload, BarPayload)]
+    expected_first = tuple(
+        float(right / left - 1) for left, right in pairwise(closes[:4])
+    )
+    assert len(request.features) == len(request.labels) == 4
+    assert request.features[0] == pytest.approx(expected_first)
+    assert request.labels[0] == stable_float(float(closes[4] / closes[3] - 1))
 
 
 def test_public_loader_rejects_source_or_license_hash_drift(

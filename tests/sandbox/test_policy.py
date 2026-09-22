@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -9,8 +10,9 @@ import pytest
 
 from psrc.cli import main
 from psrc.contract.errors import ContractViolation, ErrorCode
-from psrc.contract.models import ResourcePolicy
+from psrc.contract.models import ResourcePolicy, SandboxMode
 from psrc.runtime.artifacts import ArtifactStore
+from psrc.runtime.package import load_strategy, load_strategy_manifest
 from psrc.sandbox.container import (
     ContainerMounts,
     DockerSandbox,
@@ -178,6 +180,32 @@ def test_artifact_store_is_the_only_writable_strategy_channel(tmp_path: Path) ->
         strategy_id="rule.test",
         manifest=artifact,
     ) == {"state.txt": b"ok"}
+
+
+def test_manifest_descriptor_executes_inside_resource_guard(tmp_path: Path) -> None:
+    package = tmp_path / "package"
+    package.mkdir()
+    source_package = Path("strategies/supervised.logistic_direction")
+    shutil.copy2(source_package / "strategy.yaml", package / "strategy.yaml")
+    marker = tmp_path / "outside-marker.txt"
+    package.joinpath("strategy.py").write_text(
+        "from psrc.strategy_api import bundled_strategy_class\n"
+        "writer = open\n"
+        '_Bundled = bundled_strategy_class("supervised.logistic_direction")\n'
+        "class Strategy(_Bundled):\n"
+        "    @property\n"
+        "    def manifest(self):\n"
+        f"        writer({str(marker)!r}, 'w').write('forbidden')\n"
+        "        return super().manifest\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ContractViolation) as raised:
+        load_strategy(
+            load_strategy_manifest(package), sandbox_mode=SandboxMode.DEVELOPMENT
+        )
+    assert raised.value.error.code == ErrorCode.SANDBOX_POLICY_DENIED
+    assert not marker.exists()
 
 
 def test_docker_command_is_fail_closed(tmp_path: Path) -> None:

@@ -3,6 +3,6 @@
   "dataset_id": "public.plotly.aapl-2015-2017.train",
   "input_width": 3,
   "kind": "supervised",
-  "record_count": 399,
-  "request_sha256": "f422c292b11636f99fee97eb8b81e7f87285016dc049c3413d376978b3ad0852"
+  "record_count": 396,
+  "request_sha256": "ba9fe41ae9bedf8bc636604a03000476081b2b69ec1526ccf68ca8104d034796"
 }

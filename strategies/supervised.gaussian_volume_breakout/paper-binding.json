@@ -44,7 +44,7 @@
   "implementation": [
     {
       "path": "src/psrc/strategies/supervised.py",
-      "sha256": "530eb0d6c942441d873d6d791345d64efb7d2848d974c8d4528d8001a7ea315f",
+      "sha256": "7d66ab0ad7c342ffa81361842023e6c343c6eb0a20f47ea905a6cf4a7549645d",
       "symbols": [
         "GaussianVolumeBreakoutStrategy"
       ]
@@ -90,5 +90,5 @@
   "verification_tests": [
     "tests/integration/test_supervised_strategy_matrix.py::test_every_supervised_strategy_trains_reloads_and_backtests[supervised.gaussian_volume_breakout]"
   ],
-  "version": "1.1"
+  "version": "1.2"
 }

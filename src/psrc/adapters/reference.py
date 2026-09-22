@@ -258,6 +258,18 @@ class ReferenceEngine(BacktestAdapter):
 
                 if isinstance(action, TargetPosition):
                     self._validate_target(plan, strategy, action)
+                    projected = self._projected_position(
+                        pending=pending,
+                        quantities=quantities,
+                        instrument_id=action.instrument_id,
+                    )
+                    self._validate_order_quantity(
+                        plan=plan,
+                        strategy=strategy,
+                        quantity=abs(action.quantity - projected),
+                        instrument_id=action.instrument_id,
+                        source="target_position",
+                    )
                     order_count += 1
                     order = _PendingOrder(
                         client_order_id=f"order:{order_count}",
@@ -448,6 +460,13 @@ class ReferenceEngine(BacktestAdapter):
                 )
                 continue
             side, quantity, raw_price = resolved
+            self._validate_order_quantity(
+                plan=plan,
+                strategy=strategy,
+                quantity=quantity,
+                instrument_id=order.instrument_id,
+                source="resolved_fill",
+            )
             price = (
                 self._apply_slippage(raw_price, side) if order.order_type != "limit" else raw_price
             )
@@ -750,6 +769,47 @@ class ReferenceEngine(BacktestAdapter):
                     code=ErrorCode.ORDER_REJECTED,
                 )
 
+    @staticmethod
+    def _projected_position(
+        *,
+        pending: list[_PendingOrder],
+        quantities: dict[str, Decimal],
+        instrument_id: str,
+    ) -> Decimal:
+        projected = quantities.get(instrument_id, Decimal("0"))
+        for order in pending:
+            if order.instrument_id != instrument_id:
+                continue
+            if order.order_type == "target":
+                assert order.target_quantity is not None
+                projected = order.target_quantity
+            else:
+                assert order.side is not None and order.quantity is not None
+                projected += order.quantity if order.side == "buy" else -order.quantity
+        return projected
+
+    @staticmethod
+    def _validate_order_quantity(
+        *,
+        plan: ExecutionPlan,
+        strategy: RuntimeStrategy,
+        quantity: Decimal,
+        instrument_id: str,
+        source: str,
+    ) -> None:
+        maximum = strategy.manifest.action_requirements.max_order_quantity
+        if maximum is not None and quantity > maximum:
+            ReferenceEngine._fail_action(
+                plan,
+                "Derived order quantity exceeds the manifest limit",
+                {
+                    "instrument_id": instrument_id,
+                    "source": source,
+                    "requested": str(quantity),
+                    "maximum": str(maximum),
+                },
+                code=ErrorCode.ORDER_REJECTED,
+            )
     @staticmethod
     def _validate_target(
         plan: ExecutionPlan, strategy: RuntimeStrategy, action: TargetPosition

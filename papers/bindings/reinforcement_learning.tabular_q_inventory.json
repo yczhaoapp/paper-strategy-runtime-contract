@@ -1,9 +1,9 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "strategy_id": "reinforcement_learning.tabular_q_inventory",
   "strategy_kind": "reinforcement_learning",
   "source_id": "spooner2018",
-  "fidelity": "method_reproduction",
+  "fidelity": "method_adaptation",
   "claims": [
     {
       "claim_id": "q.inventory",
@@ -91,10 +91,10 @@
     "State and action spaces are finite and deterministic training transitions expose all three actions."
   ],
   "deviations": [
-    "Uses daily bar momentum/range/inventory state and target positions instead of order-book quote actions and tile coding."
+    "The implementation preserves tabular Q-learning and an inventory feature, but deliberately substitutes a three-action target-position task for the paper’s ten quote/liquidation actions and market-making reward."
   ],
-  "mapping_review": "Manual claim-to-code review completed; hashes bind the reviewed paper, implementation module, and executable package wrapper.",
-  "algorithm_fidelity": "A1_method_equivalent",
+  "mapping_review": "This is a runtime-contract method adaptation. Its independent oracles prove the Q-learning update and lifecycle, not reproduction of Spooner et al.’s market-making environment.",
+  "algorithm_fidelity": "A0_method_adaptation",
   "data_fidelity": "D0_synthetic",
   "experimental_fidelity": "E0_runtime_only",
   "runtime_fidelity": "R1_unified_contract"

@@ -43,6 +43,7 @@ def manifest() -> StrategyManifest:
         action_requirements=ActionRequirements(
             allowed=frozenset({ActionKind.NO_OP, ActionKind.TARGET_POSITION}),
             max_abs_position=Decimal("1"),
+            max_order_quantity=Decimal("2"),
         ),
         resources=ResourcePolicy(sandbox=SandboxMode.DEVELOPMENT),
     )

@@ -16,7 +16,7 @@ from psrc.contract.models import (
     StrategyManifest,
     TimeframeMode,
 )
-from psrc.domain.actions import Action, ActionEnvelope, SubmitOrder, TargetPosition
+from psrc.domain.actions import Action, ActionEnvelope, SubmitOrder, TargetPosition, TargetWeight
 from psrc.domain.market import BookSnapshotL2Payload, MarketEvent
 from psrc.runtime.capabilities import capabilities as runtime_capabilities
 from psrc.runtime.strategy import RuntimeStrategy
@@ -424,42 +424,17 @@ def validate_dataset_events(
         stream=stream,
         events=events,
     )
-    available_fields = _PAYLOAD_FIELDS.get(stream.kind)
-    if available_fields is None or not stream.fields <= available_fields:
-        raise _input_error(
-            run_id=run_id,
-            strategy_id=strategy.strategy_id,
-            code=ErrorCode.DATA_FIELD_MISSING,
-            message="DatasetManifest fields do not exist on the actual payload type",
-            details={
-                "stream_id": stream.stream_id,
-                "declared_fields": sorted(stream.fields),
-                "available_fields": sorted(available_fields or ()),
-            },
-        )
     requirement = next(
         (item for item in strategy.data_requirements if item.stream_id == stream.stream_id), None
     )
-    if requirement is not None and requirement.depth is not None:
-        shallow = [
-            event.event_id
-            for event in events
-            if not isinstance(event.payload, BookSnapshotL2Payload)
-            or len(event.payload.bids) < requirement.depth
-            or len(event.payload.asks) < requirement.depth
-        ]
-        if shallow:
-            raise _input_error(
-                run_id=run_id,
-                strategy_id=strategy.strategy_id,
-                code=ErrorCode.DATA_FIELD_MISSING,
-                message="Actual L2 payload does not provide the declared minimum depth",
-                details={
-                    "stream_id": stream.stream_id,
-                    "required_depth": requirement.depth,
-                    "first_invalid_event_ids": shallow[:5],
-                },
-            )
+    _validate_actual_payload_contract(
+        run_id=run_id,
+        strategy_id=strategy.strategy_id,
+        stream=stream,
+        events=events,
+        required_depth=requirement.depth if requirement is not None else None,
+        required_fields=requirement.required_fields if requirement is not None else frozenset(),
+    )
     actual_hash = sha256_model({"events": [event.model_dump(mode="json") for event in events]})
     if stream.data_sha256 != actual_hash:
         raise _input_error(
@@ -514,6 +489,17 @@ def validate_plan_events(plan: ExecutionPlan, events: tuple[MarketEvent, ...]) -
         stream=stream,
         events=events,
     )
+    requirement = next(
+        (item for item in plan.data_requirements if item.stream_id == stream.stream_id), None
+    )
+    _validate_actual_payload_contract(
+        run_id=plan.run_id,
+        strategy_id=plan.strategy_id,
+        stream=stream,
+        events=events,
+        required_depth=requirement.depth if requirement is not None else None,
+        required_fields=requirement.required_fields if requirement is not None else frozenset(),
+    )
     actual_hash = sha256_model({"events": [event.model_dump(mode="json") for event in events]})
     if actual_hash != stream.data_sha256:
         raise _input_error(
@@ -525,6 +511,53 @@ def validate_plan_events(plan: ExecutionPlan, events: tuple[MarketEvent, ...]) -
         )
 
 
+def _validate_actual_payload_contract(
+    *,
+    run_id: str,
+    strategy_id: str,
+    stream: DatasetStream,
+    events: tuple[MarketEvent, ...],
+    required_depth: int | None,
+    required_fields: frozenset[str],
+) -> None:
+    """Validate declared source and strategy fields against concrete payload objects."""
+    available_fields = _PAYLOAD_FIELDS.get(stream.kind)
+    declared_fields = stream.fields | required_fields
+    if available_fields is None or not declared_fields <= available_fields:
+        raise _input_error(
+            run_id=run_id,
+            strategy_id=strategy_id,
+            code=ErrorCode.DATA_FIELD_MISSING,
+            message="Declared fields do not exist on the actual payload type",
+            details={
+                "stream_id": stream.stream_id,
+                "declared_fields": sorted(declared_fields),
+                "available_fields": sorted(available_fields or ()),
+            },
+        )
+    if required_depth is None:
+        return
+    shallow = [
+        event.event_id
+        for event in events
+        if not isinstance(event.payload, BookSnapshotL2Payload)
+        or len(event.payload.bids) < required_depth
+        or len(event.payload.asks) < required_depth
+    ]
+    if shallow:
+        raise _input_error(
+            run_id=run_id,
+            strategy_id=strategy_id,
+            code=ErrorCode.DATA_FIELD_MISSING,
+            message="Actual L2 payload does not provide the declared minimum depth",
+            details={
+                "stream_id": stream.stream_id,
+                "required_depth": required_depth,
+                "first_invalid_event_ids": shallow[:5],
+            },
+        )
+
+
 def validate_actions(
     plan: ExecutionPlan,
     strategy: RuntimeStrategy,
@@ -532,6 +565,7 @@ def validate_actions(
     symbols: frozenset[str],
 ) -> None:
     requirements = strategy.manifest.action_requirements
+    target_symbols: set[str] = set()
     for action in actions:
         try:
             checked = ActionEnvelope.model_validate(action.model_dump(mode="python")).root
@@ -544,6 +578,26 @@ def validate_actions(
                 maximum = requirements.max_abs_position
                 if maximum is not None and abs(checked.quantity) > maximum:
                     raise ValueError("target position exceeds declared limit")
+            if isinstance(checked, (TargetPosition, TargetWeight)):
+                if checked.instrument_id in target_symbols:
+                    raise ContractViolation(
+                        ContractError(
+                            run_id=plan.run_id,
+                            strategy_id=plan.strategy_id,
+                            engine_id=plan.engine_id,
+                            stage=ErrorStage.ACTION_VALIDATION,
+                            code=ErrorCode.ORDER_REJECTED,
+                            message=(
+                                "A decision batch cannot contain multiple targets "
+                                "for one instrument"
+                            ),
+                            details={
+                                "instrument_id": checked.instrument_id,
+                                "batch_semantics": "one-final-target-per-instrument",
+                            },
+                        )
+                    )
+                target_symbols.add(checked.instrument_id)
             if isinstance(checked, SubmitOrder):
                 maximum = requirements.max_order_quantity
                 if maximum is not None and checked.quantity > maximum:

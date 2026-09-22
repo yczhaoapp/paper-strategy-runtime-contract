@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "strategy_id": "rule.l2_imbalance_maker",
   "strategy_kind": "rule",
   "source_id": "avellaneda2008",

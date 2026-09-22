@@ -89,5 +89,5 @@
     "tests/papers/test_reproduction_oracles.py::test_continuous_actor_critic_reproduces_policy_and_value_updates",
     "tests/papers/test_reproduction_oracles.py::test_continuous_actor_critic_inference_applies_tanh_and_weight_bound"
   ],
-  "version": "1.1"
+  "version": "1.2"
 }

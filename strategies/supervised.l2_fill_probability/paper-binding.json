@@ -1,14 +1,15 @@
 {
   "algorithm_fidelity": "A2_algorithm_exact",
   "assumptions": [
-    "Best-quote queue sizes are integer unit counts and the calibrated death intensities remain constant during one decision."
+    "Equation (41) is used only in the theta=0, queue-independent mu special case: unit-sized deaths, no cancellation term, independent own/opposite queues, constant intensities within a 500 ms decision horizon.",
+    "Training rows provide observed death counts and exposure seconds; maximum-likelihood rates are total deaths divided by total exposure."
   ],
   "claim_links": [
     {
       "claim_id": "fill.pure_death_queue",
       "implementation_path": "src/psrc/strategies/supervised.py",
       "symbol": "L2FillProbabilityStrategy",
-      "verification_test": "tests/papers/test_reproduction_oracles.py::test_fill_probability_reproduces_constant_rate_queue_race"
+      "verification_test": "tests/papers/test_reproduction_oracles.py::test_fill_probability_training_uses_queue_deaths_per_exposure"
     },
     {
       "claim_id": "fill.constant_rate_case",
@@ -21,14 +22,14 @@
     {
       "anchor": "pure-death process",
       "claim_id": "fill.pure_death_queue",
-      "interpretation": "Time priority makes the submitted order’s queue position a pure-death process because later arrivals join behind it.",
+      "interpretation": "Under price-time priority, later arrivals remain behind the submitted order, so the queue position is modeled as a pure-death process in the disclosed no-cancellation special case.",
       "locator": "Proposition 2, PDF p.13",
       "page": 13
     },
     {
       "anchor": "death rate",
       "claim_id": "fill.constant_rate_case",
-      "interpretation": "With queue-independent death intensity, the first-passage transform reduces to a product of identical rate terms.",
+      "interpretation": "The implementation specializes Equation (41) to theta=0 and constant unit-death intensity mu, then evaluates the resulting Erlang first-passage distributions over a finite 500 ms horizon.",
       "locator": "Equation (41), PDF p.14",
       "page": 14
     }
@@ -36,15 +37,15 @@
   "data_fidelity": "D0_synthetic",
   "data_mode": "synthetic_fixture",
   "deviations": [
-    "Implements the paper’s constant-rate, unit-order special case as an Erlang queue race; it does not invert the general state-dependent Laplace transform or claim the FX empirical results."
+    "The strategy does not implement the paper’s general state-dependent mu(s) or cancellation intensity theta(k,s), invert its general Laplace transform, or claim the FX empirical results."
   ],
   "empirical_results_reproduced": false,
   "experimental_fidelity": "E0_runtime_only",
-  "fidelity": "algorithm_reproduction",
+  "fidelity": "formula_reproduction",
   "implementation": [
     {
       "path": "src/psrc/strategies/supervised.py",
-      "sha256": "530eb0d6c942441d873d6d791345d64efb7d2848d974c8d4528d8001a7ea315f",
+      "sha256": "7d66ab0ad7c342ffa81361842023e6c343c6eb0a20f47ea905a6cf4a7549645d",
       "symbols": [
         "L2FillProbabilityStrategy"
       ]
@@ -58,15 +59,15 @@
       ]
     }
   ],
-  "mapping_review": "The former DeepLOB price-class proxy was removed. The strategy now estimates queue-death rates and evaluates the exact constant-rate first-passage race before choosing passive versus aggressive execution.",
+  "mapping_review": "The binding is limited to the explicit theta=0 constant-rate special case. Training estimates Poisson death intensities from counts and exposure, and inference integrates the independent Erlang first-passage race only through the declared 500 ms horizon.",
   "original_paper_dataset": false,
   "runtime_expectation": {
     "artifact_algorithm": "constant-rate-queue-race-v1",
-    "artifact_id": "sha256-f8e9ccab58de8eeb55c3ef6eb420d32db11145a8ae08bdd8a4111fb37c85c4d9",
+    "artifact_id": "sha256-7877389f6422f38158b2b3ea4a9edca54b997b82577fd04735f4731f967a3653",
     "data_kinds": [
       "book_snapshot_l2"
     ],
-    "decision_sha256": "d82115e57b7cb2667d094960bdefa16622b92f8c7149b29f317be7b3d0caf59c",
+    "decision_sha256": "e5d772c7e04fba69e0c323a4e90a7fab424bad0a04c9dce095b9a3eba904d559",
     "expected_decisions": 10,
     "expected_fills": 5,
     "expected_orders": 10,
@@ -89,7 +90,8 @@
   "strategy_id": "supervised.l2_fill_probability",
   "strategy_kind": "supervised",
   "verification_tests": [
-    "tests/papers/test_reproduction_oracles.py::test_fill_probability_reproduces_constant_rate_queue_race"
+    "tests/papers/test_reproduction_oracles.py::test_fill_probability_reproduces_constant_rate_queue_race",
+    "tests/papers/test_reproduction_oracles.py::test_fill_probability_training_uses_queue_deaths_per_exposure"
   ],
-  "version": "1.1"
+  "version": "1.2"
 }

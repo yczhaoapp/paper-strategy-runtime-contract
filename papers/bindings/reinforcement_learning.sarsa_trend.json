@@ -1,9 +1,9 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "strategy_id": "reinforcement_learning.sarsa_trend",
   "strategy_kind": "reinforcement_learning",
   "source_id": "spooner2018",
-  "fidelity": "method_reproduction",
+  "fidelity": "method_adaptation",
   "claims": [
     {
       "claim_id": "sarsa.algorithm",
@@ -92,10 +92,10 @@
     "Training transitions include the next on-policy action used by the SARSA backup."
   ],
   "deviations": [
-    "Uses bar trend/range/inventory state and target positions rather than the paper market-making environment."
+    "The implementation preserves on-policy SARSA, but substitutes bar-trend states, target positions and a fixture reward for the paper’s order-book quotation problem."
   ],
-  "mapping_review": "Manual claim-to-code review completed; hashes bind the reviewed paper, implementation module, and executable package wrapper.",
-  "algorithm_fidelity": "A1_method_equivalent",
+  "mapping_review": "This is a runtime-contract method adaptation. Its independent oracles distinguish SARSA from Q-learning, but do not claim reproduction of Spooner et al.’s market-making environment.",
+  "algorithm_fidelity": "A0_method_adaptation",
   "data_fidelity": "D0_synthetic",
   "experimental_fidelity": "E0_runtime_only",
   "runtime_fidelity": "R1_unified_contract"

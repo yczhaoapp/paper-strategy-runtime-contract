@@ -7,6 +7,7 @@ import tempfile
 from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
 from typing import Literal
+from weakref import WeakKeyDictionary
 
 from pydantic import Field
 
@@ -38,17 +39,28 @@ class ArtifactManifest(ContractModel):
     metadata: dict[str, str] = Field(default_factory=dict)
 
 
+_AUTHORIZED_ROOTS: WeakKeyDictionary[ArtifactStore, Path] = WeakKeyDictionary()
+
+
 class ArtifactStore:
     """Content-verified local artifact store with path traversal protection."""
 
+    __slots__ = ("__weakref__",)
+
     def __init__(self, root: Path) -> None:
-        self.root = root.resolve()
-        if os.name == "nt" and not str(self.root).startswith("\\\\?\\"):
-            value = str(self.root)
-            self.root = Path(
+        authorized_root = root.resolve()
+        if os.name == "nt" and not str(authorized_root).startswith("\\\\?\\"):
+            value = str(authorized_root)
+            authorized_root = Path(
                 "\\\\?\\UNC\\" + value[2:] if value.startswith("\\\\") else "\\\\?\\" + value
             )
-        self.root.mkdir(parents=True, exist_ok=True)
+        authorized_root.mkdir(parents=True, exist_ok=True)
+        _AUTHORIZED_ROOTS[self] = authorized_root
+
+    @property
+    def root(self) -> Path:
+        """Return the runtime-authorized root without exposing a mutable authority field."""
+        return _AUTHORIZED_ROOTS[self]
 
     @staticmethod
     def _validate_component(value: str) -> str:
@@ -206,6 +218,14 @@ class ArtifactStore:
                     details={"artifact_id": manifest.artifact_id},
                 )
             payload = target.read_bytes()
+            if len(payload) != declared.size_bytes:
+                self._fail(
+                    run_id=run_id,
+                    strategy_id=strategy_id,
+                    code=ErrorCode.ARTIFACT_HASH_MISMATCH,
+                    message=f"Artifact file {declared.logical_name!r} failed size validation",
+                    details={"expected": declared.size_bytes, "actual": len(payload)},
+                )
             actual = hashlib.sha256(payload).hexdigest()
             if actual != declared.sha256:
                 self._fail(
@@ -217,6 +237,77 @@ class ArtifactStore:
                 )
             loaded[declared.logical_name] = payload
         return loaded
+
+    @trusted_runtime_io
+    def verify_manifest(
+        self,
+        *,
+        run_id: str,
+        strategy_id: str,
+        strategy_version: str,
+        candidate: ArtifactManifest,
+    ) -> ArtifactManifest:
+        """Load the canonical disk manifest and verify all bytes before strategy loading."""
+        artifact_dir = self.root / self._validate_component(candidate.artifact_id)
+        manifest_path = artifact_dir / "manifest.json"
+        if artifact_dir.is_symlink() or manifest_path.is_symlink():
+            self._fail(
+                run_id=run_id,
+                strategy_id=strategy_id,
+                code=ErrorCode.ARTIFACT_HASH_MISMATCH,
+                message="Artifact manifest path cannot contain symbolic links",
+                details={"artifact_id": candidate.artifact_id},
+            )
+        if not manifest_path.is_file():
+            self._fail(
+                run_id=run_id,
+                strategy_id=strategy_id,
+                code=ErrorCode.ARTIFACT_NOT_FOUND,
+                message=f"Artifact {candidate.artifact_id!r} has no stored manifest",
+                details={"artifact_id": candidate.artifact_id},
+            )
+        try:
+            stored = ArtifactManifest.model_validate_json(manifest_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            self._fail(
+                run_id=run_id,
+                strategy_id=strategy_id,
+                code=ErrorCode.ARTIFACT_HASH_MISMATCH,
+                message="Stored artifact manifest is invalid",
+                details={
+                    "artifact_id": candidate.artifact_id,
+                    "cause": f"{type(exc).__name__}: {exc}",
+                },
+            )
+        if stored != candidate:
+            self._fail(
+                run_id=run_id,
+                strategy_id=strategy_id,
+                code=ErrorCode.ARTIFACT_HASH_MISMATCH,
+                message="Returned artifact manifest differs from the stored manifest",
+                details={"artifact_id": candidate.artifact_id},
+            )
+        identity_mismatches: dict[str, object] = {}
+        if stored.strategy_id != strategy_id:
+            identity_mismatches["strategy_id"] = {
+                "expected": strategy_id,
+                "actual": stored.strategy_id,
+            }
+        if stored.strategy_version != strategy_version:
+            identity_mismatches["strategy_version"] = {
+                "expected": strategy_version,
+                "actual": stored.strategy_version,
+            }
+        if identity_mismatches:
+            self._fail(
+                run_id=run_id,
+                strategy_id=strategy_id,
+                code=ErrorCode.ARTIFACT_HASH_MISMATCH,
+                message="Stored artifact identity does not match the executing strategy",
+                details={"artifact_id": candidate.artifact_id, "mismatches": identity_mismatches},
+            )
+        self.load_bytes(run_id=run_id, strategy_id=strategy_id, manifest=stored)
+        return stored
 
     @staticmethod
     def _fail(

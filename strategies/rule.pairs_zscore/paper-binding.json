@@ -92,5 +92,5 @@
   "verification_tests": [
     "tests/papers/test_reproduction_oracles.py::test_pairs_reproduces_population_zscore_and_leg_directions"
   ],
-  "version": "1.1"
+  "version": "1.2"
 }

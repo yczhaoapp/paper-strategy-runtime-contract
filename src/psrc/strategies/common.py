@@ -48,8 +48,16 @@ def make_manifest(
     actions: frozenset[ActionKind],
     training: TrainingMode,
     max_position: Decimal | None = Decimal("10"),
-    max_order: Decimal | None = Decimal("10"),
+    max_order: Decimal | None = None,
 ) -> StrategyManifest:
+    effective_max_order = max_order
+    if (
+        effective_max_order is None
+        and max_position is not None
+        and ActionKind.TARGET_POSITION in actions
+    ):
+        # A direct reversal from +limit to -limit is one derived native order.
+        effective_max_order = max_position * 2
     return StrategyManifest(
         strategy_id=strategy_id,
         strategy_version="1.0.0",
@@ -63,7 +71,7 @@ def make_manifest(
         action_requirements=ActionRequirements(
             allowed=actions,
             max_abs_position=max_position,
-            max_order_quantity=max_order,
+            max_order_quantity=effective_max_order,
         ),
         resources=ResourcePolicy(sandbox=SandboxMode.DEVELOPMENT),
         deterministic=True,

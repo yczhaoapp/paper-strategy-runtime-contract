@@ -41,7 +41,7 @@ action_requirements:
   - prediction
   - target_weight
   max_abs_position: null
-  max_order_quantity: '10'
+  max_order_quantity: null
 resources:
   sandbox: development
   network: deny

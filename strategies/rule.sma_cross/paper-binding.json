@@ -44,7 +44,7 @@
   "implementation": [
     {
       "path": "src/psrc/examples/sma_cross.py",
-      "sha256": "cff70c2ecc6e8a99c6a2e2864bc0218c80112e23443095a0863c7785b4bf99a3",
+      "sha256": "f0db3ebd2ebbad95e577081d2d7de883e49b8475b5f7b0a045cbbb3cc6044d68",
       "symbols": [
         "SmaCrossStrategy"
       ]
@@ -90,5 +90,5 @@
   "verification_tests": [
     "tests/papers/test_reproduction_oracles.py::test_sma_cross_reproduces_arithmetic_windows_and_position_rule"
   ],
-  "version": "1.1"
+  "version": "1.2"
 }

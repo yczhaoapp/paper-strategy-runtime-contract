@@ -239,6 +239,12 @@ def run_trainable(
         lifecycle.transition(LifecycleState.TRAINING)
         prefix_logs.append(_log("training", "Model or policy training started"))
         artifact = strategy.train(training, store)
+        artifact = store.verify_manifest(
+            run_id=plan.run_id,
+            strategy_id=strategy.manifest.strategy_id,
+            strategy_version=strategy.manifest.strategy_version,
+            candidate=artifact,
+        )
         _validate_artifact_training_provenance(
             plan=plan,
             training=training,
@@ -253,11 +259,17 @@ def run_trainable(
             _log("artifact", "Training artifact saved", artifact_id=artifact.artifact_id)
         )
         strategy.load(artifact, store, run_id=plan.run_id)
+        store.verify_manifest(
+            run_id=plan.run_id,
+            strategy_id=strategy.manifest.strategy_id,
+            strategy_version=strategy.manifest.strategy_version,
+            candidate=artifact,
+        )
         lifecycle.transition(LifecycleState.ARTIFACT_LOADED)
         prefix_logs.append(
             _log(
                 "artifact",
-                "Training artifact integrity-checked and loaded",
+                "Stored artifact bytes rechecked and strategy load callback completed",
                 artifact_id=artifact.artifact_id,
             )
         )

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import math
 from datetime import UTC, datetime, timedelta
 from decimal import Decimal
 from pathlib import Path
@@ -12,6 +13,7 @@ from psrc.domain.actions import Action, NoOp, Prediction, SubmitOrder, TargetPos
 from psrc.domain.market import BarPayload, MarketEvent, QuoteL1Payload
 from psrc.examples.sma_cross import SmaCrossStrategy
 from psrc.runtime.artifacts import ArtifactStore
+from psrc.runtime.training import TrainingRequest
 from psrc.strategies.catalog import reinforcement_learning_examples
 from psrc.strategies.common import canonicalize_numeric, stable_float
 from psrc.strategies.reinforcement_learning import (
@@ -32,10 +34,14 @@ from psrc.strategies.rule import (
 )
 from psrc.strategies.supervised import (
     L1AdverseSelectionStrategy,
+    L2FillProbabilityStrategy,
     LogisticDirectionStrategy,
+    RidgeReturnStrategy,
+    erlang_fill_probability_within_horizon,
     erlang_race_probability,
     fit_binary_logistic,
     fit_pooled_ols,
+    three_day_lagged_returns,
 )
 
 
@@ -245,6 +251,50 @@ def test_fill_probability_reproduces_constant_rate_queue_race() -> None:
     assert erlang_race_probability(1, 1, 2.0, 3.0) == 0.4
     observed = erlang_race_probability(2, 2, 1.0, 1.0)
     assert abs(observed - 0.5) < 1e-12
+    horizon = 0.5
+    finite = erlang_fill_probability_within_horizon(1, 1, 2.0, 3.0, horizon)
+    independent = 2 / 5 * (1 - math.exp(-5 * horizon))
+    assert abs(finite - independent) < 1e-12
+    assert finite < erlang_race_probability(1, 1, 2.0, 3.0)
+
+
+def test_fill_probability_training_uses_queue_deaths_per_exposure(tmp_path: Path) -> None:
+    strategy = L2FillProbabilityStrategy()
+    request = TrainingRequest(
+        run_id="oracle.fill-rate",
+        dataset_id="oracle.queue-counts",
+        seed=7,
+        features=((4.0, 2.0, 1.0), (2.0, 6.0, 2.0), (3.0, 1.0, 1.0), (1.0, 3.0, 1.0)),
+        labels=(1.0, 0.0, 1.0, 0.0),
+    )
+    store = ArtifactStore(tmp_path / "artifacts")
+    artifact = strategy.train(request, store)
+    payload = store.load_bytes(
+        run_id=request.run_id,
+        strategy_id=strategy.manifest.strategy_id,
+        manifest=artifact,
+    )["model.json"]
+    model = json.loads(payload)
+    assert model["own_death_rate"] == 2.0
+    assert model["opposite_death_rate"] == 2.4
+
+
+def test_ridge_uses_three_causal_lagged_returns_for_training_and_inference() -> None:
+    closes = tuple(Decimal(value) for value in ("100", "102", "101", "104"))
+    expected = (0.02, -1 / 102, 3 / 101)
+    assert np.allclose(three_day_lagged_returns(closes), expected)
+
+    strategy = RidgeReturnStrategy()
+    strategy.model = {"weights": [1.0, 10.0, 100.0], "intercept": 0.0}
+    strategy.artifact_id = "oracle-ridge"
+    strategy.on_start()
+    events = [_bar("PUBLIC.AAPL", str(close), index) for index, close in enumerate(closes)]
+    outputs = [strategy.on_event(event, _account(event.available_time)) for event in events]
+    assert all(isinstance(item[0], NoOp) for item in outputs[:3])
+    prediction = outputs[3][0]
+    assert isinstance(prediction, Prediction)
+    expected_score = sum(a * b for a, b in zip(expected, (1, 10, 100), strict=True))
+    assert abs(float(prediction.value) - expected_score) < 1e-11
 
 
 def test_directional_logistic_reproduces_paper_gradient_descent() -> None:

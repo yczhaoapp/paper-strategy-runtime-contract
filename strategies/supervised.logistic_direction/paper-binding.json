@@ -44,7 +44,7 @@
   "implementation": [
     {
       "path": "src/psrc/strategies/supervised.py",
-      "sha256": "530eb0d6c942441d873d6d791345d64efb7d2848d974c8d4528d8001a7ea315f",
+      "sha256": "7d66ab0ad7c342ffa81361842023e6c343c6eb0a20f47ea905a6cf4a7549645d",
       "symbols": [
         "LogisticDirectionStrategy"
       ]
@@ -91,5 +91,5 @@
     "tests/papers/test_reproduction_oracles.py::test_logistic_direction_uses_declared_ohlcv_feature_order",
     "tests/papers/test_reproduction_oracles.py::test_directional_logistic_reproduces_paper_gradient_descent"
   ],
-  "version": "1.1"
+  "version": "1.2"
 }

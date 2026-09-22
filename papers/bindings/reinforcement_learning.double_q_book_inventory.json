@@ -1,9 +1,9 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "strategy_id": "reinforcement_learning.double_q_book_inventory",
   "strategy_kind": "reinforcement_learning",
   "source_id": "spooner2018",
-  "fidelity": "method_reproduction",
+  "fidelity": "method_adaptation",
   "claims": [
     {
       "claim_id": "doubleq.variant",
@@ -91,10 +91,10 @@
     "Two value tables alternate updates and the opposite table evaluates the greedy next action."
   ],
   "deviations": [
-    "Uses a compact rounded L2 state and target positions rather than tile coding, quote actions, and the paper simulator."
+    "The implementation preserves Double-Q selection/evaluation separation and an L2 inventory state, but substitutes three target-position actions and a fixture reward for the paper’s quote/liquidation actions and execution-derived reward."
   ],
-  "mapping_review": "Manual claim-to-code review completed; hashes bind the reviewed paper, implementation module, and executable package wrapper.",
-  "algorithm_fidelity": "A1_method_equivalent",
+  "mapping_review": "This is a runtime-contract method adaptation. Its independent oracles prove Double-Q mechanics and lifecycle, not reproduction of Spooner et al.’s market-making environment.",
+  "algorithm_fidelity": "A0_method_adaptation",
   "data_fidelity": "D0_synthetic",
   "experimental_fidelity": "E0_runtime_only",
   "runtime_fidelity": "R1_unified_contract"

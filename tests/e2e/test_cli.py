@@ -176,6 +176,64 @@ def test_cli_builds_complete_reproduction_bundle(tmp_path: Path, capsys: object)
             "test_artifact_store_is_the_only_writable_strategy_channel",
         ),
         (
+            "tests.sandbox.test_policy",
+            "test_manifest_descriptor_executes_inside_resource_guard",
+        ),
+        (
+            "tests.negative.test_training_failures",
+            "test_runtime_independently_verifies_returned_training_artifact[missing]",
+        ),
+        (
+            "tests.negative.test_training_failures",
+            "test_runtime_independently_verifies_returned_training_artifact[size]",
+        ),
+        (
+            "tests.unit.test_artifacts",
+            "test_artifact_size_and_authorized_root_cannot_be_forged",
+        ),
+        (
+            "tests.adapters.test_public_boundary_failures",
+            "test_public_adapter_wraps_unexpected_strategy_exceptions["
+            "on_start-ReferenceEngine-capabilities]",
+        ),
+        (
+            "tests.adapters.test_public_boundary_failures",
+            "test_public_adapter_wraps_unexpected_strategy_exceptions["
+            "on_start-BacktraderAdapter-capabilities]",
+        ),
+        (
+            "tests.adapters.test_public_boundary_failures",
+            "test_target_batches_and_derived_native_orders_enforce_limits["
+            "duplicate-target-ReferenceEngine-capabilities]",
+        ),
+        (
+            "tests.adapters.test_public_boundary_failures",
+            "test_target_batches_and_derived_native_orders_enforce_limits["
+            "derived-order-limit-BacktraderAdapter-capabilities]",
+        ),
+        (
+            "tests.adapters.test_public_boundary_failures",
+            "test_public_adapter_checks_concrete_payload_fields["
+            "ReferenceEngine-capabilities]",
+        ),
+        (
+            "tests.adapters.test_public_boundary_failures",
+            "test_public_adapter_checks_concrete_payload_fields["
+            "BacktraderAdapter-capabilities]",
+        ),
+        (
+            "tests.adapters.test_public_boundary_failures",
+            "test_public_adapter_checks_concrete_l2_depth",
+        ),
+        (
+            "tests.unit.test_compatibility",
+            "test_resample_uses_market_time_for_ohlc_when_a_bar_arrives_late",
+        ),
+        (
+            "tests.unit.test_compatibility",
+            "test_resample_rejects_ambiguous_duplicate_market_timestamps",
+        ),
+        (
             "tests.negative.test_runtime_contract_enforcement",
             "test_orchestrator_rejects_strategy_identity_mismatch",
         ),

@@ -54,6 +54,7 @@ from psrc.strategies.supervised import (
     L2FillProbabilityStrategy,
     LogisticDirectionStrategy,
     RidgeReturnStrategy,
+    three_day_lagged_returns,
 )
 
 
@@ -162,18 +163,18 @@ def _public_logistic_training(events: tuple[MarketEvent, ...]) -> TrainingReques
 def _public_ridge_training(events: tuple[MarketEvent, ...]) -> TrainingRequest:
     features: list[tuple[float, ...]] = []
     labels: list[float] = []
-    for current, nxt in pairwise(events):
-        current_bar, next_bar = current.payload, nxt.payload
-        if not isinstance(current_bar, BarPayload) or not isinstance(next_bar, BarPayload):
+    closes = []
+    for event in events:
+        if not isinstance(event.payload, BarPayload):
             raise TypeError("public ridge training requires bars")
+        closes.append(event.payload.close)
+    for current_index in range(3, len(closes) - 1):
         features.append(
-            (
-                stable_float(float(current_bar.close / current_bar.open - 1)),
-                stable_float(float((current_bar.high - current_bar.low) / current_bar.open)),
-                stable_float(math.log1p(float(current_bar.volume)) / 10),
-            )
+            three_day_lagged_returns(tuple(closes[current_index - 3 : current_index + 1]))
         )
-        labels.append(stable_float(float(next_bar.close / current_bar.close - 1)))
+        labels.append(
+            stable_float(float(closes[current_index + 1] / closes[current_index] - 1))
+        )
     return TrainingRequest(
         run_id="train.supervised.ridge_return",
         dataset_id="public.plotly.aapl-2015-2017.train",
@@ -186,6 +187,7 @@ def _public_ridge_training(events: tuple[MarketEvent, ...]) -> TrainingRequest:
             "source_events_sha256": sha256_model(
                 {"events": [event.model_dump(mode="json") for event in events]}
             ),
+            "features": "three-causal-lagged-daily-close-returns",
             "label": "next-public-daily-close-return",
         },
     )
@@ -421,20 +423,25 @@ def _continuous_return_training(strategy_id: str) -> TrainingRequest:
 def _fill_training(strategy_id: str) -> TrainingRequest:
     features = tuple(
         (
-            float(1 + index % 5),
-            float(1 + (index * 2) % 5),
+            float(1 + index % 4),
+            float(1 + (index * 3) % 5),
             0.5 + (index % 4) * 0.25,
         )
         for index in range(24)
     )
-    labels = tuple(1.0 if row[0] <= row[1] else 0.0 for row in features)
+    labels = tuple(1.0 if row[0] > row[1] else 0.0 for row in features)
     return TrainingRequest(
         run_id=f"train.{strategy_id}",
         dataset_id="synthetic.queue-race-events",
         seed=7,
         features=features,
         labels=labels,
-        metadata={"label": "own_queue_depleted_before_opposite_queue"},
+        metadata={
+            "feature_semantics": "own-deaths,opposite-deaths,exposure-seconds",
+            "label": "diagnostic-own-death-count-exceeds-opposite",
+            "estimator": "constant-intensity-poisson-mle",
+            "prediction_horizon_seconds": "0.5",
+        },
     )
 
 

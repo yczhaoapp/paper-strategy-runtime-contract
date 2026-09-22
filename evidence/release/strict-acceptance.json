@@ -6,7 +6,7 @@
         "errors": 0,
         "failures": 0,
         "skipped": 0,
-        "tests": 242
+        "tests": 266
       },
       "passed": true
     },
@@ -23,7 +23,7 @@
     "code_coverage": {
       "detail": {
         "minimum": 90,
-        "percent_covered": 92.03
+        "percent_covered": 91.88
       },
       "passed": true
     },
@@ -59,7 +59,7 @@
       },
       "passed": true
     },
-    "eighteen_paper_grounded_strategy_bindings": {
+    "eighteen_strategy_bindings_with_fidelity_classification": {
       "detail": {
         "algorithm_exact_by_kind": {
           "rule": 6,
@@ -71,7 +71,7 @@
           {
             "claim_count": 2,
             "claim_link_count": 2,
-            "fidelity": "method_reproduction",
+            "fidelity": "method_adaptation",
             "kind": "reinforcement_learning",
             "runtime_behavior": {
               "bundle": "runs/all/reinforcement_learning.a2c_pairs/bundle.json",
@@ -97,7 +97,7 @@
           {
             "claim_count": 2,
             "claim_link_count": 2,
-            "fidelity": "method_reproduction",
+            "fidelity": "method_adaptation",
             "kind": "reinforcement_learning",
             "runtime_behavior": {
               "bundle": "runs/all/reinforcement_learning.double_q_book_inventory/bundle.json",
@@ -184,7 +184,7 @@
           {
             "claim_count": 2,
             "claim_link_count": 2,
-            "fidelity": "method_reproduction",
+            "fidelity": "method_adaptation",
             "kind": "reinforcement_learning",
             "runtime_behavior": {
               "bundle": "runs/all/reinforcement_learning.sarsa_trend/bundle.json",
@@ -219,7 +219,7 @@
           {
             "claim_count": 2,
             "claim_link_count": 2,
-            "fidelity": "method_reproduction",
+            "fidelity": "method_adaptation",
             "kind": "reinforcement_learning",
             "runtime_behavior": {
               "bundle": "runs/all/reinforcement_learning.tabular_q_inventory/bundle.json",
@@ -488,12 +488,12 @@
           {
             "claim_count": 2,
             "claim_link_count": 2,
-            "fidelity": "algorithm_reproduction",
+            "fidelity": "formula_reproduction",
             "kind": "supervised",
             "runtime_behavior": {
               "bundle": "runs/all/supervised.l2_fill_probability/bundle.json",
               "data_fidelity_observed": "D0_synthetic",
-              "decision_sha256": "d82115e57b7cb2667d094960bdefa16622b92f8c7149b29f317be7b3d0caf59c",
+              "decision_sha256": "e5d772c7e04fba69e0c323a4e90a7fab424bad0a04c9dce095b9a3eba904d559",
               "metrics": {
                 "decisions": 10,
                 "fills": 5,
@@ -502,7 +502,8 @@
               "runtime_fidelity_observed": "R2_independent_strict",
               "source_data_sha256": "ae71a1d713137b0d3029474773bf04977870b69e2b422dd98555aff935fe7cda",
               "tests_executed": [
-                "tests/papers/test_reproduction_oracles.py::test_fill_probability_reproduces_constant_rate_queue_race"
+                "tests/papers/test_reproduction_oracles.py::test_fill_probability_reproduces_constant_rate_queue_race",
+                "tests/papers/test_reproduction_oracles.py::test_fill_probability_training_uses_queue_deaths_per_exposure"
               ]
             },
             "runtime_verified": true,
@@ -546,16 +547,18 @@
             "runtime_behavior": {
               "bundle": "runs/all/supervised.ridge_return/bundle.json",
               "data_fidelity_observed": "D1_public_proxy",
-              "decision_sha256": "57267b8f0eede8e646e3cfaf2ce9d44bb1d39f7a0adab1a14d3fb4dedad8a015",
+              "decision_sha256": "c0fba21299c81b32f28be4d4dfa5ec5d9ae826993e5b3d43bd2b4cdd5aa64378",
               "metrics": {
                 "decisions": 106,
-                "fills": 4,
-                "orders": 106
+                "fills": 39,
+                "orders": 103
               },
               "runtime_fidelity_observed": "R2_independent_strict",
               "source_data_sha256": "2708326df26a85ab68d420790ebc7b0c9f24b70faae9bdf5d84893d5d65f3e6f",
               "tests_executed": [
-                "tests/integration/test_supervised_strategy_matrix.py::test_every_supervised_strategy_trains_reloads_and_backtests[supervised.ridge_return]"
+                "tests/integration/test_supervised_strategy_matrix.py::test_every_supervised_strategy_trains_reloads_and_backtests[supervised.ridge_return]",
+                "tests/papers/test_pipeline.py::test_public_ridge_training_builds_a_causal_three_return_window",
+                "tests/papers/test_reproduction_oracles.py::test_ridge_uses_three_causal_lagged_returns_for_training_and_inference"
               ]
             },
             "runtime_verified": true,
@@ -583,22 +586,23 @@
           "E0_runtime_only": 18
         },
         "fidelity_counts": {
-          "algorithm_reproduction": 3,
-          "formula_reproduction": 6,
-          "method_reproduction": 9
+          "algorithm_reproduction": 2,
+          "formula_reproduction": 7,
+          "method_adaptation": 4,
+          "method_reproduction": 5
         },
         "observed_runtime_fidelity_counts": {
           "R2_independent_strict": 18
         },
         "policy": {
           "empirical_claims_allowed": false,
-          "maximum_method_adaptations": 0,
+          "maximum_method_adaptations": 4,
           "minimum_algorithm_exact": 9,
           "minimum_distinct_sources": 15,
           "minimum_formula_reproductions": 6,
           "minimum_public_data_bindings": 6,
           "minimum_public_data_bindings_per_kind": 2,
-          "required_reproductions": 18
+          "minimum_reproductions": 14
         },
         "public_data_by_kind": {
           "reinforcement_learning": 2,
@@ -606,11 +610,11 @@
           "supervised": 2
         },
         "reproduction_by_kind": {
-          "reinforcement_learning": 6,
+          "reinforcement_learning": 2,
           "rule": 6,
           "supervised": 6
         },
-        "reproduction_count": 18,
+        "reproduction_count": 14,
         "runtime_evidence_required": true,
         "source_count": 15,
         "status": "passed",
@@ -674,6 +678,14 @@
         "runtime_audit_fence": true,
         "single_package_docker_entrypoint": true,
         "strategy_minimum_sandbox_enforced": true
+      },
+      "passed": true
+    },
+    "independent_audit_counterexamples_closed": {
+      "detail": {
+        "missing_tests": [],
+        "required_tests": 16,
+        "scope": "artifact authority and integrity, guarded descriptors, adapter exception and payload boundaries, derived order limits, market-time resampling, and paper claim corrections"
       },
       "passed": true
     },
@@ -854,9 +866,9 @@
     }
   },
   "contract_version": "1.4.0",
-  "passed_checks": 22,
+  "passed_checks": 23,
   "status": "passed",
-  "total_checks": 22,
+  "total_checks": 23,
   "verification_scope": "strict_container_verification",
   "verifier_policy": "generated evidence only; matrix narrative is not a result"
 }

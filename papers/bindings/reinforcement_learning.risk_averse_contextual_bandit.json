@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "strategy_id": "reinforcement_learning.risk_averse_contextual_bandit",
   "strategy_kind": "reinforcement_learning",
   "source_id": "lin2022",

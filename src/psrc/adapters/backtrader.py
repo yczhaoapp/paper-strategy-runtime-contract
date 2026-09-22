@@ -178,6 +178,31 @@ class BacktraderAdapter(BacktestAdapter):
                     elif isinstance(action, Prediction):
                         continue
                     elif isinstance(action, TargetPosition):
+                        projected = Decimal(str(position.size))
+                        for pending_order in self.broker.get_orders_open(safe=True):
+                            projected += Decimal(str(pending_order.created.size))
+                        delta = abs(action.quantity - projected)
+                        maximum_order = self.runtime.manifest.action_requirements.max_order_quantity
+                        if maximum_order is not None and delta > maximum_order:
+                            raise ContractViolation(
+                                ContractError(
+                                    run_id=plan.run_id,
+                                    strategy_id=plan.strategy_id,
+                                    engine_id=plan.engine_id,
+                                    stage=ErrorStage.ACTION_VALIDATION,
+                                    code=ErrorCode.ORDER_REJECTED,
+                                    message=(
+                                        "TargetPosition derives an order above the manifest limit"
+                                    ),
+                                    details={
+                                        "instrument_id": action.instrument_id,
+                                        "projected_position": str(projected),
+                                        "target_position": str(action.quantity),
+                                        "requested": str(delta),
+                                        "maximum": str(maximum_order),
+                                    },
+                                )
+                            )
                         order = self.order_target_size(target=float(action.quantity))
                         if order is not None:
                             order_submitted_at[order.ref] = event.available_time
@@ -217,6 +242,42 @@ class BacktraderAdapter(BacktestAdapter):
                     )
                 if order.status != order.Completed:
                     return
+                maximum_order = self.runtime.manifest.action_requirements.max_order_quantity
+                executed_quantity = Decimal(str(abs(order.executed.size)))
+                if maximum_order is not None and executed_quantity > maximum_order:
+                    raise ContractViolation(
+                        ContractError(
+                            run_id=plan.run_id,
+                            strategy_id=plan.strategy_id,
+                            engine_id=plan.engine_id,
+                            stage=ErrorStage.ACTION_VALIDATION,
+                            code=ErrorCode.ORDER_REJECTED,
+                            message="Native fill exceeds the manifest order limit",
+                            details={
+                                "native_ref": str(order.ref),
+                                "requested": str(executed_quantity),
+                                "maximum": str(maximum_order),
+                            },
+                        )
+                    )
+                resulting = Decimal(str(self.getposition(self.data).size))
+                maximum_position = self.runtime.manifest.action_requirements.max_abs_position
+                if maximum_position is not None and abs(resulting) > maximum_position:
+                    raise ContractViolation(
+                        ContractError(
+                            run_id=plan.run_id,
+                            strategy_id=plan.strategy_id,
+                            engine_id=plan.engine_id,
+                            stage=ErrorStage.ACTION_VALIDATION,
+                            code=ErrorCode.ORDER_REJECTED,
+                            message="Native fill exceeds the manifest position limit",
+                            details={
+                                "native_ref": str(order.ref),
+                                "resulting_position": str(resulting),
+                                "maximum": str(maximum_position),
+                            },
+                        )
+                    )
                 timestamp = bt.num2date(order.executed.dt, tz=UTC)
                 if timestamp.tzinfo is None:
                     timestamp = timestamp.replace(tzinfo=UTC)

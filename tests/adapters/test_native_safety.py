@@ -7,7 +7,7 @@ import pytest
 from psrc.adapters.backtrader import BacktraderAdapter, capabilities
 from psrc.contract.compiler import compile_run
 from psrc.contract.errors import ContractViolation, ErrorCode
-from psrc.contract.models import RunPolicy, SandboxMode
+from psrc.contract.models import ActionRequirements, RunPolicy, SandboxMode
 from psrc.domain.account import AccountSnapshot
 from psrc.domain.actions import Action, TargetPosition
 from psrc.domain.market import MarketEvent
@@ -22,6 +22,8 @@ from psrc.examples.synthetic import minute_bar_manifest, minute_bars
         ("oversized", ErrorCode.ACTION_INVALID),
         ("broker-margin", ErrorCode.ORDER_REJECTED),
         ("reverse-data", ErrorCode.DATA_ORDERING_INVALID),
+        ("duplicate-target", ErrorCode.ORDER_REJECTED),
+        ("derived-size", ErrorCode.ORDER_REJECTED),
     ],
 )
 def test_native_adapter_cannot_reinterpret_or_silently_reject_orders(
@@ -29,16 +31,42 @@ def test_native_adapter_cannot_reinterpret_or_silently_reject_orders(
 ) -> None:
     class Invalid(SmaCrossStrategy):
         def on_event(self, event: MarketEvent, account: AccountSnapshot) -> tuple[Action, ...]:
+            if scenario == "duplicate-target":
+                return tuple(
+                    TargetPosition(
+                        instrument_id=event.instrument_id,
+                        quantity=Decimal(1),
+                        reason_code="test.duplicate-target",
+                    )
+                    for _ in range(2)
+                )
             return (
                 TargetPosition(
                     instrument_id="WRONG" if scenario == "wrong-symbol" else event.instrument_id,
-                    quantity=Decimal(999) if scenario == "oversized" else Decimal(1),
+                    quantity=(
+                        Decimal(999)
+                        if scenario == "oversized"
+                        else Decimal(10)
+                        if scenario == "derived-size"
+                        else Decimal(1)
+                    ),
                     reason_code="test.native-safety",
                 ),
             )
 
     events = minute_bars()
     strategy = Invalid()
+    if scenario == "derived-size":
+        current = strategy.manifest.action_requirements
+        strategy.manifest = strategy.manifest.model_copy(
+            update={
+                "action_requirements": ActionRequirements(
+                    allowed=current.allowed,
+                    max_abs_position=Decimal(10),
+                    max_order_quantity=Decimal(1),
+                )
+            }
+        )
     plan = compile_run(
         run_id="test.native-safety",
         strategy=strategy.manifest,

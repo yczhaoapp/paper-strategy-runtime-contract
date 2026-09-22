@@ -88,5 +88,5 @@
   "verification_tests": [
     "tests/papers/test_reproduction_oracles.py::test_weighted_microprice_reproduces_stoikov_toy_formula"
   ],
-  "version": "1.1"
+  "version": "1.2"
 }

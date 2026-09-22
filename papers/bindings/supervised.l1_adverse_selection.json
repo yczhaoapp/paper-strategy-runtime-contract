@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "strategy_id": "supervised.l1_adverse_selection",
   "strategy_kind": "supervised",
   "source_id": "gould2015",
@@ -23,7 +23,7 @@
   "implementation": [
     {
       "path": "src/psrc/strategies/supervised.py",
-      "sha256": "530eb0d6c942441d873d6d791345d64efb7d2848d974c8d4528d8001a7ea315f",
+      "sha256": "7d66ab0ad7c342ffa81361842023e6c343c6eb0a20f47ea905a6cf4a7549645d",
       "symbols": [
         "L1AdverseSelectionStrategy"
       ]

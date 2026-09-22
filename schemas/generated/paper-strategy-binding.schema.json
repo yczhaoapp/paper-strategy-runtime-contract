@@ -243,6 +243,7 @@
   "properties": {
     "algorithm_fidelity": {
       "enum": [
+        "A0_method_adaptation",
         "A1_method_equivalent",
         "A2_algorithm_exact"
       ],
@@ -318,6 +319,7 @@
       "enum": [
         "algorithm_reproduction",
         "formula_reproduction",
+        "method_adaptation",
         "method_reproduction"
       ],
       "title": "Fidelity",
@@ -375,8 +377,8 @@
       "type": "array"
     },
     "version": {
-      "const": "1.1",
-      "default": "1.1",
+      "const": "1.2",
+      "default": "1.2",
       "title": "Version",
       "type": "string"
     }

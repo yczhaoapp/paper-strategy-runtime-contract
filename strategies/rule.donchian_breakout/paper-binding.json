@@ -91,5 +91,5 @@
   "verification_tests": [
     "tests/papers/test_reproduction_oracles.py::test_donchian_reproduces_prior_window_extrema_and_breakout_sides"
   ],
-  "version": "1.1"
+  "version": "1.2"
 }

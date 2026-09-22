@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import json
 import math
+from collections import deque
 from decimal import Decimal
 from hashlib import sha256
+from itertools import pairwise
 from math import comb
 
 import numpy as np
@@ -73,6 +75,47 @@ def erlang_race_probability(
             for k in range(opposite_queue)
         )
     )
+
+
+def erlang_fill_probability_within_horizon(
+    own_queue: int,
+    opposite_queue: int,
+    own_death_rate: float,
+    opposite_death_rate: float,
+    horizon_seconds: float,
+) -> float:
+    """P(own Erlang queue depletes first and by the stated finite horizon)."""
+    if horizon_seconds <= 0:
+        raise ValueError("fill-probability horizon must be positive")
+    if min(own_queue, opposite_queue) < 1 or min(own_death_rate, opposite_death_rate) <= 0:
+        raise ValueError("queue positions and death rates must be positive")
+    total_rate = own_death_rate + opposite_death_rate
+    scaled_horizon = total_rate * horizon_seconds
+    own_share = own_death_rate / total_rate
+    opposite_share = opposite_death_rate / total_rate
+    probability = 0.0
+    for opposite_deaths in range(opposite_queue):
+        shape = own_queue + opposite_deaths
+        regularized_gamma = 1.0 - math.exp(-scaled_horizon) * sum(
+            scaled_horizon**power / math.factorial(power) for power in range(shape)
+        )
+        probability += (
+            comb(shape - 1, opposite_deaths)
+            * own_share**own_queue
+            * opposite_share**opposite_deaths
+            * regularized_gamma
+        )
+    return float(probability)
+
+
+def three_day_lagged_returns(closes: tuple[Decimal, ...]) -> tuple[float, float, float]:
+    """Build a causal three-return window from exactly four consecutive closes."""
+    if len(closes) != 4 or any(value <= 0 for value in closes):
+        raise ValueError("three lagged returns require four positive closing prices")
+    values = tuple(
+        stable_float(float(right / left - 1)) for left, right in pairwise(closes)
+    )
+    return values[0], values[1], values[2]
 
 
 def fit_pooled_ols(x: Array, y: Array) -> tuple[Array, float]:
@@ -226,11 +269,18 @@ class RidgeReturnStrategy(_JsonModelStrategy):
         kind=StrategyKind.SUPERVISED,
         entrypoint="psrc.strategies.supervised:RidgeReturnStrategy",
         profiles=frozenset({"core.bar.v1", "execution.basic.v1", "training.supervised.v1"}),
-        data=(bar_requirement(interval="P1D", symbols=("PUBLIC.AAPL",), lookback=3),),
+        data=(bar_requirement(interval="P1D", symbols=("PUBLIC.AAPL",), lookback=4),),
         actions=frozenset({ActionKind.NO_OP, ActionKind.PREDICTION, ActionKind.TARGET_POSITION}),
         training=TrainingMode.REQUIRED,
         max_position=Decimal("2"),
     )
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.closes: deque[Decimal] = deque(maxlen=4)
+
+    def on_start(self) -> None:
+        self.closes.clear()
 
     def train(self, request: TrainingRequest, store: ArtifactStore) -> ArtifactManifest:
         x, y = self._arrays(request, 3)
@@ -254,17 +304,21 @@ class RidgeReturnStrategy(_JsonModelStrategy):
             return (NoOp(reason_code="event.not_bar", explanation="requires daily bars"),)
         model, artifact_id = self._require_model()
         bar = event.payload
-        features = (
-            float(bar.close / bar.open - 1),
-            float((bar.high - bar.low) / bar.open),
-            math.log1p(float(bar.volume)) / 10,
-        )
+        self.closes.append(bar.close)
+        if len(self.closes) < 4:
+            return (
+                NoOp(
+                    reason_code="window.insufficient_history",
+                    explanation="four closes are required for three lagged returns",
+                ),
+            )
+        features = three_day_lagged_returns(tuple(self.closes))
         forecast = stable_float(self._linear_score(model, features))
         target = (
             Decimal("2")
-            if forecast > 0.001
+            if forecast > 0.00025
             else Decimal("-2")
-            if forecast < -0.001
+            if forecast < -0.00025
             else Decimal("0")
         )
         return (
@@ -438,10 +492,15 @@ class L2FillProbabilityStrategy(_JsonModelStrategy):
 
     def train(self, request: TrainingRequest, store: ArtifactStore) -> ArtifactManifest:
         x, y = self._arrays(request, 3)
-        target = (y > 0).astype(float)
-        exposure = np.maximum(np.abs(x[:, 2]), 0.25)
-        own_rate = float((target.sum() + 1) / (exposure.sum() + 2))
-        opposite_rate = float(((1 - target).sum() + 1) / (exposure.sum() + 2))
+        del y
+        exposure = x[:, 2]
+        if np.any(x[:, :2] < 0) or np.any(exposure <= 0):
+            raise ValueError("queue-death counts must be non-negative and exposure positive")
+        total_exposure = float(exposure.sum())
+        own_rate = float(x[:, 0].sum() / total_exposure)
+        opposite_rate = float(x[:, 1].sum() / total_exposure)
+        if min(own_rate, opposite_rate) <= 0:
+            raise ValueError("calibrated queue-death rates must be positive")
         return self._save(
             request,
             store,
@@ -470,11 +529,12 @@ class L2FillProbabilityStrategy(_JsonModelStrategy):
         own_queue = max(1, round(float(book.bids[0].size)))
         opposite_queue = max(1, round(float(book.asks[0].size)))
         probability = stable_float(
-            erlang_race_probability(
+            erlang_fill_probability_within_horizon(
                 own_queue,
                 opposite_queue,
                 float(own_death_rate),
                 float(opposite_death_rate),
+                0.5,
             )
         )
         self.counter += 1

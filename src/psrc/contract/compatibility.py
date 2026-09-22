@@ -66,7 +66,12 @@ def resample_bars(events: tuple[MarketEvent, ...], target_interval: str) -> tupl
 
     output: list[MarketEvent] = []
     for sequence, ((instrument_id, bucket), group) in enumerate(sorted(groups.items())):
-        ordered = sorted(group, key=lambda event: (event.available_time, event.sequence))
+        event_times = [event.event_time for event in group]
+        if len(event_times) != len(set(event_times)):
+            raise ValueError(
+                "bar resampling does not support duplicate or revised market timestamps"
+            )
+        ordered = sorted(group, key=lambda event: (event.event_time, event.sequence))
         first = ordered[0]
         payloads = [event.payload for event in ordered]
         assert all(isinstance(payload, BarPayload) for payload in payloads)

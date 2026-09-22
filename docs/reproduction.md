@@ -17,7 +17,7 @@
 | verification.json | 本次每一步退出码、软件/Python 版本、完整验收输入树 SHA-256、作用范围和失败信息 |
 | acceptance-report.json | 逐条硬门禁 |
 | junit.xml / coverage.json | 真实测试和覆盖率结果 |
-| runs/all/summary.json | 18 个论文落地契约策略与类别计数；每个策略包含 `paper-binding.json` |
+| runs/all/summary.json | 18 个论文可追溯契约策略与类别计数；每个策略包含保真分级的 `paper-binding.json` |
 | runs/failures/summary.json | 8 类强制结构化失败 |
 | runs/compatibility/bundle.json | 转换前后事件与审计记录 |
 | runs/adapters/comparison.json | Reference 与 Backtrader 的实际差分 |

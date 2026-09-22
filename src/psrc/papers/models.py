@@ -172,12 +172,19 @@ class RuntimeBehaviorExpectation(ContractModel):
 class PaperStrategyBinding(ContractModel):
     """Review record binding a contract example to grounded paper claims and code."""
 
-    version: Literal["1.1"] = "1.1"
+    version: Literal["1.2"] = "1.2"
     strategy_id: Identifier
     strategy_kind: StrategyKind
     source_id: Identifier
-    fidelity: Literal["formula_reproduction", "algorithm_reproduction", "method_reproduction"]
-    algorithm_fidelity: Literal["A1_method_equivalent", "A2_algorithm_exact"]
+    fidelity: Literal[
+        "formula_reproduction",
+        "algorithm_reproduction",
+        "method_reproduction",
+        "method_adaptation",
+    ]
+    algorithm_fidelity: Literal[
+        "A0_method_adaptation", "A1_method_equivalent", "A2_algorithm_exact"
+    ]
     data_fidelity: Literal["D0_synthetic", "D1_public_proxy", "D2_equivalent_market", "D3_original"]
     experimental_fidelity: Literal["E0_runtime_only", "E1_directional_result", "E2_main_results"]
     runtime_fidelity: Literal["R1_unified_contract", "R2_independent_strict"]
@@ -221,8 +228,11 @@ class PaperStrategyBinding(ContractModel):
         if self.fidelity in {"formula_reproduction", "algorithm_reproduction"}:
             if self.algorithm_fidelity != "A2_algorithm_exact":
                 raise ValueError("formula/algorithm reproduction requires A2 algorithm fidelity")
-        elif self.algorithm_fidelity != "A1_method_equivalent":
-            raise ValueError("method reproduction requires A1 algorithm fidelity")
+        elif self.fidelity == "method_reproduction":
+            if self.algorithm_fidelity != "A1_method_equivalent":
+                raise ValueError("method reproduction requires A1 algorithm fidelity")
+        elif self.algorithm_fidelity != "A0_method_adaptation":
+            raise ValueError("method adaptation requires A0 algorithm fidelity")
         expected_data_fidelity = {
             "synthetic_fixture": "D0_synthetic",
             "public_historical": "D1_public_proxy",

@@ -5,7 +5,7 @@
 | 既有问题 | 当前处理 | 可复核证据 | 边界 |
 | --- | --- | --- | --- |
 | 没有真实论文输入或从论文到策略包的执行链 | 16 份公开论文由注册表固定 URL 与 SHA-256；4 个案例从原 PDF 解析、定位声明、生成独立策略目录并执行训练/推理/回测 | `scripts/fetch-papers.py`、`papers/recipes/`、`src/psrc/papers/`、`tests/papers/`、`runs/papers` 验收项 | 只对四个受审算法后端声明自动编译，不声称开放域论文理解 |
-| 论文内容与实现忠实度无法验证 | 18 个策略逐一绑定页级声明、实现符号、实现哈希、精确测试节点、假设、偏差和确定性运行签名；高等级公式/算法另有数值 oracle | `papers/bindings/`、`tests/papers/test_reproduction_oracles.py`、绑定验收 | 短锚点和哈希证明可追溯性；人工解释正确性仍需评审 |
+| 论文内容与实现忠实度无法验证 | 18 个策略逐一绑定页级声明、实现符号、实现哈希、精确测试节点、假设、偏差和确定性运行签名；高等级公式/算法另有数值 oracle；改变核心交易问题的 4 个样例明确标 A0，不计入复现 | `papers/bindings/`、`tests/papers/test_reproduction_oracles.py`、绑定验收 | 短锚点和哈希证明可追溯性；人工解释正确性仍需评审 |
 | 断网严格验收会触发依赖构建或下载 | 镜像构建期安装依赖并获取/核对论文；严格验证期直接调用已安装 Python，断网、只读、非 root 且拒绝降级 | `Dockerfile`、`scripts/verify-container.py`、严格收据 | 从零构建需要访问公开依赖和论文源；运行验收不需要网络 |
 | Docker 构建可能误用本机论文缓存 | `.dockerignore` 排除 `papers/sources`，镜像必须从来源注册表重新取得并校验全部论文 | `.dockerignore`、`Dockerfile`、`scripts/fetch-papers.py` | 公开站点不可用会使构建明确失败，不使用未声明镜像源替代 |
 | Windows 专有失败 | 平台身份调用、长路径、原子产物发布和跨平台脚本已有回归；Win32/Linux 严格类型检查通过 | `tests/papers/test_platform_regressions.py`、CI 配置 | 尚无当前提交的 Windows 真机/远程 CI 收据，不声明动态通过 |

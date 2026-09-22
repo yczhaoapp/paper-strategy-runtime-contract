@@ -1,6 +1,6 @@
 {
-  "image": "psrc-verifier:local",
-  "image_id": "sha256:9d36c31cbdaa2744534c53b2774400c2a8c1bb10b2965487762369156928f02c",
+  "base_pull_requested": true,
   "build_no_cache": true,
-  "base_pull_requested": true
+  "image": "psrc-verifier:local",
+  "image_id": "sha256:32ed4515b0633b20ab0feb9b342113870655b489dcfeaa31945006a5bf33bc6b"
 }

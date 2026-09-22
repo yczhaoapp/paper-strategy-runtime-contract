@@ -166,7 +166,11 @@ def manifest_for_recipe(recipe: PaperRecipe) -> StrategyManifest:
         ),
         actions=frozenset(actions),
         max_position=Decimal(str(limit)),
-        max_order=Decimal(str(limit)),
+        max_order=(
+            Decimal(str(limit * 2))
+            if recipe.strategy_kind == StrategyKind.SUPERVISED
+            else Decimal(str(limit))
+        ),
         training=TrainingMode.NOT_REQUIRED
         if recipe.strategy_kind == StrategyKind.RULE
         else TrainingMode.REQUIRED,

@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "strategy_id": "reinforcement_learning.linear_actor_critic_allocation",
   "strategy_kind": "reinforcement_learning",
   "source_id": "li2023",

@@ -1,12 +1,15 @@
 from __future__ import annotations
 
+from datetime import timedelta
+
 import pytest
 
 from psrc.adapters.reference import ReferenceEngine, capabilities
-from psrc.contract.compatibility import apply_compatibility_plan
+from psrc.contract.compatibility import apply_compatibility_plan, resample_bars
 from psrc.contract.compiler import compile_run
 from psrc.contract.errors import ContractViolation, ErrorCode
 from psrc.contract.models import DataKind, RunPolicy, SandboxMode, Timeframe, TimeframeMode
+from psrc.domain.market import BarPayload
 from psrc.examples.sma_cross import SmaCrossStrategy
 from psrc.examples.synthetic import manifest_for_events, minute_bars
 from psrc.runtime.orchestrator import run_rule
@@ -89,6 +92,39 @@ def test_explicit_resample_is_audited_and_uses_last_availability_time() -> None:
     compatibility_logs = [item for item in report.logs if item.stage == "compatibility"]
     assert compatibility_logs[0].fields["source_event_count"] == 10
     assert compatibility_logs[0].fields["effective_event_count"] == 2
+
+
+def test_resample_uses_market_time_for_ohlc_when_a_bar_arrives_late() -> None:
+    original = minute_bars()
+    delayed = original[0].model_copy(
+        update={
+            "available_time": original[0].event_time + timedelta(minutes=5),
+            "receive_time": original[0].event_time + timedelta(minutes=5),
+        }
+    )
+    arrivals = tuple(sorted((delayed, *original[1:]), key=lambda item: item.available_time))
+    transformed = resample_bars(arrivals, "PT5M")
+
+    first = transformed[0]
+    assert isinstance(first.payload, BarPayload)
+    assert isinstance(original[0].payload, BarPayload)
+    assert isinstance(original[4].payload, BarPayload)
+    assert first.payload.open == original[0].payload.open
+    assert first.payload.close == original[4].payload.close
+    assert first.available_time == delayed.available_time
+
+
+def test_resample_rejects_ambiguous_duplicate_market_timestamps() -> None:
+    events = minute_bars()
+    revised = events[0].model_copy(
+        update={
+            "event_id": "revision",
+            "sequence": 999,
+            "available_time": events[1].available_time,
+        }
+    )
+    with pytest.raises(ValueError, match="duplicate or revised"):
+        resample_bars((*events, revised), "PT5M")
 
 
 def test_explicit_symbol_mapping_composes_with_resampling() -> None:

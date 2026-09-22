@@ -422,7 +422,7 @@ def verify_acceptance(
 
     binding_evidence = verify_strategy_bindings(repository, evidence_root=evidence_root)
     check(
-        "eighteen_paper_grounded_strategy_bindings",
+        "eighteen_strategy_bindings_with_fidelity_classification",
         binding_evidence["status"] == "passed",
         binding_evidence,
     )
@@ -643,6 +643,7 @@ def verify_acceptance(
         "tests.sandbox.test_policy::"
         "test_runtime_audit_blocks_file_process_and_report_mount_access",
         "tests.sandbox.test_policy::test_artifact_store_is_the_only_writable_strategy_channel",
+        "tests.sandbox.test_policy::test_manifest_descriptor_executes_inside_resource_guard",
     }
     missing_sandbox_regressions = sorted(required_sandbox_regressions - executed_tests)
     check(
@@ -766,6 +767,60 @@ def verify_acceptance(
                 "cumulative position, day expiry, actual bar grid, invalid version, "
                 "coherent reused output, lookback, staleness, adapter-bound execution context, "
                 "and training provenance"
+            ),
+        },
+    )
+
+    required_audit_counterexamples = {
+        "tests.negative.test_training_failures::"
+        "test_runtime_independently_verifies_returned_training_artifact[missing]",
+        "tests.negative.test_training_failures::"
+        "test_runtime_independently_verifies_returned_training_artifact[size]",
+        "tests.unit.test_artifacts::test_artifact_size_and_authorized_root_cannot_be_forged",
+        "tests.adapters.test_public_boundary_failures::"
+        "test_public_adapter_wraps_unexpected_strategy_exceptions["
+        "on_start-ReferenceEngine-capabilities]",
+        "tests.adapters.test_public_boundary_failures::"
+        "test_public_adapter_wraps_unexpected_strategy_exceptions["
+        "on_start-BacktraderAdapter-capabilities]",
+        "tests.adapters.test_public_boundary_failures::"
+        "test_target_batches_and_derived_native_orders_enforce_limits["
+        "duplicate-target-ReferenceEngine-capabilities]",
+        "tests.adapters.test_public_boundary_failures::"
+        "test_target_batches_and_derived_native_orders_enforce_limits["
+        "derived-order-limit-BacktraderAdapter-capabilities]",
+        "tests.adapters.test_public_boundary_failures::"
+        "test_public_adapter_checks_concrete_payload_fields[ReferenceEngine-capabilities]",
+        "tests.adapters.test_public_boundary_failures::"
+        "test_public_adapter_checks_concrete_payload_fields[BacktraderAdapter-capabilities]",
+        "tests.adapters.test_public_boundary_failures::"
+        "test_public_adapter_checks_concrete_l2_depth",
+        "tests.unit.test_compatibility::"
+        "test_resample_uses_market_time_for_ohlc_when_a_bar_arrives_late",
+        "tests.unit.test_compatibility::"
+        "test_resample_rejects_ambiguous_duplicate_market_timestamps",
+        "tests.papers.test_reproduction_oracles::"
+        "test_fill_probability_reproduces_constant_rate_queue_race",
+        "tests.papers.test_reproduction_oracles::"
+        "test_fill_probability_training_uses_queue_deaths_per_exposure",
+        "tests.papers.test_reproduction_oracles::"
+        "test_ridge_uses_three_causal_lagged_returns_for_training_and_inference",
+        "tests.papers.test_pipeline::"
+        "test_public_ridge_training_builds_a_causal_three_return_window",
+    }
+    missing_audit_counterexamples = sorted(
+        required_audit_counterexamples - executed_tests
+    )
+    check(
+        "independent_audit_counterexamples_closed",
+        not missing_audit_counterexamples,
+        {
+            "required_tests": len(required_audit_counterexamples),
+            "missing_tests": missing_audit_counterexamples,
+            "scope": (
+                "artifact authority and integrity, guarded descriptors, adapter exception and "
+                "payload boundaries, derived order limits, market-time resampling, and paper "
+                "claim corrections"
             ),
         },
     )

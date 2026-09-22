@@ -1,9 +1,9 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "strategy_id": "reinforcement_learning.a2c_pairs",
   "strategy_kind": "reinforcement_learning",
   "source_id": "yang2024",
-  "fidelity": "method_reproduction",
+  "fidelity": "method_adaptation",
   "claims": [
     {
       "claim_id": "a2cpairs.zspread",
@@ -86,10 +86,10 @@
     "Actions map to long-spread, flat and short-spread paired target positions; the first 400 synchronized public AAPL/MSFT days train the policy and the next 106 days are held out."
   ],
   "deviations": [
-    "Uses a small linear A2C policy, a six-observation window and public AAPL/MSFT proxy closes rather than Stable-Baselines3 networks, 900 intervals and the paper’s BTC currency pairs; source rows are deterministically expanded to flat OHLC bars."
+    "The implementation preserves normalized spread observations and advantage actor-critic updates, but uses a fixed 1:-2 AAPL/MSFT spread, deterministic offline exploration and a return-difference reward that is not identical to the executed unit-pair PnL."
   ],
-  "mapping_review": "The learner now performs a verified advantage actor-critic update over synchronized z-scored pair observations. Because the proxy uses a fixed 1:-2 spread and unit paired positions instead of a rolling hedge regression, it is classified as an equivalent-method reproduction rather than an exact algorithm reproduction.",
-  "algorithm_fidelity": "A1_method_equivalent",
+  "mapping_review": "This is a runtime-contract method adaptation. The tests prove the A2C update and paired lifecycle; they do not claim an on-policy reproduction of the paper’s BTC pair-trading experiment.",
+  "algorithm_fidelity": "A0_method_adaptation",
   "data_fidelity": "D1_public_proxy",
   "experimental_fidelity": "E0_runtime_only",
   "runtime_fidelity": "R1_unified_contract"

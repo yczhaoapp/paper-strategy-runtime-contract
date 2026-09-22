@@ -1,12 +1,12 @@
-# Paper Strategy Runtime Contract 2.7.4
+# Paper Strategy Runtime Contract 2.8.0
 
 [![PSRC 完整验证](https://github.com/yczhaoapp/paper-strategy-runtime-contract/actions/workflows/ci.yml/badge.svg)](https://github.com/yczhaoapp/paper-strategy-runtime-contract/actions/workflows/ci.yml)
 
-Paper Strategy Runtime Contract（PSRC）是面向 [SX-CH-003](https://github.com/SingularityX-Evolution/.github/blob/main/profile/challenge-board/tasks/SX-CH-003-paper-strategy-runtime-contract.md) 的独立维护实现，用统一契约连接论文策略、训练、推理和最小回测。软件版本 2.7.4；稳定运行契约为 1.4，论文绑定契约为 1.1。
+Paper Strategy Runtime Contract（PSRC）是面向 [SX-CH-003](https://github.com/SingularityX-Evolution/.github/blob/main/profile/challenge-board/tasks/SX-CH-003-paper-strategy-runtime-contract.md) 的独立维护实现，用统一契约连接论文策略、训练、推理和最小回测。软件版本 2.8.0；稳定运行契约为 1.4，论文绑定契约为 1.2。
 
-**交付范围：18 个逐一论文落地的契约策略（三类各 6 个）+ 4 个 PDF 到代码的深度纵向案例、32 份 JSON Schema、统一训练/保存/重载/推理/回测、结构化失败、可关闭的兼容转换、沙箱和机器验收。** 每个契约策略都带来源 PDF 哈希、页级声明、声明到实现符号和已执行测试的连接、实现文件哈希、确定性运行行为签名、假设与偏差；第四个深度案例直接运行于 Backtrader。
+**交付范围：18 个论文可追溯的契约策略（三类各 6 个）+ 4 个 PDF 到代码的深度纵向案例、32 份 JSON Schema、统一训练/保存/重载/推理/回测、结构化失败、可关闭的兼容转换、沙箱和机器验收。** 每个契约策略都带来源 PDF 哈希、页级声明、声明到实现符号和已执行测试的连接、实现文件哈希、确定性运行行为签名、假设与偏差；第四个深度案例直接运行于 Backtrader。
 
-18 个策略全部达到复现门槛：6 个公式复现、3 个算法复现、9 个等价方法复现；其中 9 个达到 A2 算法精确级，规则/监督/RL 分别为 6/3/0 个。算法、数据、实验结果和运行时采用四个独立保真轴。Donchian、Pairs Z-Score、Logistic、Ridge、A2C Pairs 和线性 Actor–Critic 共 6 个策略使用固定哈希的公开 AAPL 或 AAPL/MSFT 历史数据达到 D1，三类各 2 个；其余 12 个保留 D0 确定性夹具。全部维持 E0，不宣称论文收益；严格 Linux 容器的 R2 必须由当前版本动态收据证明。详见 [复现等级政策](docs/reproduction-fidelity-policy.md)。
+18 个策略中有 7 个公式复现、2 个算法复现、5 个等价方法复现和 4 个方法适配；9 个达到 A2，5 个达到 A1，4 个明确标为 A0。Spooner 的三个学习算法样例和 A2C Pairs 保留为差异化契约样例，但因动作、奖励或训练闭环改变，不再计入论文复现。算法、数据、实验结果和运行时采用四个独立保真轴。Donchian、Pairs Z-Score、Logistic、Ridge、A2C Pairs 和线性 Actor–Critic 共 6 个策略使用固定哈希的公开 AAPL 或 AAPL/MSFT 历史数据达到 D1，三类各 2 个；其余 12 个保留 D0 确定性夹具。全部维持 E0，不宣称论文收益；严格 Linux 容器的 R2 必须由当前版本动态收据证明。详见 [复现等级政策](docs/reproduction-fidelity-policy.md)。
 
 ## 一键复现
 
@@ -87,10 +87,10 @@ uv run --no-sync psrc author run \
 - 统一声明覆盖规则、监督和 RL；tick/L1/L2、分钟线、日线；账户、订单、模型、日志和生命周期。
 - tick 在 Contract v1 中用 `event` 粒度表达；当前可执行行情类型严格限定为 OHLCV bar、trade、L1 quote 和 L2 snapshot。
 - 18 个契约示例是不同算法，覆盖配对、截面、预测、目标仓位、订单和撤改；每个包内含 `paper-binding.json`。[策略矩阵](docs/strategy-matrix.md) 列明来源和忠实度。
-- Tabular Q、SARSA、Double Q 的论文绑定同时要求多参数公式、终止/零学习率性质、每种算法 64 组固定 seed 随机单步公式，以及 16 组动态生成训练请求的完整多轮差分训练。后者核对整张持久化 Q 表、训练来源并通过公开事件入口验证训练集中未见状态，避免用单一 golden case 支撑算法声明。
+- Tabular Q、SARSA、Double Q 同时要求多参数公式、终止/零学习率性质、每种算法 64 组固定 seed 随机单步公式，以及 16 组动态生成训练请求的完整多轮差分训练。后者核对整张持久化 Q 表、训练来源并通过公开事件入口验证训练集中未见状态；这些证据证明算法实现和生命周期真实，不把已改变的市场问题提升为论文复现。
 - `RuntimeCapabilities` 单独声明 orchestrator 提供的监督/RL 训练能力；行情、动作和撮合画像仍由 `EngineCapabilities` 提供。`Reference` 与 `Backtrader` 为默认实测引擎，Backtrader 另有监督与 RL 的训练—重载—推理—回测门禁。NautilusTrader 是单独的可选适配器：`uv sync --extra dev --extra adapters --extra nautilus`；它的安装平台有额外要求，不计入默认验证。选择缺失或不支持的能力提供者会失败。
 - 兼容转换默认关闭；显式开启后记录依据、是否有损、源/目标字段、影响范围及哈希。
-- 训练产物按内容和来源寻址，先在临时目录完整写入再原子发布；Windows 使用长路径表示，拒绝路径穿越。
+- 训练产物按内容和来源寻址，先在临时目录完整写入再原子发布；存储根由运行时私有授权表持有，策略不能改写。运行时在 `train` 返回后和 `load` 回调后独立重读规范 manifest，并核对路径、大小、哈希和训练来源；Windows 使用长路径表示，拒绝路径穿越。
 - 包内策略只能导入 manifest 白名单模块和最小 `psrc.strategy_api`。扫描器解析 import 别名与完整属性路径；回调期审计钩子阻止直接文件、进程和网络访问，只有受控 `ArtifactStore` 可写模型。Docker 的内核控制构成宿主隔离边界；`--require-strict` 不可降级。
 
 ```bash
