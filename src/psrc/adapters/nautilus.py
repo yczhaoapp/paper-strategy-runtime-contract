@@ -26,9 +26,10 @@ from psrc.contract.models import (
     SandboxMode,
     SupportLevel,
 )
-from psrc.domain.account import AccountSnapshot, Fill, Position
+from psrc.domain.account import AccountSnapshot, Fill
 from psrc.domain.actions import NoOp, Prediction, TargetPosition
 from psrc.domain.market import BarPayload, MarketEvent
+from psrc.domain.position_ledger import PositionLedger
 from psrc.runtime.guards import validate_actions
 from psrc.runtime.report import (
     DecisionRecord,
@@ -138,6 +139,7 @@ class NautilusAdapter(BacktestAdapter):
         snapshots: list[AccountSnapshot] = []
         no_ops = 0
         canonical_instrument = events[0].instrument_id
+        ledger = PositionLedger()
         adapter = self
 
         class Bridge(Strategy):
@@ -153,7 +155,18 @@ class NautilusAdapter(BacktestAdapter):
             def on_bar(self, _bar: Bar) -> None:
                 nonlocal no_ops
                 event = events[self.cursor]
+                assert isinstance(event.payload, BarPayload)
                 native_quantity = Decimal(str(self.portfolio.net_position(adapter._instrument_id)))
+                state = ledger.state(canonical_instrument)
+                if abs(state.quantity - native_quantity) > Decimal("0.000001"):
+                    NautilusAdapter._fail_account(
+                        plan,
+                        "Nautilus position differs from observed fills",
+                        {
+                            "native_quantity": str(native_quantity),
+                            "ledger_quantity": str(state.quantity),
+                        },
+                    )
                 if self.pending_target is not None:
                     delta = self.pending_target - native_quantity
                     self.pending_target = None
@@ -183,13 +196,7 @@ class NautilusAdapter(BacktestAdapter):
                     timestamp=event.available_time,
                     cash=cash,
                     equity=equity,
-                    positions=(
-                        Position(
-                            instrument_id=canonical_instrument,
-                            quantity=native_quantity,
-                            average_price=Decimal(0),
-                        ),
-                    ),
+                    positions=(state.position(canonical_instrument, event.payload.close),),
                 )
                 snapshots.append(snapshot)
                 actions = strategy.on_event(event, snapshot)
@@ -229,6 +236,11 @@ class NautilusAdapter(BacktestAdapter):
                     quantity=event.last_qty.as_decimal(),
                     price=event.last_px.as_decimal(),
                     fee=event.commission.as_decimal(),
+                )
+                ledger.apply_fill(
+                    canonical_instrument,
+                    fill.quantity if side == "buy" else -fill.quantity,
+                    fill.price,
                 )
                 fills.append(fill)
                 order_events.append(

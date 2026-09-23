@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import final
+from typing import NoReturn, final
 
 from psrc.contract.errors import ContractError, ContractViolation, ErrorCode, ErrorStage
 from psrc.contract.models import EngineCapabilities, ExecutionPlan, SandboxMode
@@ -67,3 +67,17 @@ class BacktestAdapter(ABC):
         sandbox_mode: SandboxMode,
     ) -> RunReport:
         """Execute events after the final public boundary has validated them."""
+
+    @staticmethod
+    def _fail_account(plan: ExecutionPlan, message: str, details: dict[str, object]) -> NoReturn:
+        raise ContractViolation(
+            ContractError(
+                run_id=plan.run_id,
+                stage=ErrorStage.BACKTEST,
+                code=ErrorCode.BACKTEST_FAILED,
+                message=message,
+                strategy_id=plan.strategy_id,
+                engine_id=plan.engine_id,
+                details={**details, "fallback_used": False},
+            )
+        )

@@ -16,7 +16,7 @@ from psrc.contract.models import (
     SandboxMode,
     SupportLevel,
 )
-from psrc.domain.account import AccountSnapshot, Fill, OpenOrder, Position
+from psrc.domain.account import AccountSnapshot, Fill, OpenOrder
 from psrc.domain.actions import (
     CancelOrder,
     NoOp,
@@ -33,6 +33,7 @@ from psrc.domain.market import (
     QuoteL1Payload,
     TradePayload,
 )
+from psrc.domain.position_ledger import PositionLedger
 from psrc.runtime.guards import validate_actions
 from psrc.runtime.report import (
     DecisionRecord,
@@ -163,9 +164,7 @@ class ReferenceEngine(BacktestAdapter):
         universe = frozenset(event.instrument_id for event in events)
 
         cash = self.initial_cash
-        quantities: dict[str, Decimal] = {}
-        average_prices: dict[str, Decimal] = {}
-        realized_pnl: dict[str, Decimal] = {}
+        ledger = PositionLedger()
         marks: dict[str, Decimal] = {}
         pending: list[_PendingOrder] = []
         fills: list[Fill] = []
@@ -184,9 +183,7 @@ class ReferenceEngine(BacktestAdapter):
                 event=event,
                 pending=pending,
                 cash=cash,
-                quantities=quantities,
-                average_prices=average_prices,
-                realized_pnl=realized_pnl,
+                ledger=ledger,
                 fills=fills,
                 order_events=order_events,
             )
@@ -194,9 +191,7 @@ class ReferenceEngine(BacktestAdapter):
             snapshot = self._snapshot(
                 timestamp=event.available_time,
                 cash=cash,
-                quantities=quantities,
-                average_prices=average_prices,
-                realized_pnl=realized_pnl,
+                ledger=ledger,
                 marks=marks,
                 pending=pending,
             )
@@ -228,7 +223,7 @@ class ReferenceEngine(BacktestAdapter):
                         event,
                         action,
                         pending,
-                        quantities,
+                        ledger,
                         order_events,
                     )
                     continue
@@ -260,7 +255,7 @@ class ReferenceEngine(BacktestAdapter):
                     self._validate_target(plan, strategy, action)
                     projected = self._projected_position(
                         pending=pending,
-                        quantities=quantities,
+                        ledger=ledger,
                         instrument_id=action.instrument_id,
                     )
                     self._validate_order_quantity(
@@ -336,7 +331,7 @@ class ReferenceEngine(BacktestAdapter):
                     plan=plan,
                     strategy=strategy,
                     pending=[*pending, order],
-                    quantities=quantities,
+                    ledger=ledger,
                     instrument_id=order.instrument_id,
                 )
                 pending.append(order)
@@ -420,9 +415,7 @@ class ReferenceEngine(BacktestAdapter):
         event: MarketEvent,
         pending: list[_PendingOrder],
         cash: Decimal,
-        quantities: dict[str, Decimal],
-        average_prices: dict[str, Decimal],
-        realized_pnl: dict[str, Decimal],
+        ledger: PositionLedger,
         fills: list[Fill],
         order_events: list[OrderEventRecord],
     ) -> tuple[list[_PendingOrder], Decimal]:
@@ -443,7 +436,7 @@ class ReferenceEngine(BacktestAdapter):
             if order.instrument_id != event.instrument_id:
                 remaining.append(order)
                 continue
-            resolved = self._resolve_fill(order, event, quantities)
+            resolved = self._resolve_fill(order, event, ledger)
             if resolved is None:
                 remaining.append(order)
                 continue
@@ -473,14 +466,14 @@ class ReferenceEngine(BacktestAdapter):
             fee = quantity * price * self.fee_rate
             delta = quantity if side == "buy" else -quantity
             maximum = strategy.manifest.action_requirements.max_abs_position
-            resulting = quantities.get(order.instrument_id, Decimal("0")) + delta
+            resulting = ledger.state(order.instrument_id).quantity + delta
             if maximum is not None and abs(resulting) > maximum:
                 self._fail_action(
                     plan,
                     "Order fill would exceed the manifest position limit",
                     {
                         "client_order_id": order.client_order_id,
-                        "current": str(quantities.get(order.instrument_id, Decimal("0"))),
+                        "current": str(ledger.state(order.instrument_id).quantity),
                         "delta": str(delta),
                         "resulting": str(resulting),
                         "maximum": str(maximum),
@@ -488,14 +481,7 @@ class ReferenceEngine(BacktestAdapter):
                     code=ErrorCode.ORDER_REJECTED,
                 )
             cash += (-quantity * price if side == "buy" else quantity * price) - fee
-            self._update_position(
-                instrument_id=order.instrument_id,
-                delta=delta,
-                price=price,
-                quantities=quantities,
-                average_prices=average_prices,
-                realized_pnl=realized_pnl,
-            )
+            ledger.apply_fill(order.instrument_id, delta, price)
             fills.append(
                 Fill(
                     fill_id=f"fill:{len(fills) + 1}",
@@ -524,11 +510,11 @@ class ReferenceEngine(BacktestAdapter):
     def _resolve_fill(
         order: _PendingOrder,
         event: MarketEvent,
-        quantities: dict[str, Decimal],
+        ledger: PositionLedger,
     ) -> tuple[Literal["buy", "sell"], Decimal, Decimal] | Literal["satisfied"] | None:
         if order.order_type == "target":
             assert order.target_quantity is not None
-            delta = order.target_quantity - quantities.get(order.instrument_id, Decimal("0"))
+            delta = order.target_quantity - ledger.state(order.instrument_id).quantity
             if delta == 0:
                 return "satisfied"
             side: Literal["buy", "sell"] = "buy" if delta > 0 else "sell"
@@ -625,7 +611,7 @@ class ReferenceEngine(BacktestAdapter):
         event: MarketEvent,
         action: ReplaceOrder,
         pending: list[_PendingOrder],
-        quantities: dict[str, Decimal],
+        ledger: PositionLedger,
         order_events: list[OrderEventRecord],
     ) -> list[_PendingOrder]:
         matched = next(
@@ -667,7 +653,7 @@ class ReferenceEngine(BacktestAdapter):
             plan=plan,
             strategy=strategy,
             pending=updated_pending,
-            quantities=quantities,
+            ledger=ledger,
             instrument_id=updated.instrument_id,
         )
         order_events.append(
@@ -683,9 +669,7 @@ class ReferenceEngine(BacktestAdapter):
         return updated_pending
 
     @staticmethod
-    def _validate_direct_order_session(
-        plan: ExecutionPlan, strategy: RuntimeStrategy
-    ) -> None:
+    def _validate_direct_order_session(plan: ExecutionPlan, strategy: RuntimeStrategy) -> None:
         if ActionKind.SUBMIT_ORDER not in strategy.manifest.action_requirements.allowed:
             return
         unsupported = [
@@ -715,8 +699,7 @@ class ReferenceEngine(BacktestAdapter):
     def _day_order_expired(order: _PendingOrder, current_time: datetime) -> bool:
         return bool(
             order.time_in_force == "day"
-            and current_time.astimezone(UTC).date()
-            > order.submitted_at.astimezone(UTC).date()
+            and current_time.astimezone(UTC).date() > order.submitted_at.astimezone(UTC).date()
         )
 
     @staticmethod
@@ -725,13 +708,13 @@ class ReferenceEngine(BacktestAdapter):
         plan: ExecutionPlan,
         strategy: RuntimeStrategy,
         pending: list[_PendingOrder],
-        quantities: dict[str, Decimal],
+        ledger: PositionLedger,
         instrument_id: str,
     ) -> None:
         maximum = strategy.manifest.action_requirements.max_abs_position
         if maximum is None:
             return
-        current = quantities.get(instrument_id, Decimal("0"))
+        current = ledger.state(instrument_id).quantity
         minimum_projected = current
         maximum_projected = current
         for order in pending:
@@ -747,9 +730,7 @@ class ReferenceEngine(BacktestAdapter):
                 minimum_projected = min(minimum_projected, minimum_projected + delta)
                 maximum_projected = max(maximum_projected, maximum_projected + delta)
             if minimum_projected < -maximum or maximum_projected > maximum:
-                breached = (
-                    maximum_projected if maximum_projected > maximum else minimum_projected
-                )
+                breached = maximum_projected if maximum_projected > maximum else minimum_projected
                 ReferenceEngine._fail_action(
                     plan,
                     "Accepted and pending orders could exceed the manifest position limit",
@@ -773,10 +754,10 @@ class ReferenceEngine(BacktestAdapter):
     def _projected_position(
         *,
         pending: list[_PendingOrder],
-        quantities: dict[str, Decimal],
+        ledger: PositionLedger,
         instrument_id: str,
     ) -> Decimal:
-        projected = quantities.get(instrument_id, Decimal("0"))
+        projected = ledger.state(instrument_id).quantity
         for order in pending:
             if order.instrument_id != instrument_id:
                 continue
@@ -810,6 +791,7 @@ class ReferenceEngine(BacktestAdapter):
                 },
                 code=ErrorCode.ORDER_REJECTED,
             )
+
     @staticmethod
     def _validate_target(
         plan: ExecutionPlan, strategy: RuntimeStrategy, action: TargetPosition
@@ -823,61 +805,21 @@ class ReferenceEngine(BacktestAdapter):
             )
 
     @staticmethod
-    def _update_position(
-        *,
-        instrument_id: str,
-        delta: Decimal,
-        price: Decimal,
-        quantities: dict[str, Decimal],
-        average_prices: dict[str, Decimal],
-        realized_pnl: dict[str, Decimal],
-    ) -> None:
-        old_quantity = quantities.get(instrument_id, Decimal("0"))
-        old_average = average_prices.get(instrument_id, Decimal("0"))
-        new_quantity = old_quantity + delta
-        realized = realized_pnl.get(instrument_id, Decimal("0"))
-        if old_quantity == 0 or old_quantity * delta > 0:
-            gross = abs(old_quantity) * old_average + abs(delta) * price
-            average_prices[instrument_id] = (
-                gross / abs(new_quantity) if new_quantity else Decimal("0")
-            )
-        else:
-            closing = min(abs(old_quantity), abs(delta))
-            direction = Decimal("1") if old_quantity > 0 else Decimal("-1")
-            realized_pnl[instrument_id] = realized + closing * (price - old_average) * direction
-            if new_quantity == 0:
-                average_prices[instrument_id] = Decimal("0")
-            elif old_quantity * new_quantity < 0:
-                average_prices[instrument_id] = price
-        quantities[instrument_id] = new_quantity
-
-    @staticmethod
     def _snapshot(
         *,
         timestamp: datetime,
         cash: Decimal,
-        quantities: dict[str, Decimal],
-        average_prices: dict[str, Decimal],
-        realized_pnl: dict[str, Decimal],
+        ledger: PositionLedger,
         marks: dict[str, Decimal],
         pending: list[_PendingOrder],
     ) -> AccountSnapshot:
-        positions: list[Position] = []
+        positions = []
         market_value = Decimal("0")
-        for instrument_id in sorted(quantities):
-            quantity = quantities[instrument_id]
-            mark = marks.get(instrument_id, average_prices.get(instrument_id, Decimal("0")))
-            average = average_prices.get(instrument_id, Decimal("0"))
-            market_value += quantity * mark
-            positions.append(
-                Position(
-                    instrument_id=instrument_id,
-                    quantity=quantity,
-                    average_price=average,
-                    realized_pnl=realized_pnl.get(instrument_id, Decimal("0")),
-                    unrealized_pnl=quantity * (mark - average),
-                )
-            )
+        for instrument_id in ledger.instruments():
+            state = ledger.state(instrument_id)
+            mark = marks.get(instrument_id, state.average_price)
+            market_value += state.quantity * mark
+            positions.append(state.position(instrument_id, mark))
         return AccountSnapshot(
             timestamp=timestamp,
             cash=cash,

@@ -66,3 +66,25 @@ jobs:
           path: reports/strict
           if-no-files-found: warn
           retention-days: 30
+
+  optional-nautilus-verification:
+    name: Native Nautilus adapter (Linux)
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.12"
+      - name: 安装固定版本 uv
+        run: python -m pip install --disable-pip-version-check uv==0.8.22
+      - name: 验证 Nautilus 原生成交和账户快照
+        run: uv run --frozen --python 3.12 --extra dev --extra adapters --extra nautilus python -m pytest -q tests/adapters/test_nautilus_adapter.py --junitxml=reports/nautilus/junit.xml
+      - name: 保留 Nautilus 测试证据
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: psrc-nautilus-evidence-linux
+          path: reports/nautilus
+          if-no-files-found: warn
+          retention-days: 30

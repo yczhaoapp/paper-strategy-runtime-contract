@@ -18,9 +18,10 @@ from psrc.contract.models import (
     SandboxMode,
     SupportLevel,
 )
-from psrc.domain.account import AccountSnapshot, Fill, Position
+from psrc.domain.account import AccountSnapshot, Fill
 from psrc.domain.actions import NoOp, Prediction, TargetPosition
 from psrc.domain.market import BarPayload, MarketEvent
+from psrc.domain.position_ledger import PositionLedger
 from psrc.runtime.guards import validate_actions
 from psrc.runtime.report import (
     DecisionRecord,
@@ -133,7 +134,8 @@ class BacktraderAdapter(BacktestAdapter):
         snapshots: list[AccountSnapshot] = []
         order_submitted_at: dict[int, datetime] = {}
         no_ops = 0
-        realized_pnl = Decimal("0")
+        ledger = PositionLedger()
+        native_realized_pnl = Decimal("0")
 
         class Bridge(bt.Strategy):  # type: ignore[misc]
             params = (("canonical", None), ("canonical_events", None))
@@ -153,20 +155,25 @@ class BacktraderAdapter(BacktestAdapter):
                 quantity = Decimal(str(position.size))
                 average_price = Decimal(str(position.price))
                 assert isinstance(event.payload, BarPayload)
+                state = ledger.state(event.instrument_id)
+                if abs(state.quantity - quantity) > Decimal("0.000001") or abs(
+                    state.average_price - average_price
+                ) > Decimal("0.000001"):
+                    BacktraderAdapter._fail_account(
+                        plan,
+                        "Backtrader position differs from observed fills",
+                        {
+                            "native_quantity": str(quantity),
+                            "ledger_quantity": str(state.quantity),
+                            "native_average_price": str(average_price),
+                            "ledger_average_price": str(state.average_price),
+                        },
+                    )
                 snapshot = AccountSnapshot(
                     timestamp=event.available_time,
                     cash=Decimal(str(self.broker.getcash())),
                     equity=Decimal(str(self.broker.getvalue())),
-                    positions=(
-                        Position(
-                            instrument_id=event.instrument_id,
-                            quantity=quantity,
-                            average_price=average_price,
-                            realized_pnl=realized_pnl,
-                            unrealized_pnl=quantity
-                            * (event.payload.close - average_price),
-                        ),
-                    ),
+                    positions=(state.position(event.instrument_id, event.payload.close),),
                 )
                 snapshots.append(snapshot)
                 actions = self.runtime.on_event(event, snapshot)
@@ -232,7 +239,7 @@ class BacktraderAdapter(BacktestAdapter):
                 self.cursor += 1
 
             def notify_order(self, order: Any) -> None:
-                nonlocal realized_pnl
+                nonlocal native_realized_pnl
                 if order.status in {order.Margin, order.Rejected}:
                     raise ContractViolation(
                         ContractError(
@@ -253,7 +260,23 @@ class BacktraderAdapter(BacktestAdapter):
                 # Backtrader's executed.pnl is the gross price P&L of the closed
                 # portion (including a reversal), excluding executed.comm. This
                 # matches the Position P&L semantics of the reference engine.
-                realized_pnl += Decimal(str(order.executed.pnl))
+                native_realized_pnl += Decimal(str(order.executed.pnl))
+                side: Literal["buy", "sell"] = "buy" if order.executed.size > 0 else "sell"
+                signed_quantity = Decimal(str(order.executed.size))
+                state = ledger.apply_fill(
+                    events[0].instrument_id,
+                    signed_quantity,
+                    Decimal(str(order.executed.price)),
+                )
+                if abs(state.realized_pnl - native_realized_pnl) > Decimal("0.000001"):
+                    BacktraderAdapter._fail_account(
+                        plan,
+                        "Backtrader realized P&L differs from observed fills",
+                        {
+                            "native_realized_pnl": str(native_realized_pnl),
+                            "ledger_realized_pnl": str(state.realized_pnl),
+                        },
+                    )
                 maximum_order = self.runtime.manifest.action_requirements.max_order_quantity
                 executed_quantity = Decimal(str(abs(order.executed.size)))
                 if maximum_order is not None and executed_quantity > maximum_order:
@@ -293,7 +316,6 @@ class BacktraderAdapter(BacktestAdapter):
                 timestamp = bt.num2date(order.executed.dt, tz=UTC)
                 if timestamp.tzinfo is None:
                     timestamp = timestamp.replace(tzinfo=UTC)
-                side: Literal["buy", "sell"] = "buy" if order.executed.size > 0 else "sell"
                 fill = Fill(
                     fill_id=f"bt-fill:{len(fills) + 1}",
                     client_order_id=f"bt:{order.ref}",

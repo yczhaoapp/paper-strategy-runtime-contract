@@ -2,7 +2,7 @@
 
 [![PSRC 完整验证](https://github.com/yczhaoapp/paper-strategy-runtime-contract/actions/workflows/ci.yml/badge.svg)](https://github.com/yczhaoapp/paper-strategy-runtime-contract/actions/workflows/ci.yml)
 
-Paper Strategy Runtime Contract（PSRC）是面向 [SX-CH-003](https://github.com/SingularityX-Evolution/.github/blob/main/profile/challenge-board/tasks/SX-CH-003-paper-strategy-runtime-contract.md) 的独立维护实现，用统一契约连接论文策略、训练、推理和最小回测。软件版本 2.8.3；稳定运行契约为 1.4，论文绑定契约为 1.2。
+Paper Strategy Runtime Contract（PSRC）是面向 [SX-CH-003](https://github.com/SingularityX-Evolution/.github/blob/main/profile/challenge-board/tasks/SX-CH-003-paper-strategy-runtime-contract.md) 的可运行实现，用统一契约连接论文策略、训练、推理和最小回测。软件版本 2.8.3；稳定运行契约为 1.4，论文绑定契约为 1.2。
 
 **交付范围：18 个论文可追溯的契约策略（三类各 6 个）+ 4 个 PDF 到代码的深度纵向案例、32 份 JSON Schema、统一训练/保存/重载/推理/回测、结构化失败、可关闭的兼容转换、沙箱和机器验收。** 每个契约策略都带来源 PDF 哈希、页级声明、声明到实现符号和已执行测试的连接、实现文件哈希、确定性运行行为签名、假设与偏差；第四个深度案例直接运行于 Backtrader。
 
@@ -89,7 +89,7 @@ uv run --no-sync psrc author run \
 - 18 个契约示例是不同算法，覆盖配对、截面、预测、目标仓位、订单和撤改；每个包内含 `paper-binding.json`。[策略矩阵](docs/strategy-matrix.md) 列明来源和忠实度。
 - Tabular Q、SARSA、Double Q 同时要求多参数公式、终止/零学习率性质、每种算法 64 组固定 seed 随机单步公式，以及 16 组动态生成训练请求的完整多轮差分训练。后者核对整张持久化 Q 表、训练来源并通过公开事件入口验证训练集中未见状态；这些证据证明算法实现和生命周期真实，不把已改变的市场问题提升为论文复现。
 - `RuntimeCapabilities` 单独声明 orchestrator 提供的监督/RL 训练能力；行情、动作和撮合画像仍由 `EngineCapabilities` 提供。`Reference` 与 `Backtrader` 为默认实测引擎，Backtrader 另有监督与 RL 的训练—重载—推理—回测门禁。NautilusTrader 是单独的可选适配器：`uv sync --extra dev --extra adapters --extra nautilus`；它的安装平台有额外要求，不计入默认验证。选择缺失或不支持的能力提供者会失败。
-- `AccountSnapshot.positions` 的已实现损益按平仓部分累计毛价格损益，未实现损益按当前可用价格标记；佣金计入现金、权益和成交费用。Backtrader 的盈利、亏损、平仓和反向持仓快照均有原生回归，不用默认零值代替损益。
+- `AccountSnapshot.positions` 的已实现损益按平仓部分累计毛价格损益，未实现损益按当前可用价格标记；佣金计入现金、权益和成交费用。持仓成本和损益由成交驱动的共享账本计算；Backtrader 逐事件与原生 broker 的数量、均价和已实现损益核对，出现差异时结构化失败。Nautilus 适配器也使用成交账本，仍属于单独安装和验证的可选扩展。
 - 兼容转换默认关闭；显式开启后记录依据、是否有损、源/目标字段、影响范围及哈希。
 - 训练产物按内容和来源寻址，先在临时目录完整写入再原子发布。策略只收到每次运行独立的最小产物读写能力对象，不会收到受信 `ArtifactStore`、存储根或验证方法；输入必须先归一化为内建字符串、字节、整数和字符串字典。运行时在 `train` 返回后独立重读规范 manifest，在 `load` 阶段要求策略实际读取同一份已验证字节，随后再次核对路径、大小、哈希和训练来源。
 - 包内策略只能导入 manifest 白名单模块和最小 `psrc.strategy_api`。扫描器与进程内审计钩子执行资源契约并覆盖已知文件、进程和网络反例；它们不是抵御任意恶意 Python 的独立安全边界。严格模式的宿主隔离由非 root、断网、只读根目录和资源受限的 Docker 容器提供；`--require-strict` 不可降级。
