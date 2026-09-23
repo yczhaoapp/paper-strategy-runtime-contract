@@ -39,7 +39,7 @@ def capabilities(*, strict_container: bool = False) -> EngineCapabilities:
     return EngineCapabilities(
         engine_id="backtrader",
         engine_version=str(bt.__version__),
-        adapter_version="0.2.0",
+        adapter_version="0.2.1",
         support_level=SupportLevel.CONFORMANCE_VERIFIED,
         profiles=frozenset({"core.bar.v1", "execution.basic.v1"}),
         data_kinds=frozenset({DataKind.BAR}),
@@ -133,6 +133,7 @@ class BacktraderAdapter(BacktestAdapter):
         snapshots: list[AccountSnapshot] = []
         order_submitted_at: dict[int, datetime] = {}
         no_ops = 0
+        realized_pnl = Decimal("0")
 
         class Bridge(bt.Strategy):  # type: ignore[misc]
             params = (("canonical", None), ("canonical_events", None))
@@ -149,6 +150,9 @@ class BacktraderAdapter(BacktestAdapter):
                 nonlocal no_ops
                 event = self.canonical_events[self.cursor]
                 position = self.getposition(self.data)
+                quantity = Decimal(str(position.size))
+                average_price = Decimal(str(position.price))
+                assert isinstance(event.payload, BarPayload)
                 snapshot = AccountSnapshot(
                     timestamp=event.available_time,
                     cash=Decimal(str(self.broker.getcash())),
@@ -156,8 +160,11 @@ class BacktraderAdapter(BacktestAdapter):
                     positions=(
                         Position(
                             instrument_id=event.instrument_id,
-                            quantity=Decimal(str(position.size)),
-                            average_price=Decimal(str(position.price)),
+                            quantity=quantity,
+                            average_price=average_price,
+                            realized_pnl=realized_pnl,
+                            unrealized_pnl=quantity
+                            * (event.payload.close - average_price),
                         ),
                     ),
                 )
@@ -225,6 +232,7 @@ class BacktraderAdapter(BacktestAdapter):
                 self.cursor += 1
 
             def notify_order(self, order: Any) -> None:
+                nonlocal realized_pnl
                 if order.status in {order.Margin, order.Rejected}:
                     raise ContractViolation(
                         ContractError(
@@ -242,6 +250,10 @@ class BacktraderAdapter(BacktestAdapter):
                     )
                 if order.status != order.Completed:
                     return
+                # Backtrader's executed.pnl is the gross price P&L of the closed
+                # portion (including a reversal), excluding executed.comm. This
+                # matches the Position P&L semantics of the reference engine.
+                realized_pnl += Decimal(str(order.executed.pnl))
                 maximum_order = self.runtime.manifest.action_requirements.max_order_quantity
                 executed_quantity = Decimal(str(abs(order.executed.size)))
                 if maximum_order is not None and executed_quantity > maximum_order:

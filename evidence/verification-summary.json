@@ -4,7 +4,7 @@
     "acceptance_checks_passed": 23,
     "acceptance_checks_total": 23,
     "acceptance_report": "evidence/release/host-acceptance.json",
-    "coverage_percent": 91.46,
+    "coverage_percent": 91.47,
     "errors": 0,
     "failures": 0,
     "full_receipt": "evidence/release/host-verification.json",
@@ -12,37 +12,38 @@
     "scope": "development_preflight",
     "skipped": 0,
     "status": "passed",
-    "tests": 274
+    "tests": 281
   },
   "published_files": {
-    "evidence/release/host-acceptance.json": "882fb7032e37a1da697b124885a6ff93f4d6f54447ddf1afd19a9d143e7e93ee",
-    "evidence/release/host-verification.json": "2de6263fca9c67e82c9465da5ab5cb7c93583697587d9273042aa913b048ef7c",
-    "evidence/release/strict-acceptance.json": "5d474b57a96d25c1eb4cc1feac1746bddb95eb86cae093c46fb23bb2dcfad0f8",
-    "evidence/release/strict-image.json": "e704505a3e874f0f3f60e2f8c4a9afa65cd74a623585255b81961c1c221af5f6",
-    "evidence/release/strict-verification.json": "ef66c36dfb5742c5753debc3d040857fa0d8c8e3e0ec2877d00386728f34c200"
+    "evidence/release/host-acceptance.json": "01864d953654a55d2500109a8846743a80a45a4c74a063566e0032775332921b",
+    "evidence/release/host-verification.json": "762c5a2e68eb8f984dc81520d0c20d9be85d2cd44587d32319a22e318b84c430",
+    "evidence/release/strict-acceptance.json": "7421cf114591299ce065a25680cba8312edbede248db3369b5edfeb565e8d1df",
+    "evidence/release/strict-image.json": "b1d51d7081a34fa8538498b31333326cf984359507eaa516f52f742a91510a47",
+    "evidence/release/strict-verification.json": "9f3c8ca9af3f4b1dd17394f1ce226db7d44f40f27f6af32fe697e8dce427957f"
   },
   "remote_ci": {
     "claims": [],
     "status": "see_public_workflow_for_current_commit",
     "workflow": "https://github.com/yczhaoapp/paper-strategy-runtime-contract/actions/workflows/ci.yml"
   },
-  "software_version": "2.8.2",
+  "software_version": "2.8.3",
   "strict_container": {
     "acceptance_checks_passed": 23,
     "acceptance_checks_total": 23,
     "acceptance_report": "evidence/release/strict-acceptance.json",
+    "attempt_id": "6abb11a27cf1491589ca272af83bc89b",
     "build_no_cache": true,
-    "coverage_percent": 91.66,
+    "coverage_percent": 91.67,
     "errors": 0,
     "failures": 0,
     "full_receipt": "evidence/release/strict-verification.json",
-    "image_id": "sha256:86aca3671201cc83a053286e316e31404e73aac9b00fc0f1064a83162567a02e",
+    "image_id": "sha256:f94b3fb68a218bfd5601aed89cc3e03ac42d8c4e92d16c3ee8f3a5de51445f0a",
     "image_receipt": "evidence/release/strict-image.json",
     "python": "3.12.14 (main, Aug 31 2026, 23:47:53) [GCC 14.2.0]",
     "scope": "strict_container",
     "skipped": 0,
     "status": "passed",
-    "tests": 274
+    "tests": 281
   },
-  "verification_input_sha256": "730a79c1a6eaca0ff3314b31acc3c3ac4b2fb448c2b44b14f88a8a00bc056b42"
+  "verification_input_sha256": "236d2833047d011e4dab39db68ba56c7ab9c8da82d1f6e458a8f90f2fdc0548d"
 }

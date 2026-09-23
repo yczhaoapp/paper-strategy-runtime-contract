@@ -42,7 +42,7 @@ psrc run --strategy-dir <package> --engine backtrader --output <report-directory
 | 引擎 | 状态 | 已执行范围 |
 | --- | --- | --- |
 | Reference | `CONFORMANCE_VERIFIED` | bar、trade、L1、L2；Contract v1 全部动作 |
-| Backtrader | `CONFORMANCE_VERIFIED` | 单标的 bar/基础执行画像；监督 Logistic 与 RL Tabular-Q 的完整训练—保存—重载—推理—回测 |
+| Backtrader | `CONFORMANCE_VERIFIED` | 单标的 bar/基础执行画像；逐事件账户快照含原生成交的累计毛已实现损益和按当前收盘价标记的浮动损益；监督 Logistic 与 RL Tabular-Q 的完整训练—保存—重载—推理—回测 |
 | NautilusTrader | `ADAPTER_AVAILABLE` | 单标的 bar/基础执行画像；默认门禁不动态认证 |
 | QuantConnect LEAN | `PROFILED` | 仅设计映射 |
 | Microsoft Qlib | `PROFILED` | 仅批量 ML/信号映射 |

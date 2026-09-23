@@ -6,7 +6,7 @@
 2. 执行 `uv run --frozen --extra dev --extra adapters python scripts/verify.py --fetch`。
 3. 打开 `reports/generated/verification.json` 和 `acceptance-report.json`，确认均通过；检查逐步日志。
 4. 如需离线验证，保留 `.venv` 与 `papers/sources`，直接使用虚拟环境 Python 执行 `scripts/verify.py --offline`。
-5. 严格隔离使用 `python scripts/verify-container.py`；以 `reports/strict` 的实测结果为准。
+5. 严格隔离使用 `python scripts/verify-container.py`；以 `reports/strict` 的实测结果为准。启动时旧成功收据立即失效；构建、镜像检查、容器运行和报告出版失败都留下本次 `attempt_id` 的失败状态。只有同一尝试的镜像、验证和验收文件全部成功才可发布。
 
 没有 GNU Make 不影响流程。Windows 调用 `.venv\Scripts\python.exe`。Shell 脚本通过 `.gitattributes` 固定 LF，容器内执行的门禁脚本不调用依赖管理器。
 

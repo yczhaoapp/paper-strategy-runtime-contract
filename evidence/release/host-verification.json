@@ -2,7 +2,7 @@
   "error": null,
   "python": "3.13.7 (main, Sep 18 2025, 22:52:34) [Clang 20.1.4 ]",
   "scope": "development_preflight",
-  "software_version": "2.8.2",
+  "software_version": "2.8.3",
   "status": "passed",
   "steps": [
     {
@@ -51,5 +51,5 @@
     }
   ],
   "strict_requested": false,
-  "verification_input_sha256": "730a79c1a6eaca0ff3314b31acc3c3ac4b2fb448c2b44b14f88a8a00bc056b42"
+  "verification_input_sha256": "236d2833047d011e4dab39db68ba56c7ab9c8da82d1f6e458a8f90f2fdc0548d"
 }

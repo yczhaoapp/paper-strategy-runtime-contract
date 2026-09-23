@@ -22,7 +22,7 @@ psrc run --strategy-dir <package> \
 
 ## 账户、动作与输出
 
-`AccountSnapshot` 每次推理提供时间、基础币种、现金、权益、持仓和活动订单；持仓包含数量、均价、已实现和未实现损益，活动订单包含类型、方向、数量、目标数量、限价和状态。策略返回 no-op、prediction、target position、target weight、submit、cancel 或 replace 七种规范动作。Adapter 必须将订单生命周期写成 `OrderEventRecord`，成交写成 `Fill`，账户逐事件写成快照。
+`AccountSnapshot` 每次推理提供时间、基础币种、现金、权益、持仓和活动订单；持仓包含数量、均价、已实现和未实现损益，活动订单包含类型、方向、数量、目标数量、限价和状态。`realized_pnl` 是本次运行中该标的平仓部分累计的毛价格损益，平仓后仍保留；`unrealized_pnl = quantity × (当前可用行情标记价格 − 持仓均价)`。二者不扣佣金，佣金反映在现金、权益和成交的 `fee` 中；不能把未知损益静默写为零。策略返回 no-op、prediction、target position、target weight、submit、cancel 或 replace 七种规范动作。Adapter 必须将订单生命周期写成 `OrderEventRecord`，成交写成 `Fill`，账户逐事件写成快照。
 
 成功运行同时输出执行计划、决策、订单、成交、账户、模型产物、生命周期和 `RuntimeLogRecord`；`RunBundle` 再绑定实际输入、manifest、运行时能力、引擎能力、运行策略、源码及可选训练/外部准入证据。字段清单与实际支持边界见[公开接口覆盖](../docs/public-interface-coverage.md)。
 

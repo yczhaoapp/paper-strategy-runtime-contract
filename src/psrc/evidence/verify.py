@@ -784,6 +784,14 @@ def verify_acceptance(
     )
 
     required_audit_counterexamples = {
+        "tests.adapters.test_backtrader_adapter::"
+        "test_backtrader_account_pnl_covers_profit_loss_close_and_reversal",
+        "tests.unit.test_strict_launcher::"
+        "test_strict_launcher_publishes_only_one_complete_attempt",
+        "tests.unit.test_strict_launcher::"
+        "test_strict_launcher_invalidates_old_success_on_each_startup_failure[build]",
+        "tests.unit.test_strict_launcher::"
+        "test_strict_launcher_invalidates_old_success_on_each_startup_failure[run]",
         "tests.negative.test_training_failures::"
         "test_strategy_channel_class_mutation_cannot_bypass_host_manifest_verification",
         "tests.negative.test_training_failures::"

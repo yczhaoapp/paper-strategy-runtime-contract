@@ -160,6 +160,22 @@ def test_cli_builds_complete_reproduction_bundle(tmp_path: Path, capsys: object)
             "rl-tabular-q]",
         ),
         (
+            "tests.adapters.test_backtrader_adapter",
+            "test_backtrader_account_pnl_covers_profit_loss_close_and_reversal",
+        ),
+        (
+            "tests.unit.test_strict_launcher",
+            "test_strict_launcher_publishes_only_one_complete_attempt",
+        ),
+        (
+            "tests.unit.test_strict_launcher",
+            "test_strict_launcher_invalidates_old_success_on_each_startup_failure[build]",
+        ),
+        (
+            "tests.unit.test_strict_launcher",
+            "test_strict_launcher_invalidates_old_success_on_each_startup_failure[run]",
+        ),
+        (
             "tests.sandbox.test_policy",
             "test_static_scanner_resolves_aliases_and_rejects_runtime_namespace_escape",
         ),

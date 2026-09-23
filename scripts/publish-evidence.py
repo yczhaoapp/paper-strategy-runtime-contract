@@ -101,6 +101,27 @@ def main() -> int:
             raise ValueError(f"{name} acceptance report contains absolute paths: {issues}")
         published[name] = (receipt, report)
 
+    strict_receipt, strict_report = published["strict"]
+    image = read_json(args.strict / "image.json")
+    attempt_id = strict_receipt.get("attempt_id")
+    if (
+        not isinstance(attempt_id, str)
+        or len(attempt_id) != 32
+        or strict_report.get("attempt_id") != attempt_id
+        or image.get("attempt_id") != attempt_id
+        or strict_receipt.get("image_id") != image.get("image_id")
+        or strict_report.get("image_id") != image.get("image_id")
+        or strict_receipt.get("scope") != "strict_container"
+        or strict_report.get("verification_scope") != "strict_container_verification"
+    ):
+        raise ValueError("strict receipt, acceptance, and image do not share one attempt")
+    if (
+        image.get("build_no_cache") is not True
+        or image.get("base_pull_requested") is not True
+        or not str(image.get("image_id", "")).startswith("sha256:")
+    ):
+        raise ValueError("strict image receipt does not prove a no-cache pull build")
+
     args.output.mkdir(parents=True, exist_ok=True)
     files: list[Path] = []
     for name, (receipt, report) in published.items():
@@ -110,14 +131,6 @@ def main() -> int:
             files.append(path)
 
     host_receipt, host_report = published["host"]
-    strict_receipt, strict_report = published["strict"]
-    image = read_json(args.strict / "image.json")
-    if (
-        image.get("build_no_cache") is not True
-        or image.get("base_pull_requested") is not True
-        or not str(image.get("image_id", "")).startswith("sha256:")
-    ):
-        raise ValueError("strict image receipt does not prove a no-cache pull build")
     image_path = args.output / "strict-image.json"
     write_json(image_path, image)
     files.append(image_path)
@@ -132,6 +145,7 @@ def main() -> int:
         },
         "strict_container": {
             **accepted_summary(strict_receipt, strict_report),
+            "attempt_id": attempt_id,
             "image_id": image["image_id"],
             "build_no_cache": image["build_no_cache"],
             "full_receipt": "evidence/release/strict-verification.json",

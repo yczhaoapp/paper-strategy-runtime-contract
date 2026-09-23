@@ -1,7 +1,7 @@
 contract_version: 1.0.0
 engine_id: backtrader
 engine_version: 1.9.78.123
-adapter_version: 0.2.0
+adapter_version: 0.2.1
 support_level: CONFORMANCE_VERIFIED
 profiles: [core.bar.v1, execution.basic.v1]
 data_kinds: [bar]

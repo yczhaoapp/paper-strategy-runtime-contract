@@ -1,4 +1,5 @@
 {
+  "attempt_id": "6abb11a27cf1491589ca272af83bc89b",
   "challenge": "SX-CH-003",
   "checks": {
     "automated_tests_no_failures_or_skips": {
@@ -6,7 +7,7 @@
         "errors": 0,
         "failures": 0,
         "skipped": 0,
-        "tests": 274
+        "tests": 281
       },
       "passed": true
     },
@@ -23,7 +24,7 @@
     "code_coverage": {
       "detail": {
         "minimum": 90,
-        "percent_covered": 91.66
+        "percent_covered": 91.67
       },
       "passed": true
     },
@@ -695,7 +696,7 @@
     "independent_audit_counterexamples_closed": {
       "detail": {
         "missing_tests": [],
-        "required_tests": 22,
+        "required_tests": 26,
         "scope": "artifact capability separation, callback-safe scalar and callback return normalization, physical reload evidence, artifact integrity, guarded descriptors, adapter exception and payload boundaries, derived order limits, market-time resampling, and paper claim corrections"
       },
       "passed": true
@@ -883,6 +884,7 @@
     }
   },
   "contract_version": "1.4.0",
+  "image_id": "sha256:f94b3fb68a218bfd5601aed89cc3e03ac42d8c4e92d16c3ee8f3a5de51445f0a",
   "passed_checks": 23,
   "status": "passed",
   "total_checks": 23,

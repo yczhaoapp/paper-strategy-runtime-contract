@@ -24,7 +24,7 @@
 | 成交 | `TradePayload` | tick 订单生命周期集成测试 | price、size、aggressor_side、trade_id；不声明逐笔委托 MBO |
 | Level 1 | `QuoteL1Payload` | L1 规则、监督和深度论文案例 | bid/ask price 与 size；拒绝倒挂报价 |
 | Level 2 | `BookSnapshotL2Payload` | L2 规则、监督和 RL 策略 | 仅快照 bids/asks；不声明增量簿或 MBO |
-| 账户 | `AccountSnapshot` | 每事件保存 cash、equity、positions、open_orders | Reference 是单币种基础账户模型 |
+| 账户 | `AccountSnapshot` | 每事件保存 cash、equity、positions、open_orders；Backtrader 的盈利、亏损、平仓和反向持仓均核对累计毛已实现与当前标价浮动损益 | Reference 是单币种基础账户模型；损益不扣佣金，费用反映在 cash/equity 和成交记录 |
 | 订单输出 | 七种规范 `Action` | 目标仓位、权重、预测、提交、撤单、改单和 no-op 均有执行/失败测试；同标的重复目标及目标派生超限订单在两个 Adapter 上拒绝 | Reference 直接订单只实现 market/limit 和 UTC/24×7 day；累计仓位在接单、改单和成交前校验 |
 | 订单状态 | `OpenOrder.status`、`OrderEventRecord.status` | trade tick 测试验证 accepted → replaced → filled | Reference 不支持 partial fill；Schema 保留 `partially_filled` 供具备能力的 Adapter 使用 |
 | 结构化失败 | `ContractError` / `FailureReport` | 题目场景与无效 SemVer、实际时间错位等边界动态核对 | 失败不能改写为 no-op 或成功报告；失败目录不保留旧成功 Bundle |
