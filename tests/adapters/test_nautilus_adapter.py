@@ -8,6 +8,7 @@ from psrc.adapters.registry import resolve_adapter
 from psrc.contract.compiler import compile_run
 from psrc.contract.errors import ContractViolation, ErrorCode
 from psrc.contract.models import RunPolicy, SandboxMode
+from psrc.domain.market import BarPayload
 from psrc.examples.sma_cross import SmaCrossStrategy
 from psrc.examples.synthetic import minute_bar_manifest, minute_bars
 
@@ -40,3 +41,11 @@ def test_nautilus_adapter_runs_canonical_sma_strategy() -> None:
     assert report.metrics.fills >= 1
     assert report.fills[0].timestamp > events[4].available_time
     assert report.execution_plan.engine_id == "nautilus-trader"
+    for event, snapshot in zip(events, report.account_snapshots, strict=True):
+        assert isinstance(event.payload, BarPayload)
+        position = snapshot.positions[0]
+        if position.quantity:
+            assert position.average_price > 0
+        assert position.unrealized_pnl == position.quantity * (
+            event.payload.close - position.average_price
+        )
